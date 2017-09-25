@@ -1,0 +1,30 @@
+﻿공유 프로젝트를 내 컴퓨터로 받기
+File > Clone Repository > URL : 
+
+https://github.com/hwanghyohyuk/KHSemiProject
+
+입력
+
+
+작업!
+
+각 Branch 별로 작업 후 (작업 도중 Branch를 변경하면 작업내용 사라짐)
+
+Commit to [Branch Name]으로 작업내용 업로드
+
+
+초기화 작업! 
+
+Master의 공지 또는 변경사항이 생기면 각 Branch 는 Publish Repository 진행
+
+이후 작업 진행하면 작업완료 후 병합 시 오류 발생 적음
+
+
+Branch
+
+Branch는 Master 의 하위 작업 테스크이다.
+
+Master 로만 작업을 하게 된다면 오류 발생 가능성이 많아지는데
+(팀원들 모두가 Master 로 작업을 진행하고 Commit 할때 데이터 무결성 결여됨)
+
+Master를 뼈대로 하고, Branch로 살을 붙이는 방식으로 진행한다. 
