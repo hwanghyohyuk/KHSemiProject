@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+.black{
+	color:black;
+}
+
+.main{
+	color:#004157;
+}
+
+.sub{
+	color:#0789a3;
+}
+
+.lightest{
+	color:#4dbbbf;
+}
+
+.darkest{
+	color:#001429;
+}
+
+.bold{
+	font-weight:bold;
+}
+
+.bg-white{
+	background:white;
+}
