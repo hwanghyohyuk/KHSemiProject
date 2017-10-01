@@ -1,3 +1,7 @@
 .prefs
 .xml
 .classpath
+*.prefs
+Project Workspace/TestProject/.classpath
+Project Workspace/TestProject/.settings/org.eclipse.jdt.core.prefs
+Project Workspace/TestProject/.settings/org.eclipse.wst.common.project.facet.core.xml
