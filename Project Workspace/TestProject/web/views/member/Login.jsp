@@ -1,12 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+	pageEncoding="UTF-8"%>
+<!-- 
+작성자 : OOO
+내용 : OO 페이지
+작성일자 17.10.02
+ -->
+<!-- java 구문 -->
 
-</body>
-</html>
+<!-- 초기화 블럭(변수선언 및 초기화) -->
+
+<!--헤더 부분-->
+<%@ include file="/views/include/common/head.jsp"%>
+<%@ include file="/views/include/main/header.jsp"%>
+
+<!-- 메인 컨텐츠 -->
+
+
+
+
+
+
+<!-- /메인 컨텐츠 -->
+
+<!--푸터 부분-->
+<%@ include file="/views/include/main/footer.jsp"%>
+

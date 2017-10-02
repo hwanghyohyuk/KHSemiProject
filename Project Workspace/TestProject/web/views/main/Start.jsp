@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!-- include 파일 -->
+<!-- 
+작성자 : 황효혁
+내용 : 시작 페이지
+작성일자 17.10.02
+ -->
+<!-- java 구문 -->
+
+
+
+<!--헤더 부분-->
 <%@ include file="/views/include/common/head.jsp"%>
 <%@ include file="/views/include/main/header.jsp"%>
 
@@ -98,8 +107,9 @@
 		<div class="col-md-12 col-xs-12" style="height: 20px"></div>
 	</div>
 </div>
+<!-- /메인 컨텐츠 -->
 
-<!-- include 파일 -->
+<!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
 
 

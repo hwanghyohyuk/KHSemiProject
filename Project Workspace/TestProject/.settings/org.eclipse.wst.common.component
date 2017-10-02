@@ -3,6 +3,6 @@
         <wb-resource deploy-path="/" source-path="/web" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <property name="java-output-path" value="/StudyHub/build/classes"/>
-        <property name="context-root" value="main"/>
+        <property name="context-root" value="studyhub"/>
     </wb-module>
 </project-modules>

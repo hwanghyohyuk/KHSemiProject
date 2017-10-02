@@ -1,3 +1,7 @@
+﻿아래 코드를 복사해서 각 페이지 별로 덮어 쓰기바람.
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 
