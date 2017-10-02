@@ -1,0 +1,13 @@
+﻿head : header : nav : footer : 조각 코드 모음으로 실행
+
+
+
+
+view 작성 순서
+문서시작{
+<%
+초기화 블럭
+%>
+
+<jsp:include page></jsp:include> 동적인 페이지 로드(JSP파일 실행결과를 페이지에 포함시킴, 값 전달 가능)
+<%@ include file="포함할 파일의 경로“%> 정적인 페이지 로드 (조각코드 모음)

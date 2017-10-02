@@ -1,12 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+	<!-- 네비게이션 바 -->
+	<nav class="navbar navbar-default bg-white">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">스터디허브</a>
+			</div>
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-left">
+					<li><a href="#"> <span
+							class="glyphicon glyphicon-search main" aria-hidden="true"></span><span
+							class="black">스터디찾기</span></a></li>
+					<li><a href="#"><p class="black">그룹찾기</p></a></li>
+					<li><a href="#"><p class="black">도움말</p></a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><p class="black">회원가입</p></a></li>
+					<li><a href="#"><p class="black">로그인</p></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
