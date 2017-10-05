@@ -1,1 +1,1 @@
-<jsp:forward page="views/main/Start.jsp"></jsp:forward>
+<jsp:forward page="/views/main/Start.jsp"></jsp:forward>
