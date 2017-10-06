@@ -9,21 +9,19 @@
 
 
 
-<!--헤더 부분-->
+<!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
+<!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 
 <!-- 메인 컨텐츠 -->
 <div class="container">
+	<div class="col-md-0 hidden-xs" style="height: 60px"></div>
 	<!-- 이미지 영역 -->
 	<div class="col-md-6 col-xs-12">
-		<!-- 공백 영역 -->
-		<div class="col-md-0 col-xs-0" style="height: 40px"></div>
 		<img alt=""
 			src="https://dummyimage.com/540x540/3d6280/9da0cc.jpg&text=image+540x540"
 			style="width: 100%">
-		<!-- 공백 영역 -->
-		<div class="col-md-0 col-xs-0" style="height: 40px"></div>
 	</div>
 	<!-- 공백 영역 -->
 	<div class="col-md-6 col-xs-12">
@@ -45,23 +43,23 @@
 							style="border: 1px solid #337AB7; color: #337AB7;">Facebook
 							으로 가입하기</button>
 					</div>
-					<div class="form-group col-md-5 col-xs-5">
+					<div class="form-group col-md-4 col-xs-4">
 						<hr />
 					</div>
-					<div class="form-group col-md-2 col-xs-2"
+					<div class="form-group col-md-4 col-xs-4"
 						style="line-height: 40px; text-align: center">또는</div>
-					<div class="form-group col-md-5 col-xs-5">
+					<div class="form-group col-md-4 col-xs-4">
 						<hr />
 					</div>
 				</div>
-				<form>
+				<form action="/findemail" method="post" name="signupcheckform">
 					<div class="form-group">
 						<input type="email" class="form-control" id="exampleInputEmail1"
-							placeholder="이메일 주소">
+							placeholder="이메일 주소" name="email">
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control"
-							id="exampleInputPassword1" placeholder="암호">
+							id="exampleInputPassword1" placeholder="비밀번호" name="pwd">
 					</div>
 					<button type="submit" class="btn btn-primary btn-block">가입하기</button>
 				</form>
@@ -76,6 +74,7 @@
 
 <!-- 서브 컨텐츠 -->
 <div class="container">
+	<div class="col-md-0 hidden-xs" style="height: 100px"></div>
 	<div class="col-md-6 col-xs-12">
 		<div class="col-md-0 col-xs-0" style="height: 40px"></div>
 		<img alt=""
@@ -111,6 +110,7 @@
 
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
+<!--페이지 끝-->
 <%@ include file="/views/include/common/headend.jsp" %>
 
 

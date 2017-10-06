@@ -9,8 +9,9 @@
 
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 
-<!--헤더 부분-->
+<!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
+<!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 
 <!-- 메인 컨텐츠 -->
@@ -24,4 +25,5 @@
 
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
+<!--페이지 끝-->
 <%@ include file="/views/include/common/headend.jsp" %>
