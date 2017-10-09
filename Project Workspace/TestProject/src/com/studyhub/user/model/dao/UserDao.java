@@ -4,7 +4,7 @@ import java.sql.*;
 import static com.studyhub.common.JDBCTemplate.*;
 import com.studyhub.common.vo.User;
 
-public class LoginDao {
+public class UserDao {
 
 	public User selectUser(Connection conn, String useremail, String userpwd) {
 		// TODO Auto-generated method stub

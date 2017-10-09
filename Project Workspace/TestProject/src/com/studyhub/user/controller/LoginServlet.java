@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.studyhub.user.model.service.LoginService;
+import com.studyhub.user.model.service.UserService;
 import com.studyhub.common.vo.User;
 
 /**
@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		String userEmail = request.getParameter("email");
 		String userPwd = request.getParameter("pwd");
-		LoginService loginService = new LoginService();
+		UserService loginService = new UserService();
 		User user = loginService.loginCheck(userEmail, userPwd);
 		if (user != null) {
 			HttpSession session = request.getSession();
