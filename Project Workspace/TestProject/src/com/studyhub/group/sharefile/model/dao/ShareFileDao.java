@@ -3,7 +3,7 @@ package com.studyhub.group.sharefile.model.dao;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.studyhub.group.sharefile.model.vo.ShareFile;
+import com.studyhub.common.vo.ShareFile;
 
 public class ShareFileDao {
 	public ShareFileDao(){}
