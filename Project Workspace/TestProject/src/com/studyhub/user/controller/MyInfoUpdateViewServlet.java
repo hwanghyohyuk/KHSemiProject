@@ -1,4 +1,4 @@
-package com.studyhub.main.board.controller;
+package com.studyhub.user.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,23 +7,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.Board;
-import com.studyhub.main.board.model.service.BoardService;
+import com.studyhub.common.vo.User;
+import com.studyhub.user.model.service.UserService;
 
 /**
- * Servlet implementation class BoardUpdateServlet
+ * Servlet implementation class MyInfoUpdateViewServlet
  */
-@WebServlet("/boardupdate")
-public class BoardUpdateServlet extends HttpServlet {
+@WebServlet("/myinfoupdateview")
+public class MyInfoUpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	private BoardService bService;
-	private Board board;
+       
+	private UserService uService;
+	private User user;
 	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardUpdateServlet() {
+    public MyInfoUpdateViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

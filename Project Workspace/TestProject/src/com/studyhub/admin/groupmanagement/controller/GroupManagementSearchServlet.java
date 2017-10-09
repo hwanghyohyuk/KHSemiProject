@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.admin.groupmanagement.model.dao.GroupManagementDao;
+import com.studyhub.admin.groupmanagement.model.service.GroupManagementService;
+
 /**
  * Servlet implementation class GroupManagementSearchServlet
  */
@@ -14,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 public class GroupManagementSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private GroupManagementService gmService;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

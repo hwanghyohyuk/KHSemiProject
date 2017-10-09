@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.common.vo.User;
+import com.studyhub.user.model.service.UserService;
+
 /**
  * Servlet implementation class FindPwd
  */
@@ -14,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 public class FindPwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private UserService uService;
+	private User user;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

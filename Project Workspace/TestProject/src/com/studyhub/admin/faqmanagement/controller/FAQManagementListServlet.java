@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.admin.faqmanagement.model.service.FAQManagementService;
+
 /**
  * Servlet implementation class FAQManagementListServlet
  */
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 public class FAQManagementListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private FAQManagementService faqmService = new FAQManagementService();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -27,7 +31,6 @@ public class FAQManagementListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.admin.notice.model.service.NoticeService;
+
 /**
  * Servlet implementation class NoticeDeleteServlet
  */
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 public class NoticeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private NoticeService nService;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

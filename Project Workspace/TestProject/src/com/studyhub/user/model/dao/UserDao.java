@@ -5,12 +5,14 @@ import static com.studyhub.common.JDBCTemplate.*;
 import com.studyhub.common.vo.User;
 
 public class UserDao {
+	
+	private User user;
 
 	public User selectUser(Connection conn, String useremail, String userpwd) {
 		// TODO Auto-generated method stub
 		
 		String query = "select * from tb_user where email=? and user_pwd=?";
-		User user = null;
+		user = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		

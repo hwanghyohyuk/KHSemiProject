@@ -20,6 +20,9 @@ import com.studyhub.common.vo.User;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private UserService uService;
+	private User user;
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -39,8 +42,8 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		String userEmail = request.getParameter("email");
 		String userPwd = request.getParameter("pwd");
-		UserService loginService = new UserService();
-		User user = loginService.loginCheck(userEmail, userPwd);
+		uService = new UserService();
+		user = uService.loginCheck(userEmail, userPwd);
 		if (user != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);

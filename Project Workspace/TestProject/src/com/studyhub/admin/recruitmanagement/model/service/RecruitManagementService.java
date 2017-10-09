@@ -1,5 +1,7 @@
 package com.studyhub.admin.recruitmanagement.model.service;
 
-public class RecruitManagementService {
+import com.studyhub.admin.recruitmanagement.model.dao.RecruitManagementDao;
 
+public class RecruitManagementService {
+	private RecruitManagementDao rmDao;
 }
