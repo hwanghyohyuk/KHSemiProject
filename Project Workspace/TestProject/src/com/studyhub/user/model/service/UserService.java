@@ -14,6 +14,7 @@ public class UserService {
 
 	public User loginCheck(String useremail, String userpwd) {
 		Connection conn = getConnection();
+		uDao = new UserDao();
 		user =uDao.selectUser(conn, useremail, userpwd);
 		close(conn);
 		return user;

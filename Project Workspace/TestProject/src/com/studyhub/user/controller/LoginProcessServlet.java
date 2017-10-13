@@ -48,7 +48,7 @@ public class LoginProcessServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 			System.out.println("Session ID : " + session.getId());
-			response.sendRedirect("/studyhub/views/main/Main.jsp");
+			response.sendRedirect("/studyhub/main");
 		}
 	}
 

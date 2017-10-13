@@ -54,11 +54,11 @@
 				</div>
 				<form action="/findemail" method="post" name="signupcheckform">
 					<div class="form-group">
-						<input type="email" class="form-control" id="exampleInputEmail1"
+						<input type="signupemail" class="form-control" id="exampleInputEmail1"
 							placeholder="이메일 주소" name="email">
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control"
+						<input type="signuppwd" class="form-control"
 							id="exampleInputPassword1" placeholder="비밀번호" name="pwd">
 					</div>
 					<button type="submit" class="btn btn-primary btn-block">가입하기</button>
