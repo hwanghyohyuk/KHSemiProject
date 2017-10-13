@@ -22,7 +22,7 @@
 	<div class="row">
 		<div class="col-sm-3 col-xs-2"></div>
 		<div class="col-sm-6 col-xs-8">
-			<form action="/studyhub/login" method="post" name="loginform">
+			<form action="/studyhub/loginprocess" method="post" name="loginform">
 				<div class="form-group">
 					<input type="email" class="form-control" id=""
 						placeholder="이메일 주소" name="email">

@@ -38,7 +38,7 @@
 					<li><a href="/studyhub/views/user/Logout.jsp"><p class="black">로그아웃</p></a></li>
 				<% }else{%>
 					<li><a href="/studyhub/views/user/SignUp.jsp"><p class="black">회원가입</p></a></li>
-					<li><a href="/studyhub/views/user/Login.jsp"><p class="black">로그인</p></a></li>
+					<li><a href="/studyhub/login"><p class="black">로그인</p></a></li>
 				<% } %>
 				</ul>
 			</div>
