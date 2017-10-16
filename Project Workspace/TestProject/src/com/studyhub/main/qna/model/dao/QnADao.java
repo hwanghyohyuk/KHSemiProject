@@ -3,6 +3,7 @@ package com.studyhub.main.qna.model.dao;
 import java.util.ArrayList;
 import java.sql.*;
 
+
 import com.studyhub.common.vo.QnA;
 import com.studyhub.common.vo.QComment;
 import com.studyhub.common.JDBCTemplate.*;
@@ -43,4 +44,5 @@ public class QnADao {
 	public int deleteComment(Connection con, int cno) {
 		return 0;
 	}
+
 }

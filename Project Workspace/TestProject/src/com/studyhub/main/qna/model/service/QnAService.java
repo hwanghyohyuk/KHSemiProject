@@ -2,8 +2,10 @@ package com.studyhub.main.qna.model.service;
 
 import java.util.ArrayList;
 
+
 import com.studyhub.common.vo.QnA;
 import com.studyhub.common.vo.QComment;
+
 
 public class QnAService {
 	public QnAService(){}
@@ -32,6 +34,7 @@ public class QnAService {
 		return null;
 	}
 	
+
 	public int insertComment(QComment com){
 		return 0;
 	}
