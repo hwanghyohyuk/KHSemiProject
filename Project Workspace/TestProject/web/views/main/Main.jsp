@@ -23,31 +23,49 @@
 .my_group {
 	height: 40vh;
 	margin: -30px 15vw;
-	background-color: #4dbbbf;
 }
 
 .recruit {
 	height: 40vh;
 	margin: 0 15vw;
-	background-color: lightgray;
 }
 
 .head {
 	margin-bottom: 2vh;
 }
 
-.images{
+.images {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
 }
 
-
 /* 세부요소 */
+#slider-left {
+	height: 10vh;
+	margin-top: 17vh;
+	float: left;
+}
+
+#slider-right {
+	height: 10vh;
+	margin-top: 17vh;
+	float: right;
+	-ms-transform: rotate(180deg); /* IE 9 */
+	-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+	transform: rotate(180deg);
+}
+
 #groupimg {
 	float: left;
 	width: 16vw;
 	height: 30vh;
+}
+
+.cover {
+	background: rgba(0, 0, 0, 0.6);
+	color: white;
+	box-sizing: border-box;
 }
 
 #title {
@@ -58,13 +76,13 @@
 	width: 16vw;
 	font-size: 2.3rem;
 	font-weight: bold;
-	
 }
-#groupname{
+
+#groupname {
 	margin-left: 6vw;
 }
 
-#r_groupname{
+#r_groupname {
 	margin-left: 4vw;
 }
 
@@ -73,7 +91,6 @@
 	color: #0789a3;
 	position: absolute;
 	right: 20vw;
-	
 }
 </style>
 <script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
@@ -89,43 +106,61 @@
 <body>
 	<!-- 메인 컨텐츠 -->
 	<div class="my_group">
+		<img id="slider-left" src="/studyhub/images/slider.png">
 		<div class="head">
-			<a href="#" id="more">더보기</a><span id="title">나의 그룹</span> 
+			<a href="#" id="more">더보기</a><span id="title">나의 그룹</span>
 		</div>
 		<div class="images">
 			<div class="group1">
-			<a href="#"><img id="groupimg" src="/studyhub/images/studygroup.jpg"></a>
-			<p id="groupname">그룹이름1</p>
+				<div class="img">
+					<a href="#"><img id="groupimg"
+						src="/studyhub/images/studygroup.jpg"></a>
+				</div>
+				<div class="cover">
+					<p id="groupname">그룹이름1</p>
+				</div>
 			</div>
 			<div class="group2">
-			<a href="#"><img id="groupimg" src="/studyhub/images/studygroup.jpg"></a>
-			<p id="groupname">그룹이름2</p>
+				<a href="#"><img id="groupimg"
+					src="/studyhub/images/studygroup.jpg"></a>
+				<div class="cover">
+					<p id="groupname">그룹이름2</p>
+				</div>
 			</div>
 			<div class="group3">
-			<a href="#"><img id="groupimg" src="/studyhub/images/studygroup.jpg"></a>
-			<p id="groupname">그룹이름3</p>
+				<a href="#"><img id="groupimg"
+					src="/studyhub/images/studygroup.jpg"></a>
+				<div class="cover">
+					<p id="groupname">그룹이름3</p>
+				</div>
 			</div>
 		</div>
+		<img id="slider-right" src="/studyhub/images/slider.png">
 	</div>
 
 	<div class="recruit">
+	<img id="slider-left" src="/studyhub/images/slider.png">
 		<div class="head">
-			<a href="#" id="more">더보기</a><span id="title">모집게시판</span> 
+			<a href="#" id="more">더보기</a><span id="title">모집게시판</span>
 		</div>
 		<div class="images">
 			<div class="group1">
-			<a href="#"><img id="groupimg" src="/studyhub/images/recruit.jpg"></a>
-			<p id="r_groupname">kh스터디 |IT|강남</p>
+				<a href="#"><img id="groupimg"
+					src="/studyhub/images/recruit.jpg"></a>
+				<p id="r_groupname">kh스터디 |IT|강남</p>
 			</div>
 			<div class="group2">
-			<a href="#"><img id="groupimg" src="/studyhub/images/recruit.jpg"></a>
-			<p id="r_groupname">토익800|영어|신촌</p>
+				<a href="#"><img id="groupimg"
+					src="/studyhub/images/recruit.jpg"></a>
+				<p id="r_groupname">토익800|영어|신촌</p>
 			</div>
 			<div class="group3">
-			<a href="#"><img id="groupimg" src="/studyhub/images/recruit.jpg"></a>
-			<p id="r_groupname">HSK5급준비|중국어|대구</p>
+				<a href="#"><img id="groupimg"
+					src="/studyhub/images/recruit.jpg"></a>
+				<p id="r_groupname">HSK5급준비|중국어|대구</p>
 			</div>
 		</div>
+		<img id="slider-right" src="/studyhub/images/slider.png">
 	</div>
 
 	<!--푸터 부분-->
