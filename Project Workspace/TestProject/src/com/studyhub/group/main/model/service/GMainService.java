@@ -1,10 +1,12 @@
 package com.studyhub.group.main.model.service;
 
 import com.studyhub.common.vo.Group;
+import com.studyhub.common.vo.UNG;
 import com.studyhub.group.main.model.dao.GMainDao;
 
 import static com.studyhub.common.JDBCTemplate.*;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class GMainService {
 
@@ -13,6 +15,13 @@ public class GMainService {
 		Group group = new GMainDao().selectGroup(con, group_no);
 		close(con);
 		return group;
+	}
+
+	public ArrayList<UNG> selectJoinGroup(int userno) {
+		Connection con = getConnection();
+		ArrayList<UNG> list = new GMainDao().selectJoinGroup(con, userno);
+		close(con);
+		return list;
 	}
 
 }

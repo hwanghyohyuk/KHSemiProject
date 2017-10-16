@@ -2,11 +2,13 @@ package com.studyhub.group.main.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.sql.*;
 
 import static com.studyhub.common.JDBCTemplate.*;
 
 import com.studyhub.common.vo.Group;
+import com.studyhub.common.vo.UNG;
 
 public class GMainDao {
 
@@ -43,6 +45,32 @@ public class GMainDao {
 		}
 		
 		return group;
+	}
+
+	public ArrayList<UNG> selectJoinGroup(Connection con, int userno) {
+		ArrayList<UNG> list = null;
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * "
+				+ " from (select group_no, usercount"
+				+ " from tb_ung"
+				+ "	join (select group_no, count(*) as usercount"
+				+ " from tb_ung"
+				+ "	group by group_no) using(group_no)"
+				+ " where user_no = ?)"
+				+ " where rownum >0 and rownum<4";
+		
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return list;
 	}
 
 }
