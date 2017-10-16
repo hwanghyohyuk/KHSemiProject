@@ -2,9 +2,12 @@ package com.studyhub.user.model.dao;
 
 import java.sql.*;
 import static com.studyhub.common.JDBCTemplate.*;
+
+import com.studyhub.common.CryptTemplate;
+import com.studyhub.common.vo.AesUtil;
 import com.studyhub.common.vo.User;
 
-public class UserDao {
+public class UserDao implements CryptTemplate {
 
 	public User selectUser(Connection conn, String useremail, String userpwd) {
 		// TODO Auto-generated method stub
@@ -14,17 +17,20 @@ public class UserDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
+		AesUtil util = new AesUtil(KEY_SIZE, ITERATION_COUNT);
+		String encrypt = util.encrypt(SALT, IV, PASSPHRASE, userpwd);
+		System.out.println(encrypt);
 		try{
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, useremail);
-			pstmt.setString(2, userpwd);
+			pstmt.setString(2, encrypt);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()){
 				user = new User();
 				user.setEmail(useremail);
-				user.setUserPwd(userpwd);
+				user.setUserPwd(encrypt);
 				user.setUserNo(rset.getInt("user_no"));
 				user.setUserName(rset.getString("user_name"));
 				user.setPhone(rset.getString("phone"));
@@ -40,6 +46,36 @@ public class UserDao {
 		}
 		
 		return user;
+	}
+
+	public boolean createUser(Connection conn, User user) {
+		String query = "insert into tb_user values((select max(user_no)+1 from tb_user),?,?,?,?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean result = false;
+		
+		AesUtil util = new AesUtil(KEY_SIZE, ITERATION_COUNT);
+		String encrypt = util.encrypt(SALT, IV, PASSPHRASE, user.getUserPwd());
+		System.out.println(encrypt);
+		try{
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, user.getEmail());
+			pstmt.setString(2, user.getUserName());
+			pstmt.setString(3, encrypt);
+			pstmt.setString(4, user.getPhone());
+			
+			rset = pstmt.executeQuery();
+			System.out.println(rset);
+			result = true;
+			
+		}catch (SQLException e) {
+			return false;
+		}finally {
+			close(rset);
+			close(pstmt);
+			commit(conn);
+		}		
+		return result;
 	}
 
 }

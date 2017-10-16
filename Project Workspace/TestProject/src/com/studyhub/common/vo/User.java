@@ -1,6 +1,6 @@
 package com.studyhub.common.vo;
 
-public class User {
+public class User implements java.io.Serializable {
 
 	private int userNo;
 	private String email;
@@ -10,6 +10,14 @@ public class User {
 
 	public User() {
 		super();
+	}
+
+	public User(String email, String userName, String userPwd, String phone) {
+		super();
+		this.email = email;
+		this.userName = userName;
+		this.userPwd = userPwd;
+		this.phone = phone;
 	}
 
 	public User(int userNo, String email, String userName, String userPwd, String phone) {

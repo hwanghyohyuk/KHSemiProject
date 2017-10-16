@@ -15,4 +15,11 @@ public class UserService {
 		close(conn);
 		return user;
 	}
+
+	public boolean createUser(User user) {
+		Connection conn = getConnection();
+		boolean result = new UserDao().createUser(conn, user);
+		close(conn);
+		return result;
+	}
 }

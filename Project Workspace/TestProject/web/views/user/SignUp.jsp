@@ -34,14 +34,14 @@
 				<div class="form-group">
 				<h3 class="text-center">회원가입</h3>
 				</div>
-				<form action="/signup" method="post" name="signupform">
+				<form action="/studyhub/signupprocess" method="post" name="signupform">
 					<div class="form-group">
 						<input type="email" class="form-control" id=""
-							placeholder="이메일 주소" name="email">
+							placeholder="이메일 주소" name="signupemail">
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control"
-							id="" placeholder="비밀번호" name="pwd">
+							id="" placeholder="비밀번호" name="signuppwd">
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control"

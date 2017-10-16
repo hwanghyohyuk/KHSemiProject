@@ -40,7 +40,7 @@
 		<div class="col-sm-3 col-xs-2"></div>
 		<div class="col-sm-6 col-xs-8">
 		<div class="pull-left">
-			<a href="/studyhub/views/member/SignUp.jsp">회원가입</a>
+			<a href="/studyhub/signup">회원가입</a>
 		</div>
 		<div class="pull-right">
 			<a href="/studyhub/views/member/FindEmail.jsp">이메일 또는 비밀번호를
