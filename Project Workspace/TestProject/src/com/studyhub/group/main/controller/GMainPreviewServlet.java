@@ -31,8 +31,9 @@ public class GMainPreviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("text/html; charset=utf-8");
-		response.setContentType("utf-8");
+		
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		
 		int group_no = Integer.parseInt(request.getParameter("group_no"));
 		

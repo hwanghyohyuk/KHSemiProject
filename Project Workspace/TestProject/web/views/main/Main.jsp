@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <title>스터디허브 StudyHub</title>
 <!-- css, javascript, jQuery -->
-<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
 <style type="text/css">
 * {
    margin: 0px;
@@ -38,6 +38,12 @@
 }
 
 .images{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+}
+
+.groupimages{
    display: flex;
    flex-direction: row;
    justify-content: space-around;
@@ -94,8 +100,8 @@
       <div class="head">
          <a href="#" id="more">더보기</a><span id="title">나의 그룹</span> 
       </div>
-      <div class="images">
-         <div class="group1">
+      <div class="groupimages">
+         <!-- <div class="group1">
          <a href="#"><img id="groupimg" src="/studyhub/images/studygroup.jpg"></a>
          <p id="groupname">그룹이름1</p>
          </div>
@@ -106,7 +112,7 @@
          <div class="group3">
          <a href="#"><img id="groupimg" src="/studyhub/images/studygroup.jpg"></a>
          <p id="groupname">그룹이름3</p>
-         </div>
+         </div> -->
       </div>
    </div>
    <% } %>
@@ -136,24 +142,29 @@
    <!--페이지 끝-->
    <%@ include file="/views/include/common/headend.jsp"%>
 
-<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js">
-	$.ajax({
-		url: "/studyhub/joingroup",
-		data: { userno: <%= user.getUserNo() %>}
-		type: "get",
-		dataType: "json",
-		success: function(data){
-			var json = JSON.parse(JSON.stringify(data));
-			var values = "";
-			for(var i in json.list){
-				values += 
-		         <div class="group1">
-		         <a href="#"><img id="groupimg" src="/studyhub/images/studygroup.jpg"></a>
-		         <p id="groupname">그룹이름1</p>
-		         </div>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+
+	$(function(){
+		$.ajax({
+			url: "/studyhub/joingroup",
+			data:  { userno: user.getUserNo() },
+			type: "get",
+			dataType: "json",
+			success: function(data){
+				var json = JSON.parse(JSON.stringify(data));
+				var values = "";
+				for(var i in json.list){
+					values += "<div class='group" + i + "'> " +
+				         "<a href='/studyhub/gmainpreview?group_no=" + json.list[i].group_no + "'>" +
+				         "<img id='groupimg' src='/studyhub/images/studygroup.jpg'></a> " +
+				         "<p id='groupname'>"+ decodeURIComponent(json.list[i].group_name) + "</p>" +
+				         "</div>";
+				}
+				$(".groupimages").html(values);
 			}
-		}
-	}
+		});
+	});
 </script>
 
 </body>

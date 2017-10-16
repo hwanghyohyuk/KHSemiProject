@@ -1,6 +1,8 @@
 package com.studyhub.group.main.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -44,8 +46,20 @@ public class JoinGroupServlet extends HttpServlet {
 		JSONArray jarr = new JSONArray();
 		
 		for(UNG ung : list){
+			JSONObject job = new JSONObject();
+			job.put("group_no", ung.getGroupNo());
+			job.put("group_name", URLEncoder.encode(ung.getGroupName(),"UTF-8"));
+			job.put("usercoun", ung.getCount());
 			
+			jarr.add(job);
 		}
+		
+		json.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(json.toJSONString());
+		out.flush();
+		out.close();
 	}
 
 	/**
