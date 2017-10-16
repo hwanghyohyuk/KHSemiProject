@@ -18,7 +18,6 @@ Project Workspace\TestProject\.settings\
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 *.zip

@@ -16,7 +16,7 @@
 				<!-- 메인 로고 부분 -->
 				
 				<% if(user!=null){ %>
-					<a class="navbar-brand" href="/studyhub/views/main/Main.jsp">StudyHub</a>
+					<a class="navbar-brand" href="/studyhub/main">StudyHub</a>
 				<% }else{%>
 					<a class="navbar-brand" href="/studyhub/">StudyHub</a>
 				<% } %>				
@@ -35,10 +35,10 @@
 				<ul class="nav navbar-nav navbar-right">
 				<% if(user!=null){ %>
 					<li><a href="/studyhub/views/user/ModifyInfo.jsp"><p class="black"><%=user.getUserName()%></p></a></li>
-					<li><a href="/studyhub/views/user/Logout.jsp"><p class="black">로그아웃</p></a></li>
+					<li><a href="/studyhub/logout"><p class="black">로그아웃</p></a></li>
 				<% }else{%>
-					<li><a href="/studyhub/views/user/SignUp.jsp"><p class="black">회원가입</p></a></li>
-					<li><a href="/studyhub/views/user/Login.jsp"><p class="black">로그인</p></a></li>
+					<li><a href="/studyhub/signup"><p class="black">회원가입</p></a></li>
+					<li><a href="/studyhub/login"><p class="black">로그인</p></a></li>
 				<% } %>
 				</ul>
 			</div>
