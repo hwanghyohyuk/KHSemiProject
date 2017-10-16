@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+
+.black{
+	color:black;
+}
+
+.main{
+	color:#004157;
+}
+.main-back{
+	background:#004157;
+}
+
+.main-back:hover{
+	background:#165773;
+}
+.main-back:active{
+	background:#165773;
+}
+
+
+.sub{
+	color:#0789a3;
+}
+
+.lightest{
+	color:#4dbbbf;
+}
+
+.darkest{
+	color:#001429;
+}
+
+.bold{
+	font-weight:bold;
+}
+
+.bg-white{
+	background:white;
+}
+
+.height40{
+	height:40px;
+	line-height:40px;
+}
+
+.paddinghor10{
+	padding-top:10px;
+	padding-bottom:10px;
+}
