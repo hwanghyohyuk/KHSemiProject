@@ -1,4 +1,4 @@
-package com.studyhub.user.controller;
+package com.studyhub.main.main.controller;
 
 import java.io.IOException;
 
@@ -9,23 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.User;
-import com.studyhub.user.model.service.UserService;
-
 /**
- * Servlet implementation class SignUpServlet
+ * Servlet implementation class MoveToMainServlet
  */
-@WebServlet("/signup")
-public class SignUpServlet extends HttpServlet {
+@WebServlet("/main")
+public class MoveToMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private UserService uService;
-	private User user;
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SignUpServlet() {
+    public MoveToMainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,7 +31,7 @@ public class SignUpServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-		RequestDispatcher view = request.getRequestDispatcher("/views/user/SignUp.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/views/main/Main.jsp");
 		view.forward(request, response);
 	}
 
