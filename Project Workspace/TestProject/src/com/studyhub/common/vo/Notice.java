@@ -1,6 +1,6 @@
 package com.studyhub.common.vo;
 
-public class Notice {
+public class Notice implements java.io.Serializable{
 
 	private String notice;
 
