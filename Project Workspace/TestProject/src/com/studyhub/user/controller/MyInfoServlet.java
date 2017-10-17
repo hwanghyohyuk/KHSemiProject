@@ -9,19 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.User;
-import com.studyhub.user.model.service.UserService;
-
 /**
  * Servlet implementation class MyInfoServlet
  */
 @WebServlet("/myinfo")
 public class MyInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private UserService us;
-	private User user;
-    
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
