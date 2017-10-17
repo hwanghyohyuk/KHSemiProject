@@ -7,13 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.admin.notice.model.service.NoticeService;
+import com.studyhub.common.vo.Notice;
+
 /**
  * Servlet implementation class NoticeUpdateServlet
  */
 @WebServlet("/noticeupdate")
 public class NoticeUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	private Notice notice;
+	private NoticeService nService;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

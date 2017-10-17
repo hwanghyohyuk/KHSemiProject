@@ -1,4 +1,4 @@
-package com.studyhub.admin.notice.controller;
+package com.studyhub.group.notice.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,23 +7,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.admin.notice.model.service.NoticeService;
-import com.studyhub.common.vo.Notice;
+import com.studyhub.common.vo.GNotice;
+import com.studyhub.group.notice.model.service.GNoticeService;
 
 /**
- * Servlet implementation class NoticeViewServlet
+ * Servlet implementation class GNoticeUpdateViewServlet
  */
-@WebServlet("/noticeview")
-public class NoticeViewServlet extends HttpServlet {
+@WebServlet("/gnoticeupdateview")
+public class GNoticeUpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private Notice notice;
-	private NoticeService nService;
+	private GNotice gNotice;
+	private GNoticeService gNoticeService;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeViewServlet() {
+    public GNoticeUpdateViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

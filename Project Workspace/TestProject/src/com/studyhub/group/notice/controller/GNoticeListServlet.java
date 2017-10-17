@@ -7,12 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.common.vo.GNotice;
+import com.studyhub.group.notice.model.service.GNoticeService;
+
 /**
  * Servlet implementation class GNoticeListServlet
  */
 @WebServlet("/gnoticelist")
 public class GNoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private GNotice gNotice;
+	private GNoticeService gNoticeService;
        
     /**
      * @see HttpServlet#HttpServlet()
