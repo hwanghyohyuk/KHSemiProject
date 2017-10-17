@@ -7,13 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.admin.faqmanagement.model.service.FAQManagementService;
+import com.studyhub.common.vo.FAQ;
+
 /**
  * Servlet implementation class FAQManagementUpdateViewServlet
  */
 @WebServlet("/faqmanagementupdateview")
 public class FAQManagementUpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
+	private FAQManagementService faqms;
+	private FAQ faq;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

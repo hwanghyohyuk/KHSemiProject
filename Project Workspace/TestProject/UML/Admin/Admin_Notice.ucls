@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.1" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.studyhub.admin.notice.controller.NoticeViewServlet" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/admin/notice/controller/NoticeViewServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="697" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.studyhub.admin.notice.controller.NoticeDeleteServlet" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/admin/notice/controller/NoticeDeleteServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="1025" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.studyhub.admin.notice.controller.NoticeInsertServlet" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/admin/notice/controller/NoticeInsertServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.studyhub.admin.notice.controller.NoticeUpdateServlet" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/admin/notice/controller/NoticeUpdateServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="369" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.studyhub.admin.notice.model.dao.NoticeDao" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/admin/notice/model/dao/NoticeDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="292" x="494" y="459"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.studyhub.admin.notice.model.service.NoticeService" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/admin/notice/model/service/NoticeService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="216" x="697" y="212"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.studyhub.common.vo.Notice" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/common/vo/Notice.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="130" x="284" y="706"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.studyhub.common.vo.Board" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/common/vo/Board.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="387" width="175" x="454" y="706"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.studyhub.common.vo.UNG" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/common/vo/UNG.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="459" width="157" x="1171" y="706"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.studyhub.common.vo.User" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/common/vo/User.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="405" width="192" x="939" y="706"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.studyhub.common.vo.Group" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/common/vo/Group.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="567" width="230" x="669" y="706"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="12">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="13" name="nDao"/>      
+      <multiplicity id="14" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="15">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="16" name="nService"/>      
+      <multiplicity id="17" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="18">    
+    <bendpoint x="442" y="459"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="19" name="notice"/>      
+      <multiplicity id="20" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="21">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="22" name="nService"/>      
+      <multiplicity id="23" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="24">    
+    <bendpoint x="943" y="459"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="25" name="ung"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="27">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="28" name="group"/>      
+      <multiplicity id="29" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="30">    
+    <bendpoint x="335" y="212"/>    
+    <bendpoint x="335" y="459"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="31" name="notice"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="33">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="34" name="ung"/>      
+      <multiplicity id="35" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="36">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="37" name="user"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="39">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="40" name="nService"/>      
+      <multiplicity id="41" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="42">    
+    <bendpoint x="837" y="459"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="43" name="user"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="45">    
+    <bendpoint x="816" y="459"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="46" name="group"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="48">    
+    <bendpoint x="172" y="212"/>    
+    <bendpoint x="172" y="459"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="49" name="notice"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="51">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="52" name="board"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="54">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="55" name="notice"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <bendpoint x="421" y="212"/>    
+    <bendpoint x="421" y="459"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="58" name="notice"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <bendpoint x="463" y="459"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="61" name="board"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="64" name="nService"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
