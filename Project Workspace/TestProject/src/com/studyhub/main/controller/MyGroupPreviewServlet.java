@@ -37,7 +37,7 @@ public class MyGroupPreviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-int userno = Integer.parseInt(request.getParameter("userno"));
+		int userno = Integer.parseInt(request.getParameter("userno"));
 		
 		ArrayList<UNG> list = new MainService().selectJoinGroup(userno);
 		
