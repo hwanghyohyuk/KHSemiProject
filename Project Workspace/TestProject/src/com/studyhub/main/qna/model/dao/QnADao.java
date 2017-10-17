@@ -9,6 +9,9 @@ import com.studyhub.common.vo.QComment;
 import com.studyhub.common.JDBCTemplate.*;
 
 public class QnADao {
+	
+	private QnA qna;
+	
 	public QnADao() {
 	}
 

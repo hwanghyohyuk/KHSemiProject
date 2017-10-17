@@ -7,9 +7,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.studyhub.common.vo.Board;
+import com.studyhub.common.vo.Group;
 import com.studyhub.common.vo.UNG;
 
 public class MainDao {
+	
+	private UNG ung;
+	private Group group;
+	private Board board;
 
 	public ArrayList<UNG> selectJoinGroup(Connection con, int userno) {
 		ArrayList<UNG> list = null;

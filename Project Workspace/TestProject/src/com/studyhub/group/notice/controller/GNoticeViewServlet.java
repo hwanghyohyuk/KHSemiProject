@@ -16,6 +16,7 @@ import com.studyhub.group.notice.model.service.GNoticeService;
 @WebServlet("/gnoticeview")
 public class GNoticeViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 	private GNotice gNotice;
 	private GNoticeService gNoticeService;
        

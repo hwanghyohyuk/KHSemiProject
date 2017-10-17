@@ -2,7 +2,7 @@ package com.studyhub.common.vo;
 
 import java.sql.Date;
 
-public class QNA implements java.io.Serializable{
+public class QnA implements java.io.Serializable{
 	private int qnaNo;
 	private String title;
 	private String content;
@@ -10,11 +10,11 @@ public class QNA implements java.io.Serializable{
 	private int userNo;
 	private int accessNo;
 
-	public QNA() {
+	public QnA() {
 		super();
 	}
 
-	public QNA(int qnaNo, String title, String content, Date uploadDate, int userNo, int accessNo) {
+	public QnA(int qnaNo, String title, String content, Date uploadDate, int userNo, int accessNo) {
 		super();
 		this.qnaNo = qnaNo;
 		this.title = title;

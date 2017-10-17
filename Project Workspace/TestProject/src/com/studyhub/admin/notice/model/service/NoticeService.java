@@ -5,14 +5,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.studyhub.admin.notice.model.dao.NoticeDao;
+import com.studyhub.common.vo.Board;
+import com.studyhub.common.vo.Group;
 import com.studyhub.common.vo.Notice;
+import com.studyhub.common.vo.UNG;
+import com.studyhub.common.vo.User;
+
 import static com.studyhub.common.JDBCTemplate.*;
 
 public class NoticeService {
 	
-	private Notice notice;	
 	private NoticeDao nDao;
-
+	private Notice notice;	
+	private User user;
+	private UNG ung;
+	private Group group;
+	private Board board;
+	
 	
 	public ArrayList<Notice> selectList(){
 		Connection con = getConnection();

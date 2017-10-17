@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.common.vo.Group;
+import com.studyhub.group.main.model.service.GMainService;
+
 /**
  * Servlet implementation class GCreateServlet
  */
@@ -14,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 public class GCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private GMainService gms;
+	private Group group;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

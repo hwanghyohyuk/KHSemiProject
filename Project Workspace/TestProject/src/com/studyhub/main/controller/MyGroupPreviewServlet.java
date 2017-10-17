@@ -25,6 +25,9 @@ import com.studyhub.main.model.service.MainService;
 public class MyGroupPreviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private MainService ms;
+	private UNG ung;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

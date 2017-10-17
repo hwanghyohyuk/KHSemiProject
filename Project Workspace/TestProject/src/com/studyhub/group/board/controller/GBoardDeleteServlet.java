@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.GBoard;
 import com.studyhub.group.board.model.service.GBoardService;
-import com.sun.corba.se.spi.protocol.RequestDispatcherDefault;
 
 
 /**
@@ -20,7 +18,7 @@ import com.sun.corba.se.spi.protocol.RequestDispatcherDefault;
 @WebServlet("/gboarddelete")
 public class GBoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private GBoard gNboard;
+	
 	private GBoardService gNboardService;
        
     /**

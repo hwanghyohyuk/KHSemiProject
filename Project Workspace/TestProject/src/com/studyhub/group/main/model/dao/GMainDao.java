@@ -7,13 +7,25 @@ import java.sql.*;
 
 import static com.studyhub.common.JDBCTemplate.*;
 
+import com.studyhub.common.vo.GBoard;
+import com.studyhub.common.vo.GNotice;
+import com.studyhub.common.vo.GQNA;
 import com.studyhub.common.vo.Group;
+import com.studyhub.common.vo.Schedule;
+import com.studyhub.common.vo.ShareFile;
 import com.studyhub.common.vo.UNG;
 
 public class GMainDao {
 
+	private Group group;
+	private GBoard gBoard;
+	private GNotice gNotice;
+	private GQNA gQna;
+	private Schedule schedule;
+	private ShareFile shareFile;
+	
 	public Group selectGroup(Connection con, int group_no) {
-		Group group = null;
+		group = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		

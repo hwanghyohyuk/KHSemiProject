@@ -15,8 +15,6 @@ public class GNoticeDao {
 	public GNoticeDao(){}
 	
 	
-	
-	
 	//GNotice
 
 	public ArrayList<GNotice> selectList(Connection con) {

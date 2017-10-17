@@ -17,7 +17,6 @@ import com.studyhub.group.schedule.model.service.ScheduleService;
 public class ScheduleDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private Schedule schedule;
 	private ScheduleService scheduleService;
     /**
      * @see HttpServlet#HttpServlet()
