@@ -7,13 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.common.vo.Schedule;
+import com.studyhub.group.schedule.model.service.ScheduleService;
+
+	
 /**
  * Servlet implementation class ScheduleListServlet
  */
 @WebServlet("/schedulelist")
 public class ScheduleListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
+	private Schedule schedule;
+	private ScheduleService scheduleService;
     /**
      * @see HttpServlet#HttpServlet()
      */

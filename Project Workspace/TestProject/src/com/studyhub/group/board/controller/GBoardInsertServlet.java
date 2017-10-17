@@ -7,13 +7,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.common.vo.GBoard;
+import com.studyhub.group.board.model.service.GBoardService;
+
 /**
- * Servlet implementation class GBoardInsertServlet
+ * Servlet implementation class GBoardInsertServlet 
  */
 @WebServlet("/gboardinsert")
 public class GBoardInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
+	private GBoard gNboard;
+	private GBoardService gNboardService;
     /**
      * @see HttpServlet#HttpServlet()
      */
