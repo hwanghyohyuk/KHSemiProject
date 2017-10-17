@@ -2,7 +2,7 @@ package com.studyhub.common.vo;
 
 import java.sql.Date;
 
-public class GNotice {
+public class GNotice implements java.io.Serializable{
 
 	private int noticeNo;
 	private String title;

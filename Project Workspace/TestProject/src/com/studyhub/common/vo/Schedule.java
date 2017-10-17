@@ -2,7 +2,7 @@ package com.studyhub.common.vo;
 
 import java.sql.Date;
 
-public class Schedule {
+public class Schedule implements java.io.Serializable{
 	private int scheduleNo;
 	private Date meetingDate;
 	private int groupNo;

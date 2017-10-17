@@ -2,7 +2,7 @@ package com.studyhub.common.vo;
 
 import java.sql.Date;
 
-public class GBComment {
+public class GBComment implements java.io.Serializable{
 	private int commentNo;
 	private int gBoardNo;
 	private String content;

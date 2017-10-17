@@ -2,7 +2,7 @@ package com.studyhub.common.vo;
 
 import java.sql.Date;
 
-public class GBoard {
+public class GBoard implements java.io.Serializable{
 
 	private int gBoardNo;
 	private String title;

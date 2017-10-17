@@ -2,7 +2,7 @@ package com.studyhub.common.vo;
 
 import java.sql.Date;
 
-public class QNA {
+public class QNA implements java.io.Serializable{
 	private int qnaNo;
 	private String title;
 	private String content;

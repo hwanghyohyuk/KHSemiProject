@@ -2,7 +2,7 @@ package com.studyhub.common.vo;
 
 import java.sql.Date;
 
-public class QComment {
+public class QComment implements java.io.Serializable{
 
 	private int commentNo;
 	private int qnaNo;

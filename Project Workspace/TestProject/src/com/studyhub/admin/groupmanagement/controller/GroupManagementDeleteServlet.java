@@ -7,13 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.admin.groupmanagement.model.service.GroupManagementService;
+
 /**
  * Servlet implementation class GroupManagementDeleteServlet
  */
 @WebServlet("/groupmanagementdelete")
 public class GroupManagementDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private GroupManagementService gms;   
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

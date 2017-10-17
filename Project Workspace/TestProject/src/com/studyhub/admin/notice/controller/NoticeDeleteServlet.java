@@ -17,7 +17,6 @@ import com.studyhub.common.vo.Notice;
 public class NoticeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	private Notice notice;
 	private NoticeService nService;
 	
     /**
