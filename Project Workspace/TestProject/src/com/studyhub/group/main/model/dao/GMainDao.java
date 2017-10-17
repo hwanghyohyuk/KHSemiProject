@@ -27,6 +27,7 @@ public class GMainDao {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, group_no);
 			
+			rset = pstmt.executeQuery();
 			if(rset.next()){
 				group = new Group();
 				
@@ -46,48 +47,4 @@ public class GMainDao {
 		
 		return group;
 	}
-
-	public ArrayList<UNG> selectJoinGroup(Connection con, int userno) {
-		ArrayList<UNG> list = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String query = "select group_no, group_name, usercount "
-					+ "from (select group_no, group_name, usercount "
-						  + "from tb_ung "
-						  + "join (select group_no, count(*) as usercount "
-						  		+ "from tb_ung "
-						  		+ "group by group_no) "
-						  + "using(group_no) "
-						  + "join tb_group using(group_no) "
-						  + "where user_no = ?) "
-					+ "where rownum >0 and rownum<4";
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, userno);
-			
-			rset = pstmt.executeQuery();
-			if(rset != null) {
-				list = new ArrayList<UNG>();
-				while(rset.next()) {
-					UNG ung = new UNG();
-					ung.setGroupNo(rset.getInt("group_no"));
-					ung.setGroupName(rset.getString("group_name"));
-					ung.setCount(rset.getInt("usercount"));
-					System.out.println(rset.getInt("group_no"));
-					
-					list.add(ung);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return list;
-	}
-
 }

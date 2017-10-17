@@ -16,12 +16,4 @@ public class GMainService {
 		close(con);
 		return group;
 	}
-
-	public ArrayList<UNG> selectJoinGroup(int userno) {
-		Connection con = getConnection();
-		ArrayList<UNG> list = new GMainDao().selectJoinGroup(con, userno);
-		close(con);
-		return list;
-	}
-
 }

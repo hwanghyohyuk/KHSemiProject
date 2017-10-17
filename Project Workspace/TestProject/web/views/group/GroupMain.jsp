@@ -32,3 +32,5 @@
 
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
+
+<%@ include file="/views/include/common/headend.jsp"%>

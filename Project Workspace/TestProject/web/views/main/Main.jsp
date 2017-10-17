@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 
-
 <!-- 
 작성자 : 구미향
 내용 : 메인 페이지
@@ -144,14 +143,15 @@
 
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-
 	$(function(){
+		var user_no = <%= user.getUserNo()%>;
 		$.ajax({
-			url: "/studyhub/joingroup",
-			data:  { userno: user.getUserNo() },
+			url: "/studyhub/mygrouppreview",
+			data:  { userno: user_no },
 			type: "get",
 			dataType: "json",
 			success: function(data){
+				//alert('성공 : '+user.getUserNo());
 				var json = JSON.parse(JSON.stringify(data));
 				var values = "";
 				for(var i in json.list){

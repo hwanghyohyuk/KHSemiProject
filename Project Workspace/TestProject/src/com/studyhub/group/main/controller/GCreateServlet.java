@@ -1,28 +1,23 @@
 package com.studyhub.group.main.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.Group;
-import com.studyhub.group.main.model.service.GMainService;
-
 /**
- * Servlet implementation class GMainPreviewServlet
+ * Servlet implementation class GCreateServlet
  */
-@WebServlet("/gmainpreview")
-public class GMainPreviewServlet extends HttpServlet {
+@WebServlet("/gcreate")
+public class GCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GMainPreviewServlet() {
+    public GCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +26,8 @@ public class GMainPreviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8");
-		
-		int group_no = Integer.parseInt(request.getParameter("group_no"));
-		System.out.println(group_no);
-		Group group = new GMainService().SelectGroup(group_no);
-		
-		RequestDispatcher view = null;
-		if(group != null){
-			view = request.getRequestDispatcher("views/group/GroupMain.jsp");
-			request.setAttribute("group", group);
-			view.forward(request, response);
-		}
-		
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

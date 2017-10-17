@@ -34,7 +34,7 @@
 <body>
 <div id="nav_menu">
 <ul>
-	<li><a>[<%-- <%= group.getGroupName() %> --%>]</a></li>
+	<li><a>[<%= group.getGroupName() %>]</a></li>
 	<li><a href=#>공지사항</a></li>
 	<li><a href=#>스터디일정</a></li>
 	<li><a href=#>파일공유</a></li>
