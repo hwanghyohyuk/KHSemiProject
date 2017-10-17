@@ -3,6 +3,7 @@ package com.studyhub.user.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,7 +49,15 @@ public class LoginProcessServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 			System.out.println("Session ID : " + session.getId());
-			response.sendRedirect("/studyhub/main");
+			if(userEmail.equals("admin@admin.com")){
+				RequestDispatcher view = request.getRequestDispatcher("/views/admin/MainDashBoard.jsp");
+				view.forward(request, response);
+			}else{
+				response.sendRedirect("/studyhub/main");
+			}			
+		}else{
+			RequestDispatcher view = request.getRequestDispatcher("/views/user/Loginerror.jsp");
+			view.forward(request, response);
 		}
 	}
 

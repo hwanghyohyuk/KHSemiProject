@@ -34,7 +34,7 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 				<% if(user!=null){ %>
-					<li><a href="/studyhub/views/user/ModifyInfo.jsp"><p class="black"><%=user.getUserName()%></p></a></li>
+					<li><a href="/studyhub/myinfo"><p class="black"><%=user.getUserName()%></p></a></li>
 					<li><a href="/studyhub/logout"><p class="black">로그아웃</p></a></li>
 				<% }else{%>
 					<li><a href="/studyhub/signup"><p class="black">회원가입</p></a></li>
