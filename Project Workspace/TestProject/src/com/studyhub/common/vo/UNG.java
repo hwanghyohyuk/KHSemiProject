@@ -1,11 +1,15 @@
 package com.studyhub.common.vo;
 
-public class UNG {
+import java.io.Serializable;
+
+public class UNG implements Serializable {
 
 	private int ungNo;
 	private int userNo;
 	private int groupNo;
 	private int authorityNo;
+	private String groupName;
+	private int count;
 
 	public UNG() {
 		super();
@@ -17,6 +21,29 @@ public class UNG {
 		this.userNo = userNo;
 		this.groupNo = groupNo;
 		this.authorityNo = authorityNo;
+	}
+	
+	public UNG(int groupNo, String groupName, int count) {
+		super();
+		this.groupNo = groupNo;
+		this.groupName = groupName;
+		this.count = count;
+	}
+	
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	public int getUngNo() {

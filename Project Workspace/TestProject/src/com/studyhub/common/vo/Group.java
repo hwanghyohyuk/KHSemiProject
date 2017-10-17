@@ -5,8 +5,10 @@ public class Group {
 	private int groupNo;
 	private String groupName;
 	private int attributeNo;
+	private String attributeName;
 	private String location;
 	private int categoryNo;
+	private String categoryName;
 	private String description;
 
 	public Group() {
@@ -20,6 +22,17 @@ public class Group {
 		this.attributeNo = attributeNo;
 		this.location = location;
 		this.categoryNo = categoryNo;
+		this.description = description;
+	}
+
+	public Group(int groupNo, String groupName, String attributeName, String location, String categoryName,
+			String description) {
+		super();
+		this.groupNo = groupNo;
+		this.groupName = groupName;
+		this.attributeName = attributeName;
+		this.location = location;
+		this.categoryName = categoryName;
 		this.description = description;
 	}
 
@@ -69,6 +82,22 @@ public class Group {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getAttributeName() {
+		return attributeName;
+	}
+
+	public void setAttributeName(String attributeName) {
+		this.attributeName = attributeName;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	@Override

@@ -9,5 +9,6 @@
 <!-- 부트스트랩 로드-->
 <link rel="stylesheet" href="/studyhub/css/bootstrap.css">
 <link rel="stylesheet" href="/studyhub/css/custom.css">
+<link rel="stylesheet" href="/studyhub/css/bootstrap2-toggle.min.css">
 </head>
 <body>

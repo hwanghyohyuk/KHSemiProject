@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class GQnaPreviewServlet
+ * Servlet implementation class GCreateServlet
  */
-@WebServlet("/gqnapreview")
-public class GQnaPreviewServlet extends HttpServlet {
+@WebServlet("/gcreate")
+public class GCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GQnaPreviewServlet() {
+    public GCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,10 +26,8 @@ public class GQnaPreviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("utf-8");
-		request.setCharacterEncoding("text/html; charset=utf-8");
-		
-		
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
