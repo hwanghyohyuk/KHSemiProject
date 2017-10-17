@@ -16,16 +16,16 @@ public class MainDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
+		System.out.println("dao");
+		
 		String query = "select group_no, group_name, usercount "
-					+ "from (select group_no, group_name, usercount "
 						  + "from tb_ung "
 						  + "join (select group_no, count(*) as usercount "
 						  		+ "from tb_ung "
 						  		+ "group by group_no) "
 						  + "using(group_no) "
 						  + "join tb_group using(group_no) "
-						  + "where user_no = ?) "
-					+ "where rownum >0 and rownum<4";
+						  + "where user_no = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
