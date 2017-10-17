@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studyhub.admin.faqmanagement.model.service.FAQManagementService;
+import com.studyhub.common.vo.FAQ;
 
 /**
  * Servlet implementation class FAQManagementSearchServlet
@@ -15,7 +16,9 @@ import com.studyhub.admin.faqmanagement.model.service.FAQManagementService;
 @WebServlet("/faqmanagementsearch")
 public class FAQManagementSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private FAQManagementService faqManagementService;
+	private FAQ faq;
+	
 	private FAQManagementService faqmService = new FAQManagementService();
 	
     /**
