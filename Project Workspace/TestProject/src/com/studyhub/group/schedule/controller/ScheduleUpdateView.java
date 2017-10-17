@@ -11,18 +11,18 @@ import com.studyhub.common.vo.Schedule;
 import com.studyhub.group.schedule.model.service.ScheduleService;
 
 /**
- * Servlet implementation class ScheduleUpdateServlet
+ * Servlet implementation class ScheduleUpdateView
  */
-@WebServlet("/scheduleupdate")
-public class ScheduleUpdateServlet extends HttpServlet {
+@WebServlet("/scheduleupdateview")
+public class ScheduleUpdateView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private Schedule schedule;
-	private ScheduleService scheduleService; 
+	private ScheduleService scheduleService;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ScheduleUpdateServlet() {
+    public ScheduleUpdateView() {
         super();
         // TODO Auto-generated constructor stub
     }

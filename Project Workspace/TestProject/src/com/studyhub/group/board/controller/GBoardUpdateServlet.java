@@ -1,4 +1,4 @@
-package com.studyhub.group.schedule.controller;
+package com.studyhub.group.board.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,22 +7,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.Schedule;
-import com.studyhub.group.schedule.model.service.ScheduleService;
+import com.studyhub.common.vo.GBoard;
+import com.studyhub.group.board.model.service.GBoardService;
 
 /**
- * Servlet implementation class ScheduleUpdateServlet
+ * Servlet implementation class GBoardUpdateServlet
  */
-@WebServlet("/scheduleupdate")
-public class ScheduleUpdateServlet extends HttpServlet {
+@WebServlet("/gboardupdate")
+public class GBoardUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private Schedule schedule;
-	private ScheduleService scheduleService; 
+	private GBoard gNboard;
+	private GBoardService gNboardService;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ScheduleUpdateServlet() {
+    public GBoardUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
