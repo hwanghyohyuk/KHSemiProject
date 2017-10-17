@@ -1,0 +1,116 @@
+@CHARSET "UTF-8";
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+/* 레이아웃 */
+.my_group {
+	height: 40vh;
+	margin: -30px 15vw;
+	background-color: gray;
+}
+
+.recruit {
+	height: 40vh;
+	margin: 0 15vw;
+}
+
+.head {
+	margin-bottom: 2vh;
+}
+
+#slider {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	height: 36vh;
+	width: 52vw;
+	overflow: hidden;
+	background-color: lightgray;
+}
+
+
+#slider .group-slides {
+	display: block;
+	overflow: hidden;
+}
+
+#slider .slides {
+	display: block;
+	overflow: hidden;
+}
+
+#slider .slide {
+	float: left;
+	list-style-type: none;
+}
+
+/* 세부요소 */
+#slider-left {
+	height: 10vh;
+	margin-top: 27vh;
+	float: left;
+}
+
+#group-slider-left {
+	height: 10vh;
+	margin-top: 27vh;
+	float: left;
+}
+
+#slider-right {
+	height: 10vh;
+	margin-top: 10vh;
+	margin-left: 13vw;	
+	-ms-transform: rotate(180deg); /* IE 9 */
+	-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+	transform: rotate(180deg);
+	
+}
+
+#group-slider-right {
+	height: 10vh;
+	margin-top: 10vh;
+	margin-left: 13vw;	
+	-ms-transform: rotate(180deg); /* IE 9 */
+	-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+	transform: rotate(180deg);
+}
+
+#groupimg {
+	float: left;
+	width: 16vw;
+	height: 30vh;
+	margin: 1vh;
+}
+
+.cover {
+	/* background지정해야함, transparently... */
+	color: black;
+	box-sizing: border-box;
+}
+
+#title {
+	margin-top: 10vh;
+	margin-left: 3vw;
+	display: block;
+	color: #004157;
+	width: 16vw;
+	font-size: 2.3rem;
+	font-weight: bold;
+}
+
+#groupname {
+	margin-left: 6vw;
+}
+
+#r_groupname {
+	margin-left: 4vw;
+}
+
+#more {
+	font-weight: bold;
+	color: #0789a3;
+	position: absolute;
+	right: 26vw;
