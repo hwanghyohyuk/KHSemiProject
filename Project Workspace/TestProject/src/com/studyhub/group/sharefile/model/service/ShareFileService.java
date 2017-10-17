@@ -3,31 +3,31 @@ package com.studyhub.group.sharefile.model.service;
 import java.util.ArrayList;
 
 
-import com.studyhub.common.vo.ShareFile;
+import com.studyhub.common.vo.SharedFile;
 
 
 
 public class ShareFileService {
 	public ShareFileService(){}
 	
-	public ArrayList<ShareFile> selectList(){
+	public ArrayList<SharedFile> selectList(){
 		return null;
 	}
 	
-	public ShareFile selectShareFile(int no){
+	public SharedFile selectShareFile(int no){
 		return null;
 	}
 	
-	public int insertShareFile(ShareFile sf){
+	public int insertShareFile(SharedFile sf){
 		return 0;
 	}
 	public int deleteShareFile(int no){
 		return 0;
 	}
-	public int updateShareFile(ShareFile sf){
+	public int updateShareFile(SharedFile sf){
 		return 0;
 	}
-	public ArrayList<ShareFile> selectSearch(String keyword){
+	public ArrayList<SharedFile> selectSearch(String keyword){
 		return null;
 	}
 	
