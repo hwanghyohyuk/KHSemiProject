@@ -16,8 +16,6 @@ public class MainDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		System.out.println("dao");
-		
 		String query = "select group_no, group_name, usercount "
 						  + "from tb_ung "
 						  + "join (select group_no, count(*) as usercount "
