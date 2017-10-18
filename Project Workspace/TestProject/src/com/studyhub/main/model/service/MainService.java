@@ -30,4 +30,22 @@ public class MainService {
 		return result;
 	}
 
+	public int inserUnG(int userno, Group groupno) {
+		Connection con = getConnection();
+		int result = new MainDao().InsertUnG(con, userno, groupno);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+
+	public Group selectGroupNo(String groupname) {
+		Connection con = getConnection();
+		Group group = new MainDao().selectGroupNo(con, groupname);
+		close(con);
+		return group;
+	}
+
 }

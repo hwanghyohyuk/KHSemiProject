@@ -50,6 +50,7 @@ public class MyGroupPreviewServlet extends HttpServlet {
 			job.put("group_no", ung.getGroupNo());
 			job.put("group_name", URLEncoder.encode(ung.getGroupName(),"UTF-8"));
 			job.put("usercoun", ung.getCount());
+			job.put("renameimg", URLEncoder.encode(ung.getRenameimg(), "UTF-8"));
 			
 			jarr.add(job);
 		}

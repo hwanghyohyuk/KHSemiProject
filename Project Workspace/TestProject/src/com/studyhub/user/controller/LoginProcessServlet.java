@@ -45,6 +45,7 @@ public class LoginProcessServlet extends HttpServlet {
 		String userPwd = request.getParameter("pwd");
 		uService = new UserService();
 		user = uService.loginCheck(userEmail, userPwd);
+		int mygroup = new UserService().countGroup(userEmail);
 		if (user != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
@@ -53,7 +54,9 @@ public class LoginProcessServlet extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher("/views/admin/MainDashBoard.jsp");
 				view.forward(request, response);
 			}else{
-				response.sendRedirect("/studyhub/main");
+				RequestDispatcher view = request.getRequestDispatcher("/main");
+				request.setAttribute("countgroup", mygroup);
+				view.forward(request, response);
 			}			
 		}else{
 			RequestDispatcher view = request.getRequestDispatcher("/views/user/Loginerror.jsp");

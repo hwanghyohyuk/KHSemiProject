@@ -10,6 +10,7 @@ public class UNG implements Serializable {
 	private int authorityNo;
 	private String groupName;
 	private int count;
+	private String renameimg;
 
 	public UNG() {
 		super();
@@ -23,11 +24,12 @@ public class UNG implements Serializable {
 		this.authorityNo = authorityNo;
 	}
 	
-	public UNG(int groupNo, String groupName, int count) {
+	public UNG(int groupNo, String groupName, int count, String renameimg) {
 		super();
 		this.groupNo = groupNo;
 		this.groupName = groupName;
 		this.count = count;
+		this.renameimg = renameimg;
 	}
 	
 	public String getGroupName() {
@@ -76,6 +78,14 @@ public class UNG implements Serializable {
 
 	public void setAuthorityNo(int authorityNo) {
 		this.authorityNo = authorityNo;
+	}	
+
+	public String getRenameimg() {
+		return renameimg;
+	}
+
+	public void setRenameimg(String renameimg) {
+		this.renameimg = renameimg;
 	}
 
 	@Override

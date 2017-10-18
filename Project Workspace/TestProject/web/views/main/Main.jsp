@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-
+<%
+	int countgroup = ((Integer)request.getAttribute("countgroup")).intValue();
+%>
 
 <!-- 
 작성자 : 구미향
@@ -100,7 +102,7 @@
 <body>
 	<!-- 메인 컨텐츠 -->
 	<!-- 나의 그룹 부분 -->
-	<% if(user != null){ %>
+	<% if(countgroup > 0){ %>
 	<div class="row">	
 		<div class="col-md-10 col-sm-5 col-md-offset-2">
 			<div class="slider-btn">
@@ -179,7 +181,7 @@
 				var values = "";
 				for(var i in json.list){				         
 				    values +=  "<li class='slide'><a href='/studyhub/gmainpreview?group_no=" + json.list[i].group_no + "'>" +
-				    		   "<img id='groupimg' src='/studyhub/images/studygroup.jpg'></a>" + 
+				    		   "<img id='groupimg' src='/studyhub/images/groupimg/" + decodeURIComponent(json.list[i].renameimg) +"'></a>" + 
 				    		   "<div class='cover'><p id='groupname'>" + decodeURIComponent(json.list[i].group_name) + "</p></div></li>";
 				}
 				$(".group-slides").html(values);

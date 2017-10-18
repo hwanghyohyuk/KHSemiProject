@@ -17,7 +17,7 @@ public class MainDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select group_no, group_name, usercount "
+		String query = "select group_no, group_name, usercount, g_img_rename "
 						  + "from tb_ung "
 						  + "join (select group_no, count(*) as usercount "
 						  		+ "from tb_ung "
@@ -38,6 +38,7 @@ public class MainDao {
 					ung.setGroupNo(rset.getInt("group_no"));
 					ung.setGroupName(rset.getString("group_name"));
 					ung.setCount(rset.getInt("usercount"));
+					ung.setRenameimg(rset.getString("g_img_rename"));
 					
 					list.add(ung);
 				}
@@ -56,8 +57,8 @@ public class MainDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "insert into group values ("
-					+  "(select max(group_no) + 1 from group), "
+		String query = "insert into tb_group values ("
+					+  "(select max(group_no) + 1 from tb_group), "
 					+  "?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
@@ -68,7 +69,30 @@ public class MainDao {
 			pstmt.setInt(4,g.getCategoryNo());
 			pstmt.setString(5, g.getDescription());
 			pstmt.setString(6, g.getG_img_original());
-			pstmt.setString(7, g.getG_img_rename();
+			pstmt.setString(7, g.getG_img_rename());
+			
+			result = pstmt.executeUpdate();			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int InsertUnG(Connection con, int userno, Group groupno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into tb_ung values ("
+					+  "(select max(ung_no) + 1 from tb_ung), "
+					+  "?, ?, 2)";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userno);
+			pstmt.setInt(2, groupno.getGroupNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -79,6 +103,34 @@ public class MainDao {
 		}
 		
 		return result;
+	}
+
+	public Group selectGroupNo(Connection con, String groupname) {
+		Group group = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select group_no from tb_group where group_name = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, groupname);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()){
+				group = new Group();
+				group.setGroupNo(rset.getInt("group_no"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return group ;
 	}
 
 }

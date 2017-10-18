@@ -73,7 +73,7 @@ var InputImage =
 </script>
 
 <!-- 메인 컨텐츠 -->
-<form action="/studyhub/gcreate" method="get" enctype="multipart/form-data">
+<form action="/studyhub/gcreate" method="post" enctype="multipart/form-data">
 	<div id="imagePreview"></div>
 		<br>
 		<input id="image" type="file" onchange="InputImage();" name="groupimg">
@@ -96,7 +96,7 @@ var InputImage =
 			  </select>
 		</div>
 		<div>
-			<br>스터디 형식<br>
+			<br>스터디 형식<br>-
 			<input type="checkbox" checked data-toggle="toggle" data-size="large" name="group_on" value="on">
 			<br>
 		</div>
@@ -118,6 +118,10 @@ var InputImage =
 		<div class="form-group">
 			<br>한줄소개<br>
 			<input type="text" class="group_description" name="group_description">
+		</div>
+		<div>
+			<input type="hidden" name=user_no value="<%= user.getUserNo() %>">
+			<input type="hidden" name=user_email value="<%= user.getEmail() %>">
 		</div>
 		<button type="submit" class="btn btn-primary pull-right">그룹 생성</button>
 	</div>

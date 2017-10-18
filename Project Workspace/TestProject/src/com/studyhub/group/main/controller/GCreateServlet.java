@@ -19,6 +19,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.studyhub.common.vo.Group;
 import com.studyhub.main.model.service.MainService;
+import com.studyhub.user.model.service.UserService;
 
 /**
  * Servlet implementation class GCreateServlet
@@ -39,6 +40,7 @@ public class GCreateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
@@ -50,7 +52,6 @@ public class GCreateServlet extends HttpServlet {
 			request.setAttribute("message", "form enctype 속성 사용 안 함!");
 			view.forward(request, response);
 		}
-		
 		String root = request.getSession().getServletContext().getRealPath("/");
 		
 		String savePath = root + "images/groupimg";
@@ -59,7 +60,7 @@ public class GCreateServlet extends HttpServlet {
 				maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		
 		String groupname = mrequest.getParameter("group_name");
-		
+
 		int category_no = 0;
 		if(mrequest.getParameter("group_category") != null) {
 			if(mrequest.getParameter("group_category").equals("토익"))
@@ -89,6 +90,10 @@ public class GCreateServlet extends HttpServlet {
 			location = mrequest.getParameter("group_location");
 		}
 		
+		int userno = Integer.parseInt(mrequest.getParameter("user_no"));
+		String userEmail = mrequest.getParameter("user_email");
+		int mygroup = 0;
+		
 		String description = mrequest.getParameter("group_description");
 		
 		
@@ -110,6 +115,7 @@ public class GCreateServlet extends HttpServlet {
 			//파일이름 바꾸기 실행 >> 실패시 직접 바꾸기함
 			//새 파일 만들고, 원래 파일의 내용 읽어서 복사 기록하고
 			//원 파일 삭제함
+			
 			if(!originalFile.renameTo(renameFile)){
 				int read = -1;
 				byte[] buf = new byte[1024];
@@ -130,7 +136,12 @@ public class GCreateServlet extends HttpServlet {
 		
 		//처리결과에 따라 뷰 지정함
 		if(new MainService().insertGroup(g) > 0){
-			response.sendRedirect("/studyhub/main.jsp");
+			Group groupno = new MainService().selectGroupNo(groupname);
+			if(new MainService().inserUnG(userno, groupno) > 0)
+				mygroup = new UserService().countGroup(userEmail);
+				view = request.getRequestDispatcher("/main");
+				request.setAttribute("countgroup", mygroup);
+				view.forward(request, response);
 		}
 	}
 

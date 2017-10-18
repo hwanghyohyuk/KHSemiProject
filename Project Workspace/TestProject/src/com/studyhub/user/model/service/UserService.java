@@ -26,4 +26,11 @@ public class UserService {
 		close(conn);
 		return result;
 	}
+
+	public int countGroup(String userEmail) {
+		Connection con = getConnection();
+		int result = new UserDao().countGroup(con, userEmail);
+		close(con);
+		return result;
+	}
 }
