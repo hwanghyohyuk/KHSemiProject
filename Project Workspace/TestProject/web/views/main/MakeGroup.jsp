@@ -73,31 +73,55 @@ var InputImage =
 </script>
 
 <!-- 메인 컨텐츠 -->
-<form action="/studyhub/gcreate" method="get" enctype="multipart/form-data">
+<form action="/studyhub/gcreate" method="post" enctype="multipart/form-data">
 	<div id="imagePreview"></div>
 		<br>
-		<input id="image" type="file" onchange="InputImage();">
+		<input id="image" type="file" onchange="InputImage();" name="groupimg">
 	<div class="content">
 		<div class="form-group">
 			스터디 그룹 이름<br>
-			<input type="text" class="group_name">
+			<input type="text" class="group_name" name="group_name">
 		</div>
 			<div class="form-group">
 			카테고리<br>
-			<input type="text" class="group_name">
+			<select class="selectpicker" data-style="btn-primary" name="group_category">
+			      <option >토익</option>
+			      <option >영어회화</option>
+			      <option >중국어</option>
+			      <option >제2외국어</option>
+			      <option >IT/컴퓨터</option>
+			      <option >독서모임</option>
+			      <option >취업스터디</option>
+			      <option >기타</option>
+			  </select>
 		</div>
 		<div>
+			<br>스터디 형식<br>-
+			<input type="checkbox" checked data-toggle="toggle" data-size="large" name="group_on" value="on">
 			<br>
-			<input type="checkbox" checked data-toggle="toggle" data-size="large" value="on">
-			<br>
+		</div>
+		<div>
+			<br>지역<br>
+			<select class="selectpicker" data-style="btn-primary" name="group_location">
+			      <option >서울</option>
+			      <option >경기</option>
+			      <option >강원</option>
+			      <option >충북</option>
+			      <option >충남</option>
+			      <option >전북</option>
+			      <option >전남</option>
+			      <option >경북</option>
+			      <option >경남</option>
+			      <option >제주</option>
+			  </select>
 		</div>
 		<div class="form-group">
-			주요지역<br>
-			<input type="text" class="group_name">
+			<br>한줄소개<br>
+			<input type="text" class="group_description" name="group_description">
 		</div>
-			<div class="form-group">
-			한줄소개<br>
-			<input type="text" class="group_name">
+		<div>
+			<input type="hidden" name=user_no value="<%= user.getUserNo() %>">
+			<input type="hidden" name=user_email value="<%= user.getEmail() %>">
 		</div>
 		<button type="submit" class="btn btn-primary pull-right">그룹 생성</button>
 	</div>
