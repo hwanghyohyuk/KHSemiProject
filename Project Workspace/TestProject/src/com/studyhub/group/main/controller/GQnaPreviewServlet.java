@@ -1,6 +1,8 @@
 package com.studyhub.group.main.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.studyhub.common.vo.GNotice;
 import com.studyhub.common.vo.GQNA;
+import com.studyhub.common.vo.Group;
 import com.studyhub.group.main.model.service.GMainService;
 
 /**
@@ -33,10 +36,19 @@ public class GQnaPreviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("utf-8");
-		request.setCharacterEncoding("text/html; charset=utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		request.setCharacterEncoding("utf-8");
 		
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
 		
+		Group group = new GMainService().SelectGroup(groupno);
+		
+		RequestDispatcher view = null;
+		if(group != null){
+			view = request.getRequestDispatcher("views/group/groupQnA/QnAList.jsp");
+			request.setAttribute("group", group);
+			view.forward(request, response);
+		}
 	}
 
 	/**
