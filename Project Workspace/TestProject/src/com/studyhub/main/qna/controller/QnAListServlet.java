@@ -1,6 +1,9 @@
 package com.studyhub.main.qna.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,8 +35,21 @@ public class QnAListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html; charset=utf-8");
+		ArrayList<QnA> list = new QnAService().selectList();
+		RequestDispatcher view = null;
+		if(list!=null){
+			System.out.println("이리로오나 ");
+			view= request.getRequestDispatcher("/views/main/QnA/QnAList.jsp");
+			request.setAttribute("list", list);
+			view.forward(request, response);
+		}else{
+			System.out.println("이리로오나2 ");
+			view = request.getRequestDispatcher("/views/main/QnA/QnAError.jsp");
+			request.setAttribute("message", "리스트 불러오기 실패");
+			view.forward(request, response);
+		}
+	
 	}
 
 	/**

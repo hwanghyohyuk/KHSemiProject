@@ -1,10 +1,14 @@
 package com.studyhub.main.qna.model.service;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.studyhub.common.vo.QComment;
 import com.studyhub.common.vo.QnA;
 import com.studyhub.main.qna.model.dao.QnADao;
+
+import static com.studyhub.common.JDBCTemplate.*;
+
 
 
 public class QnAService {
@@ -15,27 +19,62 @@ public class QnAService {
 	public QnAService(){}
 	
 	public ArrayList<QnA> selectList(){
-		return null;
+		Connection con = getConnection();
+		ArrayList<QnA> list = new QnADao().selectList(con);
+		close(con);
+		
+		return list;
 	}
 	
 	public QnA selectQNA(int no){
-		return null;
+		Connection con = getConnection();
+		qna = new QnADao().selectOne(con, no);
+		close(con);
+		
+		return qna;
 	}
 	
 	public int insertQNA(QnA qna){
-		return 0;
+		Connection con = getConnection();
+		int result = new QnADao().insertQnA(con, qna);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
 	}
 	
 	public int deleteQNA(int no){
-		return 0;
+		Connection con = getConnection();
+		int result = new QnADao().deleteQnA(con, no);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		
+		return result;
 	}
 	
 	public int updateQNA(QnA qna){
-		return 0;
+		Connection con = getConnection();
+		int result = new QnADao().updateQnA(con, qna);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		
+		return result;
 	}
 	
 	public ArrayList<QnA> selectSearch(String keyword){
-		return null;
+		Connection con = getConnection();
+		ArrayList<QnA> list = new QnADao().selectTitleSearch(con, keyword);
+		close(con);
+		
+		return list;
 	}
 	
 
@@ -48,6 +87,12 @@ public class QnAService {
 	}
 	
 	public void updateReadCount(int no){
-		
+		Connection con = getConnection();
+		int result = new QnADao().updateReadCount(con, no);
+		if(result >0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
 	}
 }
