@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.common.vo.Group;
+import com.studyhub.main.model.service.MainService;
+
 /**
  * Servlet implementation class MyGroupListServlet
  */
@@ -14,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 public class GroupPreviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private MainService ms;
+	private Group group;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

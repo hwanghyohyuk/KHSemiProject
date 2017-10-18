@@ -5,11 +5,19 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.studyhub.common.vo.Board;
+import com.studyhub.common.vo.Group;
 import com.studyhub.common.vo.Notice;
+import com.studyhub.common.vo.UNG;
+import com.studyhub.common.vo.User;
 
 public class NoticeDao {
 
-	private Notice notice;
+	private Notice notice;	
+	private User user;
+	private UNG ung;
+	private Group group;
+	private Board board;
 
 	public ArrayList<Notice> selectList(Connection conn) {
 		// TODO Auto-generated method stub

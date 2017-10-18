@@ -25,6 +25,9 @@ import com.studyhub.main.model.service.MainService;
 public class MyGroupPreviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private MainService ms;
+	private UNG ung;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,7 +40,7 @@ public class MyGroupPreviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-int userno = Integer.parseInt(request.getParameter("userno"));
+		int userno = Integer.parseInt(request.getParameter("userno"));
 		
 		ArrayList<UNG> list = new MainService().selectJoinGroup(userno);
 		
@@ -49,7 +52,8 @@ int userno = Integer.parseInt(request.getParameter("userno"));
 			JSONObject job = new JSONObject();
 			job.put("group_no", ung.getGroupNo());
 			job.put("group_name", URLEncoder.encode(ung.getGroupName(),"UTF-8"));
-			job.put("usercoun", ung.getCount());
+			job.put("usercount", ung.getCount());
+			job.put("renameimg", URLEncoder.encode(ung.getRenameimg(), "UTF-8"));
 			
 			jarr.add(job);
 		}

@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.admin.usermanagement.model.service.UserManagementService;
+import com.studyhub.common.vo.User;
+
 /**
  * Servlet implementation class UserManagementListServlet
  */
@@ -14,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 public class UserManagementListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private UserManagementService ums;
+	private User user;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

@@ -19,7 +19,7 @@ import com.studyhub.user.model.service.UserService;
 public class SignUpProcessServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private UserService uService = null;
+	private UserService us = null;
 	private User user = null;
 	
     /**
@@ -44,8 +44,8 @@ public class SignUpProcessServlet extends HttpServlet {
 		
 		user = new User(userEmail, userName, userPwd, phone);
 		
-		uService = new UserService();
-		boolean result = uService.createUser(user);
+		us = new UserService();
+		boolean result = us.createUser(user);
 		
 		if(result){
 			System.out.println("success");
