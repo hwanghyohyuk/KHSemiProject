@@ -79,5 +79,4 @@ public class UserDao implements CryptTemplate {
 		}		
 		return result;
 	}
-
 }

@@ -22,8 +22,8 @@
 	Toggle.VERSION  = '2.2.0'
 
 	Toggle.DEFAULTS = {
-		on: 'ON',
-		off: 'OFF',
+		on: 'ONLINE',
+		off: 'OFFLINE',
 		onstyle: 'primary',
 		offstyle: 'default',
 		size: 'normal',

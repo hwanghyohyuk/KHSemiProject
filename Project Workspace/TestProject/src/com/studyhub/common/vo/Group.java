@@ -10,12 +10,26 @@ public class Group {
 	private int categoryNo;
 	private String categoryName;
 	private String description;
+	private String g_img_original;
+	private String g_img_rename;
 
 	public Group() {
 		super();
 	}
 
-	public Group(int groupNo, String groupName, int attributeNo, String location, int categoryNo, String description) {
+	public Group(String groupName, int attributeNo, String location, int categoryNo, String description,
+			String g_img_original, String g_img_rename) {
+		super();
+		this.groupName = groupName;
+		this.attributeNo = attributeNo;
+		this.location = location;
+		this.categoryNo = categoryNo;
+		this.description = description;
+		this.g_img_original = g_img_original;
+		this.g_img_rename = g_img_rename;
+	}
+	
+	public Group(int groupNo, String groupName, int attributeNo, String location, int categoryNo, String description, String g_img_original, String g_img_rename) {
 		super();
 		this.groupNo = groupNo;
 		this.groupName = groupName;
@@ -23,6 +37,9 @@ public class Group {
 		this.location = location;
 		this.categoryNo = categoryNo;
 		this.description = description;
+		this.g_img_original = g_img_original;
+		this.g_img_rename = g_img_original;
+		
 	}
 
 	public Group(int groupNo, String groupName, String attributeName, String location, String categoryName,
@@ -34,6 +51,24 @@ public class Group {
 		this.location = location;
 		this.categoryName = categoryName;
 		this.description = description;
+	}
+	
+	
+
+	public String getG_img_original() {
+		return g_img_original;
+	}
+
+	public void setG_img_original(String g_img_original) {
+		this.g_img_original = g_img_original;
+	}
+
+	public String getG_img_rename() {
+		return g_img_rename;
+	}
+
+	public void setG_img_rename(String g_img_rename) {
+		this.g_img_rename = g_img_rename;
 	}
 
 	public int getGroupNo() {
