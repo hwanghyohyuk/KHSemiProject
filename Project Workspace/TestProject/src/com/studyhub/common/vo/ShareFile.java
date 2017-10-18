@@ -2,7 +2,7 @@ package com.studyhub.common.vo;
 
 import java.sql.Date;
 
-public class ShareFile {
+public class ShareFile implements java.io.Serializable{
 
 	private int fileNo;
 	private String title;

@@ -3,6 +3,7 @@ package com.studyhub.common.vo;
 import java.sql.Date;
 
 public class GNotice implements java.io.Serializable{
+
 	private static final long serialVersionUID = 10000L;
 
 	private int noticeNo;
