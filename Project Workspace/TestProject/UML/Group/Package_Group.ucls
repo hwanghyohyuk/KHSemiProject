@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.1" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <package id="1" language="java" name="com.studyhub.common.vo" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/common/vo" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="383" width="317" x="547" y="408"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="2" language="java" name="com.studyhub.group.schedule" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/schedule" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="380" width="576" x="90" y="860"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="3" language="java" name="com.studyhub.group.board" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/board" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="380" width="467" x="984" y="385"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="4" language="java" name="com.studyhub.group.notice" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/notice" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="384" width="444" x="5" y="389"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="5" language="java" name="com.studyhub.group.main" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/main" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="244" width="877" x="270" y="78"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="6" language="java" name="com.studyhub.group.sharefile" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/sharefile" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="382" width="599" x="765" y="863"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="7" language="java" name="com.studyhub.group.board.model.dao" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/board/model/dao" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1217" y="697"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="8" language="java" name="com.studyhub.group.board.model.service" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/board/model/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1217" y="594"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="9" language="java" name="com.studyhub.group.board.controller" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/board/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1217" y="493"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="10" language="java" name="com.studyhub.group.main.model.service" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/main/model/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="701" y="207"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="11" language="java" name="com.studyhub.group.main.model.dao" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/main/model/dao" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="988" y="207"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="12" language="java" name="com.studyhub.group.main.controller" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/main/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="419" y="207"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="13" language="java" name="com.studyhub.group.notice.model.service" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/notice/model/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="226" y="600"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="14" language="java" name="com.studyhub.group.notice.controller" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/notice/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="227" y="510"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="15" language="java" name="com.studyhub.group.notice.model.dao" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/notice/model/dao" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="227" y="690"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="16" language="java" name="com.studyhub.group.schedule.model.service" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/schedule/model/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="385" y="1076"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="17" language="java" name="com.studyhub.group.schedule.controller" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/schedule/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="263" y="974"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="18" language="java" name="com.studyhub.group.schedule.model.dao" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/schedule/model/dao" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="505" y="1181"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="19" language="java" name="com.studyhub.group.sharefile.controller" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/sharefile/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1188" y="964"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="20" language="java" name="com.studyhub.group.sharefile.model.dao" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/sharefile/model/dao" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="255" x="815" y="1172"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="21" language="java" name="com.studyhub.group.sharefile.model.service" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/sharefile/model/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1086" y="1080"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <dependency id="22">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="23">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="24">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <dependency id="25">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="26">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="27">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="28">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="29">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="30">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <dependency id="31">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="32">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <dependency id="33">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="34">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="35">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="36">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="37">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="38">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="39">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="40">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="41">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="42">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="43">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <dependency id="44">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="45">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
