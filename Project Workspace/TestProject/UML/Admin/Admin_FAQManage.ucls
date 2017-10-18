@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.1" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.studyhub.admin.faqmanagement.controller.FAQManagementUpdateViewServlet" 
+    project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/admin/faqmanagement/controller/FAQManagementUpdateViewServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="2009" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.studyhub.admin.faqmanagement.controller.FAQManagementSearchServlet" 
+    project="StudyHub" file="/StudyHub/src/com/studyhub/admin/faqmanagement/controller/FAQManagementSearchServlet.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.studyhub.admin.faqmanagement.controller.FAQManagementListServlet" 
+    project="StudyHub" file="/StudyHub/src/com/studyhub/admin/faqmanagement/controller/FAQManagementListServlet.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="369" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.studyhub.admin.faqmanagement.controller.FAQManagementViewServlet" 
+    project="StudyHub" file="/StudyHub/src/com/studyhub/admin/faqmanagement/controller/FAQManagementViewServlet.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="1681" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.studyhub.admin.faqmanagement.controller.FAQManagementDeleteServlet" 
+    project="StudyHub" file="/StudyHub/src/com/studyhub/admin/faqmanagement/controller/FAQManagementDeleteServlet.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="697" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.studyhub.admin.faqmanagement.controller.FAQManagementInsertServlet" 
+    project="StudyHub" file="/StudyHub/src/com/studyhub/admin/faqmanagement/controller/FAQManagementInsertServlet.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="1025" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.studyhub.admin.faqmanagement.controller.FAQManagementUpdateServlet" 
+    project="StudyHub" file="/StudyHub/src/com/studyhub/admin/faqmanagement/controller/FAQManagementUpdateServlet.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="1353" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.studyhub.admin.faqmanagement.model.dao.FAQManagementDao" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/admin/faqmanagement/model/dao/FAQManagementDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="251" x="984" y="405"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.studyhub.admin.faqmanagement.model.service.FAQManagementService" 
+    project="StudyHub" file="/StudyHub/src/com/studyhub/admin/faqmanagement/model/service/FAQManagementService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="231" x="1025" y="212"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.studyhub.common.vo.FAQ" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/common/vo/FAQ.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="158" x="1277" y="598"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="11">    
+    <bendpoint x="832" y="212"/>    
+    <bendpoint x="832" y="405"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="12" name="faq"/>      
+      <multiplicity id="13" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="14">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="15" name="faqms"/>      
+      <multiplicity id="16" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="17">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="18" name="faqms"/>      
+      <multiplicity id="19" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="20">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="21" name="faqms"/>      
+      <multiplicity id="22" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="23">    
+    <bendpoint x="668" y="212"/>    
+    <bendpoint x="668" y="405"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="24" name="faq"/>      
+      <multiplicity id="25" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="26">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="27" name="faqms"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="29">    
+    <bendpoint x="1324" y="212"/>    
+    <bendpoint x="1324" y="405"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="30" name="faq"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
+    <bendpoint x="1488" y="212"/>    
+    <bendpoint x="1488" y="405"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="33" name="faq"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="35">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="36" name="faqms"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="38">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="39" name="faqms"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="41">    
+    <bendpoint x="1652" y="212"/>    
+    <bendpoint x="1652" y="405"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="42" name="faq"/>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="44">    
+    <bendpoint x="1286" y="212"/>    
+    <bendpoint x="1286" y="405"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="45" name="faq"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="47">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="48" name="faq"/>      
+      <multiplicity id="49" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="50">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="51" name="faqms"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="53">    
+    <bendpoint x="1265" y="405"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="54" name="faq"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="56">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="57" name="faqmd"/>      
+      <multiplicity id="58" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

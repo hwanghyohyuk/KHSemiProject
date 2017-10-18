@@ -2,19 +2,30 @@ package com.studyhub.common.vo;
 
 import java.sql.Date;
 
-public class QNA implements java.io.Serializable{
+public class QnA implements java.io.Serializable {
 	private int qnaNo;
 	private String title;
 	private String content;
 	private Date uploadDate;
 	private int userNo;
 	private int accessNo;
+	private String writer;
 
-	public QNA() {
+	public QnA() {
 		super();
 	}
 
-	public QNA(int qnaNo, String title, String content, Date uploadDate, int userNo, int accessNo) {
+	public QnA(int qnaNo, String title, String content, Date uploadDate, int accessNo, String writer) {
+		super();
+		this.qnaNo = qnaNo;
+		this.title = title;
+		this.content = content;
+		this.uploadDate = uploadDate;
+		this.accessNo = accessNo;
+		this.writer = writer;
+	}
+
+	public QnA(int qnaNo, String title, String content, Date uploadDate, int userNo, int accessNo) {
 		super();
 		this.qnaNo = qnaNo;
 		this.title = title;
@@ -22,6 +33,16 @@ public class QNA implements java.io.Serializable{
 		this.uploadDate = uploadDate;
 		this.userNo = userNo;
 		this.accessNo = accessNo;
+	}
+
+	
+	
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 
 	public int getQnaNo() {
@@ -55,7 +76,6 @@ public class QNA implements java.io.Serializable{
 	public void setUploadDate(Date uploadDate) {
 		this.uploadDate = uploadDate;
 	}
-
 	public int getUserNo() {
 		return userNo;
 	}

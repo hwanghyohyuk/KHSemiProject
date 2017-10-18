@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.admin.recruitmanagement.model.service.RecruitManagementService;
+import com.studyhub.common.vo.Board;
+
 /**
  * Servlet implementation class RecruitManagementListServlet
  */
@@ -14,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 public class RecruitManagementListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private RecruitManagementService rms;
+	private Board board;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

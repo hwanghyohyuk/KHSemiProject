@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.common.vo.Board;
+import com.studyhub.group.main.model.service.GMainService;
+
 /**
  * Servlet implementation class GBoardPreviewServlet
  */
@@ -14,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 public class GBoardPreviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private GMainService gms;
+	private Board board;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

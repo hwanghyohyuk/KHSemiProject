@@ -18,7 +18,11 @@ import com.studyhub.group.main.model.service.GMainService;
 @WebServlet("/gmainpreview")
 public class GMainPreviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	private GMainService gms;
+	private Group group;
+	
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

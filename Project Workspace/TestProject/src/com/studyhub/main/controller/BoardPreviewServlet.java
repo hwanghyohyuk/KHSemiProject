@@ -7,12 +7,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.common.vo.Board;
+import com.studyhub.main.model.service.MainService;
+
 /**
  * Servlet implementation class BoardListServlet
  */
 @WebServlet("/boardpreview")
 public class BoardPreviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private MainService ms;
+	private Board board;
        
     /**
      * @see HttpServlet#HttpServlet()

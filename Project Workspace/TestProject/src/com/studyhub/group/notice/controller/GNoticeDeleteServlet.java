@@ -18,7 +18,7 @@ import com.studyhub.common.vo.*;
 @WebServlet("/gnoticedelete")
 public class GNoticeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private GNotice gNotice;
+	
 	private GNoticeService gNoticeService;
        
     /**

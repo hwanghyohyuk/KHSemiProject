@@ -7,12 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.user.model.service.UserService;
+
 /**
  * Servlet implementation class DropUserServlet
  */
 @WebServlet("/dropuser")
 public class DropUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private UserService us;
        
     /**
      * @see HttpServlet#HttpServlet()

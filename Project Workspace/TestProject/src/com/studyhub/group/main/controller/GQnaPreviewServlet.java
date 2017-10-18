@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.common.vo.GNotice;
+import com.studyhub.common.vo.GQNA;
+import com.studyhub.group.main.model.service.GMainService;
+
 /**
  * Servlet implementation class GQnaPreviewServlet
  */
@@ -14,6 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 public class GQnaPreviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private GMainService gms;
+	private GQNA gQna;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

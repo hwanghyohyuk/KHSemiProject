@@ -17,75 +17,6 @@
 <script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
 <script type="text/javascript" src='/studyhub/js/main.js' ></script>
 <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-<style type="text/css">
-* {
-   margin: 0px;
-   padding: 0px;
-}
-
-/* 레이아웃 */
-.my_group {
-   height: 40vh;
-   margin: -30px 15vw;
-   background-color: #4dbbbf;
-}
-
-.recruit {
-   height: 40vh;
-   margin: 0 15vw;
-   background-color: lightgray;
-}
-
-.head {
-   margin-bottom: 2vh;
-}
-
-.images{
-   display: flex;
-   flex-direction: row;
-   justify-content: space-around;
-}
-
-.groupimages{
-   display: flex;
-   flex-direction: row;
-   justify-content: space-around;
-}
-
-
-/* 세부요소 */
-#groupimg {
-   float: left;
-   width: 16vw;
-   height: 30vh;
-}
-
-#title {
-   margin-top: 10vh;
-   margin-left: 3vw;
-   display: block;
-   color: #004157;
-   width: 16vw;
-   font-size: 2.3rem;
-   font-weight: bold;
-   
-}
-#groupname{
-   margin-left: 6vw;
-}
-
-#r_groupname{
-   margin-left: 4vw;
-}
-
-#more {
-   font-weight: bold;
-   color: #0789a3;
-   position: absolute;
-   right: 20vw;
-   
-}
-</style>
 
 <!-- java 구문 -->
 
@@ -180,6 +111,48 @@
 						"</div>";
 				}
 				$("#count").html(values);
+				var width = 400;
+				$(document).ready(function() {
+					$("#group-slider-left").click(function() {
+						$('.group-slides').animate({
+							'margin-left' : '+=' + width
+						}, 800);
+						console.log("working!1");
+					});
+					
+				});
+				
+				
+
+				$(document).ready(function() {
+					$("#group-slider-right").click(function() {
+						$('.group-slides').animate({
+							'margin-left' : '-=' + width
+						}, 800);
+						console.log("working!2");
+					});
+					
+				});
+
+				$(document).ready(function() {
+					$("#slider-right").click(function() {
+						$('.slides').animate({
+							'margin-left' : '-=' + width
+						}, 1000);
+						console.log("working!3");
+					});
+					
+				});
+
+				$(document).ready(function() {
+					$("#slider-left").click(function() {
+						$('.slides').animate({
+							'margin-left' : '+=' + width
+						}, 1000);
+						console.log("working!4");
+					});
+					
+				});
 				mygrouplist();
 			}
 		});

@@ -2,7 +2,7 @@ package com.studyhub.common.vo;
 
 import java.sql.Date;
 
-public class SharedFile implements java.io.Serializable{
+public class ShareFile implements java.io.Serializable{
 
 	private int fileNo;
 	private String title;
@@ -14,11 +14,11 @@ public class SharedFile implements java.io.Serializable{
 	private int uploader;
 	private int accessNo;
 
-	public SharedFile() {
+	public ShareFile() {
 		super();
 	}
 
-	public SharedFile(int fileNo, String title, String content, Date uploadDate, String fileName, String filePath,
+	public ShareFile(int fileNo, String title, String content, Date uploadDate, String fileName, String filePath,
 			String fileSize, int uploader, int accessNo) {
 		super();
 		this.fileNo = fileNo;

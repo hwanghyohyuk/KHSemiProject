@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.1" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.studyhub.group.notice.controller.GNoticeSearchServlet" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/notice/controller/GNoticeSearchServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="1025" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.studyhub.group.notice.controller.GNoticeListServlet" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/notice/controller/GNoticeListServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="1681" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.studyhub.group.notice.controller.GNoticeDeleteServlet" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/notice/controller/GNoticeDeleteServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="697" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.studyhub.group.notice.controller.GNoticeViewServlet" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/notice/controller/GNoticeViewServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="1353" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.studyhub.group.notice.controller.GNoticeUpdateServlet" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/notice/controller/GNoticeUpdateServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.studyhub.group.notice.controller.GNoticeInsertServlet" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/notice/controller/GNoticeInsertServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="2009" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.studyhub.group.notice.controller.GNoticeUpdateViewServlet" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/notice/controller/GNoticeUpdateViewServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="369" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.studyhub.group.notice.model.dao.GNoticeDao" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/notice/model/dao/GNoticeDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="300" x="928" y="495"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.studyhub.group.notice.model.service.GNoticeService" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/group/notice/model/service/GNoticeService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="243" width="224" x="1025" y="212"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.studyhub.common.vo.GNotice" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/common/vo/GNotice.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="495" width="212" x="1270" y="724"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="11">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="12" name="gNoticeService"/>      
+      <multiplicity id="13" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="14">    
+    <bendpoint x="828" y="212"/>    
+    <bendpoint x="828" y="495"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="15" name="gNotice"/>      
+      <multiplicity id="16" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="17">    
+    <bendpoint x="1485" y="212"/>    
+    <bendpoint x="1485" y="495"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="18" name="gNotice"/>      
+      <multiplicity id="19" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="20">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="21" name="gNoticeService"/>      
+      <multiplicity id="22" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="23">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="24" name="gNoticeService"/>      
+      <multiplicity id="25" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="26">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="27" name="gNotice"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="29">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="30" name="gNoticeService"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="33" name="gNoticeService"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="35">    
+    <bendpoint x="1258" y="495"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="36" name="gNotice"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="38">    
+    <bendpoint x="1648" y="212"/>    
+    <bendpoint x="1648" y="495"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="39" name="gNotice"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="41">    
+    <bendpoint x="1279" y="212"/>    
+    <bendpoint x="1279" y="495"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="42" name="gNotice"/>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="44">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="45" name="gNoticeService"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="47">    
+    <bendpoint x="665" y="212"/>    
+    <bendpoint x="665" y="495"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="48" name="gNotice"/>      
+      <multiplicity id="49" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="50">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="51" name="gNoticeService"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="53">    
+    <bendpoint x="1321" y="212"/>    
+    <bendpoint x="1321" y="495"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="54" name="gNotice"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="56">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="57" name="gNoticeDao"/>      
+      <multiplicity id="58" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
