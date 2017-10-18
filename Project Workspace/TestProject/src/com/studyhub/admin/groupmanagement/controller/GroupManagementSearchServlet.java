@@ -7,13 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.admin.groupmanagement.model.service.GroupManagementService;
+import com.studyhub.common.vo.Group;
+
 /**
  * Servlet implementation class GroupManagementSearchServlet
  */
 @WebServlet("/groupmanagementsearch")
 public class GroupManagementSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	   
+		private GroupManagementService gms;
+		private Group group;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

@@ -38,11 +38,8 @@ public class LogoutServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-		user = (User) request.getSession();
-		if (user != null) {
-			RequestDispatcher view = request.getRequestDispatcher("/views/user/Logout.jsp");
-			view.forward(request, response);
-		}
+		RequestDispatcher view = request.getRequestDispatcher("/views/user/Logout.jsp");
+		view.forward(request, response);
 	}
 
 	/**

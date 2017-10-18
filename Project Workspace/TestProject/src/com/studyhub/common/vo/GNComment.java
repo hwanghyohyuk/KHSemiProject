@@ -2,7 +2,7 @@ package com.studyhub.common.vo;
 
 import java.sql.Date;
 
-public class GNComment {
+public class GNComment implements java.io.Serializable{
 
 	private int commentNo;
 	private int noticeNo;

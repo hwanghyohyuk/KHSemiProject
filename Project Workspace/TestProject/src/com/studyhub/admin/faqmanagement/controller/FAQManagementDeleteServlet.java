@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.admin.faqmanagement.model.service.FAQManagementService;
+import com.studyhub.common.vo.FAQ;
+
 /**
  * Servlet implementation class FAQManagementDeleteServlet
  */
@@ -14,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 public class FAQManagementDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private FAQManagementService faqms;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

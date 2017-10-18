@@ -4,34 +4,32 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 
-import com.studyhub.common.vo.ShareFile;
-
-
+import com.studyhub.common.vo.SharedFile;
 
 public class ShareFileDao {
 	public ShareFileDao(){}
 	
-	public ArrayList<ShareFile> selectList(Connection con){
+	public ArrayList<SharedFile> selectList(Connection con){
 		return null;
 	}
 	
-	public ShareFile selectOne(Connection con, int no){
+	public SharedFile selectOne(Connection con, int no){
 		return null;
 	}
 	
-	public int insertShareFile(Connection con, ShareFile sf){
+	public int insertSharedFile(Connection con, SharedFile sf){
 		return 0;
 	}
 	
-	public int deleteShareFile(Connection con, int no){
+	public int deleteSharedFile(Connection con, int no){
 		return 0;
 		}
 	
-	public int updateQnA(Connection con, ShareFile sf){
+	public int updateQnA(Connection con, SharedFile sf){
 		return 0;
 	}
 	
-	public ArrayList<ShareFile> selectTitleSearch(Connection con, String key){
+	public ArrayList<SharedFile> selectTitleSearch(Connection con, String key){
 		return null;
 	}
 	

@@ -1,5 +1,7 @@
 package com.studyhub.admin.groupmanagement.model.dao;
 
-public class GroupManagementDao {
+import com.studyhub.common.vo.Group;
 
+public class GroupManagementDao {
+	private Group group;
 }

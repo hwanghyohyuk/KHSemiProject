@@ -1,4 +1,4 @@
-package com.studyhub.admin.groupmanagement.controller;
+package com.studyhub.group.main.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,23 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.admin.groupmanagement.model.service.GroupManagementService;
-import com.studyhub.common.vo.Group;
-
 /**
- * Servlet implementation class GroupManagementListServlet
+ * Servlet implementation class GCreateServlet
  */
-@WebServlet("/groupmanagementlist")
-public class GroupManagementListServlet extends HttpServlet {
+@WebServlet("/gcreate")
+public class GCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private GroupManagementService gms;
-	private Group group;
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GroupManagementListServlet() {
+    public GCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

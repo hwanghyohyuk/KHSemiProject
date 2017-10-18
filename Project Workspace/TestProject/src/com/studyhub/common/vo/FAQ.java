@@ -1,6 +1,6 @@
 package com.studyhub.common.vo;
 
-public class FAQ {
+public class FAQ implements java.io.Serializable{
 
 	private int faqNo;
 	private String title;
