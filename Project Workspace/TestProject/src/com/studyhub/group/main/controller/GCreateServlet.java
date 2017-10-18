@@ -138,10 +138,7 @@ public class GCreateServlet extends HttpServlet {
 		if(new MainService().insertGroup(g) > 0){
 			Group groupno = new MainService().selectGroupNo(groupname);
 			if(new MainService().inserUnG(userno, groupno) > 0)
-				mygroup = new UserService().countGroup(userEmail);
-				view = request.getRequestDispatcher("/main");
-				request.setAttribute("countgroup", mygroup);
-				view.forward(request, response);
+				response.sendRedirect("/studyhub/main");
 		}
 	}
 

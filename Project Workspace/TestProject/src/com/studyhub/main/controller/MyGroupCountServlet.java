@@ -2,8 +2,6 @@ package com.studyhub.main.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,24 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.studyhub.common.vo.UNG;
-import com.studyhub.group.main.model.service.GMainService;
 import com.studyhub.main.model.service.MainService;
 
 /**
- * Servlet implementation class MyGroupPreviewServlet
+ * Servlet implementation class MyGroupCountServlet
  */
-@WebServlet("/mygrouppreview")
-public class MyGroupPreviewServlet extends HttpServlet {
+@WebServlet("/mygroupcount")
+public class MyGroupCountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyGroupPreviewServlet() {
+    public MyGroupCountServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,25 +32,15 @@ public class MyGroupPreviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int userno = Integer.parseInt(request.getParameter("userno"));
+		request.setCharacterEncoding("utf-8");
 		
-		ArrayList<UNG> list = new MainService().selectJoinGroup(userno);
+		String useremail = request.getParameter("email");
 		
-		// 전송할 최종 json 객체
+		int countgroup = new MainService().countGroup(useremail);
+		
 		JSONObject json = new JSONObject();
-		JSONArray jarr = new JSONArray();
 		
-		for(UNG ung : list){
-			JSONObject job = new JSONObject();
-			job.put("group_no", ung.getGroupNo());
-			job.put("group_name", URLEncoder.encode(ung.getGroupName(),"UTF-8"));
-			job.put("usercount", ung.getCount());
-			job.put("renameimg", URLEncoder.encode(ung.getRenameimg(), "UTF-8"));
-			
-			jarr.add(job);
-		}
-		
-		json.put("list", jarr);
+		json.put("countgroup", countgroup);
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(json.toJSONString());

@@ -1,7 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%
-	int countgroup = ((Integer)request.getAttribute("countgroup")).intValue();
-%>
 
 <!-- 
 작성자 : 구미향
@@ -102,30 +99,10 @@
 <body>
 	<!-- 메인 컨텐츠 -->
 	<!-- 나의 그룹 부분 -->
-	<% if(countgroup > 0){ %>
-	<div class="row">	
-		<div class="col-md-10 col-sm-5 col-md-offset-2">
-			<div class="slider-btn">
-				<a href="#"><img id="group-slider-left"
-					src="/studyhub/images/slider.png"></a>
-			</div>
-			<div class="head">
-				<a href="#" id="more">더보기</a><span id="title">나의 그룹</span>
-			</div>
-			<div class="col-md-8 col-lg-6">
-				<div id="slider">
-					<ul class="group-slides">
-						<!-- ajax 코드가 li 태그를 생성함 -->
-					</ul>
-				</div>
-			</div>
-			<div class="slider-btn">
-				<a href="#"><img id="group-slider-right"
-					src="/studyhub/images/slider.png"></a>
-			</div>
-		</div>
-	</div>
-   <% } %>
+	
+	<div class="row" id="count">	
+		<!-- ajax로 틀 불러옴 -->
+	</div> 
    
    <!-- 모집게시판 부분 -->
 	<div class="row">
@@ -170,6 +147,45 @@
 	
 <script type="text/javascript">
 	$(function(){
+		var user_email = "<%= user.getEmail() %>";
+		$.ajax({
+			url: "/studyhub/mygroupcount",
+			data: { email: user_email },
+			type: "get",
+			dataType: "json",
+			success: function(data){
+				var json = JSON.parse(JSON.stringify(data));
+				var values = "";
+				if(json.countgroup > 0){
+					values +=
+						"<div class='col-md-10 col-sm-5 col-md-offset-2'>" +
+							"<div class='slider-btn'>" +
+								"<img id='group-slider-left' " +
+									"src='/studyhub/images/slider.png'>" +
+							"</div>" +
+							"<div class='head'>" +
+								"<a href='#' id='more'>더보기</a><span id='title'>나의 그룹</span>" +
+							"</div>" +
+							"<div class='col-md-8 col-lg-6'>" +
+								"<div id='slider'>" +
+									"<ul class='group-slides'>" +
+										// ajax 코드가 li 태그를 생성함
+									"</ul>" +
+								"</div>" +
+							"</div>" +
+							"<div class='slider-btn'>" +
+								"<img id='group-slider-right' " +
+									"src='/studyhub/images/slider.png'>" +
+							"</div>" +
+						"</div>";
+				}
+				$("#count").html(values);
+				mygrouplist();
+			}
+		});
+	});
+
+	function mygrouplist(){
 		var user_no = <%= user.getUserNo() %>;
 		$.ajax({
 			url: "/studyhub/mygrouppreview",
@@ -180,14 +196,20 @@
 				var json = JSON.parse(JSON.stringify(data));
 				var values = "";
 				for(var i in json.list){				         
-				    values +=  "<li class='slide'><a href='/studyhub/gmainpreview?group_no=" + json.list[i].group_no + "'>" +
-				    		   "<img id='groupimg' src='/studyhub/images/groupimg/" + decodeURIComponent(json.list[i].renameimg) +"'></a>" + 
-				    		   "<div class='cover'><p id='groupname'>" + decodeURIComponent(json.list[i].group_name) + "</p></div></li>";
+				    values +=  	"<li class='slide'>" +
+				    		   		"<a href='/studyhub/gmainpreview?group_no=" + json.list[i].group_no + "'>" +
+				    		   			"<div>" +
+					 						"<div><img id='groupimg' src='/studyhub/images/groupimg/" + decodeURIComponent(json.list[i].renameimg) +"'></div>" + 
+							 		        "<div class='cover col-md-9'><p id='groupname'>" + decodeURIComponent(json.list[i].group_name) + "</p></div>" +
+							 		        "<div class='col-md-3'><span class='glyphicon glyphicon-user' aria-hidden='true'>&nbsp;</span>" + json.list[i].usercount + "</div>" + 
+				    		   			"</div>" + 
+				    		   		"</a>" + 
+				    		   	"</li>";
 				}
 				$(".group-slides").html(values);
 			}
 		});
-	});
+	}
 </script>
 
 	<!--푸터 부분-->

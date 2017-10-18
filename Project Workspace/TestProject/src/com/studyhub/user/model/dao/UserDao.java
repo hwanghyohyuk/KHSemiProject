@@ -79,31 +79,4 @@ public class UserDao implements CryptTemplate {
 		}		
 		return result;
 	}
-
-	public int countGroup(Connection con, String userEmail) {
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String query = "select count(*) "
-					+  "from tb_ung "
-					+  "where user_no = (select user_no "
-					+ 					"from tb_user "
-					+					"where email = ?) "
-					+  "group by user_no";
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, userEmail);
-			
-			result = pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
-
 }

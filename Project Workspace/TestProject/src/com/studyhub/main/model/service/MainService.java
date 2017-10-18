@@ -9,6 +9,7 @@ import com.studyhub.common.vo.Group;
 import com.studyhub.common.vo.UNG;
 import com.studyhub.group.main.model.dao.GMainDao;
 import com.studyhub.main.model.dao.MainDao;
+import com.studyhub.user.model.dao.UserDao;
 
 public class MainService {
 
@@ -47,5 +48,11 @@ public class MainService {
 		close(con);
 		return group;
 	}
-
+	
+	public int countGroup(String userEmail) {
+		Connection con = getConnection();
+		int result = new MainDao().countGroup(con, userEmail);
+		close(con);
+		return result;
+	}
 }

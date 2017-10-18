@@ -19,59 +19,56 @@ import com.studyhub.common.vo.User;
  */
 @WebServlet("/loginprocess")
 public class LoginProcessServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
 
-	private UserService uService;
-	private User user;
-	
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public LoginProcessServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+   private UserService uService;
+   private User user;
+   
+   /**
+    * @see HttpServlet#HttpServlet()
+    */
+   public LoginProcessServlet() {
+      super();
+      // TODO Auto-generated constructor stub
+   }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8");
-		String userEmail = request.getParameter("email");
-		String userPwd = request.getParameter("pwd");
-		uService = new UserService();
-		user = uService.loginCheck(userEmail, userPwd);
-		int mygroup = new UserService().countGroup(userEmail);
-		if (user != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
-			System.out.println("Session ID : " + session.getId());
-			if(userEmail.equals("admin@admin.com")){
-				RequestDispatcher view = request.getRequestDispatcher("/views/admin/MainDashBoard.jsp");
-				view.forward(request, response);
-			}else{
-				RequestDispatcher view = request.getRequestDispatcher("/main");
-				request.setAttribute("countgroup", mygroup);
-				view.forward(request, response);
-			}			
-		}else{
-			RequestDispatcher view = request.getRequestDispatcher("/views/user/Loginerror.jsp");
-			view.forward(request, response);
-		}
-	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+    *      response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      request.setCharacterEncoding("utf-8");
+      response.setContentType("text/html; charset=utf-8");
+      String userEmail = request.getParameter("email");
+      String userPwd = request.getParameter("pwd");
+      uService = new UserService();
+      user = uService.loginCheck(userEmail, userPwd);
+      if (user != null) {
+         HttpSession session = request.getSession();
+         session.setAttribute("user", user);
+         System.out.println("Session ID : " + session.getId());
+         if(userEmail.equals("admin@admin.com")){
+            RequestDispatcher view = request.getRequestDispatcher("/views/admin/MainDashBoard.jsp");
+            view.forward(request, response);
+         }else{
+            response.sendRedirect("/studyhub/main");
+         }         
+      }else{
+         RequestDispatcher view = request.getRequestDispatcher("/views/user/Loginerror.jsp");
+         view.forward(request, response);
+      }
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+    *      response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }
