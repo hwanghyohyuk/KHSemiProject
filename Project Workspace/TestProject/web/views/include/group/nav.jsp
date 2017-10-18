@@ -12,7 +12,7 @@
 <style type="text/css">
 	ul {  list-style:none;	}
 	
-	ul li a {
+	ul li #nav_text {
 		color: white;
 		font-weight: bold;
 		padding-right: 40px;
@@ -34,12 +34,12 @@
 <body>
 <div id="nav_menu">
 <ul>
-	<li><a>[<%= group.getGroupName() %>]</a></li>
-	<li><a href=#>공지사항</a></li>
-	<li><a href=#>스터디일정</a></li>
-	<li><a href=#>파일공유</a></li>
-	<li><a href=#>자유게시판</a></li>
-	<li><a href=#<%-- "/studyhub/gqnapreview?groupno<%= group.getGroupNo() %> --%>">Q&A</a></li>
+	<li><a id="nav_text">[<%= group.getGroupName() %>]</a></li>
+	<li><a href=# id="nav_text">공지사항</a></li>
+	<li><a href=# id="nav_text">스터디일정</a></li>
+	<li><a href=# id="nav_text">파일공유</a></li>
+	<li><a href=# id="nav_text">자유게시판</a></li>
+	<li><a href=# id="nav_text"<%-- "/studyhub/gqnapreview?groupno<%= group.getGroupNo() %> --%>">Q&A</a></li>
 </ul>
 </div>
 
