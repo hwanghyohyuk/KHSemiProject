@@ -24,6 +24,8 @@
 <%@ include file="/views/include/main/header.jsp"%>
 
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
+<link rel="stylesheet" type="text/css"
+	href="/studyhub/css/board_detail.css">
 <link rel="stylesheet" href="/studyhub/css/bootstrap.css">
 <link rel="stylesheet" href="/studyhub/css/detail.css">
 
@@ -34,48 +36,48 @@
 
 	<!--- 글쓴거 보이는 화면  -->
 	<div class="row">
-		<div class="col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2">
-
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<h3 class="panel-title"><%=qna.getTitle()%></h3>
-
-				</div>
-				<div class="panel-body" id="content"><%=qna.getContent()%></div>
-				<!---댓글입력-->
-				<form action="#" method="post">
-					<input type="text" name="content" class="form-control"
-						id="comment-write" 
-						placeholder="댓글을 달아주세요">
-					<!--<span class ="input-group-btn">-->
-					<button class="btn btn-info btn-sm" type="submit">댓글달기</button>
-
-				</form>
-
-				<!---댓글보여지는부분--->
-
-				<div class="panel-footer">Comments:
-				<button>
-					<a href="#" data-method="post" data-confirm="Are you sure"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-				</button>
-				</div>
-				
-
+	<h2 id="heading">QnA</h2>
+		<div id="inner"
+			class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xm-8 col-xs-2">
+			
+			<hr id="first-line">
+			<div class="title">
+				<h3 class="panel-title"><%=qna.getTitle()%></h3>
 			</div>
-			<button class="btn btn-default btn-sm"
-				id="btns">
-				<a href="/studyhub/qnadelete?no=<%=qna.getQnaNo() %>" data-method="post" data-confirm="진짜로삭제할거에요?ㅠㅠ">삭제</a>
-			</button>
-			<button class="btn btn-default btn-sm"
-				id="btns">
-				<a href="/studyhub/qnaupdateview?no=<%= qna.getQnaNo()%>">수정</a>
-			</button>
+			<hr id="second-line">
+
+			<div class="panel-body" id="content"><%=qna.getContent()%></div>
+			<!---댓글입력-->
+			<form action="#" method="post">
+				<input type="text" name="content" class="form-control"
+					id="comment-write" placeholder="댓글을 달아주세요">
+				<!--<span class ="input-group-btn">-->
+				<button class="btn btn-info btn-sm" type="submit">댓글달기</button>
+
+			</form>
+
+			<!---댓글보여지는부분--->
+
+			<div class="panel-footer">
+				Comments:
+				
+					<a href="#" data-method="post" data-confirm="Are you sure"><button><span
+						class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a>
+				
+			</div>
+
+
+
+			<a href="/studyhub/qnalist">목록으로 이동</a> <a
+				href="/studyhub/qnadelete?no=<%=qna.getQnaNo()%>" data-method="post"
+				data-confirm="진짜로삭제할거에요?ㅠㅠ"><button
+					class="btn btn-default btn-sm" id="btns">삭제</button></a> <a
+				href="/studyhub/qnaupdateview?no=<%=qna.getQnaNo()%>">
+				<button class="btn btn-default btn-sm" id="btns">수정</button>
+			</a>
 
 		</div>
 	</div>
-
-
-
 
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>

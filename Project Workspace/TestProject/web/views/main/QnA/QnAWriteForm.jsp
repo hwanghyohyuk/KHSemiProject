@@ -42,7 +42,7 @@
 <body>
 
 <div class="row" id="layout">
-  <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
+  <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xm-8 col-xs-2">
   <h2>질문하기</h2>
   <br>
 	<form action="/studyhub/qnainsert" method="post">

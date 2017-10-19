@@ -20,7 +20,7 @@ public class QnADao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = "select qna_no, title, content, upload_date, user_name, access_no from tb_qna "
+		String query = "select qna_no, title, content, upload_date, user_name, access_no, readcount from tb_qna "
 				+ "join tb_user on (tb_user.user_no=tb_qna.user_no) "
 				+ "order by tb_qna.qna_no desc";
 		
@@ -39,6 +39,7 @@ public class QnADao {
 					q.setUploadDate(rset.getDate("upload_date"));
 					q.setWriter(rset.getString("user_name"));
 					q.setAccessNo(rset.getInt("access_no"));
+					q.setReadCount(rset.getInt("readcount"));
 				
 					list.add(q);
 				}
@@ -75,6 +76,7 @@ public class QnADao {
 				qna.setUploadDate(rset.getDate("upload_date"));
 				qna.setUserNo(rset.getInt("user_no"));
 				qna.setAccessNo(rset.getInt("access_no"));
+				qna.setReadCount(rset.getInt("readcount"));
 			}
 			
 		} catch (Exception e) {
@@ -93,7 +95,7 @@ public class QnADao {
 		
 		String query = "insert into tb_qna values"
 				+ "((select max(qna_no)+1 from tb_qna),"
-				+ "?, ?, sysdate, ?, ?)";
+				+ "?, ?, sysdate, ?, ?, 1)";
 				
 		try {
 			pstmt = con.prepareStatement(query);
@@ -152,6 +154,27 @@ public class QnADao {
 			close(pstmt);
 		}
 		System.out.println(result);
+		return result;
+	}
+	
+	public int updateReadCount(Connection con, int no){
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_qna set readcount = readcount+1 where qna_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		
 		return result;
 	}
 

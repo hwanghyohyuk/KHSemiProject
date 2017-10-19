@@ -37,7 +37,9 @@ public class QnAViewServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		int no = Integer.parseInt(request.getParameter("no"));
 		
-		QnA qna = new QnAService().selectQNA(no);
+		QnAService qservice = new QnAService();
+		QnA qna = qservice.selectQNA(no);
+		qservice.updateReadCount(no);
 		
 		RequestDispatcher view = null;
 		
