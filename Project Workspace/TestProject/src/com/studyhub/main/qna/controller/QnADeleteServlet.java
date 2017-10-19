@@ -1,6 +1,8 @@
 package com.studyhub.main.qna.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,8 +32,16 @@ public class QnADeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html; charset=utf-8");
+		
+		if(new QnAService().deleteQNA(Integer.parseInt(request.getParameter("no"))) > 0){
+			response.sendRedirect("/studyhub/qnalist");
+		}else{
+			RequestDispatcher errorPage = request.getRequestDispatcher("/views/main/QnA/QnAError.jsp");
+			request.setAttribute("message", "삭제 실패");
+			errorPage.forward(request, response);
+		}
+		
 	}
 
 	/**

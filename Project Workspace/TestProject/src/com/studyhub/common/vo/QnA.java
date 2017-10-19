@@ -34,9 +34,14 @@ public class QnA implements java.io.Serializable {
 		this.userNo = userNo;
 		this.accessNo = accessNo;
 	}
+	
+	public QnA(int qnaNo, String title, String content) {
+		super();
+		this.qnaNo = qnaNo;
+		this.title = title;
+		this.content = content;
+	}
 
-	
-	
 	public String getWriter() {
 		return writer;
 	}
