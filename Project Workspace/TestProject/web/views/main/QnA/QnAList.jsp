@@ -30,7 +30,7 @@
 </style>
 <script type="text/javascript">
 	function insertPage() {
-		location.href = "/views/main/QnA/QnAWriteForm.jsp"
+		location.href = "/studyhub/views/main/QnA/QnAWriteForm.jsp"
 	}
 </script>
 
@@ -75,7 +75,7 @@
 						}
 					%>
 				</table>
-					<button onclick="inserPage();" class="btn btn-info">글쓰기</button>
+					<button onclick="insertPage();" class="btn btn-info">글쓰기</button>
 			</div>
 		</div>
 	</div>

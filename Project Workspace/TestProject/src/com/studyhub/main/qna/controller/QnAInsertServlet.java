@@ -50,7 +50,7 @@ public class QnAInsertServlet extends HttpServlet {
 		if(new QnAService().insertQNA(qna)>0){
 			response.sendRedirect("/studyhub/qnalist");
 		}else{
-			RequestDispatcher errorPage = request.getRequestDispatcher("/studyhub/views/main/QnA/QnAError.jsp");
+			RequestDispatcher errorPage = request.getRequestDispatcher("/views/main/QnA/QnAError.jsp");
 			request.setAttribute("message", "질문 등록 실패");
 			errorPage.forward(request, response);
 		}
