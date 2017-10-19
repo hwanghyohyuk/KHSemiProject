@@ -88,7 +88,7 @@ public class QnAService {
 		return 0;
 	}
 	
-	public void updateReadCount(int no){
+	/*public void updateReadCount(int no){
 		Connection con = getConnection();
 		int result = new QnADao().updateReadCount(con, no);
 		if(result >0)
@@ -96,5 +96,5 @@ public class QnAService {
 		else
 			rollback(con);
 		close(con);
-	}
+	}*/
 }
