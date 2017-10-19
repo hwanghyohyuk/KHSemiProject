@@ -1,34 +1,25 @@
 package com.studyhub.group.qna.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
-import com.studyhub.common.vo.Group;
-import com.studyhub.common.vo.QnA;
-import com.studyhub.group.main.model.service.GMainService;
 import com.studyhub.group.qna.model.service.QnAService;
 
 /**
- * Servlet implementation class InsertQnAServlet
+ * Servlet implementation class InsertGroupQnAServlet
  */
-@WebServlet("/insertqna")
-public class InsertQnAServlet extends HttpServlet {
+@WebServlet("/insertgroupqna")
+public class InsertGroupQnAServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertQnAServlet() {
+    public InsertGroupQnAServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -52,7 +43,6 @@ public class InsertQnAServlet extends HttpServlet {
 				response.sendRedirect("views/group/groupQnA/QnAList.jsp");
 		}
 	}
-		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

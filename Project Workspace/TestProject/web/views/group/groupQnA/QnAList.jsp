@@ -49,7 +49,7 @@
 		var qna_group_no = "<%= group.getGroupNo() %>";
 		var qna_user_no = "<%= user.getUserNo() %>";
 		$.ajax({
-			url: "/studyhub/insertqna",
+			url: "/studyhub/insertgroupqna",
 			data: { groupno: qna_group_no, userno: qna_user_no, title: qna_title, content: qna_content },
 			type: "get"
 			/*dataType: "json"
