@@ -39,16 +39,8 @@ public class GQnaPreviewServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		
-		int groupno = Integer.parseInt(request.getParameter("groupno"));
-		
-		Group group = new GMainService().SelectGroup(groupno);
-		
-		RequestDispatcher view = null;
-		if(group != null){
-			view = request.getRequestDispatcher("views/group/groupQnA/QnAList.jsp");
-			request.setAttribute("group", group);
-			view.forward(request, response);
-		}
+		RequestDispatcher view = request.getRequestDispatcher("/views/group/groupQnA/QnAList.jsp");
+		view.forward(request, response);
 	}
 
 	/**

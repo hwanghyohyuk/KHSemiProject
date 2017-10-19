@@ -27,34 +27,35 @@
 <div class="row">
 	<div class="col-md-7 col-sm-7 col-sm-offset-1 col-md-offset-1">		
 		<div class="btn btn-default btn-sm" id="write">
-			<form onsubmit="qnawrite">
+			<form method="get" onsubmit="return qnawrite()">
 				<div class="col-xs-10 col-md-11 col-sm-10">
-	                    <input type="text" class="form-control" aria-describedby="sizing-addon1" placeholder="질문할 제목을 입력하세요." id="content">
+	                    <input type="text" class="form-control" aria-describedby="sizing-addon1" placeholder="질문할 제목을 입력하세요." name="qna_title">
 				</div>
 				<div class="col-xs-2 col-md-1 col-sm-2">
 					<input type="submit" class="btn btn-primary" value="등록">
 				</div>
 				<div class="col-xs-10 col-md-11 col-sm-10">
-	                    <textarea rows="4" size="40" value="" class="form-control" placeholder="<%= user.getUserName() %>님 무엇이 궁금하세요?"></textarea>
+	                    <textarea rows="4" class="form-control" placeholder="<%= user.getUserName() %>님 무엇이 궁금하세요?" name="qna_content"></textarea>
 				</div>
-				
+			
 			</form>
 		</div>
+		그룹번호 <%= group.getGroupNo() %>/ 그룹이름  : <%= group.getGroupName() %>
 	</div>
 </div>
 
 <script type="text/javascript">
 	function qnawrite(){
-		var group_no = "<%= group.getGroupNo() %>";
-		var user_no = "<%= user.getUserNo() %>";
+		var qna_group_no = "<%= group.getGroupNo() %>";
+		var qna_user_no = "<%= user.getUserNo() %>";
 		$.ajax({
 			url: "/studyhub/insertqna",
-			data: { groupno: group_no, userno: user_no, title: title, content: content, },
-			type: "get",
-			dataType: "json",
-			success: function(data){
+			data: { groupno: qna_group_no, userno: qna_user_no, title: qna_title, content: qna_content },
+			type: "get"
+			/*dataType: "json"
+ 			success: function(data){
 				selectQnA();
-			}
+			} */
 		});
 	}
 	

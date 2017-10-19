@@ -39,23 +39,20 @@ public class InsertQnAServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
+		System.out.println("insertQnA Start ---------");
+		
 		int userno = Integer.parseInt(request.getParameter("userno"));
 		int groupno = Integer.parseInt(request.getParameter("groupno"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		System.out.println("userno : " + userno +"/ groupno : " + groupno + "/ title : " + title + "/ content : " + content);
+		
 		
 		if(new QnAService().InsertQnA(userno, groupno, title, content) > 0) {
-			Group group = new GMainService().SelectGroup(groupno);
-			
-			RequestDispatcher view = null;
-			if(group != null){
-				view = request.getRequestDispatcher("views/group/groupQnA/QnAList.jsp");
-				request.setAttribute("group", group);
-				view.forward(request, response);
-			}
+				response.sendRedirect("views/group/groupQnA/QnAList.jsp");
 		}
-		
 	}
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
