@@ -39,12 +39,10 @@ public class QnAListServlet extends HttpServlet {
 		ArrayList<QnA> list = new QnAService().selectList();
 		RequestDispatcher view = null;
 		if(list!=null){
-			System.out.println("이리로오나 ");
 			view= request.getRequestDispatcher("/views/main/QnA/QnAList.jsp");
 			request.setAttribute("list", list);
 			view.forward(request, response);
 		}else{
-			System.out.println("이리로오나2 ");
 			view = request.getRequestDispatcher("/views/main/QnA/QnAError.jsp");
 			request.setAttribute("message", "리스트 불러오기 실패");
 			view.forward(request, response);
