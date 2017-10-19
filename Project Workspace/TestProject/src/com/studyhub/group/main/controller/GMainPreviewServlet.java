@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.studyhub.common.vo.Group;
 import com.studyhub.group.main.model.service.GMainService;
@@ -40,13 +41,15 @@ public class GMainPreviewServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		int group_no = Integer.parseInt(request.getParameter("group_no"));
-		System.out.println(group_no);
 		Group group = new GMainService().SelectGroup(group_no);
 		
 		RequestDispatcher view = null;
+		System.out.println(group.getGroupNo());
 		if(group != null){
-			view = request.getRequestDispatcher("views/group/GroupMain.jsp");
-			request.setAttribute("group", group);
+			HttpSession session = request.getSession();
+			session.setAttribute("group",group);
+			System.out.println("group session : " + session.getId());
+			view = request.getRequestDispatcher("/views/group/GroupMain.jsp");
 			view.forward(request, response);
 		}
 		
