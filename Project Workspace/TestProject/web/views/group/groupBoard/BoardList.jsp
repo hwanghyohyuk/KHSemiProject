@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.studyhub.common.vo.GBoard, java.util.*, java.sql.*, com.studyhub.common.vo.Group"%>
+<%@ page import="com.studyhub.common.vo.GBoard, java.util.*, java.sql.*, 
+com.studyhub.common.vo.Group"%>
 
 <%
 	ArrayList<GBoard> list = (ArrayList<GBoard>) request.getAttribute("list");
@@ -28,12 +29,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Document</title>
-</head>
+
 <!--헤더 부분-->
-<header>
+
 	<%@ include file="/views/include/common/head.jsp"%>
 	<%@ include file="/views/include/main/header.jsp"%>
-</header>
+</head>
 <style>
 div#full {
 	width: 1480px;
@@ -70,45 +71,10 @@ div#bottom {
 	float: right;
 	margin: 5px 60px 5px 5px;
 }
-
-ul {
-	list-style: none;
-}
-
-ul li a {
-	color: white;
-	font-weight: bold;
-	padding-right: 40px;
-}
-
-ul li {
-	text-align: center;
-	margin-top: 30px;
-}
-
-div#nav_menu {
-	margin: -10px 0px 5px 0px;
-	width: 200px;
-	height: 500px;
-	float: left;
-	background-color: #004157;
-	font-size: 15pt;
-}
 </style>
 <body>
 	<div id="full">
 		<hr>
-		<div id="nav_menu">
-			<ul>
-				<li><a>[<%=group.getGroupName()%>]
-				</a></li>
-				<li><a href=#>공지사항</a></li>
-				<li><a href=#>스터디일정</a></li>
-				<li><a href=#>파일공유</a></li>
-				<li><a href=#>자유게시판</a></li>
-				<li><a href=#<%-- "/studyhub/gqnapreview?groupno<%= group.getGroupNo() %> --%>">Q&A</a></li>
-			</ul>
-		</div>
 		<div id="name">
 			<strong>자유게시판</strong>
 		</div>
@@ -135,6 +101,7 @@ div#nav_menu {
 				<%} %>
 			</table>
 			<div id="bottom" align="right">
+			<center>
 				<%
 					if (currentPage <= 1) {
 				%>
@@ -177,10 +144,6 @@ div#nav_menu {
 				<%
 					}
 				%>
-
-				<center>
-					<input type="submit" value="이전"> <input type="submit"
-						value="1"> <input type="submit" value="다음">
 				</center>
 				<input type="submit" value="글쓰기">
 			</div>
