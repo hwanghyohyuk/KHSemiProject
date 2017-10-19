@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-
 import com.studyhub.common.vo.Board;
 import com.studyhub.common.vo.Group;
 import com.studyhub.common.vo.UNG;

@@ -9,9 +9,7 @@ import com.studyhub.common.vo.Board;
 
 import com.studyhub.common.vo.Group;
 import com.studyhub.common.vo.UNG;
-import com.studyhub.group.main.model.dao.GMainDao;
 import com.studyhub.main.model.dao.MainDao;
-import com.studyhub.user.model.dao.UserDao;
 
 public class MainService {
 
@@ -19,7 +17,7 @@ public class MainService {
 	private UNG ung;
 	private Group group;
 	private Board board;
-	
+
 	public ArrayList<UNG> selectJoinGroup(int userno) {
 		Connection con = getConnection();
 		ArrayList<UNG> list = new MainDao().selectJoinGroup(con, userno);
@@ -30,7 +28,7 @@ public class MainService {
 	public int insertGroup(Group g) {
 		Connection con = getConnection();
 		int result = new MainDao().InsertGroup(con, g);
-		if(result > 0)
+		if (result > 0)
 			commit(con);
 		else
 			rollback(con);
@@ -41,7 +39,7 @@ public class MainService {
 	public int inserUnG(int userno, Group groupno) {
 		Connection con = getConnection();
 		int result = new MainDao().InsertUnG(con, userno, groupno);
-		if(result > 0)
+		if (result > 0)
 			commit(con);
 		else
 			rollback(con);
@@ -55,7 +53,7 @@ public class MainService {
 		close(con);
 		return group;
 	}
-	
+
 	public int countGroup(String userEmail) {
 		Connection con = getConnection();
 		int result = new MainDao().countGroup(con, userEmail);
