@@ -11,11 +11,10 @@
 
 <!--헤더 부분-->
 <%@ include file="/views/include/common/head.jsp"%>
-<%@ include file="/views/include/main/header.jsp"%>
+<%@ include file="/views/include/admin/header.jsp"%>
 
 <!-- 메인 컨텐츠 -->
-
-
+어드민 메인
 
 
 
@@ -23,4 +22,5 @@
 <!-- /메인 컨텐츠 -->
 
 <!--푸터 부분-->
-<%@ include file="/views/include/main/footer.jsp"%>
+<%@ include file="/views/include/admin/footer.jsp"%>
+<%@ include file="/views/include/common/headend.jsp"%>
