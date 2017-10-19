@@ -66,7 +66,7 @@
 					%>
 					<tr>
 						<td><%=qna.getQnaNo()%></td>
-						<td><a href="/qnaview?no=<%=qna.getQnaNo()%>"><%=qna.getTitle()%></a></td>
+						<td><a href="/studyhub/qnaview?no=<%=qna.getQnaNo()%>"><%=qna.getTitle()%></a></td>
 						<td><%=qna.getWriter()%></td>
 						<td><%=qna.getUploadDate()%></td>
 						<td>조회수</td>

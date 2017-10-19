@@ -1,6 +1,8 @@
 package com.studyhub.main.qna.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,10 +34,26 @@ public class QnAUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		
+		qna = new QnA();
+		qna.setQnaNo(Integer.parseInt(request.getParameter("no")));
+		qna.setTitle(request.getParameter("title"));
+		qna.setContent(request.getParameter("content"));
+		
+		RequestDispatcher view = null;
+		
+		if(new QnAService().updateQNA(qna) > 0){
+			response.sendRedirect("/studyhub/qnalist");
+		}else{
+			view = request.getRequestDispatcher("/views/main/QnA/QnAError.jsp");
+			request.setAttribute("message", "수정실패");
+			view.forward(request, response);
+		}
+	
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
