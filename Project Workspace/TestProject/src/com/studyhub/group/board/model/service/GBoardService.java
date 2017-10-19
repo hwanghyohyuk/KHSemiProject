@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.studyhub.common.vo.GBoard;
 import com.studyhub.group.board.model.dao.GBoardDao;
 
+
 public class GBoardService {
 
 	private GBoard gNboard;
@@ -94,5 +95,14 @@ public class GBoardService {
 		close(con);
 		return result;
 	}
+
+	//전체 게시글 갯수 조회용
+	public int getListCount(){
+		Connection con = getConnection();
+		int listCount = new GBoardDao().ListCount(con);
+		close(con);
+		return listCount;
+	}
+	
 
 }

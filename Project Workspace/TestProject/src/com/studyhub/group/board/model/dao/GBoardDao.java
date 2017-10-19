@@ -47,4 +47,9 @@ public class GBoardDao {
 		return 0;
 	}
 
+	public int ListCount(Connection con) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
