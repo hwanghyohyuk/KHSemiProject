@@ -40,6 +40,10 @@
 	#title_size{
 		height: 40px;
 	}
+	
+	#uploader{
+		padding: 0px;
+	}
 
 </style>
 <!--헤더 부분-->
@@ -48,13 +52,14 @@
 <%@ include file="/views/include/group/nav.jsp" %>
 <!-- 메인 컨텐츠 -->
 
-<div class="col-md-5 col-sm-5 col-sm-offset-2 col-md-offset-2">
+<div class="container">
+<div class="col-md-5 col-sm-5 col-sm-offset-3 col-md-offset-3">
 		<div class="btn btn-default btn-sm" id="serach">
 			검색 들어갈 자리
 		</div>
 	</div>
 	
-	<div class="col-md-7 col-sm-7 col-sm-offset-1 col-md-offset-1">		
+	<div class="col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1">		
 		<div class="btn btn-default btn-sm" id="write">
 			<form method="post" name="fr" id="qnainsertform" action="">
 				<input type="hidden" name="userno" id="userno" value="<%= user.getUserNo() %>">
@@ -75,6 +80,7 @@
 	<div id="qna_list">
 		<!-- ajax  -->
 	</div>
+</div>
 	
 	
 
@@ -109,12 +115,11 @@
 				url: "/studyhub/insertgroupqna",
 				data: queryString,
 				type: "get",
-				dataType: "json",
-	
+				dataType: "json"
 			});
 			$("#title").val("");
 			$("#content").val("");
-			selectQnA();
+			return true
 		}
 	}
 	
@@ -130,7 +135,7 @@
 				var values = "";
 				for(var i in json.list){
 					values += 
-						"<div class='col-md-7 col-sm-7 col-sm-offset-1 col-md-offset-1'>" +		
+						"<div class='col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1'>" +		
 							"<div class='btn btn-default btn-sm' id='read'>" +
 								"<form method='post' name='fr' id='qnainsertform' action=''>" +
 									"<div class='col-xs-10 col-sm-10 col-md-11'>" +
@@ -141,7 +146,7 @@
 										    		decodeURIComponent(json.list[i].title) +
 										    	"</h3>" +
 										  	"</div>" +
-										    "<div class='col-xs-3 col-sm-3 col-md-2'>" +
+										    "<div class='col-xs-3 col-sm-3 col-md-2' id='uploader'>" +
 										    	decodeURIComponent(json.list[i].uploaddate) + "&nbsp" +
 										    	decodeURIComponent(json.list[i].uploader) +
 										    "</div>" +
