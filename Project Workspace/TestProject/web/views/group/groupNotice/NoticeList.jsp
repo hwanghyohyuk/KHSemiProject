@@ -17,7 +17,7 @@
 <head>
 <meta charset="utf-8">
 <title>GNoticeList</title>
-<script type="text/javascript">
+<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js">
 	function insertPage() {
 		location.href = "/views/groupNotice/NoticeWriteForm.jsp";
 	}
@@ -72,8 +72,7 @@ div#bottom {
 	<div id="name">
 		<strong>공지사항</strong>
 	</div>	
-	<table id="board" align="center" cellspacing="0" cellpadding="10"
-		border="1" width="1100">
+	<table class="table table-bordered table-hover">
 		<tr align="center" height="20">
 			<td width="60">번호</td>
 			<td width="470">제목</td>
@@ -99,8 +98,6 @@ div#bottom {
       <center><input type="submit" value="이전" > <input type="submit" value="1"> <input type="submit" value="다음" ></center>
       <input type="submit" value="글쓰기" onclick="insertPage()">
   	</div>
-
-
 
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>
