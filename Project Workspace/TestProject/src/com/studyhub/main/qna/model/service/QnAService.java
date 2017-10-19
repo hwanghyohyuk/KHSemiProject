@@ -3,8 +3,10 @@ package com.studyhub.main.qna.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.studyhub.common.vo.GQNA;
 import com.studyhub.common.vo.QComment;
 import com.studyhub.common.vo.QnA;
+import com.studyhub.group.qna.model.dao.GroupQnADao;
 import com.studyhub.main.qna.model.dao.QnADao;
 
 import static com.studyhub.common.JDBCTemplate.*;
