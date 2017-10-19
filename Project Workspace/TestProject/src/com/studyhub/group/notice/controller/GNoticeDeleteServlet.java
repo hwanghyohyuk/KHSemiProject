@@ -36,12 +36,12 @@ public class GNoticeDeleteServlet extends HttpServlet {
 		// 공지 삭제
 		response.setContentType("text/html; charset=utf-8");
 		
-		int bnum= Integer.parseInt(request.getParameter("bnum"));
+		int no= Integer.parseInt(request.getParameter("no"));
 		
-		if(new GNoticeService().deleteGNotice(bnum) > 0){
-			response.sendRedirect("");
+		if(new GNoticeService().deleteGNotice(no) > 0){
+			response.sendRedirect("/studyhub/gnoticelist");
 		}else{
-			RequestDispatcher view = request.getRequestDispatcher("");
+			RequestDispatcher view = request.getRequestDispatcher("/views/group/groupNotice/NoticeError.jsp");
 			request.setAttribute("message", "게시글 삭제 실패");
 			view.forward(request, response);
 		}

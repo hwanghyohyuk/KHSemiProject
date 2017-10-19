@@ -69,6 +69,11 @@ public class GNoticeService {
 		return list;
 	}
 	
+	public int deleteGNotice(int no) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	
 	//GNotice Conmment
 	
@@ -82,10 +87,7 @@ public class GNoticeService {
 		
 	}
 
-	public int deleteGNotice(int bnum) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 	
 	
 	

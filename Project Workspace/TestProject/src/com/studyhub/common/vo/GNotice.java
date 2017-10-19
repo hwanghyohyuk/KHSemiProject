@@ -13,13 +13,14 @@ public class GNotice implements java.io.Serializable{
 	private int uploader;
 	private int accessNo;
 	private int groupNo;
+	private int readCount;
 
 	public GNotice() {
 		super();
 	}
 
 	public GNotice(int noticeNo, String title, String content, Date uploadDate, int uploader, int accessNo,
-			int groupNo) {
+			int groupNo, int readCount) {
 		super();
 		this.noticeNo = noticeNo;
 		this.title = title;
@@ -28,6 +29,7 @@ public class GNotice implements java.io.Serializable{
 		this.uploader = uploader;
 		this.accessNo = accessNo;
 		this.groupNo = groupNo;
+		this.readCount = readCount;
 	}
 
 	public int getNoticeNo() {
@@ -85,11 +87,23 @@ public class GNotice implements java.io.Serializable{
 	public void setGroupNo(int groupNo) {
 		this.groupNo = groupNo;
 	}
+	
+	public int getReadCount(){
+		return readCount;
+	}
+	
+	public void setReadCount(int readCount){
+		this.readCount = readCount;
+	}
 
 	@Override
 	public String toString() {
 		return "GNotice [noticeNo=" + noticeNo + ", title=" + title + ", content=" + content + ", uploadDate="
-				+ uploadDate + ", uploader=" + uploader + ", accessNo=" + accessNo + ", groupNo=" + groupNo + "]";
+				+ uploadDate + ", uploader=" + uploader + ", accessNo=" + accessNo + ", groupNo=" + groupNo
+				+ ", readCount=" + readCount + "]";
 	}
+	
+	
+
 
 }
