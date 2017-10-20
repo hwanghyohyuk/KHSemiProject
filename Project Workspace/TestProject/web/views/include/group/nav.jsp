@@ -10,12 +10,14 @@
 <meta charset="UTF-8">
 <title>studyHub</title>
 <style type="text/css">
-	ul {  list-style:none;	}
+	ul {  
+		list-style:none;
+		padding-left: 0;
+	}
 	
 	ul li #nav_text {
 		color: white;
 		font-weight: bold;
-		padding-right: 40px;
 	
 	}
 	
@@ -28,7 +30,6 @@
 		background-color: #004157;
 		font-size: 15pt;
 		float:left;
-		position: relative;
 		left: 0%; 
 		top: 13%; 
 		text-align:center; 
@@ -37,8 +38,8 @@
 
 </head>
 <body>
-<div class="col-cd-3" id="nav_menu">
-<ul>
+<div id="nav_menu">
+<ul class="nav nav-stacked">
 	<li><a id="nav_text">[<%= group.getGroupName() %>]</a></li>
 	<li><a href=# id="nav_text">공지사항</a></li>
 	<li><a href=# id="nav_text">스터디일정</a></li>
