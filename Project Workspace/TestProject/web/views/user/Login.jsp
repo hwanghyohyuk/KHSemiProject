@@ -24,14 +24,14 @@
 		<div class="col-sm-6 col-xs-8">
 			<form action="/studyhub/loginprocess" method="post" name="loginform">
 				<div class="form-group">
-					<input type="email" class="form-control" id=""
-						placeholder="이메일 주소" name="email">
+					<input type="email" class="form-control" id="email"
+						placeholder="이메일 주소" name="email" onkeydown='emptyCheck()' onkeyup='emptyCheck()'>
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control"
-						id="" placeholder="암호" name="pwd">
+						id="pwd" placeholder="암호" name="pwd" onkeydown='emptyCheck()' onkeyup='emptyCheck()'>
 				</div>
-				<button type="submit" class="btn btn-primary btn-block main-back">로그인</button>
+				<button type="submit" class="btn btn-primary btn-block main-back" id = "loginbtn" disabled="disabled">로그인</button>
 			</form>
 		</div>
 		<div class="col-sm-3 col-xs-2"></div>
@@ -43,14 +43,26 @@
 			<a href="/studyhub/signup">회원가입</a>
 		</div>
 		<div class="pull-right">
-			<a href="/studyhub/views/member/FindEmail.jsp">이메일 또는 비밀번호를
+			<a href="/studyhub/findemail" >이메일 또는 비밀번호를
 				잊으셨나요?</a>
 		</div>
 		</div>
 		<div class="col-sm-3 col-xs-2"></div>
 	</div>
 </div>
+
 <!-- /메인 컨텐츠 -->
+<script type="text/javascript">
+function emptyCheck() {
+	var email = $("#email").val();
+	var pwd = $("#pwd").val();
+	if(email=="" || pwd==""){
+		$("#loginbtn").prop("disabled", true);
+	}else{
+		$("#loginbtn").prop("disabled", false);
+	}
+}
+</script>
 
 <!--페이지 끝-->
 <%@ include file="/views/include/common/headend.jsp"%>

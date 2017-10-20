@@ -10,12 +10,13 @@ public class QnA implements java.io.Serializable {
 	private int userNo;
 	private int accessNo;
 	private String writer;
+	private int readCount;
 
 	public QnA() {
 		super();
 	}
 
-	public QnA(int qnaNo, String title, String content, Date uploadDate, int accessNo, String writer) {
+	public QnA(int qnaNo, String title, String content, Date uploadDate, int accessNo, String writer, int readCount) {
 		super();
 		this.qnaNo = qnaNo;
 		this.title = title;
@@ -23,9 +24,10 @@ public class QnA implements java.io.Serializable {
 		this.uploadDate = uploadDate;
 		this.accessNo = accessNo;
 		this.writer = writer;
+		this.readCount = readCount;
 	}
 
-	public QnA(int qnaNo, String title, String content, Date uploadDate, int userNo, int accessNo) {
+	public QnA(int qnaNo, String title, String content, Date uploadDate, int userNo, int accessNo, int readCount) {
 		super();
 		this.qnaNo = qnaNo;
 		this.title = title;
@@ -33,8 +35,18 @@ public class QnA implements java.io.Serializable {
 		this.uploadDate = uploadDate;
 		this.userNo = userNo;
 		this.accessNo = accessNo;
+		this.readCount = readCount;
 	}
 	
+	public QnA(int qnaNo, String title, String content, int accessNo) {
+		super();
+		this.qnaNo = qnaNo;
+		this.title = title;
+		this.content = content;
+		this.accessNo = accessNo;
+	}
+	
+
 	public QnA(int qnaNo, String title, String content) {
 		super();
 		this.qnaNo = qnaNo;
@@ -96,11 +108,22 @@ public class QnA implements java.io.Serializable {
 	public void setAccessNo(int accessNo) {
 		this.accessNo = accessNo;
 	}
+	
+	public void setReadCount(int readCount){
+		this.readCount = readCount;
+	}
+	
+	public int getReadCount(){
+		return readCount;
+	}
 
 	@Override
 	public String toString() {
-		return "QNA [qnaNo=" + qnaNo + ", title=" + title + ", content=" + content + ", uploadDate=" + uploadDate
-				+ ", userNo=" + userNo + ", accessNo=" + accessNo + "]";
+		return "QnA [qnaNo=" + qnaNo + ", title=" + title + ", content=" + content + ", uploadDate=" + uploadDate
+				+ ", userNo=" + userNo + ", accessNo=" + accessNo + ", writer=" + writer + ", readCount=" + readCount
+				+ "]";
 	}
+
+	
 
 }

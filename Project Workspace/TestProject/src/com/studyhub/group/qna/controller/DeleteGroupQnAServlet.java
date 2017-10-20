@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.studyhub.group.qna.model.service.GroupQnAService;
 
 /**
- * Servlet implementation class InsertGroupQnAServlet
+ * Servlet implementation class DeleteGroupQnAServlet
  */
-@WebServlet("/insertgroupqna")
-public class InsertGroupQnAServlet extends HttpServlet {
+@WebServlet("/deletegroupqna")
+public class DeleteGroupQnAServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertGroupQnAServlet() {
+    public DeleteGroupQnAServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,15 +28,9 @@ public class InsertGroupQnAServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
-		int userno = Integer.parseInt(request.getParameter("userno"));
-		int groupno = Integer.parseInt(request.getParameter("groupno"));
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-
-		if(new GroupQnAService().InsertQnA(userno, groupno, title, content) > 0) {
-				response.sendRedirect("views/group/groupQnA/QnAList.jsp");
+		int gqnano = Integer.parseInt(request.getParameter("gqnano"));
+		if(new GroupQnAService().deleteGroupQnA(gqnano) > 0){
+			response.sendRedirect("/views/group/groupQnA/QnAList.jsp");
 		}
 	}
 

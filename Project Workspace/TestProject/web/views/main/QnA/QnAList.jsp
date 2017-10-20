@@ -23,17 +23,13 @@
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 
-<style>
-#btns {
-	float: right;
-}
-</style>
 <script type="text/javascript">
 	function insertPage() {
 		location.href = "/studyhub/views/main/QnA/QnAWriteForm.jsp"
 	}
 </script>
 
+<link rel="stylesheet" type="text/css" href="/studyhub/css/board_list.css">
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
 <link rel="stylesheet" href="/studyhub/css/bootstrap.css">
 
@@ -43,39 +39,48 @@
 <!-- 메인 컨텐츠 -->
 <body>
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div
+			class="col-md-8 col-md-offset-2 col-sm-10 col-xs-9 col-xs-offset-1">
 			<h2>Q&A게시판</h2>
 
-			<div align="center">
+			<div class="search">
+
 				<form action="#" method="post">
-					<input type="search" autocomplete name="keyword" length="50">
-					&nbsp; <input type="submit" value="제목검색" class="btn btn-default">
+					<select>
+						<option value="제목">제목</option>
+						<option value="작성자">작성자</option>
+					</select> <input type="search" autocomplete name="keyword" length="50"
+						id="search-input"> &nbsp; <input type="submit" value="검색"
+						id="search-btn">
 				</form>
 
 			</div>
 
 			<div class="table-area">
 				<table class="table table-striped" align="center" width="600">
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>날짜</th>
-					<th>조회수</th>
+					<tr id="attr">
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>날짜</th>
+						<th>조회수</th>
+					</tr>
 					<%
 						for (QnA qna : list) {
 					%>
 					<tr>
 						<td><%=qna.getQnaNo()%></td>
-						<td><a href="/studyhub/qnaview?no=<%=qna.getQnaNo()%>"><%=qna.getTitle()%></a></td>
+						<td id="title_text"><a
+							href="/studyhub/qnaview?no=<%=qna.getQnaNo()%>"><%=qna.getTitle()%></a></td>
 						<td><%=qna.getWriter()%></td>
 						<td><%=qna.getUploadDate()%></td>
-						<td>조회수</td>
+						<td><%=qna.getReadCount()%></td>
 					</tr>
 					<%
 						}
 					%>
 				</table>
-					<button onclick="insertPage();" class="btn btn-info">글쓰기</button>
+				<button onclick="insertPage();" id="btns">글쓰기</button>
 			</div>
 		</div>
 	</div>

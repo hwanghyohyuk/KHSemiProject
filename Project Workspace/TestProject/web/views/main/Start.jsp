@@ -52,16 +52,16 @@
 						<hr />
 					</div>
 				</div>
-				<form action="/findemail" method="post" name="signupcheckform">
+				<form action="/studyhub/findemail" method="post" name="signupcheckform">
 					<div class="form-group">
-						<input type="signupemail" class="form-control" id="exampleInputEmail1"
-							placeholder="이메일 주소" name="email">
+						<input type="email" class="form-control" id="signupemail"
+							placeholder="이메일 주소" name="email" onkeydown='emptyCheck()' onkeyup='emptyCheck()'>
 					</div>
 					<div class="form-group">
-						<input type="signuppwd" class="form-control"
-							id="exampleInputPassword1" placeholder="비밀번호" name="pwd">
+						<input type="password" class="form-control"
+							id="signuppwd" placeholder="비밀번호" name="pwd" onkeydown='emptyCheck()' onkeyup='emptyCheck()'>
 					</div>
-					<button type="submit" class="btn btn-primary btn-block">가입하기</button>
+					<button type="submit" class="btn btn-primary btn-block" id='signupbtn' disabled="disabled">가입하기</button>
 				</form>
 			</div>
 		</div>
@@ -107,6 +107,17 @@
 	</div>
 </div>
 <!-- /메인 컨텐츠 -->
+<script type="text/javascript">
+function emptyCheck() {
+	var email = $("#signupemail").val();
+	var pwd = $("#signuppwd").val();
+	if(email=="" || pwd==""){
+		$("#signupbtn").prop("disabled", true);
+	}else{
+		$("#signupbtn").prop("disabled", false);
+	}
+}
+</script>
 
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
