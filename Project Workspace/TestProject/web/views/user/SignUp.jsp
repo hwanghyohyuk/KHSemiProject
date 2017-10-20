@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 
-작성자 : OOO
+작성자 : 황효혁
 내용 : 회원가입 페이지
-작성일자 17.10.02
+작성일자 : 17.10.20
  -->
 <!-- java 구문 -->
 
@@ -36,26 +36,26 @@
 				</div>
 				<form action="/studyhub/signupprocess" method="post" name="signupform">
 					<div class="form-group">
-						<input type="email" class="form-control" id=""
-							placeholder="이메일 주소" name="signupemail">
+						<input type="email" class="form-control" id="signupemail"
+							placeholder="이메일 주소" name="signupemail" oninput='checkEmail()'>
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control"
-							id="" placeholder="비밀번호" name="signuppwd">
+							id="signuppwd" placeholder="비밀번호" name="signuppwd" oninput="checkPwd()">
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control"
-							id="" placeholder="비밀번호 확인" name="confirmpwd">
+							id="confirmpwd" placeholder="비밀번호 확인" name="confirmpwd" oninput="checkPwd()">
 					</div>
 					<div class="form-group">
 						<input type="text" class="form-control"
-							id="" placeholder="사용자 이름" name="username">
+							id="username" placeholder="사용자 이름" name="username"  oninput="checkName()">
 					</div>
 					<div class="form-group">
 						<input type="tel" class="form-control"
-							id="" placeholder="연락처" name="phone">
+							id="phone" placeholder="연락처" name="phone" oninput="checkPhone()">
 					</div>
-					<button type="submit" class="btn btn-primary pull-right">가입</button>
+					<button type="submit" class="btn btn-primary pull-right" id="signupbtn" disabled="disabled">가입</button>
 				</form>
 			</div>
 		</div>
@@ -68,4 +68,5 @@
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
 <!--페이지 끝-->
+<script type="text/javascript" src="/studyhub/js/signup.js"></script>
 <%@ include file="/views/include/common/headend.jsp"%>

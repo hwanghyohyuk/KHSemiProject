@@ -25,11 +25,11 @@
 			<form action="/studyhub/loginprocess" method="post" name="loginform">
 				<div class="form-group">
 					<input type="email" class="form-control" id="email"
-						placeholder="이메일 주소" name="email" onkeydown='emptyCheck()' onkeyup='emptyCheck()'>
+						placeholder="이메일 주소" name="email" oninput='emptyCheck()'>
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control"
-						id="pwd" placeholder="암호" name="pwd" onkeydown='emptyCheck()' onkeyup='emptyCheck()'>
+						id="pwd" placeholder="암호" name="pwd" oninput='emptyCheck()'>
 				</div>
 				<button type="submit" class="btn btn-primary btn-block main-back" id = "loginbtn" disabled="disabled">로그인</button>
 			</form>
