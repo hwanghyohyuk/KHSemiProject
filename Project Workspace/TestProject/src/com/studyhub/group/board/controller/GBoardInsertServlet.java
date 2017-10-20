@@ -111,7 +111,7 @@ public class GBoardInsertServlet extends HttpServlet {
 					response.sendRedirect("");
 				}else{
 					view = request.getRequestDispatcher("views/gboard/gboardError.jsp");
-					request.setAttribute("message", "GBoard 서비스 : 원글 등록 실패!");
+					request.setAttribute("message", "GBoard 게시글 등록 실패!");
 					view.forward(request, response);
 				}
 				}

@@ -64,12 +64,11 @@ public class GBoardDao {
 	}
 
 	public ArrayList<GBoard> selectList(Connection con, int currentPage, int limit){
-			// 한 페이지에 출력할 게시글 목록 조회용
+			
 			ArrayList<GBoard> list = null;
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 			
-			//currentPage 에 해당되는 목록만 조회
 			String query ="select * from ("
 					+ "select rownum rnum, gboard_no, gboard_title, "
 					+ "gboard_uploader, gboard_content, gboard_original_filename, "

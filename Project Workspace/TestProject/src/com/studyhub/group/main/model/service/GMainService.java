@@ -24,4 +24,11 @@ public class GMainService {
 		close(con);
 		return group;
 	}
+
+	public ArrayList<GBoard> selectGroupBoard(int groupno) {
+		Connection con = getConnection();
+		ArrayList<GBoard> list = new GMainDao().selectGroupBoard(con, groupno);
+		close(con);
+		return list;
+	}
 }
