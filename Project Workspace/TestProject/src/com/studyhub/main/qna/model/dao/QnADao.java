@@ -182,13 +182,71 @@ public class QnADao {
 		return null;
 	}
 
-	public int insertComment(Connection con, QComment com) {
-		return 0;
+	public int insertComment(Connection con, int qnano, String comment, int userno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into tb_qna_comment values("+
+					"(select max(comment_no)+1 from tb_qna_comment),"+
+					"?, ?, sysdate, ?, 1)";
+		
+		try{
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, qnano);
+			pstmt.setString(2, comment);
+			pstmt.setInt(3, userno);
+			
+			result = pstmt.executeUpdate();
+		} catch(Exception e){
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public ArrayList<QComment> selectComment(Connection con, int qnano) {
+		ArrayList<QComment> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select comment_no, qna_no, content, to_char(upload_date, 'yyyyMMdd') as str_date, user_name "+
+						"from tb_qna_comment "
+				+"join tb_user on (tb_qna_comment.user_no = tb_user.user_no) "
+						+"where qna_no = 1 order by comment_no desc";
+		
+		try{
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, qnano);
+			
+			rset = pstmt.executeQuery();
+			if(rset !=null){
+				list = new ArrayList<QComment>();
+				while(rset.next()){
+					QComment qc = new QComment();
+					qc.setCommentNo(rset.getInt("comment_no"));
+					qc.setQnaNo(rset.getInt("qna_no"));
+					qc.setContent(rset.getString("content"));
+					qc.setStrUploadDate(rset.getString("str_date"));
+					qc.setCommentWriter(rset.getString("user_name"));
+					
+					list.add(qc);
+				}
+				
+			}} catch(Exception e){
+				e.printStackTrace();
+			} finally{
+				close(rset);
+				close(pstmt);
+			}
 	}
 
 	public int deleteComment(Connection con, int cno) {
 		return 0;
 	}
+
+	
 
 
 }

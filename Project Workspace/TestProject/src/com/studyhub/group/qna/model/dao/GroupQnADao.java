@@ -55,7 +55,7 @@ public class GroupQnADao {
 			if(rset != null){
 				list = new ArrayList<GQNA>();
 				while(rset.next()){
-					GQNA gq = new GQNA();
+					GQNA gq = new GQNA(); 
 					gq.setgQnaNo(rset.getInt("g_qna_no"));
 					gq.setTitle(rset.getString("title"));
 					gq.setContent(rset.getString("content"));

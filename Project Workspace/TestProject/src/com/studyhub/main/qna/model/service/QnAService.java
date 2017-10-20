@@ -91,21 +91,35 @@ public class QnAService {
 	}
 	
 
-	public int insertComment(QComment com){
-		return 0;
-	}
-	
-	public int deleteComment(int cno){
-		return 0;
-	}
-	
-	/*public void updateReadCount(int no){
+	public int insertComment(int qnano, String comment, int userno){
 		Connection con = getConnection();
-		int result = new QnADao().updateReadCount(con, no);
-		if(result >0)
+		int result = new QnADao().insertComment(con, qnano, comment, userno);
+		if(result>0)
 			commit(con);
 		else
 			rollback(con);
 		close(con);
-	}*/
+		return result;
+	}
+	
+	public int deleteComment(int cno){
+		Connection con = getConnection();
+		int result = new QnADao().deleteComment(con, cno);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		
+		return result;
+	}
+
+	public ArrayList<QComment> selectComment(int qnano) {
+		Connection con = getConnection();
+		ArrayList<QComment> list = new QnADao().selectComment(con, qnano);
+		close(con);
+		
+		return list;
+	}
+	
 }

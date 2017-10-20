@@ -10,10 +10,34 @@ public class QComment implements java.io.Serializable{
 	private Date uploadDate;
 	private int userNo;
 	private int accessNo;
+	private String strUploadDate;
+	private String commentWriter;
 
 	public QComment() {
 		super();
 	}
+	
+	public QComment(int commentNo, int qnaNo, String content, String strUploadDate, String commentWriter) {
+		super();
+		this.commentNo = commentNo;
+		this.qnaNo = qnaNo;
+		this.content = content;
+		this.strUploadDate = strUploadDate;
+		this.commentWriter = commentWriter;
+	}
+
+	
+
+
+	public QComment(int commentNo, String content, String strUploadDate, String commentWriter) {
+		super();
+		this.commentNo = commentNo;
+		this.content = content;
+		this.strUploadDate = strUploadDate;
+		this.commentWriter = commentWriter;
+	}
+
+
 
 	public QComment(int commentNo, int qnaNo, String content, Date uploadDate, int userNo, int accessNo) {
 		super();
@@ -24,6 +48,32 @@ public class QComment implements java.io.Serializable{
 		this.userNo = userNo;
 		this.accessNo = accessNo;
 	}
+
+	
+	
+	public String getStrUploadDate() {
+		return strUploadDate;
+	}
+
+
+
+	public void setStrUploadDate(String strUploadDate) {
+		this.strUploadDate = strUploadDate;
+	}
+
+
+
+	public String getCommentWriter() {
+		return commentWriter;
+	}
+
+
+
+	public void setCommentWriter(String commentWriter) {
+		this.commentWriter = commentWriter;
+	}
+
+
 
 	public int getCommentNo() {
 		return commentNo;
