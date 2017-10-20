@@ -42,7 +42,7 @@
   <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
   <h2>게시글 작성하기</h2>
   <br>
-	<form action="/studyhub/qnainsert" method="post">
+	<form action="/studyhub/gboardinsert" method="post">
 		<div class="form-group">
 			<label for="title">제목</label> <input type="text"
 				class="form-control" id="exampleInputEmail1"
@@ -64,7 +64,9 @@
 				placeholder="내용을 입력하세요"></textarea>
 		</div>
 		<input type="submit" value="제출하기" id="btns">
-		<a href="/studyhub/Boardlist">목록으로 이동</a>
+		<%GBoard gb = new GBoard(); %>
+		<a href="/studyhub/gboardpreview?groupno=<%=gb.getgBoardNo()%>">목록으로 이동</a>
+	
 	</div>
 	</form>
 
