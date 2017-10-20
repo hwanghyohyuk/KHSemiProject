@@ -16,10 +16,10 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>StudyHub::그룹공지</title>
-<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js">
+<title>그룹공지::StudyHub</title>
+<script type="text/javascript">
 	function insertPage() {
-		location.href = "/views/groupNotice/NoticeWriteForm.jsp";
+		location.href = "/studyhub/views/group/groupNotice/NoticeWriteForm.jsp";
 	}
 </script>
 <!--헤더 부분-->
@@ -56,17 +56,18 @@
 						for (GNotice gnotice : list) {
 					%>
 					<tr>
-						<td align="center"><%=gnotice.getNoticeNo()%></td>
-						<td align="center"><%=gnotice.getTitle()%></td>
-						<td align="center"><%=gnotice.getUploader()%></td>
-						<td align="center"><%=gnotice.getUploadDate()%></td>
+						<td><%=gnotice.getNoticeNo()%></td>
+						<td id="title_text">
+						<a href="/studyhub/gnoticeview?no=<%=gnotice.getNoticeNo()%>"><%=gnotice.getTitle()%></a></td>
+						<td><%=gnotice.getUploader()%></td>
+						<td><%=gnotice.getUploadDate()%></td>
 					</tr>
 					<%
 						}
 					%>
 				</table>
 				<!-- /메인 컨텐츠 -->
-				<button onclick="insertPage();" align="right" class="btn btn-info">글쓰기</button>
+				<button onclick="insertPage();" class="btn btn-info">글쓰기</button>
 			</div>
 		</div>
 	</div>

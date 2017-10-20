@@ -97,20 +97,20 @@ public class GMainDao {
 	}
 
 
-	public ArrayList<GNotice> selectGroupNotice(Connection con, int gnoticeno) {
+	public ArrayList<GNotice> selectGroupNotice(Connection con, int groupno) {
 	ArrayList<GNotice> list = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select notice_no, title, to_char(uploader), upload_date" +
+		String query = "select notice_no, title, uploader, upload_date" +
 					" from tb_g_notice" +
 					" join tb_user on (tb_g_notice.uploader=tb_user.user_no)" +
 					" where notice_no = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, gnoticeno);
+			pstmt.setInt(1, groupno);
 			
 			rset = pstmt.executeQuery();
 			if(rset != null){
@@ -119,7 +119,7 @@ public class GMainDao {
 				GNotice gn = new GNotice();
 				gn.setNoticeNo(rset.getInt("notice_no"));
 				gn.setTitle(rset.getString("title"));
-				gn.setUploader(rset.getInt("uploder"));
+				gn.setUploader(rset.getInt("uploader"));
 				gn.setUploadDate(rset.getDate("upload_date"));
 				System.out.println(gn);
 				list.add(gn);

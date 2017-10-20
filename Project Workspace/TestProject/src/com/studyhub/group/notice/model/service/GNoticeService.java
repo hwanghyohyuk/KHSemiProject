@@ -40,17 +40,7 @@ public class GNoticeService {
 		return gnotice;
 	}
 	
-	
-	public void addReadCount(int no){
-		Connection conn = getConnection();
-		int result = new GNoticeDao().updateReadCount(conn, no);
-		if(result > 0)
-			commit(conn);
-		else
-			rollback(conn);
 		
-	}
-	
 	public int insertGNotice(GNotice gnotice){
 		Connection conn = getConnection();
 		int result = new GNoticeDao().insertGNotice(conn, gnotice);
@@ -60,13 +50,6 @@ public class GNoticeService {
 			rollback(conn);
 		return result;
 		
-	}
-	
-	public ArrayList<GNotice> selectSearch(String keyword){
-		Connection conn = getConnection();
-		ArrayList<GNotice> list = new GNoticeDao().selectTitleSearch(conn,keyword);
-		close(conn);
-		return list;
 	}
 	
 	public int deleteGNotice(int no) {
