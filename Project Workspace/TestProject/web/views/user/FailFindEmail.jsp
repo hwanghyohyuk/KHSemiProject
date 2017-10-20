@@ -22,30 +22,17 @@
 	<div class="row">
 		<div class="col-sm-3 col-xs-2"></div>
 		<div class="col-sm-6 col-xs-8">
-			<p>기억나는 이메일을 입력해주세요</p>
-			<form action="/studyhub/findemailprocess" method="post" name="findemail">
-				<div class="form-group">
-					<input type="email" class="form-control" id="email"
-						placeholder="이메일 주소" name="email" onkeydown='emptyCheck()' onkeyup='emptyCheck()'>
-				</div>
-				<a href="/studyhub/login" class="btn btn-default pull-left">이전화면</a>
-				<button type="submit" class="btn btn-primary pull-right main-back" id="findemailbtn" disabled="disabled">이메일 확인</button>
-			</form>
+			<p>이메일을 찾을 수 없습니다.</p>
+			<br>
+			<hr>
+			<br>
+			<a class="btn btn-primary pull-left main-back" href="/studyhub/signup">회원가입</a>
+			<a class="btn btn-default pull-right" href="/studyhub/findemail">재시도</a>
 		</div>
 		<div class="col-sm-3 col-xs-2"></div>
 	</div>
 </div>
 <!-- /메인 컨텐츠 -->
 
-<script type="text/javascript">
-function emptyCheck() {
-	var email = $("#email").val();
-	if(email==""){
-		$("#findemailbtn").prop("disabled", true);
-	}else{
-		$("#findemailbtn").prop("disabled", false);
-	}
-}
-</script>
 <!--페이지 끝-->
 <%@ include file="/views/include/common/headend.jsp"%>

@@ -75,8 +75,31 @@ public class UserDao implements CryptTemplate {
 		}finally {
 			close(rset);
 			close(pstmt);
-			commit(conn);
 		}		
+		return result;
+	}
+
+	public int checkEmail(Connection conn, String userEmail) {
+		String query = "select count(*) from tb_user where email=?";
+				
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userEmail);
+			rset = pstmt.executeQuery();
+
+			if (rset.next())
+				result = rset.getInt(1);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		return result;
 	}
 }
