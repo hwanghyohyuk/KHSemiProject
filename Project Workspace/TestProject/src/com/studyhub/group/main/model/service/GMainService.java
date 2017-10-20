@@ -31,4 +31,11 @@ public class GMainService {
 		close(con);
 		return list;
 	}
+
+	public ArrayList<GNotice> selectGroupNotice(int gnoticeno) {
+		Connection con = getConnection();
+		ArrayList<GNotice> list = new GMainDao().selectGroupNotice(con, gnoticeno);
+		close(con);
+		return list;
+	}
 }

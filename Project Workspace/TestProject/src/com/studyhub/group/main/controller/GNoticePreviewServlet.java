@@ -1,6 +1,7 @@
 package com.studyhub.group.main.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.common.vo.GBoard;
 import com.studyhub.common.vo.GNotice;
 import com.studyhub.common.vo.Group;
 import com.studyhub.group.main.model.service.GMainService;
@@ -37,8 +39,12 @@ public class GNoticePreviewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
+		int gnoticeno = Integer.parseInt(request.getParameter("gnoticeno"));
 		
+		ArrayList<GNotice> list = new GMainService().selectGroupNotice(gnoticeno);
 		RequestDispatcher view = request.getRequestDispatcher("/views/group/groupNotice/NoticeList.jsp");
+		System.out.println(list);
+		request.setAttribute("list", list);
 		view.forward(request, response);
 	}
 
