@@ -48,7 +48,7 @@
 	<li><a href="/studyhub/gnoticepreview" id="nav_text">공지사항</a></li>
 	<li><a href=# id="nav_text">스터디일정</a></li>
 	<li><a href=# id="nav_text">파일공유</a></li>
-	<li><a href=# id="nav_text">자유게시판</a></li>
+	<li><a href="/studyhub/gboardpreview?groupno=<%= group.getGroupNo() %>" id="nav_text">자유게시판</a></li>
 	<li><a href="/studyhub/gqnapreview" id="nav_text">Q&A</a></li>
 </ul>
 </div>

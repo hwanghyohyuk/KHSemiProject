@@ -8,15 +8,17 @@ public class GBoard implements java.io.Serializable{
 	private String title;
 	private String content;
 	private Date uploadDate;
-	private int uploader;
+	private String strDate;
+	private String uploader;
 	private int accessNo;
 	private int groupNo;
+	private int readcount;
 
 	public GBoard() {
 		super();
 	}
 
-	public GBoard(int gBoardNo, String title, String content, Date uploadDate, int uploader, int accessNo,
+	public GBoard(int gBoardNo, String title, String content, Date uploadDate, String uploader, int accessNo,
 			int groupNo) {
 		super();
 		this.gBoardNo = gBoardNo;
@@ -26,6 +28,36 @@ public class GBoard implements java.io.Serializable{
 		this.uploader = uploader;
 		this.accessNo = accessNo;
 		this.groupNo = groupNo;
+	}
+	
+	
+	public GBoard(int gBoardNo, String title, String content, String strDate, String uploader, int accessNo,
+			int groupNo, int readcount) {
+		super();
+		this.gBoardNo = gBoardNo;
+		this.title = title;
+		this.content = content;
+		this.strDate = strDate;
+		this.uploader = uploader;
+		this.accessNo = accessNo;
+		this.groupNo = groupNo;
+		this.readcount = readcount;
+	}	
+
+	public int getReadcount() {
+		return readcount;
+	}
+
+	public void setReadcount(int readcount) {
+		this.readcount = readcount;
+	}
+
+	public String getStrDate() {
+		return strDate;
+	}
+
+	public void setStrDate(String strDate) {
+		this.strDate = strDate;
 	}
 
 	public int getgBoardNo() {
@@ -60,11 +92,11 @@ public class GBoard implements java.io.Serializable{
 		this.uploadDate = uploadDate;
 	}
 
-	public int getUploader() {
+	public String getUploader() {
 		return uploader;
 	}
 
-	public void setUploader(int uploader) {
+	public void setUploader(String uploader) {
 		this.uploader = uploader;
 	}
 
@@ -89,5 +121,7 @@ public class GBoard implements java.io.Serializable{
 		return "GBoard [gBoardNo=" + gBoardNo + ", title=" + title + ", content=" + content + ", uploadDate="
 				+ uploadDate + ", uploader=" + uploader + ", accessNo=" + accessNo + ", groupNo=" + groupNo + "]";
 	}
+
+	
 
 }
