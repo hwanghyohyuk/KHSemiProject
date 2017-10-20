@@ -10,11 +10,23 @@ body{
 	background: white;
 }
 
-#first-line{
-	height: 2vh;
-
+hr #first-line{
+	margin-bottom: 0;
 }
 #second-line{
 
+}
+
+.head-text{
+	margin-left: 2vw;
+}
+#title-text{
+	color: #0789a3;
+	font-weight: bold;
+	width: 40vw;
+}
+
+#content{
+	margin-left: 2vw;
 }
 

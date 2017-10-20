@@ -41,8 +41,13 @@
 			class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xm-8 col-xs-2">
 			
 			<hr id="first-line">
-			<div class="title">
-				<h3 class="panel-title"><%=qna.getTitle()%></h3>
+			<div class="head-text">
+				<h3 id="title-text"><%=qna.getTitle()%></h3>
+				<div id="attr-text">
+				<span>조회수 <%=qna.getReadCount() %> |</span>
+				<span>작성날짜 <%=qna.getUploadDate() %> |</span>
+				<span>작성자 <%=qna.getWriter() %></span>
+				</div>
 			</div>
 			<hr id="second-line">
 
@@ -55,6 +60,7 @@
 				<button class="btn btn-info btn-sm" type="submit">댓글달기</button>
 
 			</form>
+			
 
 			<!---댓글보여지는부분--->
 
