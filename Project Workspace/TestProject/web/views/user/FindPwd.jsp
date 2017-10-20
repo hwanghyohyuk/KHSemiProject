@@ -26,15 +26,24 @@
 			<form action="/findpwd" method="post" name="findpwd">
 				<div class="form-group">
 					<input type="password" class="form-control"
-						id="exampleInputPassword1" placeholder="비밀번호" name="pwd">
+						id="pwd" placeholder="비밀번호" name="pwd" onkeydown='emptyCheck()' onkeyup='emptyCheck()'>
 				</div>
-				<button type="submit" class="btn btn-primary btn-block main-back">비밀번호 확인</button>
+				<button type="submit" class="btn btn-primary btn-block main-back" id="findwpdbtn" disabled="disabled">비밀번호 확인</button>
 			</form>
 		</div>
 		<div class="col-sm-3 col-xs-2"></div>
 	</div>
 </div>
 <!-- /메인 컨텐츠 -->
-
+<script type="text/javascript">
+function emptyCheck() {
+	var pwd = $("#pwd").val();
+	if(pwd==""){
+		$("#findwpdbtn").prop("disabled", true);
+	}else{
+		$("#findwpdbtn").prop("disabled", false);
+	}
+}
+</script>
 <!--페이지 끝-->
 <%@ include file="/views/include/common/headend.jsp"%>

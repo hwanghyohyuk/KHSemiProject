@@ -43,7 +43,7 @@
 					src="/studyhub/images/slider.png"></a>
 			</div>
 			<div class="head">
-				<a href="#" id="more">더보기</a><span id="title">모집게시판</span>
+				<a href="/studyhub/boardlist" id="more">더보기</a><span id="title">모집게시판</span>
 			</div>
 			<div class="col-md-8 col-lg-6">
 				<div id="slider">

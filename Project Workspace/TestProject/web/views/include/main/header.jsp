@@ -4,7 +4,7 @@
     	User user =(User)session.getAttribute("user");
     %>   
 	<!-- 헤더 영역 : 네비게이션 바 -->
-	<nav class="navbar navbar-default bg-white">
+	<nav class="navbar navbar-default bg-white" id="navbar">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
@@ -16,15 +16,18 @@
 				<!-- 메인 로고 부분 -->
 				
 				<% if(user!=null){ %>
-					<a class="navbar-brand" href="/studyhub/main">StudyHub</a>
+					<a class="navbar-brand" href="/studyhub/main"><img id="logo"
+								src="/studyhub/images/logo.png"></a>
 				<% }else{%>
-					<a class="navbar-brand" href="/studyhub/">StudyHub</a>
+					<a class="navbar-brand" href="/studyhub/"><img id="logo"
+								src="/studyhub/images/logo.png"></a>
 				<% } %>				
 				<!-- / -->
 			</div>
 			<!-- 메뉴 부분 -->
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
+				<nav class="fill">
 				<ul class="nav navbar-nav navbar-left">
 					<li><a href="#"> <span
 							class="glyphicon glyphicon-search main" aria-hidden="true"></span><span
@@ -41,6 +44,7 @@
 					<li><a href="/studyhub/login"><p class="black">로그인</p></a></li>
 				<% } %>
 				</ul>
+				</nav>
 			</div>
 		</div>
 	</nav>

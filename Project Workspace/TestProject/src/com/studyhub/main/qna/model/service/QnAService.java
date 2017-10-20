@@ -71,6 +71,17 @@ public class QnAService {
 		return result;
 	}
 	
+	public void updateReadCount(int no){
+		Connection con = getConnection();
+		int result = new QnADao().updateReadCount(con, no);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		
+	}
+	
 	public ArrayList<QnA> selectSearch(String keyword){
 		Connection con = getConnection();
 		ArrayList<QnA> list = new QnADao().selectTitleSearch(con, keyword);

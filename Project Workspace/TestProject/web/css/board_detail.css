@@ -1,0 +1,32 @@
+body{
+	background: #f1f1f1!important;
+}
+
+#heading{
+	margin-left: 18vw;
+	
+}
+#inner{
+	background: white;
+}
+
+hr #first-line{
+	margin-bottom: 0;
+}
+#second-line{
+
+}
+
+.head-text{
+	margin-left: 2vw;
+}
+#title-text{
+	color: #0789a3;
+	font-weight: bold;
+	width: 40vw;
+}
+
+#content{
+	margin-left: 2vw;
+}
+
