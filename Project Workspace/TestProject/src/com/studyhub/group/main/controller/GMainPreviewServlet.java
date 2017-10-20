@@ -41,15 +41,23 @@ public class GMainPreviewServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		int group_no = Integer.parseInt(request.getParameter("group_no"));
-		Group group = new GMainService().SelectGroup(group_no);
+		int reset = Integer.parseInt(request.getParameter("reset"));
+		
 		
 		RequestDispatcher view = null;
-		if(group != null){
-			HttpSession session = request.getSession();
-			session.setAttribute("group",group);
-			System.out.println("group session : " + session.getId());
-			view = request.getRequestDispatcher("/views/group/GroupMain.jsp");
-			view.forward(request, response);
+		if(reset == 1){
+			if(new GMainService().SelectGroupMain(group_no) > 0){
+				
+			}
+		}else{
+			Group group = new GMainService().SelectGroup(group_no);
+			if(group != null){
+				HttpSession session = request.getSession();
+				session.setAttribute("group",group);
+				System.out.println("group session : " + session.getId());
+				view = request.getRequestDispatcher("/views/group/GroupMain.jsp");
+				view.forward(request, response);
+			}
 		}
 		
 	}

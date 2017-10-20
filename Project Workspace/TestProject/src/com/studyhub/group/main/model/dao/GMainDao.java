@@ -59,4 +59,36 @@ public class GMainDao {
 		
 		return group;
 	}
+
+	public int SelectGroupMain(Connection con, int group_no) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "select group_no, user_name, membercount, category_name, location, attribute_name
+from tb_group
+join (select group_no, user_name
+       from tb_ung
+       join tb_user using(user_no)
+       where authority_no = 2) using (group_no)
+join (select group_no, category_name
+       from tb_group
+       join tb_category using (category_no)) using(group_no)
+join (select group_no, attribute_name
+       from tb_on_off
+       join tb_group using(attribute_no)) using(group_no)
+join (select group_no, count(*) as membercount
+       from tb_ung
+       group by group_no) using(group_no)
+where group_no=1;";
+		
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

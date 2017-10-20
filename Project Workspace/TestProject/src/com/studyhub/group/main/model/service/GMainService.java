@@ -24,4 +24,11 @@ public class GMainService {
 		close(con);
 		return group;
 	}
+
+	public int SelectGroupMain(int group_no) {
+		Connection con = getConnection();
+		int result = new GMainDao().SelectGroupMain(con, group_no);
+		close(con);
+		return result;
+	}
 }

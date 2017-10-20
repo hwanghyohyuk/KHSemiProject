@@ -44,7 +44,7 @@
 <body>
 <div id="nav_menu">
 <ul class="nav nav-stacked">
-	<li><a id="nav_text">[<%= group.getGroupName() %>]</a></li>
+	<li><a href="" id="nav_text">[<%= group.getGroupName() %>]</a></li>
 	<li><a href=# id="nav_text">공지사항</a></li>
 	<li><a href=# id="nav_text">스터디일정</a></li>
 	<li><a href=# id="nav_text">파일공유</a></li>
