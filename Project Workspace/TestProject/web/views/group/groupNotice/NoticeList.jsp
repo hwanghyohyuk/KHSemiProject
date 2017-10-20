@@ -78,18 +78,16 @@ div#bottom {
 			<td width="470">제목</td>
 			<td width="80">작성자</td>
 			<td width="50">날짜</td>
-			<td width="30">조회수</td>
 		</tr>
 
 		<%
-			for (GNotice gNotice : list) {
+			for (GNotice gnotice : list) {
 		%>
 		<tr height="30">
-			<td align="center"><%= gNotice.getNoticeNo()%></td>
-			<td align="center"><%= gNotice.getTitle() %></td>
-			<td align="center"><%= gNotice.getUploader()%></td>
-			<td align="center"><%= gNotice.getUploadDate() %></td>
-			<td align="center"><%= gNotice.getReadCount() %></td>
+			<td align="center"><%= gnotice.getNoticeNo()%></td>
+			<td align="center"><%= gnotice.getTitle() %></td>
+			<td align="center"><%= gnotice.getUploader()%></td>
+			<td align="center"><%= gnotice.getUploadDate() %></td>
 		</tr>
 		<%
 			}
