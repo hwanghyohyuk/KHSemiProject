@@ -78,4 +78,26 @@ public class GroupQnADao {
 		return list;
 	}
 
+	public int deleteGroupQnA(Connection con, int gqnano) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from tb_g_qna"
+					+ " where g_qna_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, gqnano);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

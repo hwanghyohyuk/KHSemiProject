@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>studyHub</title>
+<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
 <style type="text/css">
 	ul {  
 		list-style:none;
@@ -28,11 +29,14 @@
 	
 	div#nav_menu {
 		background-color: #004157;
+		position: relative;
 		font-size: 15pt;
 		float:left;
 		left: 0%; 
-		top: 13%; 
+		top: 0px;; 
 		text-align:center; 
+		height: 87%;
+		padding-top: 0px;
 	}
 </style>
 
@@ -45,9 +49,19 @@
 	<li><a href=# id="nav_text">스터디일정</a></li>
 	<li><a href=# id="nav_text">파일공유</a></li>
 	<li><a href=# id="nav_text">자유게시판</a></li>
-	<li><a href="/studyhub/gqnapreview?groupno=<%= group.getGroupNo() %>" id="nav_text">Q&A</a></li>
+	<li><a href="/studyhub/gqnapreview" id="nav_text">Q&A</a></li>
 </ul>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+		var currentPosition = parseInt($("#nav_menu").css("top"));
+			$(window).scroll(function(){
+				var position = $(window).scrollTop();
+				$("#nav_menu").stop().animate({"top": position + currentPosition + "px"}, 300);
+			});
+	});
+</script>
 
 </body>
 </html>    

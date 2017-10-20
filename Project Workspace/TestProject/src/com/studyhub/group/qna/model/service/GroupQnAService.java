@@ -28,4 +28,15 @@ public class GroupQnAService {
 		return list;
 	}
 
+	public int deleteGroupQnA(int gqnano) {
+		Connection con = getConnection();
+		int result = new GroupQnADao().deleteGroupQnA(con, gqnano);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return 0;
+	}
+
 }

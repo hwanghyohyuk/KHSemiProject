@@ -52,8 +52,8 @@
 <%@ include file="/views/include/group/nav.jsp" %>
 <!-- 메인 컨텐츠 -->
 
-<div class="container">
-<div class="col-md-5 col-sm-5 col-sm-offset-3 col-md-offset-3">
+<div class="container col-lg-offset-2 col-md-offset-2 col-sm-offset-2">
+<div class="col-md-6 col-sm-6 col-sm-offset-3 col-md-offset-3">
 		<div class="btn btn-default btn-sm" id="serach">
 			검색 들어갈 자리
 		</div>
@@ -92,6 +92,10 @@
 <%@ include file="/views/include/common/headend.jsp"%>
 
 <script type="text/javascript">
+	$(function(){
+		selectQnA();
+	});
+
 	function insertqna(){
 		if($("#title").val() == ""){
 			alert("제목을 입력하세요.");
@@ -119,11 +123,12 @@
 			});
 			$("#title").val("");
 			$("#content").val("");
+			selectQnA();
 			return true
 		}
 	}
 	
-	$(function selectQnA(){
+	function selectQnA(){
 		var group_no = "<%= group.getGroupNo() %>";
 		$.ajax({
 			url: "/studyhub/selectgroupqna",
@@ -142,6 +147,9 @@
 							            "<div class='panel panel-primary' >" +
 										  "<div class='panel-heading' id='title_size'>" +
 										  	"<div class='col-xs-9 col-sm-9 col-md-10'>" +
+										  	"<div>" +
+										  		"<input type='hidden' value='"+ json.list[i].g_qna_no +"' id='g_qna_no'>"+
+										  	"</div>" +
 										  		"<h3 class='panel-title' id='qnatitle'>" +
 										    		decodeURIComponent(json.list[i].title) +
 										    	"</h3>" +
@@ -157,10 +165,10 @@
 										"</div>" +
 							        "</div>" +
 									"<div class='col-xs-2 col-sm-2 col-md-1'>" +
-										"<input type='button' id='qnaupdatebtn' name='qnaupdatebtn' class='btn btn-primary' value='수정' onclick='insertqna();''>" +
+										"<input type='button' id='qnaupdatebtn' name='qnaupdatebtn' class='btn btn-primary' value='수정' onclick='updateqna();''>" +
 									"</div>" +
 									"<div class='col-xs-2 col-md-1 col-sm-2'>" +
-										"<input type='button' id='qnadeletebtn' name='qnadeletebtn' class='btn btn-primary' value='삭제' onclick='insertqna();'>" +
+										"<input type='button' id='qnadeletebtn' name='qnadeletebtn' class='btn btn-primary' value='삭제' onclick='deleteQnA();'>" +
 									"</div>" +
 								"</form>" +
 							"</div>" +
@@ -173,7 +181,19 @@
 				alert("error\nxhr : " + xhr + ", status : " + status + ", error : " + error);
 			}
 		});
-	});
+	}
+	
+	function deleteQnA(){
+		var g_qna_no = $("#g_qna_no").val();
+		$.ajax({
+			url: "/studyhub/deletegroupqna",
+			data: { gqnano: g_qna_no },
+			type: "get",
+			dataType: "json",
+		});
+		alert("삭제되었습니다.");
+		selectQnA();
+	}
 </script>
 
 <!-- /동균 -->
