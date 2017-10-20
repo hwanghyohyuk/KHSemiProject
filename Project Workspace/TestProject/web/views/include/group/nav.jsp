@@ -35,7 +35,7 @@
 		left: 0%; 
 		top: 0px;; 
 		text-align:center; 
-		height: 87%;
+		height: 87vh;
 		padding-top: 0px;
 	}
 </style>
