@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>질문하기::StudyHub</title>
+<title>게시글</title>
 
 <!-- java 구문 -->
 
@@ -40,7 +40,7 @@
 
 <div class="row" id="layout">
   <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
-  <h2>질문하기</h2>
+  <h2>게시글 작성하기</h2>
   <br>
 	<form action="/studyhub/qnainsert" method="post">
 		<div class="form-group">
