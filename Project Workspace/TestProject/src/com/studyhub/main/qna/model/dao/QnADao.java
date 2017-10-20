@@ -20,7 +20,7 @@ public class QnADao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = "select qna_no, title, content, upload_date, user_name, access_no from tb_qna "
+		String query = "select qna_no, title, content, upload_date, user_name, access_no, readcount from tb_qna "
 				+ "join tb_user on (tb_user.user_no=tb_qna.user_no) "
 				+ "order by tb_qna.qna_no desc";
 		
@@ -39,6 +39,7 @@ public class QnADao {
 					q.setUploadDate(rset.getDate("upload_date"));
 					q.setWriter(rset.getString("user_name"));
 					q.setAccessNo(rset.getInt("access_no"));
+					q.setReadCount(rset.getInt("readcount"));
 				
 					list.add(q);
 				}
@@ -55,8 +56,37 @@ public class QnADao {
 	}
 
 	public QnA selectOne(Connection con, int no) {
-
-		return null;
+		QnA qna = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from tb_qna where qna_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				qna = new QnA();
+				qna.setQnaNo(rset.getInt("qna_no"));
+				qna.setTitle(rset.getString("title"));
+				qna.setContent(rset.getString("content"));
+				qna.setUploadDate(rset.getDate("upload_date"));
+				qna.setUserNo(rset.getInt("user_no"));
+				qna.setAccessNo(rset.getInt("access_no"));
+				qna.setReadCount(rset.getInt("readcount"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return qna;
 	}
 
 	public int insertQnA(Connection con, QnA qna) {
@@ -65,7 +95,7 @@ public class QnADao {
 		
 		String query = "insert into tb_qna values"
 				+ "((select max(qna_no)+1 from tb_qna),"
-				+ "?, ?, default, ?, ?)";
+				+ "?, ?, sysdate, ?, ?, 1)";
 				
 		try {
 			pstmt = con.prepareStatement(query);
@@ -84,11 +114,68 @@ public class QnADao {
 	}
 
 	public int deleteQnA(Connection con, int no) {
-		return 0;
+		int result =0;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from tb_qna where qna_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		return result;
 	}
 
 	public int updateQnA(Connection con, QnA qna) {
-		return 0;
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_qna set title = ?, content = ? "
+				+"where qna_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, qna.getTitle());
+			pstmt.setString(2, qna.getContent());
+			pstmt.setInt(3, qna.getQnaNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
+	
+	public int updateReadCount(Connection con, int no){
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_qna set readcount = readcount+1 where qna_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	public ArrayList<QnA> selectTitleSearch(Connection con, String keyword) {
@@ -103,9 +190,5 @@ public class QnADao {
 		return 0;
 	}
 
-	public int updateReadCount(Connection con, int no) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

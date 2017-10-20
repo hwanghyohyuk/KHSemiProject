@@ -43,7 +43,7 @@
 					src="/studyhub/images/slider.png"></a>
 			</div>
 			<div class="head">
-				<a href="#" id="more">더보기</a><span id="title">모집게시판</span>
+				<a href="/studyhub/boardlist" id="more">더보기</a><span id="title">모집게시판</span>
 			</div>
 			<div class="col-md-8 col-lg-6">
 				<div id="slider">
@@ -172,9 +172,15 @@
 				    values +=  	"<li class='slide'>" +
 				    		   		"<a href='/studyhub/gmainpreview?group_no=" + json.list[i].group_no + "'>" +
 				    		   			"<div>" +
-					 						"<div><img id='groupimg' src='/studyhub/images/groupimg/" + decodeURIComponent(json.list[i].renameimg) +"'></div>" + 
-							 		        "<div class='cover col-md-9'><p id='groupname'>" + decodeURIComponent(json.list[i].group_name) + "</p></div>" +
-							 		        "<div class='col-md-3'><span class='glyphicon glyphicon-user' aria-hidden='true'>&nbsp;</span>" + json.list[i].usercount + "</div>" + 
+					 						"<div>" +
+				    		   					"<img id='groupimg' src='/studyhub/images/groupimg/" + decodeURIComponent(json.list[i].renameimg) +"'>" +
+					 						"</div>" + 
+							 		        "<div class='cover col-md-9'>" +
+					 							"<p id='groupname'>" + decodeURIComponent(json.list[i].group_name) + "</p>" +
+					 						"</div>" + 
+							 		        "<div class='col-md-3'>" +
+					 							"<span class='glyphicon glyphicon-user' aria-hidden='true'>&nbsp;</span>" + json.list[i].usercount + 
+					 						"</div>" + 
 				    		   			"</div>" + 
 				    		   		"</a>" + 
 				    		   	"</li>";

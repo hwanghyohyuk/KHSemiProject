@@ -22,7 +22,21 @@ public class UserService {
 
 	public boolean createUser(User user) {
 		Connection conn = getConnection();
-		boolean result = new UserDao().createUser(conn, user);
+		uDao = new UserDao();
+		boolean result = uDao.createUser(conn, user);
+		if(result){
+			commit(conn);
+		}else{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int checkEmail(String userEmail) {
+		Connection conn = getConnection();
+		uDao = new UserDao();
+		int result = uDao.checkEmail(conn, userEmail);
 		close(conn);
 		return result;
 	}

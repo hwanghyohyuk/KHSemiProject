@@ -40,12 +40,15 @@ public class QnAInsertServlet extends HttpServlet {
 		RequestDispatcher view = null;
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String writer = request.getParameter("writer");
+		int userNo = Integer.parseInt(request.getParameter("user_no"));
+		int accessNo = Integer.parseInt(request.getParameter("access_no"));
 		
 		QnA qna = new QnA();
 		qna.setTitle(title);
 		qna.setContent(content);
-		qna.setWriter(writer);
+		qna.setUserNo(userNo);
+		qna.setAccessNo(accessNo);
+		
 		
 		if(new QnAService().insertQNA(qna)>0){
 			response.sendRedirect("/studyhub/qnalist");
