@@ -172,9 +172,15 @@
 				    values +=  	"<li class='slide'>" +
 				    		   		"<a href='/studyhub/gmainpreview?group_no=" + json.list[i].group_no + "'>" +
 				    		   			"<div>" +
-					 						"<div><img id='groupimg' src='/studyhub/images/groupimg/" + decodeURIComponent(json.list[i].renameimg) +"'></div>" + 
-							 		        "<div class='cover col-md-9'><p id='groupname'>" + decodeURIComponent(json.list[i].group_name) + "</p></div>" +
-							 		        "<div class='col-md-3'><span class='glyphicon glyphicon-user' aria-hidden='true'>&nbsp;</span>" + json.list[i].usercount + "</div>" + 
+					 						"<div>" +
+				    		   					"<img id='groupimg' src='/studyhub/images/groupimg/" + decodeURIComponent(json.list[i].renameimg) +"'>" +
+					 						"</div>" + 
+							 		        "<div class='cover col-md-9'>" +
+					 							"<p id='groupname'>" + decodeURIComponent(json.list[i].group_name) + "</p>" +
+					 						"</div>" + 
+							 		        "<div class='col-md-3'>" +
+					 							"<span class='glyphicon glyphicon-user' aria-hidden='true'>&nbsp;</span>" + json.list[i].usercount + 
+					 						"</div>" + 
 				    		   			"</div>" + 
 				    		   		"</a>" + 
 				    		   	"</li>";

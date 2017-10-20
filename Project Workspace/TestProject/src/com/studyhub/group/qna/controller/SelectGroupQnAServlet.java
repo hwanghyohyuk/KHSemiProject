@@ -54,7 +54,6 @@ public class SelectGroupQnAServlet extends HttpServlet {
 			job.put("groupno", gq.getGroupNo());
 			
 			jarr.add(job);
-			System.out.println(job);
 		}
 		json.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");
