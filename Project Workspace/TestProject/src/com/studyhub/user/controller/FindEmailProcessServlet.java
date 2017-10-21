@@ -47,17 +47,14 @@ public class FindEmailProcessServlet extends HttpServlet {
 		int result = us.checkEmail(userEmail);
 		System.out.println(result);
 		RequestDispatcher view = null;
-		if (pagename.equals("signup")) {// 전달받은 페이지이름으로 실행할 코드
+		if (pagename !=null &&( pagename.equals("signup") || pagename.equals("start"))) {// 전달받은 페이지이름으로 실행할 코드
 			PrintWriter pw = response.getWriter();
-			System.out.println("PrintWriter");
 			if (result > 0) {
 				pw.println("1");
-				System.out.println("1");
 				pw.flush();
 				pw.close();
 			} else {
 				pw.println("0");
-				System.out.println("0");
 				pw.flush();
 				pw.close();
 			}

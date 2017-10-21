@@ -52,14 +52,10 @@
 						<hr />
 					</div>
 				</div>
-				<form action="/studyhub/findemail" method="post" name="signupcheckform">
+				<form action="/studyhub/signup" method="post" name="signupcheckform">
 					<div class="form-group">
 						<input type="email" class="form-control" id="signupemail"
-							placeholder="이메일 주소" name="email" onkeydown='emptyCheck()' onkeyup='emptyCheck()'>
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-control"
-							id="signuppwd" placeholder="비밀번호" name="pwd" onkeydown='emptyCheck()' onkeyup='emptyCheck()'>
+							placeholder="이메일 주소" name="signupemail" oninput='checkEmail("start")' onblur='checkEmail("start")' onclick='checkEmail("start")' >
 					</div>
 					<button type="submit" class="btn btn-primary btn-block" id='signupbtn' disabled="disabled">가입하기</button>
 				</form>
@@ -107,21 +103,11 @@
 	</div>
 </div>
 <!-- /메인 컨텐츠 -->
-<script type="text/javascript">
-function emptyCheck() {
-	var email = $("#signupemail").val();
-	var pwd = $("#signuppwd").val();
-	if(email=="" || pwd==""){
-		$("#signupbtn").prop("disabled", true);
-	}else{
-		$("#signupbtn").prop("disabled", false);
-	}
-}
-</script>
 
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
 <!--페이지 끝-->
+<script type="text/javascript" src="/studyhub/js/signup.js"></script>
 <%@ include file="/views/include/common/headend.jsp" %>
 
 

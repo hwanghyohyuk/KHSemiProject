@@ -2,14 +2,15 @@ var emailCheck = 0;
 var pwdCheck = 0;
 var nameCheck = 0;
 var phoneCheck = 0;
+var pagename = '';
 // 이메일 체크하여 가입버튼 비활성화, 중복확인.
-function checkEmail() {
+function checkEmail(pagename) {
 	var signupemail = $('#signupemail').val();
 	$.ajax({
 		type : "post",
 		data : {
 			email : signupemail,
-			pagename : "signup"
+			pagename : pagename
 		},
 		url : "/studyhub/findemailprocess",
 		success : function(data) {
@@ -30,7 +31,11 @@ function checkEmail() {
 			}
 		}
 	});
-	toggleBtn();
+	if(pagename=='signup'){
+		toggleBtn();
+	}else if(pagename=='start'){
+		startToggleBtn();
+	}	
 }
 // 재입력 비밀번호 체크하여 가입버튼 비활성화 또는 맞지않음을 알림.
 function checkPwd() {
@@ -38,7 +43,9 @@ function checkPwd() {
 	var confirmpwd = $('#confirmpwd').val();
 	if (signuppwd == "") {
 		$("#signuppwd").css("background-color", "white");
-	} else {
+	} else if(signuppwd.length < 10){
+		$("#signuppwd").css("background-color", "#FFCECE");
+	}else{
 		$("#signuppwd").css("background-color", "#B0F6AC");
 	}
 	if (confirmpwd == "") {
@@ -46,7 +53,7 @@ function checkPwd() {
 	} else {
 		$("#confirmpwd").css("background-color", "#B0F6AC");
 	}
-	if (signuppwd == "" && confirmpwd == "") {
+	if (signuppwd == "" && confirmpwd == "" && signuppwd.length < 10) {
 		$("#confirmpwd").css("background-color", "white");
 		$("#signuppwd").css("background-color", "white");
 	} else {
@@ -68,8 +75,14 @@ function checkName() {
 		nameCheck = 0;
 		$("#username").css("background-color", "white");
 	} else {
-		nameCheck = 1;
-		$("#username").css("background-color", "#B0F6AC");
+		var pattern = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
+		if(pattern.test(username)){
+			nameCheck = 1;
+			$("#username").css("background-color", "#B0F6AC");
+		}else{
+			nameCheck = 0;
+			$("#username").css("background-color", "#FFCECE");
+		}	
 	}
 	toggleBtn();
 }
@@ -79,19 +92,16 @@ function checkPhone() {
 		$("#phone").css("background-color", "white");
 		phoneCheck = 0;
 	} else {
-		$("#phone").css("background-color", "#B0F6AC");
-		phoneCheck = 1;
+		var pattern = /^[0-9]{10,11}$/;
+		if(pattern.test(phone)){
+			$("#phone").css("background-color", "#B0F6AC");
+			phoneCheck = 1;
+		}else{
+			$("#phone").css("background-color", "#FFCECE");
+			phoneCheck = 0;
+		}	
 	}
 	toggleBtn();
-}
-
-function emptyStartPwdCheck() {
-	var pwd = $("#pwd").val();
-	if(pwd==""){
-		pwdCheck=0;
-	}else{
-		pwdCheck=1;
-	}
 }
 
 function toggleBtn() {
@@ -99,7 +109,15 @@ function toggleBtn() {
 	if (activeBtn == 4) {
 		$("#signupbtn").prop("disabled", false);
 		$("#signupbtn").css("background-color", "#004157");
-	} else if (activeBtn == 2) {
+	} else {
+		$("#signupbtn").prop("disabled", true);
+		$("#signupbtn").css("background-color", "#aaaaaa");
+	}
+}
+
+function startToggleBtn() {
+	var activeBtn = emailCheck;
+	if (activeBtn == 1) {
 		$("#signupbtn").prop("disabled", false);
 		$("#signupbtn").css("background-color", "#004157");
 	} else {
@@ -107,3 +125,5 @@ function toggleBtn() {
 		$("#signupbtn").css("background-color", "#aaaaaa");
 	}
 }
+
+
