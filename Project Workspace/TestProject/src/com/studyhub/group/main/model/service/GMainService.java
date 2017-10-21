@@ -38,4 +38,8 @@ public class GMainService {
 		close(con);
 		return list;
 	}
+
+	public ArrayList<GBoard> selectGroupBoard(int groupno) {
+		return null;
+	}
 }

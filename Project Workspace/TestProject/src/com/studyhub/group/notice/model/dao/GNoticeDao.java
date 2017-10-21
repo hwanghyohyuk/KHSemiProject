@@ -146,6 +146,18 @@ public class GNoticeDao {
 		}		
 		
 		return result;
+	}
+
+
+	public int updateReadCount(Connection conn, int no) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	public ArrayList<GNotice> selectTitleSearch(Connection conn, String keyword) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 	
 	
