@@ -25,10 +25,10 @@ public class GMainService {
 		return group;
 	}
 
-	public ArrayList<GBoard> selectGroupBoard(int groupno) {
+	public Group SelectGroupMain(int group_no) {
 		Connection con = getConnection();
-		ArrayList<GBoard> list = new GMainDao().selectGroupBoard(con, groupno);
+		Group group = new GMainDao().SelectGroupMain(con, group_no);
 		close(con);
-		return list;
+		return group;
 	}
 }

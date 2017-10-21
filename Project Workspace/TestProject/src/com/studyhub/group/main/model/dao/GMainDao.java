@@ -59,33 +59,43 @@ public class GMainDao {
 		return group;
 	}
 
-	public ArrayList<GBoard> selectGroupBoard(Connection con, int groupno) {
-		ArrayList<GBoard> list = null;
+
+	public Group SelectGroupMain(Connection con, int group_no) {
+		Group g = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select g_board_no, title, user_name, to_char('upload_date', 'yyyyMMdd') as upload_date, readcount" +
-					" from tb_g_board" +
-					" join tb_user on (tb_g_board.uploader=tb_user.user_no)" +
-					" where group_no = ?";
+		String query = 	"select group_no, user_name, membercount, category_name, location, attribute_name " +
+						"from tb_group " +
+						"join (select group_no, user_name " +
+						"from tb_ung " +
+						"join tb_user using(user_no) " +
+						"where authority_no = 2) using (group_no) " +
+						"join (select group_no, category_name " +
+						"from tb_group " +
+						"join tb_category using (category_no)) using(group_no) " +
+						"join (select group_no, attribute_name " +
+						"from tb_on_off " +
+						"join tb_group using(attribute_no)) using(group_no) " +
+						"join (select group_no, count(*) as membercount " +
+						"from tb_ung " +
+						"group by group_no) using(group_no) " +
+						"where group_no = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, groupno);
+			pstmt.setInt(1, group_no);
 			
 			rset = pstmt.executeQuery();
-			if(rset != null){
-				list = new ArrayList<GBoard>();
-				while(rset.next());
-				GBoard gb = new GBoard();
-				gb.setgBoardNo(rset.getInt("g_board_no"));
-				gb.setTitle(rset.getString("title"));
-				gb.setUploader(rset.getString("user_name"));
-				gb.setStrDate(rset.getString("upload_date"));
-				gb.setReadcount(rset.getInt("readcount"));
-				System.out.println(gb);
-				list.add(gb);
+			if(rset.next()) {
+				g = new Group();
+				g.setGroupNo(rset.getInt("group_no"));
+				g.setUserName(rset.getString("user_name"));
+				g.setMemberCount(rset.getInt("membercount"));
+				g.setCategoryName(rset.getString("category_name"));
+				g.setLocation(rset.getString("location"));
+				g.setAttributeName(rset.getString("attribute_name"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,6 +103,6 @@ public class GMainDao {
 			close(rset);
 			close(pstmt);
 		}
-		return list;
+		return g;
 	}
 }
