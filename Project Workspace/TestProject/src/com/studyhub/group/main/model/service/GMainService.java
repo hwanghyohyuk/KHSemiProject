@@ -25,10 +25,10 @@ public class GMainService {
 		return group;
 	}
 
-	public int SelectGroupMain(int group_no) {
+	public Group SelectGroupMain(int group_no) {
 		Connection con = getConnection();
-		int result = new GMainDao().SelectGroupMain(con, group_no);
+		Group group = new GMainDao().SelectGroupMain(con, group_no);
 		close(con);
-		return result;
+		return group;
 	}
 }

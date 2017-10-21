@@ -170,7 +170,7 @@
 				var values = "";
 				for(var i in json.list){				         
 				    values +=  	"<li class='slide'>" +
-				    		   		"<a href='/studyhub/gmainpreview?group_no=" + json.list[i].group_no + "'>" +
+				    		   		"<a href='/studyhub/gmainpreview?group_no=" + json.list[i].group_no + "&reset=0'>" +
 				    		   			"<div>" +
 					 						"<div>" +
 				    		   					"<img id='groupimg' src='/studyhub/images/groupimg/" + decodeURIComponent(json.list[i].renameimg) +"'>" +

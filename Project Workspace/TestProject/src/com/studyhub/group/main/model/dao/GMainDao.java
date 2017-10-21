@@ -60,35 +60,49 @@ public class GMainDao {
 		return group;
 	}
 
-	public int SelectGroupMain(Connection con, int group_no) {
-		int result = 0;
+	public Group SelectGroupMain(Connection con, int group_no) {
+		Group g = null;
 		
 		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		
-		String query = "select group_no, user_name, membercount, category_name, location, attribute_name
-from tb_group
-join (select group_no, user_name
-       from tb_ung
-       join tb_user using(user_no)
-       where authority_no = 2) using (group_no)
-join (select group_no, category_name
-       from tb_group
-       join tb_category using (category_no)) using(group_no)
-join (select group_no, attribute_name
-       from tb_on_off
-       join tb_group using(attribute_no)) using(group_no)
-join (select group_no, count(*) as membercount
-       from tb_ung
-       group by group_no) using(group_no)
-where group_no=1;";
+		String query = 	"select group_no, user_name, membercount, category_name, location, attribute_name " +
+						"from tb_group " +
+						"join (select group_no, user_name " +
+						"from tb_ung " +
+						"join tb_user using(user_no) " +
+						"where authority_no = 2) using (group_no) " +
+						"join (select group_no, category_name " +
+						"from tb_group " +
+						"join tb_category using (category_no)) using(group_no) " +
+						"join (select group_no, attribute_name " +
+						"from tb_on_off " +
+						"join tb_group using(attribute_no)) using(group_no) " +
+						"join (select group_no, count(*) as membercount " +
+						"from tb_ung " +
+						"group by group_no) using(group_no) " +
+						"where group_no = ?";
 		
 		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, group_no);
 			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				g = new Group();
+				g.setGroupNo(rset.getInt("group_no"));
+				g.setUserName(rset.getString("user_name"));
+				g.setMemberCount(rset.getInt("membercount"));
+				g.setCategoryName(rset.getString("category_name"));
+				g.setLocation(rset.getString("location"));
+				g.setAttributeName(rset.getString("attribute_name"));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			close(rset);
 			close(pstmt);
 		}
-		return result;
+		return g;
 	}
 }

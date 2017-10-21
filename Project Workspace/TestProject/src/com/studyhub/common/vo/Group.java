@@ -12,6 +12,8 @@ public class Group {
 	private String description;
 	private String g_img_original;
 	private String g_img_rename;
+	private String userName; // 그룹장
+	private int memberCount; //그룹인원
 
 	public Group() {
 		super();
@@ -52,8 +54,33 @@ public class Group {
 		this.categoryName = categoryName;
 		this.description = description;
 	}
-	
-	
+
+	public Group(int groupNo, String attributeName, String location, String categoryName, String userName,
+			int memberCount) {
+		super();
+		this.groupNo = groupNo;
+		this.attributeName = attributeName;
+		this.location = location;
+		this.categoryName = categoryName;
+		this.userName = userName;
+		this.memberCount = memberCount;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public int getMemberCount() {
+		return memberCount;
+	}
+
+	public void setMemberCount(int memberCount) {
+		this.memberCount = memberCount;
+	}
 
 	public String getG_img_original() {
 		return g_img_original;
