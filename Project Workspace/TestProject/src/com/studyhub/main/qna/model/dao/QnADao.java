@@ -182,7 +182,45 @@ public class QnADao {
 	}
 
 	public ArrayList<QnA> selectTitleSearch(Connection con, String keyword) {
-		return null;
+		ArrayList<QnA> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select qna_no, title, content, upload_date, user_name, access_no, readcount from tb_qna "
+				+ "join tb_user on (tb_user.user_no=tb_qna.user_no) "
+				+ "where title like ?"
+				+ "order by tb_qna.qna_no desc";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "%" + keyword + "%");
+			rset = pstmt.executeQuery();
+			
+			if(rset != null){
+				list = new ArrayList<QnA>();
+				
+				while(rset.next()){
+					QnA q = new QnA();
+					q.setQnaNo(rset.getInt("qna_no"));
+					q.setTitle(rset.getString("title"));
+					q.setContent(rset.getString("content"));
+					q.setUploadDate(rset.getDate("upload_date"));
+					q.setWriter(rset.getString("user_name"));
+					q.setAccessNo(rset.getInt("access_no"));
+					q.setReadCount(rset.getInt("readcount"));
+				
+					list.add(q);
+				}
+			}
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 	public int insertComment(Connection con, int qnano, String comment, int userno) {
@@ -265,6 +303,48 @@ public class QnADao {
 		}
 		System.out.println("삭제가 되나:"+result);
 		return result;
+	}
+
+	public ArrayList<QnA> selectWriterSearch(Connection con, String keyword) {
+		ArrayList<QnA> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select qna_no, title, content, upload_date, user_name, access_no, readcount from tb_qna "
+				+ "join tb_user on (tb_user.user_no=tb_qna.user_no) "
+				+ "where user_name like ?"
+				+ "order by tb_qna.qna_no desc";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "%" + keyword + "%");
+			rset = pstmt.executeQuery();
+			
+			if(rset != null){
+				list = new ArrayList<QnA>();
+				
+				while(rset.next()){
+					QnA q = new QnA();
+					q.setQnaNo(rset.getInt("qna_no"));
+					q.setTitle(rset.getString("title"));
+					q.setContent(rset.getString("content"));
+					q.setUploadDate(rset.getDate("upload_date"));
+					q.setWriter(rset.getString("user_name"));
+					q.setAccessNo(rset.getInt("access_no"));
+					q.setReadCount(rset.getInt("readcount"));
+				
+					list.add(q);
+				}
+			}
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 	

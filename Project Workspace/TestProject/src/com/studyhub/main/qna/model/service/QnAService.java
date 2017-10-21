@@ -82,9 +82,17 @@ public class QnAService {
 		
 	}
 	
-	public ArrayList<QnA> selectSearch(String keyword){
+	public ArrayList<QnA> selectTitleSearch(String keyword){
 		Connection con = getConnection();
 		ArrayList<QnA> list = new QnADao().selectTitleSearch(con, keyword);
+		close(con);
+		
+		return list;
+	}
+	
+	public ArrayList<QnA> selectWriterSearch(String keyword){
+		Connection con = getConnection();
+		ArrayList<QnA> list = new QnADao().selectWriterSearch(con, keyword);
 		close(con);
 		
 		return list;
