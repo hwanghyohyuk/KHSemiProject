@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 
-작성자 : OOO
-내용 : OO 페이지
-작성일자 17.10.02
+작성자 : 윤찬호
+내용 : 그룹 일정 메인 페이지
+작성일자 17.10.19
  -->
 <!-- java 구문 -->
 
@@ -13,6 +13,7 @@
 <%@ include file="/views/include/common/head.jsp"%>
 <%@ include file="/views/include/main/header.jsp"%>
 <%@ include file="/views/include/group/nav.jsp" %>
+
 <!-- 메인 컨텐츠 -->
 
 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
@@ -20,7 +21,6 @@
 	</div>
 	<div id="calendar" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 	</div>
-
 </div>
 <!-- /메인 컨텐츠 -->
 
