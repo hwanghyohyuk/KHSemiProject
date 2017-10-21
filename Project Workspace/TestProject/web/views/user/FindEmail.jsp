@@ -26,7 +26,7 @@
 			<form action="/studyhub/findemailprocess" method="post" name="findemail">
 				<div class="form-group">
 					<input type="email" class="form-control" id="email"
-						placeholder="이메일 주소" name="email" onkeydown='emptyCheck()' onkeyup='emptyCheck()'>
+						placeholder="이메일 주소" name="email" oninput='emptyCheck()'>
 				</div>
 				<a href="/studyhub/login" class="btn btn-default pull-left">이전화면</a>
 				<button type="submit" class="btn btn-primary pull-right main-back" id="findemailbtn" disabled="disabled">이메일 확인</button>
