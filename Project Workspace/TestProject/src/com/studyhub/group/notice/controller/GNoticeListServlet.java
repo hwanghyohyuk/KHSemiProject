@@ -1,6 +1,9 @@
 package com.studyhub.group.notice.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,8 +35,21 @@ public class GNoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// 공지글 조회용
+		
+		ArrayList<GNotice> list = new GNoticeService().selectList();
+		
+		RequestDispatcher view = null;
+		if(list != null){
+			view = request.getRequestDispatcher("views/group/groupNotice/NoticeList.jsp");
+			request.setAttribute("list", list);
+			view.forward(request, response);
+		}else{
+			view = request.getRequestDispatcher("views/group/groupNotice/NoticeError.jsp");
+			request.setAttribute("message",	"공지글 조회 실패");
+			view.forward(request, response);
+		}
+		
 	}
 
 	/**
