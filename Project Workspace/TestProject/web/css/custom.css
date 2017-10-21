@@ -12,7 +12,7 @@
 	background: #004157;
 	color: white;
 } */
-li a, li a:after, li a:before {
+.fill li a, .fill li a:after, .fill li a:before {
 	transition: all .5s;
 }
 
@@ -20,12 +20,16 @@ li a, li a:after, li a:before {
 	color: #004157;
 } */
 
-li a {
+.fill li a {
 	position:relative;
   z-index: 1;
 }
 
-li a:after {
+.fill ul li{
+	margin-top: 0;
+}
+
+.fill li a:after {
 	display: block;
 	position: absolute;
 	top: 0;
@@ -49,13 +53,13 @@ p:hover{
 	color: white;
 }
  */
-li a:hover:after {
+.fill li a:hover:after {
 	opacity: 1;
 	visibility: visible;
 	height: 100%;
 }
 
-li a {
+.fill li a {
 	transition: all 1.5s;
 }
 
@@ -108,4 +112,10 @@ li a {
 .paddinghor10 {
 	padding-top: 10px;
 	padding-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {   
+#logo{
+	width: 24vw;
+}
 }

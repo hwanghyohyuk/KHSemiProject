@@ -1,4 +1,4 @@
-package com.studyhub.group.qna.controller;
+package com.studyhub.main.qna.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,18 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studyhub.group.qna.model.service.GroupQnAService;
+import com.studyhub.main.qna.model.service.QnAService;
 
 /**
- * Servlet implementation class DeleteGroupQnAServlet
+ * Servlet implementation class QnACommentDeleteServlet
  */
-@WebServlet("/deletegroupqna")
-public class DeleteGroupQnAServlet extends HttpServlet {
+@WebServlet("/qnacommentdelete")
+public class QnACommentDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteGroupQnAServlet() {
+    public QnACommentDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,9 +29,9 @@ public class DeleteGroupQnAServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int gqnano = Integer.parseInt(request.getParameter("gqnano"));
-		if(new GroupQnAService().deleteGroupQnA(gqnano) > 0){
-			response.sendRedirect("views/main/QnA/QnADetail.jsp");
+		int commentno = Integer.parseInt(request.getParameter("commentno"));
+		if(new QnAService().deleteComment(commentno) > 0){
+			response.sendRedirect("/views/group/groupQnA/QnAList.jsp");
 		}
 	}
 

@@ -1,5 +1,14 @@
 @CHARSET "UTF-8";
 
+#list-layout{
+	margin-top: 6vh;
+	
+}
+
+#qnatitle{
+	color: black;
+	
+}
 .search {
 	margin-left: 42vw;
 }

@@ -60,7 +60,9 @@ public class QnADao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select * from tb_qna where qna_no = ?";
+		String query = "select qna_no, title, content, upload_date, user_name, access_no, readcount from tb_qna "
+				+ "join tb_user on (tb_user.user_no=tb_qna.user_no) "+
+				"where qna_no = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -73,8 +75,8 @@ public class QnADao {
 				qna.setQnaNo(rset.getInt("qna_no"));
 				qna.setTitle(rset.getString("title"));
 				qna.setContent(rset.getString("content"));
+				qna.setWriter(rset.getString("user_name"));
 				qna.setUploadDate(rset.getDate("upload_date"));
-				qna.setUserNo(rset.getInt("user_no"));
 				qna.setAccessNo(rset.getInt("access_no"));
 				qna.setReadCount(rset.getInt("readcount"));
 			}
@@ -130,6 +132,7 @@ public class QnADao {
 		} finally{
 			close(pstmt);
 		}
+		System.out.println("글삭제가 되나:"+result);
 		return result;
 	}
 
@@ -179,16 +182,172 @@ public class QnADao {
 	}
 
 	public ArrayList<QnA> selectTitleSearch(Connection con, String keyword) {
-		return null;
+		ArrayList<QnA> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select qna_no, title, content, upload_date, user_name, access_no, readcount from tb_qna "
+				+ "join tb_user on (tb_user.user_no=tb_qna.user_no) "
+				+ "where title like ?"
+				+ "order by tb_qna.qna_no desc";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "%" + keyword + "%");
+			rset = pstmt.executeQuery();
+			
+			if(rset != null){
+				list = new ArrayList<QnA>();
+				
+				while(rset.next()){
+					QnA q = new QnA();
+					q.setQnaNo(rset.getInt("qna_no"));
+					q.setTitle(rset.getString("title"));
+					q.setContent(rset.getString("content"));
+					q.setUploadDate(rset.getDate("upload_date"));
+					q.setWriter(rset.getString("user_name"));
+					q.setAccessNo(rset.getInt("access_no"));
+					q.setReadCount(rset.getInt("readcount"));
+				
+					list.add(q);
+				}
+			}
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
-	public int insertComment(Connection con, QComment com) {
-		return 0;
+	public int insertComment(Connection con, int qnano, String comment, int userno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into tb_qna_comment values("+
+					"(select max(comment_no)+1 from tb_qna_comment),"+
+					"?, ?, sysdate, ?, 1)";
+		
+		try{
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, qnano);
+			pstmt.setString(2, comment);
+			pstmt.setInt(3, userno);
+			
+			result = pstmt.executeUpdate();
+		} catch(Exception e){
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public ArrayList<QComment> selectComment(Connection con, int qnano) {
+		ArrayList<QComment> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select comment_no, qna_no, content, to_char(upload_date, 'yyyyMMdd') as str_date, user_name "+
+						"from tb_qna_comment "
+				+"join tb_user on (tb_qna_comment.user_no = tb_user.user_no) "
+						+"where qna_no = ? order by comment_no desc";
+		
+		try{
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, qnano);
+			
+			rset = pstmt.executeQuery();
+			if(rset !=null){
+				list = new ArrayList<QComment>();
+				while(rset.next()){
+					QComment qc = new QComment();
+					qc.setCommentNo(rset.getInt("comment_no"));
+					qc.setQnaNo(rset.getInt("qna_no"));
+					qc.setContent(rset.getString("content"));
+					qc.setStrUploadDate(rset.getString("str_date"));
+					qc.setCommentWriter(rset.getString("user_name"));
+					
+					list.add(qc);
+				}
+				
+			}} catch(Exception e){
+				e.printStackTrace();
+			} finally{
+				close(rset);
+				close(pstmt);
+			}
+		System.out.println(list);
+		return list;
 	}
 
 	public int deleteComment(Connection con, int cno) {
-		return 0;
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from tb_qna_comment where comment_no = ?";
+		
+		try{
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, cno);
+			
+			result = pstmt.executeUpdate();
+		} catch(Exception e){
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		System.out.println("삭제가 되나:"+result);
+		return result;
 	}
+
+	public ArrayList<QnA> selectWriterSearch(Connection con, String keyword) {
+		ArrayList<QnA> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select qna_no, title, content, upload_date, user_name, access_no, readcount from tb_qna "
+				+ "join tb_user on (tb_user.user_no=tb_qna.user_no) "
+				+ "where user_name like ?"
+				+ "order by tb_qna.qna_no desc";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "%" + keyword + "%");
+			rset = pstmt.executeQuery();
+			
+			if(rset != null){
+				list = new ArrayList<QnA>();
+				
+				while(rset.next()){
+					QnA q = new QnA();
+					q.setQnaNo(rset.getInt("qna_no"));
+					q.setTitle(rset.getString("title"));
+					q.setContent(rset.getString("content"));
+					q.setUploadDate(rset.getDate("upload_date"));
+					q.setWriter(rset.getString("user_name"));
+					q.setAccessNo(rset.getInt("access_no"));
+					q.setReadCount(rset.getInt("readcount"));
+				
+					list.add(q);
+				}
+			}
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	
 
 
 }
