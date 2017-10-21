@@ -33,7 +33,7 @@ public class QnACommentInsertServlet extends HttpServlet {
 		int qnano = Integer.parseInt(request.getParameter("qnano"));
 		String comment = request.getParameter("comment");
 		int userno = Integer.parseInt(request.getParameter("userno"));
-		
+		System.out.println(comment);
 		if(new QnAService().insertComment(qnano, comment, userno) > 0){
 			response.sendRedirect("views/main/QnA/QnADetail.jsp");
 		}

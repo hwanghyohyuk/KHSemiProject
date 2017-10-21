@@ -37,15 +37,15 @@ public class QnACommentSelectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int qnano = Integer.parseInt(request.getParameter("qnano"));
-		ArrayList<QComment> list = new QnAService().selectComment();
-		
+		ArrayList<QComment> list = new QnAService().selectComment(qnano);
+		System.out.println(qnano);
 		JSONObject json  = new JSONObject();
 		JSONArray jarr = new JSONArray();
 		
 		for(QComment qc : list){
 			JSONObject job = new JSONObject();
 			job.put("qnano", qc.getQnaNo());
-			job.put("comment", qc.getContent());
+			job.put("comment", URLEncoder.encode(qc.getContent(), "UTF-8"));
 			job.put("commentno", qc.getCommentNo());
 			job.put("uploaddate", URLEncoder.encode(qc.getStrUploadDate(), "UTF-8"));
 			job.put("username", URLEncoder.encode(qc.getCommentWriter(), "UTF-8"));

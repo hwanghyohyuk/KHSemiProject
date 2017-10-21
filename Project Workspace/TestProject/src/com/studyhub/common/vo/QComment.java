@@ -29,6 +29,13 @@ public class QComment implements java.io.Serializable{
 	
 
 
+	public QComment(int qnaNo, String content, int userNo) {
+		super();
+		this.qnaNo = qnaNo;
+		this.content = content;
+		this.userNo = userNo;
+	}
+
 	public QComment(int commentNo, String content, String strUploadDate, String commentWriter) {
 		super();
 		this.commentNo = commentNo;
@@ -126,7 +133,10 @@ public class QComment implements java.io.Serializable{
 	@Override
 	public String toString() {
 		return "QComment [commentNo=" + commentNo + ", qnaNo=" + qnaNo + ", content=" + content + ", uploadDate="
-				+ uploadDate + ", userNo=" + userNo + ", accessNo=" + accessNo + "]";
+				+ uploadDate + ", userNo=" + userNo + ", accessNo=" + accessNo + ", strUploadDate=" + strUploadDate
+				+ ", commentWriter=" + commentWriter + "]";
 	}
+
+	
 
 }
