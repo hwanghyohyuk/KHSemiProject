@@ -30,5 +30,17 @@ public class GMainService {
 		Group group = new GMainDao().SelectGroupMain(con, group_no);
 		close(con);
 		return group;
+
+	}
+
+	public ArrayList<GNotice> selectGroupNotice(int groupno) {
+		Connection con = getConnection();
+		ArrayList<GNotice> list = new GMainDao().selectGroupNotice(con, groupno);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<GBoard> selectGroupBoard(int groupno) {
+		return null;
 	}
 }

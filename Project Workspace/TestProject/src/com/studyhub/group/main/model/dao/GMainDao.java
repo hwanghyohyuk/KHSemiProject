@@ -60,6 +60,7 @@ public class GMainDao {
 		return group;
 	}
 
+
 	public Group SelectGroupMain(Connection con, int group_no) {
 		Group g = null;
 		
@@ -105,4 +106,44 @@ public class GMainDao {
 		}
 		return g;
 	}
+
+
+	public ArrayList<GNotice> selectGroupNotice(Connection con, int groupno) {
+	ArrayList<GNotice> list = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select notice_no, title, uploader, upload_date" +
+					" from tb_g_notice" +
+					" join tb_user on (tb_g_notice.uploader=tb_user.user_no)" +
+					" where notice_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null){
+				list = new ArrayList<GNotice>();
+				while(rset.next());
+				GNotice gn = new GNotice();
+				gn.setNoticeNo(rset.getInt("notice_no"));
+				gn.setTitle(rset.getString("title"));
+				gn.setUploader(rset.getInt("uploader"));
+				gn.setUploadDate(rset.getDate("upload_date"));
+				System.out.println(gn);
+				list.add(gn);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	
+	}
+
+	
 }
