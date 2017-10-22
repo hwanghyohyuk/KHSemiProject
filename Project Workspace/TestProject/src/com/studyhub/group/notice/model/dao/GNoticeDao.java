@@ -149,16 +149,29 @@ public class GNoticeDao {
 	}
 
 
-	public int updateReadCount(Connection conn, int no) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteNotice(Connection conn, int bnum) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from notice where gnotice_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bnum);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return result;
 	}
 
 
-	public ArrayList<GNotice> selectTitleSearch(Connection conn, String keyword) {
-		// TODO Auto-generated method stub
-		return null;
-	}	
+	
 	
 	
 

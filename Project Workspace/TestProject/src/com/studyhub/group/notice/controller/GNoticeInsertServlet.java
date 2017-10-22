@@ -1,6 +1,8 @@
 package com.studyhub.group.notice.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,8 +38,19 @@ public class GNoticeInsertServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf8"); 
 		
-		// 업로드할 파일의 용량 제한
-		int maxSize = 1024*1024*10;
+		RequestDispatcher view = null;
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		int userNo = Integer.parseInt(request.getParameter("user_no"));
+		int accessNo = Integer.parseInt(request.getParameter("access_no"));
+		
+		GNotice gnotice = new GNotice();
+		gnotice.setTitle(title);
+		gnotice.setContent(content);
+		
+		
+		
+		
 		
 		
 	}
