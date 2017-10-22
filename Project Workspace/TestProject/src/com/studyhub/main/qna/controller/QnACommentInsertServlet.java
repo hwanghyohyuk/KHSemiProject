@@ -1,33 +1,25 @@
-package com.studyhub.group.main.controller;
+package com.studyhub.main.qna.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.GNotice;
-import com.studyhub.common.vo.Group;
-import com.studyhub.group.main.model.service.GMainService;
+import com.studyhub.main.qna.model.service.QnAService;
 
 /**
- * Servlet implementation class GNoticePreviewServlet
+ * Servlet implementation class QnACommentInsertServlet
  */
-@WebServlet("/gnoticepreview")
-public class GNoticePreviewServlet extends HttpServlet {
+@WebServlet("/qnacommentinsert")
+public class QnACommentInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private GMainService gms;
-	private GNotice gNotice;
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GNoticePreviewServlet() {
+    public QnACommentInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,15 +28,15 @@ public class GNoticePreviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
-		int groupno = Integer.parseInt(request.getParameter("groupno"));
 		
-		ArrayList<GNotice> list = new GMainService().selectGroupNotice(groupno);
-		RequestDispatcher view = request.getRequestDispatcher("/views/group/groupNotice/NoticeList.jsp");
-		System.out.println(list);
-		request.setAttribute("list", list);
-		view.forward(request, response);
+		int qnano = Integer.parseInt(request.getParameter("qnano"));
+		String comment = request.getParameter("comment");
+		int userno = Integer.parseInt(request.getParameter("userno"));
+		System.out.println(comment);
+		if(new QnAService().insertComment(qnano, comment, userno) > 0){
+			response.sendRedirect("views/main/QnA/QnADetail.jsp");
+		}
 	}
 
 	/**

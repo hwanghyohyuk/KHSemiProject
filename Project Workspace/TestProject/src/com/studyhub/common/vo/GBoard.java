@@ -10,6 +10,7 @@ public class GBoard implements java.io.Serializable{
 	private Date uploadDate;
 	private String strDate;
 	private String uploader;
+	private int userNo;
 	private int accessNo;
 	private int groupNo;
 	private int readcount;
@@ -18,7 +19,7 @@ public class GBoard implements java.io.Serializable{
 		super();
 	}
 
-	public GBoard(int gBoardNo, String title, String content, Date uploadDate, String uploader, int accessNo,
+	public GBoard(int gBoardNo, String title, String content, Date uploadDate, String uploader, int userNo,int accessNo,
 			int groupNo) {
 		super();
 		this.gBoardNo = gBoardNo;
@@ -26,6 +27,7 @@ public class GBoard implements java.io.Serializable{
 		this.content = content;
 		this.uploadDate = uploadDate;
 		this.uploader = uploader;
+		this.userNo = userNo;
 		this.accessNo = accessNo;
 		this.groupNo = groupNo;
 	}
@@ -43,6 +45,15 @@ public class GBoard implements java.io.Serializable{
 		this.groupNo = groupNo;
 		this.readcount = readcount;
 	}	
+
+	
+	public int getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
 
 	public int getReadcount() {
 		return readcount;
@@ -121,6 +132,9 @@ public class GBoard implements java.io.Serializable{
 		return "GBoard [gBoardNo=" + gBoardNo + ", title=" + title + ", content=" + content + ", uploadDate="
 				+ uploadDate + ", uploader=" + uploader + ", accessNo=" + accessNo + ", groupNo=" + groupNo + "]";
 	}
+
+	
+
 
 	
 

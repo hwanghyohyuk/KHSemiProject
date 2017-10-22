@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 
-작성자 : OOO
-내용 : OO 페이지
+작성자 : 양동균
+내용 : 그룹QnAList 페이지
 작성일자 17.10.02
  -->
 <!-- java 구문 -->

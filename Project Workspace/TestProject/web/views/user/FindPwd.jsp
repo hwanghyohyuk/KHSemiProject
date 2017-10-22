@@ -26,7 +26,7 @@
 			<form action="/findpwd" method="post" name="findpwd">
 				<div class="form-group">
 					<input type="password" class="form-control"
-						id="pwd" placeholder="비밀번호" name="pwd" onkeydown='emptyCheck()' onkeyup='emptyCheck()'>
+						id="pwd" placeholder="비밀번호" name="pwd" oninput='emptyCheck()'>
 				</div>
 				<button type="submit" class="btn btn-primary btn-block main-back" id="findwpdbtn" disabled="disabled">비밀번호 확인</button>
 			</form>
