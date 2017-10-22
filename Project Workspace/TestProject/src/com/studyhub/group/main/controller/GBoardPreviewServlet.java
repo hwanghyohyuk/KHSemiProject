@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.studyhub.common.vo.GNotice;
 import com.studyhub.common.vo.Group;
-import com.studyhub.common.vo.Board;
 import com.studyhub.common.vo.GBoard;
 import com.studyhub.group.main.model.service.GMainService;;
 
@@ -25,7 +24,7 @@ public class GBoardPreviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private GMainService gms;
-	private Board board;
+	private GBoard gboard;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -45,7 +44,6 @@ public class GBoardPreviewServlet extends HttpServlet {
 		
 		ArrayList<GBoard> list = new GMainService().selectGroupBoard(groupno);
 		RequestDispatcher view = request.getRequestDispatcher("/views/group/groupBoard/BoardList.jsp");
-		System.out.println(list);
 		request.setAttribute("list", list);
 		view.forward(request, response);
 		

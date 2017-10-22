@@ -9,6 +9,7 @@
 <!-- 부트스트랩 로드-->
 <link rel="stylesheet" href="/studyhub/css/bootstrap.css">
 <link rel="stylesheet" href="/studyhub/css/custom.css">
-<link rel="stylesheet" href="/studyhub/css/bootstrap2-toggle.min.css">
+<link rel="stylesheet" href="/studyhub/css/bootstrap2-toggle.min.css"> <!-- 토글버튼 css -->
+<link rel="stylesheet" href="/studyhub/css/fullcalendar.css"> <!-- 달력 css -->
 </head>
 <body>

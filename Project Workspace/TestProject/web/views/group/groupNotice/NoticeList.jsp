@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"
 	import="java.util.*, com.studyhub.common.vo.GNotice"%>
 <!-- 
-작성자 : OOO
-내용 : OO 페이지
-작성일자 17.10.02
+작성자 : 윤찬호
+내용 : 그룹공지 게시판 리스트 페이지
+작성일자 17.10.19
  -->
 <!-- java 구문 -->
 <%
@@ -16,112 +16,63 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>GNoticeList</title>
+<title>그룹공지::StudyHub</title>
 <script type="text/javascript">
 	function insertPage() {
-		location.href = "";
+		location.href = "/studyhub/views/group/groupNotice/NoticeWriteForm.jsp";
 	}
 </script>
 <!--헤더 부분-->
 <%@ include file="/views/include/common/head.jsp"%>
 <%@ include file="/views/include/main/header.jsp"%>
-<style type="text/css">
-div#full {
-	width: 1430px;
-	height: 630px;
-	float: top;
-	border: 1px solid black;
-	margin: 5px 5px -10px 5px;
-}
-
-div#a {
-	width: 1420px;
-	height: 100px;
-	float: top;
-	border: 1px solid black;
-	margin: 5px 5px -10px 5px;
-}
-
-div#b {
-	width: 200px;
-	height: 500px;
-	float: left;
-	border: 1px solid black;
-	margin: -10px 0px 5px 5px;
-	background-color: #336699;
-}
-
-div#c {
-	width: 1200px;
-	height: 435px;
+<!-- 그룹 네비게이션바 -->
+<%@ include file="/views/include/group/nav.jsp"%>
+<style>
+#btns {
 	float: right;
-	border: 1px solid black;
-	margin: 5px 5px 5px 0px;
-	background-color: skyblue;
-}
-
-div#d {
-	width: 1180px;
-	height: 40px;
-	float: right;
-	margin: 5px 10px 5px 5px;
-	font-size: 30px
-}
-
-#e {
-	background-color: white;
-	margin: 30px;
-}
-
-div#aa {
-	width: 1180px;
-	height: 50px;
-	float: right;
-	margin: 5px 60px 5px 5px;
 }
 </style>
+
+<link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
+<link rel="stylesheet" href="/studyhub/css/bootstrap.css">
+
+<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
 </head>
 <!-- 메인 컨텐츠 -->
 <body>
-	<div id="full">
-		<div id="a"></div>
-		<hr>
-		<div id="b"></div>
-		<div id="d">
-			<strong>공지사항</strong>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h2>공지사항</h2>
+			<div class="table-area">
+				<table class="table table-striped" align="center" width="600">
+					<tr align="center">
+						<td>번호</td>
+						<td>제목</td>
+						<td>작성자</td>
+						<td>날짜</td>
+					</tr>
+
+					<%
+						for (GNotice gnotice : list) {
+					%>
+					<tr>
+						<td><%=gnotice.getNoticeNo()%></td>
+						<td id="title_text">
+						<a href="/studyhub/gnoticeview?no=<%=gnotice.getNoticeNo()%>"><%=gnotice.getTitle()%></a></td>
+						<td><%=gnotice.getUploader()%></td>
+						<td><%=gnotice.getUploadDate()%></td>
+					</tr>
+					<%
+						}
+					%>
+				</table>
+				<!-- /메인 컨텐츠 -->
+				<button onclick="insertPage();" class="btn btn-info">글쓰기</button>
+			</div>
 		</div>
+	</div>
 
-		<table id="e" align="center" cellspacing="0" cellpadding="10"
-			border="1" width="1100">
-			<tr align="center" height="20">
-				<td width="60">번호</td>
-				<td width="470">제목</td>
-				<td width="80">작성자</td>
-				<td width="50">날짜</td>
-				<td width="80">조회수</td>
-			</tr>
-			
-			<% 
-			for(GNotice gNotice : list){ 
-			%>
-			
-			<tr height="30">
-				<td align = "center"><%= GNotice.getNoticeNo() %></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			
-			
-		<%} %>
-		</table>
-
-		<!-- /메인 컨텐츠 -->
-
-
-
-		<!--푸터 부분-->
-		<%@ include file="/views/include/main/footer.jsp"%>
+	<!--푸터 부분-->
+	<%@ include file="/views/include/main/footer.jsp"%>
 </body>
 </html>

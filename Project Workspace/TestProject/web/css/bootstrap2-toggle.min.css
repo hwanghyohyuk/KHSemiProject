@@ -17,9 +17,9 @@ label.checkbox .toggle,label.checkbox.inline .toggle{margin-left:-20px;margin-ri
 .toggle.btn{min-width:30px}
 .toggle-on.btn{padding-right:24px}
 .toggle-off.btn{padding-left:24px}
-.toggle.btn-large{min-width:80px; min-height:30px;}
-.toggle-on.btn-large{padding-right:35px}
-.toggle-off.btn-large{padding-left:35px}
+.toggle.btn-large{min-width:100px; min-height:30px;}
+.toggle-on.btn-large{padding-right:20px}
+.toggle-off.btn-large{padding-left:20px}
 .toggle.btn-small{min-width:25px}
 .toggle-on.btn-small{padding-right:20px}
 .toggle-off.btn-small{padding-left:20px}

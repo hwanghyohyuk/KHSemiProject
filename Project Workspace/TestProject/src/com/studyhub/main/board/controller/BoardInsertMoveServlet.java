@@ -1,7 +1,6 @@
-package com.studyhub.group.main.controller;
+package com.studyhub.main.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,24 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.GNotice;
-import com.studyhub.common.vo.Group;
-import com.studyhub.group.main.model.service.GMainService;
-
 /**
- * Servlet implementation class GNoticePreviewServlet
+ * Servlet implementation class BoardInsertViewServlet
  */
-@WebServlet("/gnoticepreview")
-public class GNoticePreviewServlet extends HttpServlet {
+@WebServlet("/boardinsert.move")
+public class BoardInsertMoveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private GMainService gms;
-	private GNotice gNotice;
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GNoticePreviewServlet() {
+    public BoardInsertMoveServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,14 +28,10 @@ public class GNoticePreviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=utf-8");
+		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		int groupno = Integer.parseInt(request.getParameter("groupno"));
-		
-		ArrayList<GNotice> list = new GMainService().selectGroupNotice(groupno);
-		RequestDispatcher view = request.getRequestDispatcher("/views/group/groupNotice/NoticeList.jsp");
-		System.out.println(list);
-		request.setAttribute("list", list);
+		response.setContentType("text/html; charset=utf-8");
+		RequestDispatcher view = request.getRequestDispatcher("/views/main/Board/BoardWriteForm.jsp");
 		view.forward(request, response);
 	}
 
