@@ -17,7 +17,7 @@
 <!-- 메인 컨텐츠 -->
 
 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="schedulelist">
 	</div>
 	<div id="calendar" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 	</div>
@@ -29,9 +29,32 @@
 <%@ include file="/views/include/common/headend.jsp"%>
 
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(function (){
+		selectSchedule();
+		calendar();
+	});
+	
+	function calendar(){
 		$("#calendar").fullCalendar({
 			
 		})
 	});
+	
+	function selectSchedule(){
+		var group_no = <%= group.getGroupNo() %>;
+		$.ajax({
+			url: "/studyhub/schedulelist",
+			data: {groupno: group_no},
+			type: "get",
+			dataType: "json",
+			success: function(data){
+				var json = JSON.parse(JSON.stringify(data));
+				var values = "";
+				for(var i in json.list){
+					values += "";
+				}
+				$("#schedulelist").html(values);
+			}
+		});
+	}
 </script>
