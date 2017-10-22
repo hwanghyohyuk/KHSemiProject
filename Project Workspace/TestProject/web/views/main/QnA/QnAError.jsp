@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 <title>Error</title>
 </head>
 <body>
 서비스 에러 발생: <%= (String)request.getAttribute("message") %>
 </body>
-</html
+</html>
