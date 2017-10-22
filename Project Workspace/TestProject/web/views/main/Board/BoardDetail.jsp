@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.studyhub.common.vo.Board"%>
 <!-- 
-작성자 : OOO
-내용 : OO 페이지
-작성일자 17.10.02
+작성자 : 황효혁
+내용 : 모집게시판 상세보기 페이지
+작성일자 17.10.22
  -->
 <!-- java 구문 -->
-
+<%
+	Board board = (Board) request.getAttribute("board");
+%>
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 
 <!--페이지 시작-->
@@ -21,32 +23,26 @@
 			모집게시판 <small>글쓰기</small>
 		</h1>
 	</div>
-
 	<form class="form-horizontal">
 		<div class="form-group">
 			<label for="inputEmail3" class="col-sm-2 control-label">제목</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" placeholder="제목" id="title">
+				<%=board.getTitle()%>
 			</div>
 		</div>
 		<hr>
 		<div class="form-group">
 			<label for="inputPassword3" class="col-sm-2 control-label">내용</label>
 			<div class="col-sm-10">
-				<textarea class="form-control" rows="10" id="content"
-					placeholder="내용"></textarea>
+				<%=board.getContent()%>
 			</div>
 		</div>
 		<hr>
 		<div class="form-group">
-			<label for="exampleInputFile" class="col-sm-2 control-label">파일
-				업로드</label> <input type="file" id="exampleInputFile">
-			<p class="help-block"></p>
-		</div>
-		<hr>
-		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-primary main-back pull-right">등록</button>
+				<a href="/studyhub/boarddelete?bno=<%=board.getBoardNo()%>" class="btn btn-primary main-back pull-right">삭제</a> <a
+					href="/studyhub/boardupdateview?bno=<%=board.getBoardNo()%>" class="btn btn-primary main-back pull-right">수정</a> <a
+					href="/studyhub/boardlist" class="btn btn-primary main-back pull-right">목록</a>
 			</div>
 		</div>
 	</form>

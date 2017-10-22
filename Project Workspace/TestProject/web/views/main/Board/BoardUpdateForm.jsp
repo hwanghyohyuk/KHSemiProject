@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.studyhub.common.vo.Board"%>
 <!-- 
-작성자 : OOO
-내용 : OO 페이지
-작성일자 17.10.02
+작성자 : 황효혁
+내용 : 모집게시판 상세보기 페이지
+작성일자 17.10.22
  -->
 <!-- java 구문 -->
-
+<%
+	Board board = (Board) request.getAttribute("board");
+%>
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 
 <!--페이지 시작-->
@@ -18,23 +20,23 @@
 <div class="container">
 	<div class="page-header">
 		<h1>
-			모집게시판 <small>글쓰기</small>
+			모집게시판 <small>글 수정</small>
 		</h1>
 	</div>
 
 	<form class="form-horizontal">
 		<div class="form-group">
-			<label for="inputEmail3" class="col-sm-2 control-label">제목</label>
+			<label for="title" class="col-sm-2 control-label">제목</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" placeholder="제목" id="title">
+				<input type="text" class="form-control" placeholder="제목" id="title" value="<%=board.getTitle()%>">
 			</div>
 		</div>
 		<hr>
 		<div class="form-group">
-			<label for="inputPassword3" class="col-sm-2 control-label">내용</label>
+			<label for="content" class="col-sm-2 control-label">내용</label>
 			<div class="col-sm-10">
 				<textarea class="form-control" rows="10" id="content"
-					placeholder="내용"></textarea>
+					placeholder="내용" ><%=board.getContent()%></textarea>
 			</div>
 		</div>
 		<hr>
@@ -46,7 +48,7 @@
 		<hr>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-primary main-back pull-right">등록</button>
+				<button type="submit" class="btn btn-primary main-back pull-right">수정</button>
 			</div>
 		</div>
 	</form>
