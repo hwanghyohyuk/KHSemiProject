@@ -29,44 +29,40 @@
 		<h1>
 			모집게시판 <small>원하는 그룹을 찾자.</small>
 		</h1>
-		<br>총 게시글 갯수 : <%= listCount %>
+		<br>총 게시글 갯수 :
+		<%=listCount%>
 	</div>
-	<table class="table table-hover" align="center">
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-			</tr>
-		</thead>
-		<%
-			for (Board b : list) {
-		%>
-		<tbody>
-			<tr>
-				<td><%=b.getBoardNo()%></td>
-				<td>
-					<%
-						if (user != null) {
-					%> <a
-					href="/studyhub/boardview?bno=<%=b.getBoardNo()%>&page=<%=currentPage%>">
-						<%=b.getTitle()%>
-				</a> <%
- 	} else {
- %> <%=b.getTitle()%> <%
- 	}
- %>
-				</td>
-				<td><%=b.getUploaderName()%></td>
-				<td><%=b.getUploadDate()%></td>
-				<td><%=b.getBoardReadCount()%></td>
-			</tr>
-		</tbody>
-		<%
-			}
-		%>
-	</table>
+	<div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+				</tr>
+			</thead>
+			<%
+				for (Board b : list) {
+			%>
+			<tbody>
+				<tr>
+					<td><%=b.getBoardNo()%></td>
+					<td>
+						<%
+							if (user != null) {
+						%> <a
+						href="/studyhub/boardview?bno=<%=b.getBoardNo()%>&page=<%=currentPage%>">
+							<%=b.getTitle()%>
+					</a> <%} else {%> <%=b.getTitle()%> <%	} %>
+					</td>
+					<td><%=b.getUploaderName()%></td>
+					<td><%=b.getUploadDate()%></td>
+				</tr>
+			</tbody>
+			<%}%>
+		</table>
+	</div>
 	<hr>
 	<div align="right">
 		<%
@@ -82,8 +78,6 @@
 		%>
 	</div>
 
-
-
 	<div align="center">
 		<div class="btn-group" role="group" aria-label="paging">
 			<%-- 이전 페이지 있을 경우에 대한 처리 --%>
@@ -91,13 +85,13 @@
 				if (currentPage <= 1) {
 			%>
 			<a class="btn btn-default" href="#" disabled><span
-				class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
+				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 			<%
 				} else {
 			%>
 			<a class="btn btn-default"
 				href="/first/blist?page=<%=currentPage - 1%>"><span
-				class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
+				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 			<%
 				}
 			%>
@@ -120,13 +114,13 @@
 				if (currentPage >= maxPage) {
 			%>
 			<a class="btn btn-default" href="#" disabled><span
-				class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
+				class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
 			<%
 				} else {
 			%>
 			<a class="btn btn-default"
 				href="/studyhub/boardlist?page=<%=currentPage + 1%>"><span
-				class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
+				class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
 			<%
 				}
 			%>

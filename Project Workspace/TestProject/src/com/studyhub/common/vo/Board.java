@@ -10,7 +10,6 @@ public class Board implements java.io.Serializable {
 	private Date uploadDate;
 	private int uploader;
 	private String uploaderName;
-	private int boardReadCount;
 	private String boardOriginalFileName;
 	private String boardRenameFileName;
 
@@ -18,20 +17,19 @@ public class Board implements java.io.Serializable {
 		super();
 	}
 
-	public Board(int boardNo, String title, String content, Date uploadDate, int uploader, int boardReadCount,
-			String boardOriginalFileName, String boardRenameFileName) {
+	public Board(int boardNo, String title, String content, Date uploadDate, int uploader, String boardOriginalFileName,
+			String boardRenameFileName) {
 		super();
 		this.boardNo = boardNo;
 		this.title = title;
 		this.content = content;
 		this.uploadDate = uploadDate;
 		this.uploader = uploader;
-		this.boardReadCount = boardReadCount;
 		this.boardOriginalFileName = boardOriginalFileName;
 		this.boardRenameFileName = boardRenameFileName;
 	}
 
-	public Board(int boardNo, String title, String content, Date uploadDate, String uploaderName, int boardReadCount,
+	public Board(int boardNo, String title, String content, Date uploadDate, String uploaderName,
 			String boardOriginalFileName, String boardRenameFileName) {
 		super();
 		this.boardNo = boardNo;
@@ -39,7 +37,6 @@ public class Board implements java.io.Serializable {
 		this.content = content;
 		this.uploadDate = uploadDate;
 		this.uploaderName = uploaderName;
-		this.boardReadCount = boardReadCount;
 		this.boardOriginalFileName = boardOriginalFileName;
 		this.boardRenameFileName = boardRenameFileName;
 	}
@@ -90,14 +87,6 @@ public class Board implements java.io.Serializable {
 
 	public void setUploaderName(String uploaderName) {
 		this.uploaderName = uploaderName;
-	}
-
-	public int getBoardReadCount() {
-		return boardReadCount;
-	}
-
-	public void setBoardReadCount(int boardReadCount) {
-		this.boardReadCount = boardReadCount;
 	}
 
 	public String getBoardOriginalFileName() {

@@ -1,6 +1,8 @@
 package com.studyhub.main.board.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +35,24 @@ public class BoardUpdateView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		int bno = Integer.parseInt(request.getParameter("bno"));
+
+		bs = new BoardService();
+		board = bs.selectBoard(bno);
+
+		RequestDispatcher view = null;
+
+		if (board != null) {
+			view = request.getRequestDispatcher("/views/main/Board/BoardUpdateForm.jsp");
+			request.setAttribute("board", board);
+			view.forward(request, response);
+		} else {
+			view = request.getRequestDispatcher("/views/main/Board/BoardError.jsp");
+			request.setAttribute("message", "상세조회실패");
+			view.forward(request, response);
+		}
 	}
 
 	/**

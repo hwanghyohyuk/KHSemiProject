@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.studyhub.common.vo.Board;
+import com.studyhub.common.vo.QnA;
 
 public class BoardDao {
 
@@ -99,9 +100,39 @@ public class BoardDao {
 		return 0;
 	}
 
-	public Board selectBoard(Connection con, int bnum) {
-		// TODO Auto-generated method stub
-		return null;
+	public Board selectBoard(Connection con, int bno) {
+		board = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select board_no, title, content, upload_date, user_name "
+				+ "from tb_board "
+				+ "join tb_user on (tb_board.uploader = tb_user.user_no) "
+				+ "where board_no = ?";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, bno);
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				board = new Board();
+				board.setBoardNo(rset.getInt("board_no"));
+				board.setTitle(rset.getString("title"));
+				board.setContent(rset.getString("content"));
+				board.setUploadDate(rset.getDate("upload_date"));
+				board.setUploaderName(rset.getString("user_name"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return board;
 	}
 
 	public int deleteBoard(Connection con, int bnum) {
