@@ -149,12 +149,11 @@ public class GMainDao {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
-		String query = "select g_board_no, title, user_name, to_char('upload_date', 'yyyyMMdd') as upload_date, readcount" +
+		String query = "select g_board_no, title, user_name, to_char(upload_date, 'yyyyMMdd') as upload_date, readcount" +
 					" from tb_g_board" +
 					" join tb_user on (tb_g_board.uploader=tb_user.user_no)" +
 					" where group_no = ?";
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, groupno);
@@ -162,15 +161,15 @@ public class GMainDao {
 			rset = pstmt.executeQuery();
 			if(rset != null){
 				list = new ArrayList<GBoard>();
-				while(rset.next());
-				GBoard gb = new GBoard();
-				gb.setgBoardNo(rset.getInt("g_board_no"));
-				gb.setTitle(rset.getString("title"));
-				gb.setUploader(rset.getString("user_name"));
-				gb.setStrDate(rset.getString("upload_date"));
-				gb.setReadcount(rset.getInt("readcount"));
-				System.out.println(gb);
-				list.add(gb);
+				while(rset.next()) {
+					GBoard gb = new GBoard();
+					gb.setgBoardNo(rset.getInt("g_board_no"));
+					gb.setTitle(rset.getString("title"));
+					gb.setUploader(rset.getString("user_name"));
+					gb.setStrDate(rset.getString("upload_date"));
+					gb.setReadcount(rset.getInt("readcount"));
+					list.add(gb);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

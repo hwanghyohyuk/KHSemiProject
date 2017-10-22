@@ -44,7 +44,6 @@ public class GBoardPreviewServlet extends HttpServlet {
 		
 		ArrayList<GBoard> list = new GMainService().selectGroupBoard(groupno);
 		RequestDispatcher view = request.getRequestDispatcher("/views/group/groupBoard/BoardList.jsp");
-		System.out.println(list);
 		request.setAttribute("list", list);
 		view.forward(request, response);
 		
