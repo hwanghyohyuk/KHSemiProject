@@ -1,8 +1,4 @@
-/**
- * 검색필터 모달창 띄우기
- */
-
-function searchFilter(){
-	
-	
-}
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').focus()
+})
+$('#myModal').modal('toggle');
