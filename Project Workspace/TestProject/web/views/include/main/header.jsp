@@ -36,29 +36,26 @@
 			id="bs-example-navbar-collapse-1">
 			<nav class="fill">
 				<ul class="nav navbar-nav navbar-left">
-					<li><a href="javascript:void(0);" onclick="searchFilter();"> <span
-							class="glyphicon glyphicon-search main" aria-hidden="true"></span><span
-							class="black">스터디찾기</span></a></li>
-					<!-- <li><a href="/studyhub/views/main/MakeGroup.jsp"><p
-								class="black">그룹만들기</p></a></li> -->
-					<li><a href="/studyhub/views/main/FAQ/FAQmain.jsp"><p
-								class="black">도움말</p></a></li>
-					<li>
-						<div class="btn-group">
-							<button type="button" 
-								id="toggle-btn" data-toggle="dropdown" aria-expanded="false">
-								나의 그룹 <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">그룹1</a></li>
-								<li><a href="#">그룹2</a></li>
-								<li><a href="#">그룹3?</a></li>
-								<li class="divider"></li>
-								<li><a href="/studyhub/views/main/MakeGroup.jsp">
-										새 그룹만들기</a></li>
-							</ul>
-						</div>
-					</li>
+					<li><a href="#" data-toggle="modal" data-target="#seachfilter">
+							<span class="glyphicon glyphicon-search main" aria-hidden="true"></span><span
+							class="black">스터디찾기</span>
+					</a></li>
+					<li><a href="/studyhub/views/main/FAQ/FAQmain.jsp">
+							<p class="black">도움말</p>
+					</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-expanded="false"><p
+								class="black">
+								나의 그룹<span class="caret"></span>
+							</p> </a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">그룹1</a></li>
+							<li><a href="#">그룹2</a></li>
+							<li><a href="#">그룹3</a></li>
+							<li class="divider"></li>
+							<li><a href="/studyhub/views/main/MakeGroup.jsp"> 새
+									그룹만들기</a></li>
+						</ul></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<%
@@ -79,3 +76,69 @@
 		</div>
 	</div>
 </nav>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="seachfilter" tabindex="-1" role="dialog"
+	aria-labelledby="seachfilterLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="seachfilterLabel">스터디 찾기</h4>
+			</div>
+			<div class="modal-body">
+				<div style="display: table;width:100%">
+					<div style="display: table-cell; vertical-align: middle">
+						<form class="form-horizontal">
+							<div class="form-group">
+								<label for="rule" class="col-sm-3 control-label">스터디 방식</label>
+								<div class="col-sm-3">
+									<select class="form-control">
+									<option>온라인 스터디</option>
+									<option>오프라인 스터디</option>
+								</select>
+								</div>			
+								<label for="rule" class="col-sm-3 control-label">스터디 분야</label>
+								<div class="col-sm-3">
+									<select class="form-control">
+									<option>1</option>
+									<option>2</option>
+								</select>
+								</div>							
+							</div>
+							
+							<div class="form-group">
+								<label for="rule" class="col-sm-3 control-label">스터디 지역</label>
+								<div class="col-sm-3">
+									<select class="form-control">
+									<option>1</option>
+									<option>2</option>
+								</select>
+								</div>				
+								<label for="rule" class="col-sm-3 control-label">상세 지역</label>
+								<div class="col-sm-3">
+									<select class="form-control">
+									<option>1</option>
+									<option>2</option>
+								</select>
+								</div>						
+							</div>
+						</form>
+						<hr>
+						<div>
+						결과도출
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /Modal -->
