@@ -42,6 +42,7 @@ public class GMainDao {
 			rset = pstmt.executeQuery();
 			if(rset.next()){
 				group = new Group();
+				
 				group.setGroupNo(group_no);
 				group.setGroupName(rset.getString("group_name"));
 				group.setAttributeName(rset.getString("attribute_name"));
@@ -141,7 +142,42 @@ public class GMainDao {
 			close(pstmt);
 		}
 		return list;
+	}
 	
+	public ArrayList<GBoard> selectGroupBoard(Connection con, int groupno) {
+		ArrayList<GBoard> list = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select g_board_no, title, user_name, to_char(upload_date, 'yyyyMMdd') as upload_date, readcount" +
+					" from tb_g_board" +
+					" join tb_user on (tb_g_board.uploader=tb_user.user_no)" +
+					" where group_no = ?";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null){
+				list = new ArrayList<GBoard>();
+				while(rset.next()) {
+					GBoard gb = new GBoard();
+					gb.setgBoardNo(rset.getInt("g_board_no"));
+					gb.setTitle(rset.getString("title"));
+					gb.setUploader(rset.getString("user_name"));
+					gb.setStrDate(rset.getString("upload_date"));
+					gb.setReadcount(rset.getInt("readcount"));
+					list.add(gb);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 	
