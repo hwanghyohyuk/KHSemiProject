@@ -40,8 +40,7 @@ public class ScheduleListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		int groupno = Integer.parseInt(request.getParameter("groupno"));
-		
+		int groupno = Integer.parseInt(request.getParameter("group_no"));
 		ArrayList<Schedule> list = new ScheduleService().selectList(groupno);
 		
 		JSONObject json = new JSONObject();
