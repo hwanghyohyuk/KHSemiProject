@@ -72,11 +72,11 @@
 		<%
 			if (user != null) {
 		%>
-		<button class="btn btn-default" onclick="showWriteBoard();">글쓰기</button>
+		<a class="btn btn-default" href="/studyhub/boardinsert.move">글쓰기</a>
 		<%
 			} else {
 		%>
-		<button class="btn btn-default" disabled>글쓰기</button>
+		<a class="btn btn-default" disabled>글쓰기</a>
 		<%
 			}
 		%>
@@ -138,12 +138,6 @@
 
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
-
-<script type="text/javascript">
-	function showWriteBoard() {
-		location.href = "views/main/Board/BoardWriteForm.jsp";
-	}
-</script>
 
 <!--페이지 끝-->
 <%@ include file="/views/include/common/headend.jsp"%>
