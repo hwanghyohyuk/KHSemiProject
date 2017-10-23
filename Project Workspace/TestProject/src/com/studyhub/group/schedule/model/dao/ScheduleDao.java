@@ -124,5 +124,45 @@ public class ScheduleDao {
 		}
 		return list;
 	}
+
+	public int deleteSchedule(Connection con, int scheduleno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from tb_schedule where schedule_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, scheduleno);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateSchedule(Connection con, Schedule sc) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_schedule set";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sc.getScheduleNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }
 
