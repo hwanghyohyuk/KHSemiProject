@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+body{
+background: #f4f4f4;
+}
+#btns {
+	float: right;
+}
+
+#layout {
+	margin-top: 8vh;
+}
+
+#form-outline{
+background: white;
+padding-bottom: 3vh;
+}
+.upload{
+	padding: 1vh 0;
+	
+}
