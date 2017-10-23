@@ -1,29 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-
 <!-- 
 작성자 : 구미향
 내용 : 메인 페이지
 작성일자 17.10.16
  -->
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>스터디허브 StudyHub</title>
-<!-- css, javascript, jQuery -->
-<link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
-<link rel="stylesheet" href="/studyhub/css/bootstrap.css">
-
-<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
-<script type="text/javascript" src='/studyhub/js/main.js' ></script>
-<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-
+ 
 <!-- java 구문 -->
 
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
+<!--CSS 및 자바스크립트-->
+<link rel="stylesheet" href="/studyhub/css/main.css">
+<script type="text/javascript" src='/studyhub/js/main.js' ></script>
+<!-- /head , body -->
+<%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 </head>
@@ -194,5 +186,5 @@
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>
 	<!--페이지 끝-->
-	<%@ include file="/views/include/common/headend.jsp"%>
+	<%@ include file="/views/include/common/tail.jsp"%>
 <!-- /미향 -->

@@ -4,13 +4,16 @@
 작성자 : 황효혁
 내용 : 시작 페이지
 작성일자 17.10.02
+수정일자 17.10.23
  -->
 <!-- java 구문 -->
 
-
-
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
+<!--CSS 및 자바스크립트-->
+<script type="text/javascript" src="/studyhub/js/signup.js"></script>
+<!-- /head , body -->
+<%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 
@@ -107,7 +110,6 @@
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
 <!--페이지 끝-->
-<script type="text/javascript" src="/studyhub/js/signup.js"></script>
-<%@ include file="/views/include/common/headend.jsp" %>
+<%@ include file="/views/include/common/tail.jsp" %>
 
 

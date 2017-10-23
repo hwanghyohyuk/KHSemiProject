@@ -6,13 +6,17 @@
 작성일자 17.10.22
  -->
 <!-- java 구문 -->
+
+<!-- 초기화 블럭(변수선언 및 초기화) -->
 <%
 	Board board = (Board) request.getAttribute("board");
 %>
-<!-- 초기화 블럭(변수선언 및 초기화) -->
-
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
+<!--CSS 및 자바스크립트-->
+
+<!-- /head , body -->
+<%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 
@@ -46,13 +50,10 @@
 			</div>
 		</div>
 	</form>
-
-
-
 </div>
 <!-- /메인 컨텐츠 -->
 
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
 <!--페이지 끝-->
-<%@ include file="/views/include/common/headend.jsp"%>
+<%@ include file="/views/include/common/tail.jsp"%>
