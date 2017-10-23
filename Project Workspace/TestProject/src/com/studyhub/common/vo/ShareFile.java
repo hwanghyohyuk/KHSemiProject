@@ -9,8 +9,7 @@ public class ShareFile implements java.io.Serializable{
 	private String content;
 	private Date uploadDate;
 	private String fileName;
-	private String filePath;
-	private String fileSize;
+	private String renameFileName;
 	private int uploader;
 	private int accessNo;
 	private String userName;
@@ -31,16 +30,15 @@ public class ShareFile implements java.io.Serializable{
 		this.downloadCount = downloadCount;
 	}
 
-	public ShareFile(int fileNo, String title, String content, Date uploadDate, String fileName, String filePath,
-			String fileSize, int uploader, int accessNo) {
+	public ShareFile(int fileNo, String title, String content, Date uploadDate, String fileName, String renameFileName,
+			 int uploader, int accessNo) {
 		super();
 		this.fileNo = fileNo;
 		this.title = title;
 		this.content = content;
 		this.uploadDate = uploadDate;
 		this.fileName = fileName;
-		this.filePath = filePath;
-		this.fileSize = fileSize;
+		this.renameFileName = renameFileName;
 		this.uploader = uploader;
 		this.accessNo = accessNo;
 	}
@@ -101,20 +99,14 @@ public class ShareFile implements java.io.Serializable{
 		this.fileName = fileName;
 	}
 
-	public String getFilePath() {
-		return filePath;
+	
+
+	public String getRenameFileName() {
+		return renameFileName;
 	}
 
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
-
-	public String getFileSize() {
-		return fileSize;
-	}
-
-	public void setFileSize(String fileSize) {
-		this.fileSize = fileSize;
+	public void setRenameFileName(String renameFileName) {
+		this.renameFileName = renameFileName;
 	}
 
 	public int getUploader() {
@@ -135,9 +127,11 @@ public class ShareFile implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "SharedFile [fileNo=" + fileNo + ", title=" + title + ", content=" + content + ", fileName=" + fileName
-				+ ", filePath=" + filePath + ", fileSize=" + fileSize + ", uploader=" + uploader + ", accessNo="
-				+ accessNo + "]";
+		return "ShareFile [fileNo=" + fileNo + ", title=" + title + ", content=" + content + ", uploadDate="
+				+ uploadDate + ", fileName=" + fileName + ", renameFileName=" + renameFileName + ", uploader="
+				+ uploader + ", accessNo=" + accessNo + ", userName=" + userName + ", downloadCount=" + downloadCount
+				+ "]";
 	}
 
+	
 }
