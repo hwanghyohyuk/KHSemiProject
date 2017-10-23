@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
 <!-- 
 작성자 : OOO
 내용 : OO 페이지
@@ -11,17 +9,10 @@
 
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 
-<!--헤더 부분-->
+<!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
-<%@ include file="/views/include/main/header.jsp"%>
 
-<!-- 메인 컨텐츠 -->
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>Document</title>
-</head>
+<!--자바스크립트 및 CSS-->
 <style>
 div#full {
 	width: 1480px;
@@ -77,8 +68,14 @@ div#bottom {
 	margin: 5px 60px 5px 5px;
 }
 </style>
-<body>
-	<div id="full">
+<!-- /head , body -->
+<%@ include file="/views/include/common/headend.jsp"%>
+
+<!--헤더 부분-->
+<%@ include file="/views/include/main/header.jsp"%>
+<%@ include file="/views/include/group/nav.jsp"%>
+<!-- 메인 컨텐츠 -->
+<div id="full">
 		<div id="top"></div>
 		<hr>
 		<div id="left"></div>
@@ -114,7 +111,11 @@ div#bottom {
 <br>
 			</div>
 		</div>
-		<%@ include file="/views/include/main/footer.jsp"%>
-</body>
-</html>
->
+
+
+<!-- /메인 컨텐츠 -->
+
+<!--푸터 부분-->
+<%@ include file="/views/include/main/footer.jsp"%>
+<!--페이지 끝-->
+<%@ include file="/views/include/common/tail.jsp" %>
