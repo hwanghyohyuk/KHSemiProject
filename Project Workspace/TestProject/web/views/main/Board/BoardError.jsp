@@ -11,6 +11,10 @@
 
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
+<!--CSS 및 자바스크립트-->
+
+<!-- /head , body -->
+<%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 
@@ -34,4 +38,4 @@
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
 <!--페이지 끝-->
-<%@ include file="/views/include/common/headend.jsp"%>
+<%@ include file="/views/include/common/tail.jsp"%>
