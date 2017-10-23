@@ -25,6 +25,8 @@
 
 .list-group-item {
 	margin-top: 0px;
+	padding-left: 7px;
+	padding-right: 7px;
 }
 
 #list-group {
@@ -44,12 +46,14 @@
 	padding-left: 0px;
 }
 
-#time {
+#time, #meeting_onoff {
 	text-align: right;
+	padding-right: 6px;
 }
 
 #content {
 	text-align: left;
+	height: 40px;
 }
 
 .modal-header {
@@ -111,6 +115,10 @@
 	padding-left: 0px;
 	padding-right: 0px;
 }
+
+#meeting_name {
+	padding-left: 7px;
+}
 </style>
 
 <%@ include file="/views/include/common/headend.jsp"%>
@@ -126,18 +134,28 @@
 			id="schedulelist">
 			<ul class="list-group" id="list-group">
 
-				<li class="list-group-item" id="list-group-item">
+				<!-- <li class="list-group-item" id="list-group-item">
 					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="day">10월
 						25일 수요일</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="time">PM
 						3:00</div>
 				</li>
-				<li class="list-group-item" id='content'>예제)강남역 스타벅스</li>
-
+				<li class="list-group-item" id='content'>
+					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="meeting_name">
+						내용
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="meeting_onoff">
+						ONLINE
+					</div>
+				</li> -->
+				
 			</ul>
 		</div>
 	</div>
-	<div id="calendar" class="col-lg-8 col-md-8 col-sm-8 col-xs-8"></div>
+	<div id="calendar" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+		<!-- 캘린더 ajax -->
+	</div>
+</div>
 
 	<!-- 모달부분 -->
 	<div class="modal fade" id="dkmodal" tabindex="-1" role="dialog"
@@ -170,17 +188,17 @@
 						<div id="selectedtime" class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
 							<select class="form-control" id="hour">
 								<option value="00">00</option>
-								<option value="00">01</option>
-								<option value="00">02</option>
-								<option value="00">03</option>
-								<option value="00">04</option>
-								<option value="00">05</option>
-								<option value="00">06</option>
-								<option value="00">07</option>
-								<option value="00">08</option>
-								<option value="00">09</option>
-								<option value="00">10</option>
-								<option value="00">11</option>
+								<option value="01">01</option>
+								<option value="02">02</option>
+								<option value="03">03</option>
+								<option value="04">04</option>
+								<option value="05">05</option>
+								<option value="06">06</option>
+								<option value="07">07</option>
+								<option value="08">08</option>
+								<option value="09">09</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
 							</select> &nbsp; : &nbsp; <select class="form-control" id="minute">
 								<option value="00">00</option>
 								<option value="10">10</option>
@@ -198,7 +216,7 @@
 								type="radio" name="onoff" id="onoff" autocomplete="off"
 								value="ONLINE" checked>ONLINE
 							</label> <label class="btn btn-primary"> <input type="radio"
-								name="onoff" id="onoff" autocomplete="off" value="OFF">OFFLINE
+								name="onoff" id="onoff" autocomplete="off" value="OFFLINE">OFFLINE
 							</label>
 						</div>
 					</div>
@@ -208,14 +226,13 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-primary"
-						onclick="InsertSchedule()">등록</button>
+					<button type="button" class="btn btn-primary" onclick="InsertSchedule();">등록</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-</div>
+
 <!-- /메인 컨텐츠 -->
 
 <!--푸터 부분-->
@@ -223,7 +240,7 @@
 
 <script type="text/javascript">
 	$(function() {
-		/* selectSchedule(); */
+		selectSchedule();
 		calendar();
 	});
 
@@ -260,22 +277,24 @@
 	
 	/* 일정 등록 */
 	function InsertSchedule() {
-		var group = "<%=group.getGroupNo()%>";
+		var groupno = "<%=group.getGroupNo()%>";
 		var modaldate = $("#modaldate").val();
 		var modalampm = $("input:radio[name=ampm]:checked").val();		
 		var modalhour = $("#hour option:selected").val();
-		var modalminute = $("minute option:selected").val();
+		var modalminute = $("#minute option:selected").val();
 		var modalonoff = $("input:radio[name=onoff]:checked").val();
+		var modalcontent = $("#modalcontent").val();
 		
-		var queryString = { group_no: groupno, modaldate: modaldate, modalampm: modalampm, modalhour: modalhour, modalminute: modalminute, modalonoff: modalonoff }
+		var queryString = { group_no: groupno, modaldate: modaldate, modalampm: modalampm, modalhour: modalhour, modalminute: modalminute, modalonoff: modalonoff, modalcontent: modalcontent };
 		
 		$.ajax({
 			url: "/studyhub/scheduleinsert",
 			data: queryString,
 			type: "get",
 			dataType: "json",
-			success: function(){
+			success: function(data){
 				alert("일정이 등록되었습니다.");
+				$("#dkmodal").modal('hide');
 				selectSchedule();
 			}
 		});
@@ -284,25 +303,37 @@
 	/* 일정 셀렉트 */
 	function selectSchedule() {
 		var group_no = "<%=group.getGroupNo()%>";
-		$
-				.ajax({
+		$.ajax({
 					url : "/studyhub/schedulelist",
-					data : {
-						group_no : group_no
-					},
+					data : { group_no : group_no },
 					type : "get",
 					dataType : "json",
 					success : function(data) {
 						var json = JSON.parse(JSON.stringify(data));
 						var values = "";
 						for ( var i in json.list) {
-							values += "<li class='list-group-item' id='list-group-item'>"
-									+ "<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8' id='day'>날짜</div>"
-									+ "<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4' id='time'>시간</div>"
-									+ "</li>"
-									+ "<li class='list-group-item' id='content'>내용</li>";
+							values += 
+								"<li class='list-group-item' id='list-group-item'>" +
+									"<input type='hidden' value='" + json.list[i].schedule_no + "'>" +
+									"<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8' id='day'>" +
+										decodeURIComponent(json.list[i].meeting_date) +
+									"</div>" +
+									"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4' id='time'>" +
+										decodeURIComponent(json.list[i].ampm) + "&nbsp;" +
+										json.list[i].hour + " : " +
+										json.list[i].minute +
+									"</div>" +
+								"</li>" +
+								"<li class='list-group-item' id='content'>" +
+									"<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8' id='meeting_name'>" +
+										decodeURIComponent(json.list[i].meeting_name) +
+									"</div>" +
+									"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4' id='meeting_onoff'>" +
+										decodeURIComponent(json.list[i].onoff) +
+									"</div>" +
+								"</li>";
 						}
-						$("#schedulelist").html(values);
+						$("#list-group").html(values);
 					}
 				});
 	}
