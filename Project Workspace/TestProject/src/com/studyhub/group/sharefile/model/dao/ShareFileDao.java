@@ -91,16 +91,17 @@ public class ShareFileDao {
 		
 		String query = "insert into tb_share_file values "+
 					"((select max(file_no)+1 from tb_share_file), "+
-					"?, ?, sysdate, ?,?,?,?,default)";
+					"?, ?, sysdate, ?, ?, ?, ?, null, default)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, sf.getTitle());
 			pstmt.setString(2, sf.getContent());
-			pstmt.setDate(3, sf.getUploadDate());
-			pstmt.setString(4, sf.getFileName());
-			pstmt.setString(5, sf.getRenameFileName());
-			pstmt.setInt(6, sf.getUploader());
+			pstmt.setString(3, sf.getFileName());
+			pstmt.setString(4, sf.getRenameFileName());
+			pstmt.setInt(5, sf.getUploader());
+			pstmt.setInt(6, sf.getAccessNo());
+			pstmt.setInt(7, sf.getGroupNo());
 			
 			result = pstmt.executeUpdate(); 
 					
@@ -109,7 +110,7 @@ public class ShareFileDao {
 		} finally{
 			close(pstmt);
 		}
-		
+		System.out.println(result+"result");
 		return result;
 	}
 	

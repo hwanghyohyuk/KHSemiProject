@@ -58,6 +58,7 @@ public class ShareFileInsertServlet extends HttpServlet {
 		int userno = Integer.parseInt(mrequest.getParameter("user_no"));
 		String content = mrequest.getParameter("content");
 		int accessno = Integer.parseInt(mrequest.getParameter("access_no"));
+		int groupno = Integer.parseInt(mrequest.getParameter("group_no"));
 		
 		String originalFileName = mrequest.getFilesystemName("upfile");
 		ShareFile sf = null;
@@ -89,9 +90,12 @@ public class ShareFileInsertServlet extends HttpServlet {
 				fout.close();
 				originalFile.delete();
 		}
-			sf = new ShareFile(//////);
+			sf = new ShareFile(title, content, null,null, userno, accessno, groupno);
+			System.out.println(sf+"!");
+			
 		}else{
-			sf = new ShareFile(title,content, userno, );
+			sf = new ShareFile(title, content, null,null, userno, accessno, groupno);
+			System.out.println(sf+"@");
 		}
 		
 		

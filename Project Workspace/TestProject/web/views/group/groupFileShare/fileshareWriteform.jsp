@@ -19,6 +19,7 @@
 
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
+<%@ include file="/views/include/group/nav.jsp"%>
 
 <!-- 메인 컨텐츠 -->
 
@@ -27,7 +28,7 @@
 			class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xm-6 col-xs-3" id="form-outline">
 			<h2>파일 공유 글쓰기</h2>
 			<br>
-			<form action="/studyhub/qnainsert" method="post">
+			<form action="/studyhub/sharefileinsert" enctype="multipart/form-data" method="post">
 				<div class="form-group">
 					<label for="title">제목</label> <input type="text"
 						class="form-control" id="post_title" name="title"
@@ -52,8 +53,10 @@
 				</div>
 
 				<input type="submit" value="제출하기" class="btn btn-info" id="btns">
-				<a href="/studyhub/sharefilelist">&nbsp;&nbsp;목록으로 이동</a> <input type="hidden"
-					name="user_no" value="<%=user.getUserNo()%>">
+				<a href="/studyhub/sharefilelist">&nbsp;&nbsp;목록으로 이동</a> 
+				<input type="hidden" name="user_no" value="<%=user.getUserNo()%>">
+				<input type="hidden" name="group_no" value="<%= group.getGroupNo() %>">
+				
 			</form>
 		</div>
 	</div>

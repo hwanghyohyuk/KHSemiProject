@@ -12,14 +12,41 @@ public class ShareFile implements java.io.Serializable{
 	private String renameFileName;
 	private int uploader;
 	private int accessNo;
+	private int groupNo;
 	private String userName;
 	private int downloadCount;
 
 	public ShareFile() {
 		super();
 	}
+	
+	
+	public ShareFile(String title, String content, String fileName, String renameFileName, int uploader, int accessNo,
+			int groupNo) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.fileName = fileName;
+		this.renameFileName = renameFileName;
+		this.uploader = uploader;
+		this.accessNo = accessNo;
+		this.groupNo = groupNo;
+	}
+	
+	public ShareFile(String title, String content, String fileName, String renameFileName, int uploader, int accessNo
+			) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.fileName = fileName;
+		this.renameFileName = renameFileName;
+		this.uploader = uploader;
+		this.accessNo = accessNo;
+		
+	}
 
-	public ShareFile(int fileNo, String title, String content, Date uploadDate, String fileName, String userName, int downloadCount) {
+
+	/*public ShareFile(int fileNo, String title, String content, Date uploadDate, String fileName, String userName, int downloadCount) {
 		super();
 		this.fileNo = fileNo;
 		this.title = title;
@@ -28,7 +55,7 @@ public class ShareFile implements java.io.Serializable{
 		this.fileName = fileName;
 		this.userName = userName;
 		this.downloadCount = downloadCount;
-	}
+	}*/
 
 	public ShareFile(int fileNo, String title, String content, Date uploadDate, String fileName, String renameFileName,
 			 int uploader, int accessNo) {
@@ -41,6 +68,17 @@ public class ShareFile implements java.io.Serializable{
 		this.renameFileName = renameFileName;
 		this.uploader = uploader;
 		this.accessNo = accessNo;
+	}
+
+	
+
+	public int getGroupNo() {
+		return groupNo;
+	}
+
+
+	public void setGroupNo(int groupNo) {
+		this.groupNo = groupNo;
 	}
 
 	public int getDownloadCount() {
