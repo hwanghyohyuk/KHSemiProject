@@ -10,8 +10,11 @@ public class ScheduleDao {
 	
 	private Schedule schedule;
 
-	public ArrayList<Schedule> selectList(Connection con) {
+	public ArrayList<Schedule> selectList(Connection con, int groupno) {
 		ArrayList<Schedule> slist = null;
+		
+		
+		
 		return slist;
 		
 	}

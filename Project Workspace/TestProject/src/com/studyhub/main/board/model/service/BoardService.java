@@ -43,9 +43,9 @@ public class BoardService {
 		return result;
 	}
 
-	public void addReadCount(int bnum) {
+	public void addReadCount(int bno) {
 		Connection con = getConnection();
-		int result = new BoardDao().addReadCount(con, bnum);
+		int result = new BoardDao().addReadCount(con, bno);
 		if (result > 0)
 			commit(con);
 		else
@@ -54,16 +54,16 @@ public class BoardService {
 		return;
 	}
 
-	public Board selectBoard(int bnum) {
+	public Board selectBoard(int bno) {
 		Connection con = getConnection();
-		Board board = new BoardDao().selectBoard(con, bnum);
+		Board board = new BoardDao().selectBoard(con, bno);
 		close(con);
 		return board;
 	}
 
-	public int deleteBoard(int bnum) {
+	public int deleteBoard(int bno) {
 		Connection con = getConnection();
-		int result = new BoardDao().deleteBoard(con, bnum);
+		int result = new BoardDao().deleteBoard(con, bno);
 		if (result > 0)
 			commit(con);
 		else

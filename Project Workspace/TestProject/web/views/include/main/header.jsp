@@ -1,50 +1,96 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.studyhub.common.vo.User"%>
-    <%
-    	User user =(User)session.getAttribute("user");
-    %>   
-	<!-- 헤더 영역 : 네비게이션 바 -->
-	<nav class="navbar navbar-default bg-white" id="navbar">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<!-- 메인 로고 부분 -->
-				
-				<% if(user!=null){ %>
-					<a class="navbar-brand" href="/studyhub/main"><img id="logo"
-								src="/studyhub/images/logo.png"></a>
-				<% }else{%>
-					<a class="navbar-brand" href="/studyhub/"><img id="logo"
-								src="/studyhub/images/logo.png"></a>
-				<% } %>				
-				<!-- / -->
-			</div>
-			<!-- 메뉴 부분 -->
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<nav class="fill">
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" import="com.studyhub.common.vo.User"%>
+<%
+	User user = (User) session.getAttribute("user");
+%>
+
+<!-- 헤더 영역 : 네비게이션 바 -->
+<nav class="navbar navbar-default bg-white" id="navbar">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<!-- 메인 로고 부분 -->
+
+			<%
+				if (user != null) {
+			%>
+			<a class="navbar-brand" href="/studyhub/main"><img id="logo"
+				src="/studyhub/images/logo.png"></a>
+			<%
+				} else {
+			%>
+			<a class="navbar-brand" href="/studyhub/"><img id="logo"
+				src="/studyhub/images/logo.png"></a>
+			<%
+				}
+			%>
+			
+		</div>
+		
+		<!-- 메뉴 부분 -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<nav class="fill">
 				<ul class="nav navbar-nav navbar-left">
-					<li><a href="#"> <span
+					<li><a href="#myModal" role="button" class="btn" data-toggle="modal"> <span
 							class="glyphicon glyphicon-search main" aria-hidden="true"></span><span
 							class="black">스터디찾기</span></a></li>
-					<li><a href="/studyhub/views/main/MakeGroup.jsp"><p class="black">그룹만들기</p></a></li>
-					<li><a href="/studyhub/views/main/FAQ/FAQmain.jsp"><p class="black">도움말</p></a></li>
+					<!-- <li><a href="/studyhub/views/main/MakeGroup.jsp"><p
+								class="black">그룹만들기</p></a></li> -->
+					<li><a href="/studyhub/views/main/FAQ/FAQmain.jsp"><p
+								class="black">도움말</p></a></li>
+					<li>
+						<div class="btn-group">
+							<button type="button" 
+								id="toggle-btn" data-toggle="dropdown" aria-expanded="false">
+								나의 그룹 <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">그룹1</a></li>
+								<li><a href="#">그룹2</a></li>
+								<li><a href="#">그룹3?</a></li>
+								<li class="divider"></li>
+								<li><a href="/studyhub/views/main/MakeGroup.jsp">
+										새 그룹만들기</a></li>
+							</ul>
+						</div>
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-				<% if(user!=null){ %>
+					<%
+						if (user != null) {
+					%>
 					<li><a href="/studyhub/myinfo"><p class="black"><%=user.getUserName()%></p></a></li>
 					<li><a href="/studyhub/logout"><p class="black">로그아웃</p></a></li>
-				<% }else{%>
+					<%
+						} else {
+					%>
 					<li><a href="/studyhub/signup"><p class="black">회원가입</p></a></li>
 					<li><a href="/studyhub/login"><p class="black">로그인</p></a></li>
-				<% } %>
+					<%
+						}
+					%>
 				</ul>
-				</nav>
-			</div>
+			</nav>
 		</div>
-	</nav>
+	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">모달 제목</h3>
+  </div>
+  <div class="modal-body">
+    <p>한 멋진 본문…</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">닫기</button>
+    <button class="btn btn-primary">변경사항 저장</button>
+  </div>
+</div>
+	</div>
+</nav>

@@ -32,8 +32,15 @@ public class BoardUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		int bno = Integer.parseInt(request.getParameter("bno"));
+
+		bs = new BoardService();
+		board = bs.selectBoard(bno);
+		
+		
+
 	}
 
 	/**

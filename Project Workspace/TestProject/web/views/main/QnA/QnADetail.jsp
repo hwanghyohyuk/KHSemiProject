@@ -56,18 +56,25 @@
 			
 				<input type="text" name="content" class="form-control"
 					id="comment-write" placeholder="댓글을 달아주세요">
-				<input type="hidden" name="qnano" value="<%= qna.getQnaNo()  %>">
-				<input type="hidden" name="userno" value="<%= user.getUserNo() %>">
+				<input type="hidden" name="qnano" id="qnano" value="<%= qna.getQnaNo()  %>">
+				<input type="hidden" name="userno" id="userno" value="<%= user.getUserNo() %>">
 				<!--<span class ="input-group-btn">-->
 				<button class="btn btn-info btn-sm" onclick="insert();">댓글달기</button>
 				<script type="text/javascript">
+				
+				$(function(){
+					select();
+				});
 					function insert(){
+						console.log("is it working");
 						if($("#comment-write").val() ==""){
 							alert("댓글을 입력하세요");
 							focus("#comment-write");
 							return false;
 						}else{
-							var comment = $("comment-write").val();
+							var comment = $("#comment-write").val();
+							var userno = $("#userno").val();
+							var qnano = $("#qnano").val();
 							
 							var queryString = { "userno": userno, "qnano": qnano, "comment": comment};
 							
@@ -91,17 +98,17 @@
 							type: "get",
 							datatype: "json",
 							success: function(data){
+								
 								var json = JSON.parse(JSON.stringify(data));
 								var values = "";
 								for(var i in json.list){
 									values +=
-										"<div class="panel-footer">Comments:"+
-										decodeURIComponent(json.list[i].commentno)+
-										"<span> | "+ decodeURIComponent(json.list[i].username)"</span>"+
-										"<span> | "+ decodeURIComponent(json.list[i].uploaddate)"</span>"+
+										"<div class='panel-footer'>"+
+										decodeURIComponent(json.list[i].comment)+
+										"<span> | "+ decodeURIComponent(json.list[i].username)+ "</span>"+
+										"<span> | "+ decodeURIComponent(json.list[i].uploaddate)+ "</span>"+
 										"<input type='hidden' value='"+ json.list[i].commentno +"' id='commentno'>"+
-										"<a href="#" data-method="post" data-confirm="댓글을 삭제하시겠습니까?"><button>"+
-										+"<span>class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a></div>";
+										"<input type='button' id='comment-del-btn' name='comment-del-btn' class='btn btn-info btn-sm' value='삭제' onclick='deleteC();'></div>"									;
 									
 								}
 								$("#comment-list").html(values);
@@ -112,9 +119,9 @@
 								alert("error\nxhr: " + xhr + ", status: " + status+ ", error: " + error);
 							}
 						});
-					}
+					}	
 					
-					function delete(){
+					function deleteC(){
 						var commentno = $("#commentno").val();
 						$.ajax({
 							url: "/studyhub/qnacommentdelete",
@@ -123,25 +130,25 @@
 							dataType: "json",
 						});
 						alert("삭제되었습니다.");
-						selectQnA();
-					}
+						select();	
+					} 
 				
 				</script>	
 
 			<!---댓글보여지는부분--->
 			<div id="comment-list">
-			<div class="panel-footer">
+			<!-- <div class="panel-footer">
 				Comments:
 				
 					<a href="#" data-method="post" data-confirm="댓글을 삭제하시겠습니까?"><button><span
 						class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a>
 				
-			</div>
-			</div>
+			</div> -->
+			</div> 
 			
 			<a href="/studyhub/qnalist">목록으로 이동</a> <a
 				href="/studyhub/qnadelete?no=<%=qna.getQnaNo()%>" data-method="post"
-				data-confirm="진짜로삭제할거에요?ㅠㅠ"><button
+				data-confirm="진짜로삭제할거에요?"><button
 					class="btn btn-default btn-sm" id="btns">삭제</button></a> <a
 				href="/studyhub/qnaupdateview?no=<%=qna.getQnaNo()%>">
 				<button class="btn btn-default btn-sm" id="btns">수정</button>

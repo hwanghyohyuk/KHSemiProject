@@ -1,6 +1,9 @@
 package com.studyhub.group.main.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,8 +36,15 @@ public class GNoticePreviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html; charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
+		
+		ArrayList<GNotice> list = new GMainService().selectGroupNotice(groupno);
+		RequestDispatcher view = request.getRequestDispatcher("/views/group/groupNotice/NoticeList.jsp");
+		System.out.println(list);
+		request.setAttribute("list", list);
+		view.forward(request, response);
 	}
 
 	/**

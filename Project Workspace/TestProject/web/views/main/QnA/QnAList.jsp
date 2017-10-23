@@ -38,17 +38,17 @@
 </head>
 <!-- 메인 컨텐츠 -->
 <body>
-	<div class="row">
+	<div class="row" id="list-layout">
 		<div
 			class="col-md-8 col-md-offset-2 col-sm-10 col-xs-9 col-xs-offset-1">
-			<h2>Q&A게시판</h2>
+			<h2><a href="/studyhub/qnalist" id="qnatitle">Q&A게시판</a></h2>
 
 			<div class="search">
 
-				<form action="#" method="post">
-					<select>
-						<option value="제목">제목</option>
-						<option value="작성자">작성자</option>
+				<form action="/studyhub/qnasearch" method="post">
+					<select id="search-by" name="search-by">
+						<option value="title">제목</option>
+						<option value="writer">작성자</option>
 					</select> <input type="search" autocomplete name="keyword" length="50"
 						id="search-input"> &nbsp; <input type="submit" value="검색"
 						id="search-btn">

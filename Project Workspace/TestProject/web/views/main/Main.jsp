@@ -13,9 +13,11 @@
 <!-- css, javascript, jQuery -->
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
 <link rel="stylesheet" href="/studyhub/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/studyhub/css/custom.css">
 
 <script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
 <script type="text/javascript" src='/studyhub/js/main.js' ></script>
+<script type="text/javascript" src="/studyhub/js/bootstrap.js"></script>
 <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
 
 <!-- java 구문 -->
@@ -170,7 +172,7 @@
 				var values = "";
 				for(var i in json.list){				         
 				    values +=  	"<li class='slide'>" +
-				    		   		"<a href='/studyhub/gmainpreview?group_no=" + json.list[i].group_no + "'>" +
+				    		   		"<a href='/studyhub/gmainpreview?group_no=" + json.list[i].group_no + "&reset=0'>" +
 				    		   			"<div>" +
 					 						"<div>" +
 				    		   					"<img id='groupimg' src='/studyhub/images/groupimg/" + decodeURIComponent(json.list[i].renameimg) +"'>" +

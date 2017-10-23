@@ -15,7 +15,15 @@
 <%@ include file="/views/include/group/nav.jsp" %>
 <!-- 메인 컨텐츠 -->
 
-
+<div class="container col-lg-offset-2 col-md-offset-2 col-sm-offset-2">
+	<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<h3><%= group.getGroupName() %>
+			<div id="groupinfo">
+			<!-- ajax로 불러옴 -->
+			</div>
+		</h3>
+	</div>
+</div>
 
 <!-- /메인 컨텐츠 -->
 
@@ -23,3 +31,37 @@
 <%@ include file="/views/include/main/footer.jsp"%>
 
 <%@ include file="/views/include/common/headend.jsp"%>
+<script type="text/javascript">
+	$(function(){
+		var groupno = "<%= group.getGroupNo() %>";
+		var reset = "1";
+		
+		var querystring = { "group_no": groupno, "reset": reset };
+		$.ajax({
+			url: "/studyhub/gmainpreview",
+			data: querystring,
+			type: "get",
+			dataType: "json",
+			success: function(data){
+				var json = JSON.parse(JSON.stringify(data))
+				var values = "";
+				if(json.group_no > 0){
+					values += 
+						"<small>" +
+							"그룹장 : " + decodeURIComponent(json.user_name) + 
+							" / 그룹원 : " + json.membercount +
+							" 명 / 스터디 분야 : " + decodeURIComponent(json.category_name) +
+							" / 스터디 지역 : " + decodeURIComponent(json.location) +
+							" / 스터디 형식 : " + decodeURIComponent(json.attribute_name) +
+						"</small>";
+				}
+				$("#groupinfo").html(values);
+			},
+			error: function(){
+				alert("에러");
+			}
+		});
+		
+		
+	});
+</script>

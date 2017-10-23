@@ -8,6 +8,14 @@
 	width: 8vw;
 	margin-top: -2vh;
 }
+
+
+#toggle-btn{
+	margin-top: 2vh;
+	border-color: transparent;
+	background-color: transparent;
+}
+
 /* li:hover{
 	background: #004157;
 	color: white;
@@ -113,6 +121,9 @@ p:hover{
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
+<!--modal -->
+
 
 @media screen and (max-width: 768px) {   
 #logo{

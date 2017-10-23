@@ -13,9 +13,10 @@ public class ScheduleService {
 	private Schedule schedule;
 	
 	// 일정 리스트 목록
-	public ArrayList<Schedule> selectList(){
+	public ArrayList<Schedule> selectList(int groupno){
 		Connection con = getConnection();
-		ArrayList<Schedule> list = new ScheduleDao().selectList(con);
+		ArrayList<Schedule> list = new ScheduleDao().selectList(con, groupno);
+		close(con);
 		return list;
 	}
 	

@@ -1,6 +1,9 @@
 package com.studyhub.main.qna.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,10 +19,7 @@ import com.studyhub.main.qna.model.service.QnAService;
 @WebServlet("/qnasearch")
 public class QnASearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	private QnAService qs;
-	private QnA qna;
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,8 +32,36 @@ public class QnASearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		String searchby = request.getParameter("search-by");
+		String keyword = request.getParameter("keyword");
+		if (searchby.equals("title")) {
+
+			ArrayList<QnA> list = new QnAService().selectTitleSearch(keyword);
+			RequestDispatcher view = null;
+			if (list != null) {
+				view = request.getRequestDispatcher("views/main/QnA/QnAList.jsp");
+				request.setAttribute("list", list);
+				view.forward(request, response);
+			} else {
+				view = request.getRequestDispatcher("views/main/QnA/QnAError.jsp");
+				request.setAttribute("message", "검색 실패");
+				view.forward(request, response);
+			}
+		} else {
+			ArrayList<QnA> list = new QnAService().selectWriterSearch(keyword);
+			RequestDispatcher view = null;
+			if (list != null) {
+				view = request.getRequestDispatcher("views/main/QnA/QnAList.jsp");
+				request.setAttribute("list", list);
+				view.forward(request, response);
+			} else {
+				view = request.getRequestDispatcher("views/main/QnA/QnAError.jsp");
+				request.setAttribute("message", "검색 실패");
+				view.forward(request, response);
+			}
+		}
 	}
 
 	/**
