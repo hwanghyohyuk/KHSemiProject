@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import = "java.util.*, com.studyhub.common.vo.ShareFile"%>
+<% ArrayList<ShareFile> list = (ArrayList<ShareFile>)request.getAttribute("list"); %>
 <!-- 
 작성자 : 구미향
 내용 : 파일공유 메인 페이지
@@ -19,7 +20,7 @@
 <!-- 메인 컨텐츠 -->
 
 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+	
 		<div class="category-tab">
 		<ul class="nav nav-tabs">
   <li role="presentation" class="active"><a href="#">tab1</a></li>
@@ -27,15 +28,19 @@
   <li role="presentation"><a href="#">+</a></li>
 </ul>
 		</div>
+		<% for (ShareFile sf : list){ %>
 		<div class="fileboxes">
 		<div class="filebox">
-		<h4>title</h4>
-		<p>content</p>
+		<h4><%= sf.getTitle() %></h4>
+		<p><%= sf.getContent() %></p>
 		<hr>
-		<p>filename</p>
-		<p>upload_date</p>
+		<p><%= sf.getUserName() %></p>
+		<p><%= sf.getUploadDate() %> | <%= sf.getDownloadCount() %></p>
+		<p><%= sf.getFileName() %>
 		<button id="download">download</button>
 		</div>
+		
+		<% } %>
 		
 		<div class="filebox">
 		<h4>title</h4>
@@ -65,12 +70,7 @@
 		</div>
 		
 		</div>
-		
-	</div>
-	
-	
-	
-	
+
 </div>
 <!-- /메인 컨텐츠 -->
 

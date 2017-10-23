@@ -46,4 +46,11 @@ public class GMainService {
 		close(con);
 		return list;
 	}
+	
+	public ArrayList<ShareFile> selectGroupFileShare(int groupno) {
+		Connection con = getConnection();
+		ArrayList<ShareFile> list = new GMainDao().selectGroupShareFile(con, groupno);
+		close(con);
+		return list;
+	}
 }
