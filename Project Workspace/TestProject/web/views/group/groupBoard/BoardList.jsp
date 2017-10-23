@@ -1,31 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-	import="java.util.*, com.studyhub.common.vo.GBoard"%>
+	pageEncoding="UTF-8" import="java.util.*, com.studyhub.common.vo.GBoard"%>
+<!-- 
+작성자 : OOO
+내용 : OO 페이지
+작성일자 17.10.02
+ -->
+<!-- java 구문 -->
+<%@ page import="java.util.*, com.studyhub.common.vo.GBoard" %>
+<!-- 초기화 블럭(변수선언 및 초기화) -->
 <%
 	ArrayList<GBoard> list = (ArrayList<GBoard>)request.getAttribute("list");
 %>
-<!-- 
-작성자 : 조남훈
-내용 : 자유게시판 페이지 
-작성일자 17.10.20
- -->
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>StudyHub</title>
-
-<!-- java 구문 -->
-
-
-<!-- 초기화 블럭(변수선언 및 초기화) -->
-
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
-<!--헤더 부분-->
-<%@ include file="/views/include/main/header.jsp"%>
-<%@ include file="/views/include/group/nav.jsp" %>
+
+<!--자바스크립트 및 CSS-->
 <style>
 #btns {
 	float: right;
@@ -37,12 +26,12 @@
 	}
 </script>
 
-<link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
-<link rel="stylesheet" href="/studyhub/css/bootstrap.css">
+<!-- /head , body -->
+<%@ include file="/views/include/common/headend.jsp"%>
 
-<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
-
-</head>
+<!--헤더 부분-->
+<%@ include file="/views/include/main/header.jsp"%>
+<%@ include file="/views/include/group/nav.jsp"%>
 <!-- 메인 컨텐츠 -->
 <body>
 	<div class="row">
@@ -83,10 +72,10 @@
 		</div>
 	</div>
 
-	<!--푸터 부분-->
-	<%@ include file="/views/include/main/footer.jsp"%>
-	<!--페이지 끝-->
-	<%@ include file="/views/include/common/headend.jsp"%>
 
-</body>
-</html>
+<!-- /메인 컨텐츠 -->
+
+<!--푸터 부분-->
+<%@ include file="/views/include/main/footer.jsp"%>
+<!--페이지 끝-->
+<%@ include file="/views/include/common/tail.jsp" %>

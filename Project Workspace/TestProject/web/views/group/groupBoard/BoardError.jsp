@@ -1,12 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+	pageEncoding="UTF-8"%>
+<!-- 
+작성자 : OOO
+내용 : OO 페이지
+작성일자 17.10.02
+ -->
+<!-- java 구문 -->
+
+<!-- 초기화 블럭(변수선언 및 초기화) -->
+
+<!--페이지 시작-->
+<%@ include file="/views/include/common/head.jsp"%>
+
+<!--자바스크립트 및 CSS-->
+
+<!-- /head , body -->
+<%@ include file="/views/include/common/headend.jsp"%>
+
+<!--헤더 부분-->
+<%@ include file="/views/include/main/header.jsp"%>
+
+<!-- 메인 컨텐츠 -->
 서비스 에러 발생: <%= (String)request.getAttribute("message") %>
-</body>
-</html>
+
+<!-- /메인 컨텐츠 -->
+
+<!--푸터 부분-->
+<%@ include file="/views/include/main/footer.jsp"%>
+<!--페이지 끝-->
+<%@ include file="/views/include/common/tail.jsp" %>
