@@ -11,19 +11,7 @@
 
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
-<!--CSS 및 자바스크립트-->
-<script type="text/javascript">
-function emptyCheck() {
-	var pwd = $("#pwd").val();
-	if(pwd==""){
-		$("#findwpdbtn").prop("disabled", true);
-	}else{
-		$("#findwpdbtn").prop("disabled", false);
-	}
-}
-</script>
-<!-- /head , body -->
-<%@ include file="/views/include/common/headend.jsp"%>
+
 <!-- 메인 컨텐츠 -->
 <div class="container">
 	<a href="/studyhub/"> <img class="img-responsive center-block"
@@ -47,5 +35,15 @@ function emptyCheck() {
 	</div>
 </div>
 <!-- /메인 컨텐츠 -->
+<script type="text/javascript">
+function emptyCheck() {
+	var pwd = $("#pwd").val();
+	if(pwd==""){
+		$("#findwpdbtn").prop("disabled", true);
+	}else{
+		$("#findwpdbtn").prop("disabled", false);
+	}
+}
+</script>
 <!--페이지 끝-->
-<%@ include file="/views/include/common/tail.jsp"%>
+<%@ include file="/views/include/common/headend.jsp"%>

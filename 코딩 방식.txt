@@ -12,7 +12,7 @@
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
 
-<!--CSS 및 자바스크립트-->
+<!--자바스크립트 및 CSS-->
 
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
@@ -21,6 +21,8 @@
 <%@ include file="/views/include/main/header.jsp"%>
 
 <!-- 메인 컨텐츠 -->
+
+
 
 <!-- /메인 컨텐츠 -->
 

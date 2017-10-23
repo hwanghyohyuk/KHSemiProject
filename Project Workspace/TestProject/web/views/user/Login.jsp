@@ -11,20 +11,7 @@
 
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
-<!--CSS 및 자바스크립트-->
-<script type="text/javascript">
-function emptyCheck() {
-	var email = $("#email").val();
-	var pwd = $("#pwd").val();
-	if(email=="" || pwd==""){
-		$("#loginbtn").prop("disabled", true);
-	}else{
-		$("#loginbtn").prop("disabled", false);
-	}
-}
-</script>
-<!-- /head , body -->
-<%@ include file="/views/include/common/headend.jsp"%>
+
 <!-- 메인 컨텐츠 -->
 <div class="container text-center">
 	<a href="/studyhub/"> <img class="img-responsive center-block"
@@ -63,6 +50,19 @@ function emptyCheck() {
 		<div class="col-sm-3 col-xs-2"></div>
 	</div>
 </div>
+
 <!-- /메인 컨텐츠 -->
+<script type="text/javascript">
+function emptyCheck() {
+	var email = $("#email").val();
+	var pwd = $("#pwd").val();
+	if(email=="" || pwd==""){
+		$("#loginbtn").prop("disabled", true);
+	}else{
+		$("#loginbtn").prop("disabled", false);
+	}
+}
+</script>
+
 <!--페이지 끝-->
-<%@ include file="/views/include/common/tail.jsp"%>
+<%@ include file="/views/include/common/headend.jsp"%>

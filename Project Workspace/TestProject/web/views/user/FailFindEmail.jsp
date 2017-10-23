@@ -11,10 +11,7 @@
 
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
-<!--CSS 및 자바스크립트-->
 
-<!-- /head , body -->
-<%@ include file="/views/include/common/headend.jsp"%>
 <!-- 메인 컨텐츠 -->
 <div class="container">
 	<a href="/studyhub/"> <img class="img-responsive center-block"
@@ -38,4 +35,4 @@
 <!-- /메인 컨텐츠 -->
 
 <!--페이지 끝-->
-<%@ include file="/views/include/common/tail.jsp"%>
+<%@ include file="/views/include/common/headend.jsp"%>
