@@ -140,7 +140,7 @@
 	<div id="calendar" class="col-lg-8 col-md-8 col-sm-8 col-xs-8"></div>
 
 	<!-- 모달부분 -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	<div class="modal fade" id="dkmodal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -252,7 +252,7 @@
 					var ss = "일";
 				ss += "요일";
 				$("#modaldate").val(yy + "년 " + mm + "월 " + dd + "일 " + ss);
-				$("#myModal").modal();
+				$("#dkmodal").modal();
 
 			}
 		});
@@ -283,8 +283,7 @@
 
 	/* 일정 셀렉트 */
 	function selectSchedule() {
-		var group_no = "<%=group.getGroupNo()%>
-	";
+		var group_no = "<%=group.getGroupNo()%>";
 		$
 				.ajax({
 					url : "/studyhub/schedulelist",
