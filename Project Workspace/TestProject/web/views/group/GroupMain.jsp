@@ -11,6 +11,7 @@
 
 <!--헤더 부분-->
 <%@ include file="/views/include/common/head.jsp"%>
+
 <%@ include file="/views/include/common/headend.jsp"%>
 <%@ include file="/views/include/main/header.jsp"%>
 <%@ include file="/views/include/group/nav.jsp" %>

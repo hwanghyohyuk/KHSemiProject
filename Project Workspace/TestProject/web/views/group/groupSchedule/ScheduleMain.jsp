@@ -18,7 +18,6 @@
 <script src='/studyhub/js/calendar/fullcalendar.js'></script>
 <!-- 캘린더 js -->
 <script src="/studyhub/js/bootstrap.min.js"></script>
-
 <style type="text/css">
 #schedulelist {
 	margin-top: 20px;
@@ -113,9 +112,12 @@
 	padding-right: 0px;
 }
 </style>
+
 <%@ include file="/views/include/common/headend.jsp"%>
+
 <%@ include file="/views/include/main/header.jsp"%>
 <%@ include file="/views/include/group/nav.jsp"%>
+
 <!-- 메인 컨텐츠 -->
 
 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
@@ -158,11 +160,11 @@
 					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 						<div class="btn-group col-lg-5 col-md-5 col-sm-5 col-xs-5"
 							data-toggle="buttons" id="modaltime">
-							<label class="btn btn-primary active"> 
-								<input type="radio" name="ampm" id="ampm" autocomplete="off" value="AM" checked>AM
-							</label>
-							<label class="btn btn-primary"> 
-								<input type="radio"	name="ampm" id="ampm" autocomplete="off" value="PM"> PM
+							<label class="btn btn-primary active"> <input
+								type="radio" name="ampm" id="ampm" autocomplete="off" value="AM"
+								checked>AM
+							</label> <label class="btn btn-primary"> <input type="radio"
+								name="ampm" id="ampm" autocomplete="off" value="PM"> PM
 							</label>
 						</div>
 						<div id="selectedtime" class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
@@ -179,9 +181,7 @@
 								<option value="00">09</option>
 								<option value="00">10</option>
 								<option value="00">11</option>
-							</select> 
-								&nbsp; : &nbsp; 
-							<select class="form-control" id="minute">
+							</select> &nbsp; : &nbsp; <select class="form-control" id="minute">
 								<option value="00">00</option>
 								<option value="10">10</option>
 								<option value="20">20</option>
@@ -194,11 +194,11 @@
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="modal-tag">온/오프라인</div>
 					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 						<div class="btn-group" data-toggle="buttons" id="modalonoff">
-							<label class="btn btn-primary active"> 
-								<input type="radio" name="onoff" id="onoff" autocomplete="off" value="ONLINE" checked>ONLINE
-							</label> 
-							<label class="btn btn-primary"> 
-								<input type="radio" name="onoff" id="onoff" autocomplete="off" value="OFF">OFFLINE
+							<label class="btn btn-primary active"> <input
+								type="radio" name="onoff" id="onoff" autocomplete="off"
+								value="ONLINE" checked>ONLINE
+							</label> <label class="btn btn-primary"> <input type="radio"
+								name="onoff" id="onoff" autocomplete="off" value="OFF">OFFLINE
 							</label>
 						</div>
 					</div>
@@ -260,7 +260,7 @@
 	
 	/* 일정 등록 */
 	function InsertSchedule() {
-		var group = "<%= group.getGroupNo() %>";
+		var group = "<%=group.getGroupNo()%>";
 		var modaldate = $("#modaldate").val();
 		var modalampm = $("input:radio[name=ampm]:checked").val();		
 		var modalhour = $("#hour option:selected").val();
@@ -283,25 +283,29 @@
 
 	/* 일정 셀렉트 */
 	function selectSchedule() {
-		var group_no = "<%= group.getGroupNo() %>";
-		$.ajax({
-			url : "/studyhub/schedulelist",
-			data : { group_no : group_no },
-			type : "get",
-			dataType : "json",
-			success : function(data) {
-				var json = JSON.parse(JSON.stringify(data));
-				var values = "";
-				for ( var i in json.list) {
-					values += "<li class='list-group-item' id='list-group-item'>"
-							+ "<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8' id='day'>날짜</div>"
-							+ "<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4' id='time'>시간</div>"
-							+ "</li>" 
-							+ "<li class='list-group-item' id='content'>내용</li>";
-				}
-				$("#schedulelist").html(values);
-			}
-		});
+		var group_no = "<%=group.getGroupNo()%>
+	";
+		$
+				.ajax({
+					url : "/studyhub/schedulelist",
+					data : {
+						group_no : group_no
+					},
+					type : "get",
+					dataType : "json",
+					success : function(data) {
+						var json = JSON.parse(JSON.stringify(data));
+						var values = "";
+						for ( var i in json.list) {
+							values += "<li class='list-group-item' id='list-group-item'>"
+									+ "<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8' id='day'>날짜</div>"
+									+ "<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4' id='time'>시간</div>"
+									+ "</li>"
+									+ "<li class='list-group-item' id='content'>내용</li>";
+						}
+						$("#schedulelist").html(values);
+					}
+				});
 	}
 </script>
 
