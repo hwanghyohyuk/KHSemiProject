@@ -8,6 +8,10 @@
 <!-- java 구문 -->
 
 <!-- 초기화 블럭(변수선언 및 초기화) -->
+
+<link rel="stylesheet" href="/studyhub/css/bootstrap2-toggle.min.css"> <!-- 토글버튼 css -->
+<script type="text/javascript" src="/studyhub/js/bootstrap2-toggle.js"></script> <!-- 토글버튼 js -->
+
 <style type="text/css">
 	#write {
 		width: 100%;

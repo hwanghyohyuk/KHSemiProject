@@ -1,8 +1,4 @@
-﻿아래 코드를 복사해서 각 페이지 별로 덮어 쓰기바람.
-
-
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 
 작성자 : OOO
@@ -15,13 +11,16 @@
 
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
+
+<!--자바스크립트 및 CSS-->
+
+<!-- /head , body -->
+<%@ include file="/views/include/common/headend.jsp"%>
+
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 
 <!-- 메인 컨텐츠 -->
-
-
-
 
 
 
@@ -30,4 +29,4 @@
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
 <!--페이지 끝-->
-<%@ include file="/views/include/common/headend.jsp" %>
+<%@ include file="/views/include/common/tail.jsp" %>
