@@ -41,6 +41,15 @@ public class Board implements java.io.Serializable {
 		this.boardRenameFileName = boardRenameFileName;
 	}
 
+	public Board(String title, String content, int uploader, String boardOriginalFileName, String boardRenameFileName) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.uploader = uploader;
+		this.boardOriginalFileName = boardOriginalFileName;
+		this.boardRenameFileName = boardRenameFileName;
+	}
+
 	public int getBoardNo() {
 		return boardNo;
 	}

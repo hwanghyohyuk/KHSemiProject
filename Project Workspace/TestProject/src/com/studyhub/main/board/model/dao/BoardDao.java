@@ -91,9 +91,17 @@ public class BoardDao {
 	}
 
 	public int insertBoard(Connection con, Board b) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		int result=0;
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into tb_board values ("
+				+ "(select max(board_no) + 1 from board), "
+				+ "?, ?, ?, ?, ?, sysdate, default, 0, "
+				+ "(select max(board_no) + 1 from board), NULL, "
+				+ "default)";
+		
+		return result;
+	} 
 
 	public int addReadCount(Connection con, int bnum) {
 		// TODO Auto-generated method stub
