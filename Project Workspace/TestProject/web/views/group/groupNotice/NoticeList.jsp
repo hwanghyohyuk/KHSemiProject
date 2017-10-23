@@ -34,7 +34,6 @@
 <%@ include file="/views/include/group/nav.jsp"%>
 
 <!-- 메인 컨텐츠 -->
-<body>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<h2>공지사항</h2>

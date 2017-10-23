@@ -21,8 +21,8 @@
 #layout {
 	margin-top: 8vh;
 }
-
 </style>
+
 
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
@@ -31,38 +31,45 @@
 
 <!-- 메인 컨텐츠 -->
 
-	<div class="row" id="layout">
-		<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
-			<h2>그룹 공지 작성</h2>
-			<br>
-			<form action="/studyhub/gnoticecreate" method="post">
-				<div class="form-group">
-					<label for="title">제목</label> <input type="text"
-						class="form-control" id="exampleInputEmail1"
-						aria-describedby="emailHelp" placeholder="제목을 입력하세요">
-				</div>
-				<div class="range">
-					<label for="Content">공개범위</label> <label class="radio-inline">
-						<input type="radio" name="option" id="inlineRadio1"
-						value="option1"> 전체공개
-					</label> <label class="radio-inline"> <input type="radio"
-						name="option" id="inlineRadio2" value="option2"> 회원공개
-					</label>
-				</div>
-				<div class="form-group">
-					<label for="Content">내용</label>
-					<textarea class="form-control" id="Textarea" rows="15"
-						placeholder="내용을 입력하세요"></textarea>
-				</div>
-				<input type="submit" value="제출하기" id="btns"> 
-				<a href="/studyhub/gnoticepreview?groupno=<%= group.getGroupNo() %>">목록으로 이동</a>
-		</div>
+<div class="row" id="layout">
+	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
+		<h2>그룹 공지 작성</h2>
+		<br>
+		<form action="/studyhub/gnoticecreate" method="post">
+			<div class="form-group">
+				<label for="title">제목</label> <input type="text"
+					class="form-control" id="exampleInputEmail1"
+					name="title" 
+					aria-describedby="emailHelp" placeholder="제목을 입력하세요">
+			</div>
+			<div class="range">
+				<label for="Content">공개범위</label> <label class="radio-inline">
+					<input type="radio" name="option" id="inlineRadio1" value="option1">
+					전체공개
+				</label> <label class="radio-inline"> <input type="radio"
+					name="option" id="inlineRadio2" value="option2"> 회원공개
+				</label>
+			</div>
+			<div class="form-group">
+				<label for="Content">내용</label>
+				<textarea class="form-control" id="Textarea" rows="15"
+				name="content" placeholder="내용을 입력하세요"></textarea>
+			</div>
+			<input type="hidden" name="uploader" value="<%= user.getUserNo() %>">
+			<input type="hidden" readonly name = "access_no" value= "<%=user.getUserName() %>">
+			<input type="submit" value="제출하기" id="btns"> <a
+				href="/studyhub/gnoticepreview?groupno=<%=group.getGroupNo()%>">목록으로
+				이동</a>
 		</form>
+	</div>
+	
+</div>
 
 
-		<!-- /메인 컨텐츠 -->
 
-		<!--푸터 부분-->
-		<%@ include file="/views/include/main/footer.jsp"%>
-		<!--페이지 끝-->
-		<%@ include file="/views/include/common/tail.jsp"%>
+	<!-- /메인 컨텐츠 -->
+
+	<!--푸터 부분-->
+	<%@ include file="/views/include/main/footer.jsp"%>
+	<!--페이지 끝-->
+	<%@ include file="/views/include/common/tail.jsp"%>
