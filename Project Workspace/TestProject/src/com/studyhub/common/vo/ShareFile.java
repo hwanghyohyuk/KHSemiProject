@@ -13,9 +13,22 @@ public class ShareFile implements java.io.Serializable{
 	private String fileSize;
 	private int uploader;
 	private int accessNo;
+	private String userName;
+	private int downloadCount;
 
 	public ShareFile() {
 		super();
+	}
+
+	public ShareFile(int fileNo, String title, String content, Date uploadDate, String fileName, String userName, int downloadCount) {
+		super();
+		this.fileNo = fileNo;
+		this.title = title;
+		this.content = content;
+		this.uploadDate = uploadDate;
+		this.fileName = fileName;
+		this.userName = userName;
+		this.downloadCount = downloadCount;
 	}
 
 	public ShareFile(int fileNo, String title, String content, Date uploadDate, String fileName, String filePath,
@@ -32,12 +45,28 @@ public class ShareFile implements java.io.Serializable{
 		this.accessNo = accessNo;
 	}
 
+	public int getDownloadCount() {
+		return downloadCount;
+	}
+
+	public void setDownloadCount(int downloadCount) {
+		this.downloadCount = downloadCount;
+	}
+
 	public int getFileNo() {
 		return fileNo;
 	}
 
 	public void setFileNo(int fileNo) {
 		this.fileNo = fileNo;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getTitle() {
