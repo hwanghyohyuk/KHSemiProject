@@ -21,35 +21,15 @@ public class ScheduleService {
 	}
 	
 	// 일정 등록
-	public Boolean insertSchedule(Schedule schedule){
+	public int insertSchedule(int groupno){
 		Connection con = getConnection();
-		Boolean result = new ScheduleDao().insertSchedule(con, schedule);
+		int result = new ScheduleDao().insertSchedule(con, groupno);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
 		return result;
 		
 	}
-	// 일정 상세보기
-	public Schedule selectSchedule(int scheduleNo){
-		Connection con = getConnection();
-		Schedule schedule = new ScheduleDao().selectSchedule(con,scheduleNo);
-		return schedule;
-		
-	}
-	
-	// 일정 삭제
-	public Boolean delectSchedule(Schedule schedule){
-		Connection con = getConnection();
-		Boolean result = new ScheduleDao().delectSchedule(con, schedule);
-		return result;
-		
-	}
-	
-	// 일정 수정
-	public Boolean updateSchedule(Schedule scheduleNo){
-		Connection con = getConnection();
-		Boolean result = new ScheduleDao().updateSchedule(con,scheduleNo);
-		return result;
-		
-	}	
-
-	
 }

@@ -7,18 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.Schedule;
 import com.studyhub.group.schedule.model.service.ScheduleService;
 
 /**
- * Servlet implementation class ScheduleCreateServlet
+ * Servlet implementation class ScheduleInsertServlet
  */
-@WebServlet("/schedulecreate")
+@WebServlet("/scheduleinsert")
 public class ScheduleInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	private Schedule schedule;
-	private ScheduleService scheduleService; 
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -31,8 +28,13 @@ public class ScheduleInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		
+		int groupno = Integer.parseInt(request.getParameter("group_no"));
+		
+		if(new ScheduleService().insertSchedule(groupno) > 0){
+			response.sendRedirect("/views/group/groupSchedule/ScheduleMain.jsp");
+		}
 	}
 
 	/**
