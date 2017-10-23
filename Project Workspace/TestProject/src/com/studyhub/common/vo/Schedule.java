@@ -7,8 +7,8 @@ public class Schedule implements java.io.Serializable{
 	private int groupNo;
 	private String meetingDate;
 	private String ampm;
-	private int hour;
-	private int minute;
+	private String hour;
+	private String minute;
 	private String onoff;
 	private String meetingName;
 	
@@ -16,7 +16,7 @@ public class Schedule implements java.io.Serializable{
 		super();
 	}
 	
-	public Schedule(int scheduleNo, int groupNo, String meetingDate, String ampm, int hour, int minute, String onoff,
+	public Schedule(int scheduleNo, int groupNo, String meetingDate, String ampm, String hour, String minute, String onoff,
 			String meetingName) {
 		super();
 		this.scheduleNo = scheduleNo;
@@ -52,16 +52,16 @@ public class Schedule implements java.io.Serializable{
 	public void setAmpm(String ampm) {
 		this.ampm = ampm;
 	}
-	public int getHour() {
+	public String getHour() {
 		return hour;
 	}
-	public void setHour(int hour) {
+	public void setHour(String hour) {
 		this.hour = hour;
 	}
-	public int getMinute() {
+	public String getMinute() {
 		return minute;
 	}
-	public void setMinute(int minute) {
+	public void setMinute(String minute) {
 		this.minute = minute;
 	}
 	public String getOnoff() {

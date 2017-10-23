@@ -32,4 +32,11 @@ public class ScheduleService {
 		return result;
 		
 	}
+
+	public ArrayList<Schedule> selectOne(int scheduleno) {
+		Connection con = getConnection();
+		ArrayList<Schedule> list = new ScheduleDao().selectOne(con, scheduleno);
+		close(con);
+		return list;
+	}
 }

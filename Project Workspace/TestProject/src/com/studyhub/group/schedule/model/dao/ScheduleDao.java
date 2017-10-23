@@ -22,7 +22,8 @@ public class ScheduleDao {
 		
 		String query = "select schedule_no, group_no, meeting_date, ampm, hour, minute, onoff, meeting_name" 
 					 + " from tb_schedule"
-					 + " where group_no = ?";
+					 + " where group_no = ?"
+					 + " order by meeting_date asc";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -37,8 +38,8 @@ public class ScheduleDao {
 					sc.setGroupNo(rset.getInt("group_no"));
 					sc.setMeetingDate(rset.getString("meeting_date"));
 					sc.setAmpm(rset.getString("ampm"));
-					sc.setHour(rset.getInt("hour"));
-					sc.setMinute(rset.getInt("minute"));
+					sc.setHour(rset.getString("hour"));
+					sc.setMinute(rset.getString("minute"));
 					sc.setOnoff(rset.getString("onoff"));
 					sc.setMeetingName(rset.getString("meeting_name"));
 					
@@ -68,8 +69,8 @@ public class ScheduleDao {
 			pstmt.setInt(1, sc.getGroupNo());
 			pstmt.setString(2, sc.getMeetingDate());
 			pstmt.setString(3, sc.getAmpm());
-			pstmt.setInt(4, sc.getHour());
-			pstmt.setInt(5, sc.getMinute());
+			pstmt.setString(4, sc.getHour());
+			pstmt.setString(5, sc.getMinute());
 			pstmt.setString(6, sc.getOnoff());
 			pstmt.setString(7, sc.getMeetingName());
 			
@@ -83,24 +84,45 @@ public class ScheduleDao {
 		return result;
 	}
 
-	public Schedule selectSchedule(Connection con, int scheduleNo) {
-		Schedule schedule = null;
+	public ArrayList<Schedule> selectOne(Connection con, int scheduleno) {
+		ArrayList<Schedule> list = null;
 		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		
-		return schedule;
+		String query = "select schedule_no, group_no, meeting_date, ampm, hour, minute, onoff, meeting_name" 
+					 + " from tb_schedule"
+					 + " where schedule_no = ?"
+					 + " order by meeting_date asc";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, scheduleno);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null){
+				list = new ArrayList<Schedule>();
+				while(rset.next()){
+					Schedule sc = new Schedule();
+					sc.setScheduleNo(rset.getInt("schedule_no"));
+					sc.setGroupNo(rset.getInt("group_no"));
+					sc.setMeetingDate(rset.getString("meeting_date"));
+					sc.setAmpm(rset.getString("ampm"));
+					sc.setHour(rset.getString("hour"));
+					sc.setMinute(rset.getString("minute"));
+					sc.setOnoff(rset.getString("onoff"));
+					sc.setMeetingName(rset.getString("meeting_name"));
+					
+					list.add(sc);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
-
-	public Boolean delectSchedule(Connection con, Schedule schedule) {
-		Boolean result = false;
-		return result;
-	}
-
-	public Boolean updateSchedule(Connection con, Schedule scheduleNo) {
-		Boolean result = false;
-		return result;
-	}
-
-	
-	
 }
 
