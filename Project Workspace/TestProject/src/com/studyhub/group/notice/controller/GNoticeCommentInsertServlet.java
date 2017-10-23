@@ -7,23 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.GNotice;
-import com.studyhub.group.notice.model.service.GNoticeService;
-
 /**
- * Servlet implementation class GNoticeUpdateServlet
+ * Servlet implementation class GNoticeCommentInsertServlet
  */
-@WebServlet("/gnoticeupdate")
-public class GNoticeUpdateServlet extends HttpServlet {
+@WebServlet("/gnoticecommentinsert")
+public class GNoticeCommentInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private GNotice gNotice;
-	private GNoticeService gNoticeService;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GNoticeUpdateServlet() {
+    public GNoticeCommentInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,8 +26,8 @@ public class GNoticeUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8");
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

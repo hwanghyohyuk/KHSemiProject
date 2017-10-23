@@ -1,25 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*, com.studyhub.common.vo.GNotice"%>
+	pageEncoding="UTF-8"%>
 <!-- 
 작성자 : 윤찬호
 내용 : 공지 수정 페이지  
 작성일자 17.10.21
  -->
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>공지 수정::StudyHub</title>
-
 <!-- java 구문 -->
-<% GNotice gnotice = (GNotice)request.getAttribute("gnotice"); %>
+ <%@ page import="java.util.*, com.studyhub.common.vo.GNotice" %>
 
 <!-- 초기화 블럭(변수선언 및 초기화) -->
-
+<% 
+	GNotice gnotice = (GNotice)request.getAttribute("gnotice"); 
+%>
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
-<!--헤더 부분-->
-<%@ include file="/views/include/main/header.jsp"%>
 
 <style>
 #btns {
@@ -29,19 +23,14 @@
 #layout {
 	margin-top: 8vh;
 }
-
 </style>
 
+<%@ include file="/views/include/common/headend.jsp"%>
+<!--헤더 부분-->
+<%@ include file="/views/include/main/header.jsp"%>
+<%@ include file="/views/include/group/nav.jsp"%>
 
-<link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
-<link rel="stylesheet" href="/studyhub/css/bootstrap.css">
-
-<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
-
-</head>
 <!-- 메인 컨텐츠 -->
-<body>
-
 <div class="row" id="layout">
   <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
   <h2>질문하기</h2>
@@ -77,6 +66,4 @@
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>
 	<!--페이지 끝-->
-	<%@ include file="/views/include/common/headend.jsp"%>
-</body>
-</html>
+	<%@ include file="/views/include/common/tail.jsp"%>

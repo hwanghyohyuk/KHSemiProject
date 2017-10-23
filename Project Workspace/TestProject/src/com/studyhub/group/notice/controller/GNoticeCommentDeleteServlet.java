@@ -7,23 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.GNotice;
-import com.studyhub.group.notice.model.service.GNoticeService;
-
 /**
- * Servlet implementation class GNoticeSearchServlet
+ * Servlet implementation class GNoticeCommentDeleteServlet
  */
-@WebServlet("/gnoticesearch")
-public class GNoticeSearchServlet extends HttpServlet {
+@WebServlet("/gnoticecommentdelete")
+public class GNoticeCommentDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private GNotice gNotice;
-	private GNoticeService gNoticeService;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GNoticeSearchServlet() {
+    public GNoticeCommentDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
