@@ -5,8 +5,6 @@
 내용 : OO 페이지
 작성일자 17.10.02
  -->
-<!-- java 구문 -->
-
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 
 <!--페이지 시작-->
@@ -29,8 +27,8 @@
 	margin-left: 60%;
 	top: 15%;
 }
-}
 </style>
+
 <script type="text/javascript">
 	var InputImage = (function loadImageFile() {
 		if (window.FileReader) {
