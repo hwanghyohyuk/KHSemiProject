@@ -5,20 +5,16 @@
 내용 : QnA질문writeform 
 작성일자 17.10.19
  -->
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>질문하기::StudyHub</title>
 
 <!-- java 구문 -->
 
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 
+
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
-<!--헤더 부분-->
-<%@ include file="/views/include/main/header.jsp"%>
+
+<!--자바스크립트 및 CSS-->
 
 <style>
 #btns {
@@ -32,13 +28,14 @@
 
 
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
-<link rel="stylesheet" href="/studyhub/css/bootstrap.css">
 
-<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
+<!-- /head , body -->
+<%@ include file="/views/include/common/headend.jsp"%>
 
-</head>
+<!--헤더 부분-->
+<%@ include file="/views/include/main/header.jsp"%>
+
 <!-- 메인 컨텐츠 -->
-<body>
 
 	<div class="row" id="layout">
 		<div
@@ -74,7 +71,7 @@
 
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>
-	<!--페이지 끝-->
-	<%@ include file="/views/include/common/headend.jsp"%>
+<!--페이지 끝-->
+<%@ include file="/views/include/common/tail.jsp" %>
 </body>
 </html>

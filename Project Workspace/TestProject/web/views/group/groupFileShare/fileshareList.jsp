@@ -6,14 +6,15 @@
 내용 : 파일공유 메인 페이지
 작성일자 17.10.23
  -->
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="/studyhub/css/fileshare.css">
-</head>
-<body >
+
     <!--헤더 부분-->
 <%@ include file="/views/include/common/head.jsp"%>
+
+<!--자바스크립트 및 CSS-->
+ <link rel="stylesheet" type="text/css" href="/studyhub/css/fileshare.css">
+<!-- /head , body -->
+<%@ include file="/views/include/common/headend.jsp"%>
+
 <%@ include file="/views/include/main/header.jsp"%>
 <%@ include file="/views/include/group/nav.jsp" %>
 
@@ -76,6 +77,7 @@
 
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
-<%@ include file="/views/include/common/headend.jsp"%>
+
+<%@ include file="/views/include/common/tail.jsp" %>
 </body>
 </html>
