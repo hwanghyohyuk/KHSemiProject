@@ -16,10 +16,6 @@
 <!--자바스크립트 및 CSS-->
 <link rel="stylesheet" type="text/css"
 	href="/studyhub/css/fileshareList.css">
-	
-<!-- 얘를 붙이면 노트북에서도레이아웃이맞게되는데 대신에 스크롤이 안되는느낌?....어케해야할지모르겟당  -->
-<link rel="stylesheet" href="/studyhub/css/bootstrap.min.css"> 
-
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
 
