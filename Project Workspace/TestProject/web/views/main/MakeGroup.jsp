@@ -5,7 +5,8 @@
 내용 : OO 페이지
 작성일자 17.10.02
  -->
-<!-- java 구문 -->
+<%@ include file="/views/include/common/head.jsp"%>
+<%@ include file="/views/include/main/header.jsp"%>
 
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 <style type="text/css">
@@ -27,10 +28,8 @@
 	}
 }
 </style>
-<!--페이지 시작-->
-<%@ include file="/views/include/common/head.jsp"%>
-<!--헤더 부분-->
-<%@ include file="/views/include/main/header.jsp"%>
+
+<%@ include file="/views/include/common/headend.jsp"%>
 
 <script type="text/javascript">
 var InputImage = 
