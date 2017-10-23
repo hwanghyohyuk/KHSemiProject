@@ -34,10 +34,10 @@
 		<h4><%= sf.getTitle() %></h4>
 		<p><%= sf.getContent() %></p>
 		<hr>
-		<p><%= sf.getUserName() %></p>
-		<p><%= sf.getUploadDate() %> | <%= sf.getDownloadCount() %></p>
-		<p><%= sf.getFileName() %>
-		<button id="download">download</button>
+		<h6><%= sf.getUserName() %></h6>
+		<h6><%= sf.getUploadDate() %></h6>
+		<h6><%= sf.getFileName()%> | 다운로드수: <%= sf.getDownloadCount()%></h6>
+		<h6><button id="download">download</button></h6>
 		</div>
 		
 		<% } %>
