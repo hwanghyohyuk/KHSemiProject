@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.group.schedule.model.service.ScheduleService;
+
 /**
  * Servlet implementation class ScheduleInsertServlet
  */
@@ -30,7 +32,9 @@ public class ScheduleInsertServlet extends HttpServlet {
 		
 		int groupno = Integer.parseInt(request.getParameter("group_no"));
 		
-		
+		if(new ScheduleService().insertSchedule(groupno) > 0){
+			response.sendRedirect("/views/group/groupSchedule/ScheduleMain.jsp");
+		}
 	}
 
 	/**

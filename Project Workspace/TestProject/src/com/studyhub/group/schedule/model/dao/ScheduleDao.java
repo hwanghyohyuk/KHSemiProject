@@ -1,7 +1,10 @@
 package com.studyhub.group.schedule.model.dao;
 
+import static com.studyhub.common.JDBCTemplate.*;
+
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import com.studyhub.common.vo.Schedule;
@@ -19,8 +22,20 @@ public class ScheduleDao {
 		
 	}
 
-	public Boolean insertSchedule(Connection con, Schedule schedule) {
-		Boolean result = false;		
+	public int insertSchedule(Connection con, int groupno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "";
+		
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
 		return result;
 	}
