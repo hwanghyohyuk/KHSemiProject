@@ -36,13 +36,13 @@ public class ScheduleInsertServlet extends HttpServlet {
 		sc.setGroupNo(Integer.parseInt(request.getParameter("group_no")));
 		sc.setMeetingDate(request.getParameter("modaldate"));
 		sc.setAmpm(request.getParameter("modalampm"));
-		sc.setHour(Integer.parseInt(request.getParameter("modalhour")));
-		sc.setMinute(Integer.parseInt(request.getParameter("modalminute")));
+		sc.setHour(request.getParameter("modalhour"));
+		sc.setMinute(request.getParameter("modalminute"));
 		sc.setOnoff(request.getParameter("modalonoff"));
 		sc.setMeetingName(request.getParameter("modalcontent"));
 		
 		if(new ScheduleService().insertSchedule(sc) > 0){
-			response.sendRedirect("/views/group/groupSchedule/ScheduleMain.jsp");
+			response.sendRedirect("views/group/groupSchedule/ScheduleMain.jsp");
 		}
 	}
 

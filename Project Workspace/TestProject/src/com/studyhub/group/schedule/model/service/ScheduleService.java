@@ -32,4 +32,33 @@ public class ScheduleService {
 		return result;
 		
 	}
+
+	public ArrayList<Schedule> selectOne(int scheduleno) {
+		Connection con = getConnection();
+		ArrayList<Schedule> list = new ScheduleDao().selectOne(con, scheduleno);
+		close(con);
+		return list;
+	}
+
+	public int deleteSchedule(int scheduleno) {
+		Connection con = getConnection();
+		int result = new ScheduleDao().deleteSchedule(con, scheduleno);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+
+	public int updateSchedule(Schedule sc) {
+		Connection con = getConnection();
+		int result = new ScheduleDao().updateSchedule(con, sc);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
 }
