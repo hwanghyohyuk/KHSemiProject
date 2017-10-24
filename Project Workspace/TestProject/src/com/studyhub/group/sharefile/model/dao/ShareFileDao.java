@@ -6,7 +6,6 @@ import static com.studyhub.common.JDBCTemplate.close;
 import java.sql.*;
 import java.util.ArrayList;
 
-import com.studyhub.common.vo.GNotice;
 import com.studyhub.common.vo.ShareFile;
 import com.studyhub.group.sharefile.model.service.ShareFileService;
 
@@ -17,46 +16,53 @@ public class ShareFileDao {
 	public ShareFileDao(){}
 	
 	
-	public ArrayList<ShareFile> selectList(Connection con){
+	public ArrayList<ShareFile> selectList(Connection con, int groupno){
 		ArrayList<ShareFile> list = null;
-		
-		Statement stmt = null;
+
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
-		String query = "select * from tb_share_file order by file_no desc";
-		try{
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
-			
-			if(rset != null){
+		String query = "select file_no, title, user_name, content, upload_date, originalfilename, renamefilename, downloadcount"
+				+ " from tb_share_file" + " join tb_user on (tb_share_file.uploader=tb_user.user_no)"
+				+ " where group_no = ? order by file_no desc";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+
+			rset = pstmt.executeQuery();
+			if (rset != null) {
 				list = new ArrayList<ShareFile>();
-				
-				while(rset.next()){
+				while (rset.next()) {
 					ShareFile sf = new ShareFile();
 					sf.setFileNo(rset.getInt("file_no"));
 					sf.setTitle(rset.getString("title"));
+					sf.setUserName(rset.getString("user_name"));
 					sf.setContent(rset.getString("content"));
-					sf.setFileName(rset.getString("originalfilename"));
-					sf.setDownloadCount(rset.getInt("downloadcount"));
 					sf.setUploadDate(rset.getDate("upload_date"));
-					
+					sf.setFileName(rset.getString("originalfilename"));
+					sf.setRenameFileName(rset.getString("renamefilename"));
+					sf.setDownloadCount(rset.getInt("downloadcount"));
+					list.add(sf);
+
 				}
 			}
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		return list;
 	}
+	
 	
 	public ShareFile selectOne(Connection con, int no){
 		ShareFile sf = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select * from tb_share_file where file_no = ?";
+		String query = "select file_no, title, user_name, content, upload_date, originalfilename, renamefilename, downloadcount"
+				+ " from tb_share_file" + " join tb_user on (tb_share_file.uploader=tb_user.user_no) where file_no = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -70,7 +76,9 @@ public class ShareFileDao {
 				sf.setFileNo(rset.getInt("file_no"));
 				sf.setTitle(rset.getString("title"));
 				sf.setContent(rset.getString("content"));
+				sf.setUserName(rset.getString("user_name"));
 				sf.setFileName(rset.getString("originalfilename"));
+				sf.setRenameFileName(rset.getString("renamefilename"));
 				sf.setDownloadCount(rset.getInt("downloadcount"));
 				sf.setUploadDate(rset.getDate("upload_date"));
 				
@@ -91,7 +99,7 @@ public class ShareFileDao {
 		
 		String query = "insert into tb_share_file values "+
 					"((select max(file_no)+1 from tb_share_file), "+
-					"?, ?, sysdate, ?, ?, ?, ?, null, default)";
+					"?, ?, default, ?, ?, ?, ?, ?, default)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -99,9 +107,9 @@ public class ShareFileDao {
 			pstmt.setString(2, sf.getContent());
 			pstmt.setString(3, sf.getFileName());
 			pstmt.setString(4, sf.getRenameFileName());
-			pstmt.setInt(5, sf.getUploader());
-			pstmt.setInt(6, sf.getAccessNo());
-			pstmt.setInt(7, sf.getGroupNo());
+			pstmt.setInt(5, sf.getGroupNo());
+			pstmt.setInt(6, sf.getUploader());
+			pstmt.setInt(7, sf.getAccessNo());
 			
 			result = pstmt.executeUpdate(); 
 					
@@ -110,7 +118,6 @@ public class ShareFileDao {
 		} finally{
 			close(pstmt);
 		}
-		System.out.println(result+"result");
 		return result;
 	}
 	
