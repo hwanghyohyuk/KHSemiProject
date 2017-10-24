@@ -39,19 +39,17 @@ public class GBoardInsertServlet extends HttpServlet {
 				
 				RequestDispatcher view = null;
 				GBoard gboard = new GBoard();
-				
 				String title = request.getParameter("title");
-				String content = request.getParameter("content");
-				String uploader = request.getParameter("uploader");
-				//int userNo = Integer.parseInt(request.getParameter("user_no"));
+				String content = request.getParameter("content");				
+				int uploader = Integer.parseInt(request.getParameter("uploader"));
 				int accessNo = Integer.parseInt(request.getParameter("access_no"));
-				
+				int groupNo = Integer.parseInt(request.getParameter("group_no"));
 				
 				gboard.setTitle(title);
 				gboard.setContent(content);
 				gboard.setUploader(uploader);
 				gboard.setAccessNo(accessNo);
-				
+				gboard.setGroupNo(groupNo);
 				
 				if(new GBoardService().insertBoard(gboard)>0){
 					response.sendRedirect("/studyhub/gboardlist");
