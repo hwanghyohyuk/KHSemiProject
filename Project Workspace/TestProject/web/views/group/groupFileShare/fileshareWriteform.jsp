@@ -3,7 +3,7 @@
 <!-- 
 작성자 : 구미향
 내용 : 파일공유 write Form  페이지
-작성일자 17.10.22
+작성일자 17.10.23
  -->
 <!-- java 구문 -->
 
@@ -25,7 +25,7 @@
 
 <div class="row" id="layout">
 		<div
-			class="col-lg-6 col-lg-offset-2 col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xm-6 col-xs-2" id="form-outline">
+			class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xm-6 col-xs-3" id="form-outline">
 			<h2>파일 공유 글쓰기</h2>
 			<br>
 			<form action="/studyhub/sharefileinsert" enctype="multipart/form-data" method="post">

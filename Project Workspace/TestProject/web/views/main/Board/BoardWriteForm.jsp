@@ -11,10 +11,6 @@
 
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
-<!--자바스크립트 및 CSS-->
-
-<!-- /head , body -->
-<%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 
@@ -26,33 +22,25 @@
 		</h1>
 	</div>
 
-	<form class="form-horizontal" action="/studyhub/boardinsert" method="post" enctype="multipart/form-data">
+	<form class="form-horizontal">
 		<div class="form-group">
-			<label for="btitle" class="col-sm-2 control-label">제목</label>
+			<label for="inputEmail3" class="col-sm-2 control-label">제목</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" placeholder="제목" name="btitle" id="btitle">
+				<input type="text" class="form-control" placeholder="제목" id="title">
 			</div>
 		</div>
 		<hr>
 		<div class="form-group">
-			<label for="bwriter" class="col-sm-2 control-label">작성자</label>
+			<label for="inputPassword3" class="col-sm-2 control-label">내용</label>
 			<div class="col-sm-10">
-				<input type="hidden" class="form-control" name="bwriterno" id="bwriterno" value="<%= user.getUserNo() %>">
-				<input type="text" readonly class="form-control" name="bwriter" id="bwriter" value="<%= user.getUserName() %>">
-			</div>
-		</div>
-		<hr>
-		<div class="form-group">
-			<label for="bcontent" class="col-sm-2 control-label">내용</label>
-			<div class="col-sm-10">
-				<textarea class="form-control" rows="10" name="bcontent" id="bcontent"
+				<textarea class="form-control" rows="10" id="content"
 					placeholder="내용"></textarea>
 			</div>
 		</div>
 		<hr>
 		<div class="form-group">
-			<label for="fileupload" class="col-sm-2 control-label">파일
-				업로드</label> <input type="file" id="fileupload">
+			<label for="exampleInputFile" class="col-sm-2 control-label">파일
+				업로드</label> <input type="file" id="exampleInputFile">
 			<p class="help-block"></p>
 		</div>
 		<hr>
@@ -62,10 +50,13 @@
 			</div>
 		</div>
 	</form>
+
+
+
 </div>
 <!-- /메인 컨텐츠 -->
 
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
 <!--페이지 끝-->
-<%@ include file="/views/include/common/tail.jsp"%>
+<%@ include file="/views/include/common/headend.jsp"%>

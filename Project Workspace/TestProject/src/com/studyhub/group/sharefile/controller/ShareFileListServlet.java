@@ -36,8 +36,8 @@ public class ShareFileListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html charset=utf-8");
-		int no = Integer.parseInt(request.getParameter("groupno"));
-		ArrayList<ShareFile> list = new ShareFileService().selectList(no);
+		
+		ArrayList<ShareFile> list = new ShareFileService().selectList();
 		
 		RequestDispatcher view = null;
 		

@@ -16,9 +16,9 @@ public class ShareFileService {
 	public ShareFileService(){}
 
 	
-	public ArrayList<ShareFile> selectList(int no){
+	public ArrayList<ShareFile> selectList(){
 		Connection con = getConnection();
-		ArrayList<ShareFile> list = new ShareFileDao().selectList(con, no);
+		ArrayList<ShareFile> list = new ShareFileDao().selectList(con);
 		close(con);
 		return list;
 	}
