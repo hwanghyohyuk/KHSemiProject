@@ -1,7 +1,6 @@
 package com.studyhub.group.sharefile.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,19 +13,16 @@ import com.studyhub.common.vo.ShareFile;
 import com.studyhub.group.sharefile.model.service.ShareFileService;
 
 /**
- * Servlet implementation class ShareFileListServlet
+ * Servlet implementation class ShareFileDetailServlet
  */
-@WebServlet("/sharefilelist")
-public class ShareFileListServlet extends HttpServlet {
+@WebServlet("/sharefiledetail")
+public class ShareFileDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private ShareFileService sfs;
-	private ShareFile shareFile;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShareFileListServlet() {
+    public ShareFileDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,20 +31,24 @@ public class ShareFileListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html charset=utf-8");
-		int no = Integer.parseInt(request.getParameter("groupno"));
-		ArrayList<ShareFile> list = new ShareFileService().selectList(no);
+		
+		response.setContentType("text/html; charset=utf-8");
+		int sfno = Integer.parseInt(request.getParameter("sfno"));
+		ShareFileService sfservice = new ShareFileService();
+		
+		sfservice.updateReadCount(sfno);
+		
+		ShareFile sf = sfservice.selectShareFile(sfno);
 		
 		RequestDispatcher view = null;
-		
-		if(list!=null){
-			view = request.getRequestDispatcher("views/group/groupFileShare/fileshareList.jsp");
-			request.setAttribute("list", list);
+		if(sf!=null){
+			view = request.getRequestDispatcher("views/group/groupFileShare/fileshareDetail.jsp");		
+			request.setAttribute("sharefile", sf);
 			view.forward(request, response);
-			
+		
 		}else{
 			view = request.getRequestDispatcher("views/group/groupFileShare/fileshareError.jsp");
-			request.setAttribute("message", "파일 공유 리스트 조회 실패");
+			request.setAttribute("message", "상세조회실패");
 			view.forward(request, response);
 		}
 		
