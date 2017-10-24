@@ -1,10 +1,12 @@
 package com.studyhub.group.sharefile.model.service;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 
 import com.studyhub.common.vo.ShareFile;
 import com.studyhub.group.sharefile.model.dao.ShareFileDao;
+import static com.studyhub.common.JDBCTemplate.*;
 
 public class ShareFileService {
 	
@@ -15,21 +17,49 @@ public class ShareFileService {
 
 	
 	public ArrayList<ShareFile> selectList(){
-		return null;
+		Connection con = getConnection();
+		ArrayList<ShareFile> list = new ShareFileDao().selectList(con);
+		close(con);
+		return list;
 	}
 	
 	public ShareFile selectShareFile(int no){
-		return null;
+		Connection con = getConnection();
+		ShareFile file = new ShareFileDao().selectOne(con, no);
+		close(con);
+		return file;
 	}
 	
 	public int insertShareFile(ShareFile sf){
-		return 0;
+		Connection con = getConnection();
+		int result = new ShareFileDao().insertSharedFile(con, sf);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+		
 	}
 	public int deleteShareFile(int no){
-		return 0;
+		Connection con = getConnection();
+		int result = new ShareFileDao().deleteSharedFile(con, no);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
 	}
 	public int updateShareFile(ShareFile sf){
-		return 0;
+		Connection con = getConnection();
+		int result = new ShareFileDao().updateSharedFile(con, sf);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
 	}
 	public ArrayList<ShareFile> selectSearch(String keyword){
 		return null;

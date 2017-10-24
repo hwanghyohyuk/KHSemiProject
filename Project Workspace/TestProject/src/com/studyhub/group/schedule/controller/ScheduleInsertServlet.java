@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.common.vo.Schedule;
 import com.studyhub.group.schedule.model.service.ScheduleService;
 
 /**
@@ -30,9 +31,17 @@ public class ScheduleInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		int groupno = Integer.parseInt(request.getParameter("group_no"));
+		Schedule sc = new Schedule();
 		
-		if(new ScheduleService().insertSchedule(groupno) > 0){
+		sc.setGroupNo(Integer.parseInt(request.getParameter("group_no")));
+		sc.setMeetingDate(request.getParameter("modaldate"));
+		sc.setAmpm(request.getParameter("modalampm"));
+		sc.setHour(Integer.parseInt(request.getParameter("modalhour")));
+		sc.setMinute(Integer.parseInt(request.getParameter("modalminute")));
+		sc.setOnoff(request.getParameter("modalonoff"));
+		sc.setMeetingName(request.getParameter("modalcontent"));
+		
+		if(new ScheduleService().insertSchedule(sc) > 0){
 			response.sendRedirect("/views/group/groupSchedule/ScheduleMain.jsp");
 		}
 	}

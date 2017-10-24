@@ -2,6 +2,7 @@ package com.studyhub.group.schedule.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -48,9 +49,14 @@ public class ScheduleListServlet extends HttpServlet {
 		
 		for(Schedule sc : list) {
 			JSONObject job = new JSONObject();
-			
-			// 데이터 풋 할거 넣어야함
-			
+			job.put("schedule_no", sc.getScheduleNo());
+			job.put("meeting_date", URLEncoder.encode(sc.getMeetingDate(), "UTF-8"));
+			job.put("ampm", URLEncoder.encode(sc.getAmpm(), "UTF-8"));
+			job.put("hour", sc.getHour());
+			job.put("minute", sc.getMinute());
+			job.put("onoff", URLEncoder.encode(sc.getOnoff(), "UTF-8"));
+			job.put("meeting_name", URLEncoder.encode(sc.getMeetingName(), "UTF-8"));
+						
 			jarr.add(job);
 		}
 		
