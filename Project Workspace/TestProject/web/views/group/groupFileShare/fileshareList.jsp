@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"
 	import="java.util.*, com.studyhub.common.vo.ShareFile"%>
 <%
-	ArrayList<ShareFile> list = (ArrayList<ShareFile>) request.getAttribute("list");
+	ArrayList<ShareFile> list = (ArrayList<ShareFile>)request.getAttribute("list");
 %>
 <!-- 
 작성자 : 구미향
@@ -47,11 +47,11 @@
 	%>
 	
 		<div class="filebox">
-			<h4><%=sf.getTitle()%></h4>
+			<h4><a href="/studyhub/sharefiledetail?sfno=<%=sf.getFileNo() %>"><%=sf.getTitle()%></a></h4>
 			<p><%=sf.getContent()%></p>
 			<hr>
-			<h6><%=sf.getUserName()%></h6>
-			<h6><%=sf.getUploadDate()%></h6>
+			 <h6><%=sf.getUserName()%></h6> 
+			 <h6><%=sf.getUploadDate()%></h6> 
 			<h6><%=sf.getFileName()%>
 				| 다운로드수:
 				<%=sf.getDownloadCount()%></h6>
@@ -73,23 +73,6 @@
 			<button id="download">download</button>
 		</div>
 
-		<div class="filebox">
-			<h4>title</h4>
-			<p>content</p>
-			<hr>
-			<p>filename</p>
-			<p>upload_date</p>
-			<button id="download">download</button>
-		</div>
-
-		<div class="filebox">
-			<h4>title</h4>
-			<p>content</p>
-			<hr>
-			<p>filename</p>
-			<p>upload_date</p>
-			<button id="download">download</button>
-		</div>
 
 	</div>
 

@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.studyhub.common.vo.ShareFile;
+import com.studyhub.group.sharefile.model.service.ShareFileService;
 
 /**
  * Servlet implementation class ShareFileInsertServlet
@@ -90,12 +91,18 @@ public class ShareFileInsertServlet extends HttpServlet {
 				fout.close();
 				originalFile.delete();
 		}
-			sf = new ShareFile(title, content, null,null, userno, accessno, groupno);
-			System.out.println(sf+"!");
+			sf = new ShareFile(title, content, originalFileName,renameFileName, userno, accessno, groupno);
 			
 		}else{
 			sf = new ShareFile(title, content, null,null, userno, accessno, groupno);
-			System.out.println(sf+"@");
+		}
+		
+		if(new ShareFileService().insertShareFile(sf) > 0){
+			response.sendRedirect("/studyhub/sharedfilepreview?groupno="+groupno);
+		}else{
+			view = request.getRequestDispatcher("views/group/groupFileShare/fileshareError.jsp");
+			request.setAttribute("message", "서비스 : 글 등록 실패!");
+			view.forward(request, response);
 		}
 		
 		
