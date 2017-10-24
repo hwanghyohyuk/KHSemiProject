@@ -123,15 +123,73 @@ public class ShareFileDao {
 	
 	
 	public int deleteSharedFile(Connection con, int no){
-		return 0;
+		int result =0;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from tb_share_file where file_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		return result;
 		}
 	
 	public int updateSharedFile(Connection con, ShareFile sf){
-		return 0;
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_share_file set title = ?, content = ?, originalfilename = ?, renamefilename = ? "
+				+"where file_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, sf.getTitle());
+			pstmt.setString(2, sf.getContent());
+			pstmt.setString(3, sf.getFileName());
+			pstmt.setString(4, sf.getRenameFileName());
+			
+			result = pstmt.executeUpdate(); 
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		System.out.println("결과"+result);
+		return result;
 	}
 	
 	public ArrayList<ShareFile> selectTitleSearch(Connection con, String key){
 		return null;
+	}
+
+	//수정해야됨 ㅋㅋㅋ
+	public void updateReadCount(Connection con, int no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_qna set readcount = readcount+1 where qna_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		
 	}
 	
 }

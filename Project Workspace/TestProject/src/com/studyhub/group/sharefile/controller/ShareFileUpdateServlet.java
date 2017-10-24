@@ -47,7 +47,7 @@ public class ShareFileUpdateServlet extends HttpServlet {
 		
 		RequestDispatcher view = null;
 		ShareFile sf = null;
-		
+		System.out.println("???DFD");
 		if(!ServletFileUpload.isMultipartContent(request)){
 			view = request.getRequestDispatcher("views/group/groupFileShare/fileshareError.jsp");
 			request.setAttribute("message", "form의 enctype속성 누락");
@@ -60,12 +60,14 @@ public class ShareFileUpdateServlet extends HttpServlet {
 			
 			MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 			
+			int fileno = Integer.parseInt(mrequest.getParameter("fileno"));
 			String title = mrequest.getParameter("title");
 			int userno = Integer.parseInt(mrequest.getParameter("user_no"));
 			String content = mrequest.getParameter("content");
 			int accessno = Integer.parseInt(mrequest.getParameter("access_no"));
 			int groupno = Integer.parseInt(mrequest.getParameter("group_no"));
 			
+			System.out.println(fileno + "fileno");
 			String originalFileName = mrequest.getFilesystemName("upfile");
 			
 			if(originalFileName !=null){
@@ -96,13 +98,14 @@ public class ShareFileUpdateServlet extends HttpServlet {
 					fout.close();
 					originalFile.delete();
 			}
-				sf = new ShareFile(title, content, originalFileName,renameFileName, userno, accessno, groupno);
+				sf = new ShareFile(fileno, title, content, originalFileName,renameFileName, userno, accessno, groupno);
 				
 			}else{
-				sf = new ShareFile(title, content, null,null, userno, accessno, groupno);
+				sf = new ShareFile(fileno, title, content, null,null, userno, accessno, groupno);
 			}
-			
-			if(new ShareFileService().insertShareFile(sf) > 0){
+			System.out.println("뭐가안되닌");
+			if(new ShareFileService().updateShareFile(sf) > 0){
+				System.out.println("dmdm"+sf);
 				response.sendRedirect("/studyhub/sharedfilepreview?groupno="+groupno);
 			}else{
 				view = request.getRequestDispatcher("views/group/groupFileShare/fileshareError.jsp");

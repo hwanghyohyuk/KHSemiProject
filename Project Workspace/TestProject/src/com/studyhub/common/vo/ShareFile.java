@@ -22,9 +22,10 @@ public class ShareFile implements java.io.Serializable{
 	
 	
 	
-	public ShareFile(String title, String content, String fileName, String renameFileName, int uploader, int accessNo,
+	public ShareFile(int fileNo, String title, String content, String fileName, String renameFileName, int uploader, int accessNo,
 			int groupNo) {
 		super();
+		this.fileNo = fileNo;
 		this.title = title;
 		this.content = content;
 		this.fileName = fileName;

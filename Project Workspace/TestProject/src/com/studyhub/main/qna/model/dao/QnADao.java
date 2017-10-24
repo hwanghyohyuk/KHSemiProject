@@ -132,7 +132,6 @@ public class QnADao {
 		} finally{
 			close(pstmt);
 		}
-		System.out.println("글삭제가 되나:"+result);
 		return result;
 	}
 
@@ -301,7 +300,7 @@ public class QnADao {
 		} finally{
 			close(pstmt);
 		}
-		System.out.println("삭제가 되나:"+result);
+
 		return result;
 	}
 

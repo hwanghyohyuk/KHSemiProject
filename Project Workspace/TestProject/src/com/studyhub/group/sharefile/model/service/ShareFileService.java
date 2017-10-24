@@ -66,6 +66,8 @@ public class ShareFileService {
 	}
 	
 	public void updateReadCount(int no){
+		Connection con = getConnection();
+		new ShareFileDao().updateReadCount(con, no);
 		
 	}
 }

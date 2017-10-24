@@ -26,42 +26,42 @@
 <div class="row" id="layout">
 		<div
 			class="col-lg-6 col-lg-offset-2 col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xm-6 col-xs-2" id="form-outline">
-			<h2>파일 공유 글쓰기</h2>
+			<h2>파일 공유글 수정하기</h2>
 			<br>
 			<form action="/studyhub/sharefileupdate" enctype="multipart/form-data" method="post">
-			<input type="hidden" name="fileno" value="<%= sf.getFileNo() %>">
-			<input type="hidden" name="ofile" value="<%= sf.getFileName() %>">
-			<input type="hidden" name="rfile" value="<%= sf.getRenameFileName() %>">
-				<div class="form-group">
-					<label for="title">제목</label> <input type="text"
-						class="form-control" id="post_title" name="title"
-						aria-describedby="emailHelp" value="<%=sf.getTitle()%>">
-				</div>
-				<div class="range">
-					<label for="Content">공개범위</label> <label class="radio-inline">
-						<input type="radio" name="access_no" id="inlineRadio1" value="1" checked>
-						전체공개
-					</label> <label class="radio-inline"> <input type="radio"
-						name="access_no" id="inlineRadio2" value="2"> 회원공개
-					</label>
-				</div>
-				<div class="upload">
-					<label for="upload">파일첨부</label>
-					<% if(sf.getFileName()!=null){ %>
-					<%=sf.getFileName() %>
-					<% } %>
-					<input type="file" name="upfile">
-				</div>
-				<div class="form-group">
-					<label for="Content">내용</label>
-					<textarea class="form-control" id="Textarea" rows="8"
-						name="content"><%=sf.getContent() %></textarea>
-				</div>
-
-				<input type="submit" value="제출하기" class="btn btn-info" id="btns">
-				<a href="/studyhub/sharefilelist">&nbsp;&nbsp;목록으로 이동</a> 
-				<input type="hidden" name="user_no" value="<%=user.getUserNo()%>">
-				<input type="hidden" name="group_no" value="<%= group.getGroupNo() %>">
+				<input type="hidden" name="fileno" value="<%= sf.getFileNo() %>">
+				<input type="hidden" name="ofile" value="<%= sf.getFileName() %>">
+				<input type="hidden" name="rfile" value="<%= sf.getRenameFileName() %>">
+					<div class="form-group">
+						<label for="title">제목</label> <input type="text"
+							class="form-control" id="post_title" name="title"
+							aria-describedby="emailHelp" value="<%=sf.getTitle()%>">
+					</div>
+					<div class="range">
+						<label for="Content">공개범위</label> <label class="radio-inline">
+							<input type="radio" name="access_no" id="inlineRadio1" value="1" checked>
+							전체공개
+						</label> <label class="radio-inline"> <input type="radio"
+							name="access_no" id="inlineRadio2" value="2"> 회원공개
+						</label>
+					</div>
+					<div class="upload">
+						<label for="upload">파일첨부</label>
+						<% if(sf.getFileName()!=null){ %>
+						<%=sf.getFileName() %>
+						<% } %>
+						<input type="file" name="upfile">
+					</div>
+					<div class="form-group">
+						<label for="Content">내용</label>
+						<textarea class="form-control" id="Textarea" rows="8"
+							name="content"><%=sf.getContent() %></textarea>
+					</div>
+	
+					<input type="submit" value="제출하기" class="btn btn-info" id="btns">
+					<a href="/studyhub/sharedfilepreview?groupno=<%=group.getGroupNo()%>">&nbsp;&nbsp;목록으로 이동</a> 
+					<input type="hidden" name="user_no" value="<%=user.getUserNo()%>">
+					<input type="hidden" name="group_no" value="<%= group.getGroupNo() %>">
 				
 			</form>
 		</div>
