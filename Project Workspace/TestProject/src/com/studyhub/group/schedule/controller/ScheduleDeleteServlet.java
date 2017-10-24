@@ -30,8 +30,13 @@ public class ScheduleDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		
+		int scheduleno = Integer.parseInt(request.getParameter("schedule_no"));
+		
+		if(new ScheduleService().deleteSchedule(scheduleno) > 0) {
+			response.sendRedirect("views/group/groupSchedule/ScheduleMain.jsp");
+		}
 	}
 
 	/**

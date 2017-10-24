@@ -21,9 +21,9 @@ public class ScheduleService {
 	}
 	
 	// 일정 등록
-	public int insertSchedule(int groupno){
+	public int insertSchedule(Schedule sc){
 		Connection con = getConnection();
-		int result = new ScheduleDao().insertSchedule(con, groupno);
+		int result = new ScheduleDao().insertSchedule(con, sc);
 		if(result > 0)
 			commit(con);
 		else
@@ -31,5 +31,34 @@ public class ScheduleService {
 		close(con);
 		return result;
 		
+	}
+
+	public ArrayList<Schedule> selectOne(int scheduleno) {
+		Connection con = getConnection();
+		ArrayList<Schedule> list = new ScheduleDao().selectOne(con, scheduleno);
+		close(con);
+		return list;
+	}
+
+	public int deleteSchedule(int scheduleno) {
+		Connection con = getConnection();
+		int result = new ScheduleDao().deleteSchedule(con, scheduleno);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+
+	public int updateSchedule(Schedule sc) {
+		Connection con = getConnection();
+		int result = new ScheduleDao().updateSchedule(con, sc);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
 	}
 }

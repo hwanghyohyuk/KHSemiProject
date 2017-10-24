@@ -6,12 +6,6 @@
 작성일자 17.10.18
  -->
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>스터디허브 StudyHub::QnA</title>
-
 <!-- java 구문 -->
 <%
 	QnA qna = (QnA) request.getAttribute("qna");
@@ -21,19 +15,19 @@
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
 <!--헤더 부분-->
-<%@ include file="/views/include/main/header.jsp"%>
 
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
 <link rel="stylesheet" type="text/css"
 	href="/studyhub/css/board_detail.css">
-<link rel="stylesheet" href="/studyhub/css/bootstrap.css">
 <link rel="stylesheet" href="/studyhub/css/detail.css">
 
-<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
+<!-- /head , body -->
+<%@ include file="/views/include/common/headend.jsp"%>
 
-</head>
-<body>
+<!--헤더 부분-->
+<%@ include file="/views/include/main/header.jsp"%>
 
+<!-- 메인 컨텐츠 -->
 	<!--- 글쓴거 보이는 화면  -->
 	<div class="row">
 	<h2 id="heading">QnA</h2>
@@ -160,7 +154,7 @@
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>
 	<!--페이지 끝-->
-	<%@ include file="/views/include/common/headend.jsp"%>
+<%@ include file="/views/include/common/tail.jsp" %>
 
 </body>
 </html>

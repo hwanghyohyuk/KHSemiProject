@@ -5,12 +5,10 @@
 내용 : FAQ 메인 페이지(메인에서 도움말 클릭했을 때의 화면)
 작성일자 17.10.17
  -->
+<!--페이지 시작-->
+<%@ include file="/views/include/common/head.jsp"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>스터디허브 StudyHub::FAQ</title>
+<!--자바스크립트 및 CSS-->
 <style>
 /* layout */
 .head-text {
@@ -77,22 +75,14 @@
 </style>
 
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
-<link rel="stylesheet" href="/studyhub/css/bootstrap.css">
 
-<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
-<!-- java 구문 -->
+<!-- /head , body -->
+<%@ include file="/views/include/common/headend.jsp"%>
 
-<!-- 초기화 블럭(변수선언 및 초기화) -->
-
-<!--페이지 시작-->
-<%@ include file="/views/include/common/head.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 
-</head>
-<body>
-
-	<!-- 메인 컨텐츠 -->
+<!-- 메인 컨텐츠 -->
 	<div class="notice">
 		<p id="notice">[공지] 공지사항은 여기에 ㅎㅎㅎㅎㅎㅎ</p>
 	</div>
@@ -138,8 +128,8 @@
 	
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>
-	<!--페이지 끝-->
-	<%@ include file="/views/include/common/headend.jsp"%>
+<!--페이지 끝-->
+<%@ include file="/views/include/common/tail.jsp" %>
 
 </body>
 </html>
