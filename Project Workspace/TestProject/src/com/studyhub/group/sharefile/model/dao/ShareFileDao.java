@@ -155,6 +155,7 @@ public class ShareFileDao {
 			pstmt.setString(2, sf.getContent());
 			pstmt.setString(3, sf.getFileName());
 			pstmt.setString(4, sf.getRenameFileName());
+			pstmt.setInt(5, sf.getFileNo());
 			
 			result = pstmt.executeUpdate(); 
 					
@@ -163,7 +164,31 @@ public class ShareFileDao {
 		} finally{
 			close(pstmt);
 		}
-		System.out.println("결과"+result);
+		
+		return result;
+	}
+	
+	public int updateTextOnly(Connection con, ShareFile sf){
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_share_file set title = ?, content = ?"
+				+"where file_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, sf.getTitle());
+			pstmt.setString(2, sf.getContent());
+			pstmt.setInt(3, sf.getFileNo());
+			System.out.println("여기로 오닝??? ");
+			result = pstmt.executeUpdate(); 
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
 		return result;
 	}
 	

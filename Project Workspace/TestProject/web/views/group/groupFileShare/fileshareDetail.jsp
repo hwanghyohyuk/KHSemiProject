@@ -15,8 +15,14 @@
 <%@ include file="/views/include/common/head.jsp"%>
 
 <!--자바스크립트 및 CSS-->
-<link rel="stylesheet" type="text/css"
-	href="/studyhub/css/board_detail.css">
+<link rel="stylesheet" type="text/css" href="/studyhub/css/board_detail.css">
+<link rel="stylesheet" href="/studyhub/css/bootstrap.min.css">
+<script src="/studyhub/js/bootstrap.min.js"></script>
+<script>
+	function check(){
+		return confirm("정말 삭제하시겠습니까?");
+	}
+</script>
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
 
@@ -26,7 +32,9 @@
 
 <!-- 메인 컨텐츠 -->
 <div class="row" >
+	<div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-8 col-sm-offset-1 col-xm-8 col-xs-1">
 	<h2 id="heading">Shared Files</h2>
+	</div>
 	<div id="inner"
 		class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-8 col-sm-offset-1 col-xm-8 col-xs-1">
 
@@ -41,26 +49,30 @@
 		</div>
 		<hr id="second-line">
 		
-		<div class="panel-body" id="content"><%=sf.getContent()%></div>
-		 <input
-			type="hidden" name="sfno" id="sfno" value="<%=sf.getFileNo()%>">
-		<input type="hidden" name="userno" id="userno"
-			value="<%=user.getUserNo()%>">
+		<div class="panel-body" id="content">
+		<% if(sf.getContent()==null){ %>
+		<% } else{ %>
+		<%=sf.getContent()%>
+		<% } %>
+		<input type="hidden" name="sfno" id="sfno" value="<%=sf.getFileNo()%>">
+		<input type="hidden" name="userno" id="userno" value="<%=user.getUserNo()%>">
 		<hr>
 		<% if(sf.getFileName()==null){ %>
 		<span>첨부파일 없음</span>
 		<% }else{ %>
-		&nbsp;&nbsp;&nbsp;<span>다운로드 받기: <a href="/studyhub/sharefiledown?ofile=<%=sf.getFileName() %>&rfile=<%=sf.getRenameFileName()%>"><%=sf.getFileName() %></a></span>
+		<span>다운로드 받기: <a href="/studyhub/sharefiledown?ofile=<%=sf.getFileName() %>&rfile=<%=sf.getRenameFileName()%>"><%=sf.getFileName() %></a></span>
 		<% } %>
-		
+		</div>
+		<hr>
 		<div class="sub-btns">
-		<a href="/studyhub/sharefilelist">목록으로 이동</a> 
+		<a href="/studyhub/sharedfilepreview?groupno=<%=group.getGroupNo()%>">목록으로 이동</a> 
 		
-		<a href="/studyhub/sharefiledelete?fileno=<%=sf.getFileNo()%>">
-		<button class="btn btn-default btn-sm" id="btns" data-method="post" data-confirm="진짜로삭제할거에요?">삭제</button></a> 
-			<a href="/studyhub/sharefileupdateview?no=<%=sf.getFileNo()%>">
-			<button class="btn btn-default btn-sm" id="btns">수정</button>
-		</a>
+		<a href="/studyhub/sharefileupdateview?no=<%=sf.getFileNo()%>">
+			<button class="btn btn-default btn-sm" id="btns">수정</button></a>
+		<a href="/studyhub/sharefiledelete?fileno=<%=sf.getFileNo()%>&groupno=<%=group.getGroupNo()%>"
+		 onclick="return check();">
+		<button class="btn btn-default btn-sm" id="btns">삭제</button></a> 
+			
 		</div>
 	</div>
 </div>

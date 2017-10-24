@@ -14,8 +14,10 @@
 <%@ include file="/views/include/common/head.jsp"%>
 
 <!--자바스크립트 및 CSS-->
-<link rel="stylesheet" type="text/css"
-	href="/studyhub/css/fileshareList.css">
+<link rel="stylesheet" type="text/css" href="/studyhub/css/fileshareList.css">
+<link rel="stylesheet" href="/studyhub/css/bootstrap.min.css">
+<script src="/studyhub/js/bootstrap.min.js"></script>
+
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
 
@@ -28,12 +30,25 @@
 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
 	<!-- Tab -->
 	<div class="category-tab">
-		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="#">tab1</a></li>
-			<li role="presentation"><a href="#">tab2</a></li>
-			<li role="presentation"><a href="#">+</a></li>
-		</ul>
+		<ul class="nav nav-tabs" role="tablist">
+		    <li role="presentation" class="active"><a href="#reading" aria-controls="reading" role="tab" data-toggle="tab">Reading</a></li>
+		    <li role="presentation"><a href="#listening" aria-controls="listening" role="tab" data-toggle="tab">listening</a></li>
+		    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+		    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">+</a></li>
+		 </ul>
 	</div>
+	
+	<div role="tabpanel">
+  	<!-- Tab panes -->
+	  <div class="tab-content">
+	    <div role="tabpanel" class="tab-pane active" id="Reading">...</div>
+	    <div role="tabpanel" class="tab-pane" id="Listening">...</div>
+	    <div role="tabpanel" class="tab-pane" id="blabla">message?s</div>
+	    <div role="tabpanel" class="tab-pane" id="+">...</div>
+	  </div>
+	</div>
+	
+	
 
 	<!-- file boxes  -->
 	<div class="fileboxes">
@@ -47,16 +62,29 @@
 	%>
 	
 		<div class="filebox">
-			<h4><a href="/studyhub/sharefiledetail?sfno=<%=sf.getFileNo() %>"><%=sf.getTitle()%></a></h4>
-			<p><%=sf.getContent()%></p>
+			<span id="title">
+			<a href="/studyhub/sharefiledetail?sfno=<%=sf.getFileNo() %>">
+			<% if(sf.getTitle().length()>9){ %>
+			<%=sf.getTitle().substring(0, 9) %>..
+			<% }else{ %>
+			<%=sf.getTitle()%>
+			<% } %>
+			</a></span>
+			
 			<hr>
 			 <h6><%=sf.getUserName()%></h6> 
-			 <h6><%=sf.getUploadDate()%></h6> 
-			<h6><%=sf.getFileName()%>
-				| 다운로드수:
-				<%=sf.getDownloadCount()%></h6>
+			 <h6><%=sf.getUploadDate()%> | 다운로드수:
+				<%=sf.getDownloadCount()%> </h6> 
+			<h6 id="filename">
+			<% if(sf.getFileName().length()>15){ %>
+			<%=sf.getFileName().substring(0, 15) %>..
+			<% }else{ %>
+			<%=sf.getFileName()%>
+			<% } %>
+			</h6>
 			<h6>
-				<button id="download">download</button>
+				<a href="/studyhub/sharefiledown?ofile=<%=sf.getFileName() %>&rfile=<%=sf.getRenameFileName()%>">
+				<button id="download" onclick="download();">download</button></a>
 			</h6>
 		</div>
 

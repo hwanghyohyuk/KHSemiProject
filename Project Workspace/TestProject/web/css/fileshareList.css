@@ -4,8 +4,10 @@ body{
 	background: #f4f4f4;
 }
 
-h4{
+#title{
 	cursor: pointer;
+	color: #0789a3;
+	font-size: 2rem;
 }
 .category-tab{
 	margin: 3vw;
@@ -39,6 +41,9 @@ h4{
 		rgba(0, 0, 0, 0.23);
 }
 
+#filename{
+	font-weight: bold;
+}
 #download {
 	background: #004157;
 	color: white;
@@ -48,6 +53,7 @@ h4{
 	width: 6vw;
 	height: 4vh;
 }
+
 
 #plus-img{
 	width: 7vw;

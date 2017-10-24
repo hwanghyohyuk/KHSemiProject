@@ -14,6 +14,8 @@
 
 <!--자바스크립트 및 CSS-->
 <link rel="stylesheet" type="text/css" href="/studyhub/css/write_form.css">
+<link rel="stylesheet" href="/studyhub/css/bootstrap.min.css">
+	<script src="/studyhub/js/bootstrap.min.js"></script>
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
 
