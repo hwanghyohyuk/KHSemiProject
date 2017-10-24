@@ -44,6 +44,9 @@ public class GMainPreviewServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		int group_no = Integer.parseInt(request.getParameter("group_no"));
+		int user_no = 0;
+		if(request.getParameter("user_no") != null)
+			user_no = Integer.parseInt(request.getParameter("user_no"));
 		int reset = Integer.parseInt(request.getParameter("reset"));
 		
 		Group group = null;
@@ -66,7 +69,7 @@ public class GMainPreviewServlet extends HttpServlet {
 				out.close();
 			}
 		}else{
-			group = new GMainService().SelectGroup(group_no);
+			group = new GMainService().SelectGroup(group_no, user_no);
 			if(group != null){
 				HttpSession session = request.getSession();
 				session.setAttribute("group",group);
