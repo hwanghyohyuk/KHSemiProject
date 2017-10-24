@@ -7,47 +7,59 @@ public class Board implements java.io.Serializable {
 	private int boardNo;
 	private String title;
 	private String content;
-	private Date uploadDate;
 	private int uploader;
 	private String uploaderName;
-	private String boardOriginalFileName;
-	private String boardRenameFileName;
+	private Date uploadDate;
+	private Date deadlineDate;
+	private String status;
+	private int groupNo;
+	private String groupName;
+	private String location;
+	private String categoryName;
+	private String attributeName;
+	private String gImgRename;
 
 	public Board() {
 		super();
 	}
 
-	public Board(int boardNo, String title, String content, Date uploadDate, int uploader, String boardOriginalFileName,
-			String boardRenameFileName) {
+	public Board(int boardNo, String title, String content, int uploader, String uploaderName, Date uploadDate,
+			Date deadlineDate, String status, String groupName, String location, String categoryName,
+			String attributeName, String gImgRename) {
 		super();
 		this.boardNo = boardNo;
 		this.title = title;
 		this.content = content;
-		this.uploadDate = uploadDate;
 		this.uploader = uploader;
-		this.boardOriginalFileName = boardOriginalFileName;
-		this.boardRenameFileName = boardRenameFileName;
-	}
-
-	public Board(int boardNo, String title, String content, Date uploadDate, String uploaderName,
-			String boardOriginalFileName, String boardRenameFileName) {
-		super();
-		this.boardNo = boardNo;
-		this.title = title;
-		this.content = content;
-		this.uploadDate = uploadDate;
 		this.uploaderName = uploaderName;
-		this.boardOriginalFileName = boardOriginalFileName;
-		this.boardRenameFileName = boardRenameFileName;
+		this.uploadDate = uploadDate;
+		this.deadlineDate = deadlineDate;
+		this.status = status;
+		this.groupName = groupName;
+		this.location = location;
+		this.categoryName = categoryName;
+		this.attributeName = attributeName;
+		this.gImgRename = gImgRename;
 	}
 
-	public Board(String title, String content, int uploader, String boardOriginalFileName, String boardRenameFileName) {
+	public Board(int boardNo, String title, String content, int uploader, String uploaderName, Date uploadDate,
+			Date deadlineDate, String status, int groupNo, String groupName, String location, String categoryName,
+			String attributeName, String gImgRename) {
 		super();
+		this.boardNo = boardNo;
 		this.title = title;
 		this.content = content;
 		this.uploader = uploader;
-		this.boardOriginalFileName = boardOriginalFileName;
-		this.boardRenameFileName = boardRenameFileName;
+		this.uploaderName = uploaderName;
+		this.uploadDate = uploadDate;
+		this.deadlineDate = deadlineDate;
+		this.status = status;
+		this.groupNo = groupNo;
+		this.groupName = groupName;
+		this.location = location;
+		this.categoryName = categoryName;
+		this.attributeName = attributeName;
+		this.gImgRename = gImgRename;
 	}
 
 	public int getBoardNo() {
@@ -74,14 +86,6 @@ public class Board implements java.io.Serializable {
 		this.content = content;
 	}
 
-	public Date getUploadDate() {
-		return uploadDate;
-	}
-
-	public void setUploadDate(Date uploadDate) {
-		this.uploadDate = uploadDate;
-	}
-
 	public int getUploader() {
 		return uploader;
 	}
@@ -98,26 +102,76 @@ public class Board implements java.io.Serializable {
 		this.uploaderName = uploaderName;
 	}
 
-	public String getBoardOriginalFileName() {
-		return boardOriginalFileName;
+	public Date getUploadDate() {
+		return uploadDate;
 	}
 
-	public void setBoardOriginalFileName(String boardOriginalFileName) {
-		this.boardOriginalFileName = boardOriginalFileName;
+	public void setUploadDate(Date uploadDate) {
+		this.uploadDate = uploadDate;
 	}
 
-	public String getBoardRenameFileName() {
-		return boardRenameFileName;
+	public Date getDeadlineDate() {
+		return deadlineDate;
 	}
 
-	public void setBoardRenameFileName(String boardRenameFileName) {
-		this.boardRenameFileName = boardRenameFileName;
+	public void setDeadlineDate(Date deadlineDate) {
+		this.deadlineDate = deadlineDate;
 	}
 
-	@Override
-	public String toString() {
-		return "Board [boardNo=" + boardNo + ", title=" + title + ", content=" + content + ", uploadDate=" + uploadDate
-				+ ", uploader=" + uploader + ", uploaderName=" + uploaderName + "]";
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public int getGroupNo() {
+		return groupNo;
+	}
+
+	public void setGroupNo(int groupNo) {
+		this.groupNo = groupNo;
+	}
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public String getAttributeName() {
+		return attributeName;
+	}
+
+	public void setAttributeName(String attributeName) {
+		this.attributeName = attributeName;
+	}
+
+	public String getgImgRename() {
+		return gImgRename;
+	}
+
+	public void setgImgRename(String gImgRename) {
+		this.gImgRename = gImgRename;
 	}
 
 }

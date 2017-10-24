@@ -20,6 +20,15 @@
 %>
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
+<!--자바스크립트 및 CSS-->
+<style>
+#groupimg{
+width:100px;
+height:100px;
+}
+</style>
+<!-- /head , body -->
+<%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 
@@ -36,18 +45,26 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>번호</th>
+					<th>그룹이미지</th>
+					<th>분류</th>
+					<th>그룹명</th>
 					<th>제목</th>
 					<th>작성자</th>
 					<th>작성일</th>
+					<th>마감일</th>					
+					<th>상태</th>
+					<th>지역</th>				
+					<th>스터디방식</th>					
 				</tr>
 			</thead>
+			<tbody>
 			<%
 				for (Board b : list) {
-			%>
-			<tbody>
+			%>			
 				<tr>
-					<td><%=b.getBoardNo()%></td>
+					<td><img id="groupimg" src="/imamges/groupimg/<%=b.getgImgRename()%>" style></td>
+					<td><%=b.getCategoryName() %></td>
+					<td><%=b.getGroupName() %></td>
 					<td>
 						<%
 							if (user != null) {
@@ -58,9 +75,13 @@
 					</td>
 					<td><%=b.getUploaderName()%></td>
 					<td><%=b.getUploadDate()%></td>
-				</tr>
-			</tbody>
+					<td><%=b.getDeadlineDate() %></td>
+					<td><%=b.getStatus() %></td>
+					<td><%=b.getLocation() %></td>
+					<td><%=b.getAttributeName() %></td>
+				</tr>			
 			<%}%>
+			</tbody>
 		</table>
 	</div>
 	<hr>
@@ -134,4 +155,4 @@
 <%@ include file="/views/include/main/footer.jsp"%>
 
 <!--페이지 끝-->
-<%@ include file="/views/include/common/headend.jsp"%>
+<%@ include file="/views/include/common/tail.jsp"%>

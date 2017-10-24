@@ -40,16 +40,29 @@ public class BoardDao {
 	}
 
 	public ArrayList<Board> selectList(Connection con, int currentPage, int limit) {
-		// 한 페이지에 출력할 게시글 목록 조회용
 		ArrayList<Board> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		
+		String query = "select * from("
+				+ "select rownum rnum, board_no, title, user_name, content, upload_date, deadline_date, "
+				+ "case when deadline_date > sysdate then '모집중' "
+				+ "else '마감' end as status "
+				+ ", group_name, location, category_name, attribute_name, g_img_rename "
+				+ "from "
+				+ "(select * "
+				+ "from tb_board "
+				+ "join tb_user on (tb_board.uploader=tb_user.user_no) "
+				+ "join tb_ung using(user_no) "
+				+ "join tb_group using(group_no) "
+				+ "join tb_on_off using(attribute_no) "
+				+ "join tb_category using(category_no) "
+				+ "join (select group_no, count(*) as memberCount "
+				+ "from tb_ung group by group_no) using(group_no) "
+				+ "where authority_no=(select authority_no "
+				+ "from tb_authority where authority_name='그룹장') "
+				+ "order by board_no desc)) where rnum >= ? and rnum <= ?";
 
-		// currentPage 에 해당되는 목록만 조회
-		String query = "select * from (select rownum rnum, board_no, title, user_name, content, upload_date from (select * from tb_board join tb_user on(tb_board.uploader=tb_user.user_no) order by board_no desc)) where rnum >= ? and rnum <= ?";
-		/* + "board_original_filename, " */
-		/* + "board_rename_filename, " */
-		/* + "board_readcount " */
 
 		int startRow = (currentPage - 1) * limit + 1;
 		int endRow = startRow + limit - 1;
@@ -66,15 +79,19 @@ public class BoardDao {
 
 				while (rset.next()) {
 					Board b = new Board();
-
+					
 					b.setBoardNo(rset.getInt("board_no"));
 					b.setTitle(rset.getString("title"));
 					b.setUploaderName(rset.getString("user_name"));
 					b.setContent(rset.getString("content"));
 					b.setUploadDate(rset.getDate("upload_date"));
-					// b.setBoardReadCount(rset.getInt("board_readcount"));
-					// b.setBoardOriginalFileName(rset.getString("board_original_filename"));
-					// b.setBoardRenameFileName(rset.getString("board_rename_filename"));
+					b.setDeadlineDate(rset.getDate("upload_date"));
+					b.setStatus(rset.getString("status"));
+					b.setGroupName(rset.getString("group_name"));
+					b.setLocation(rset.getString("location"));
+					b.setCategoryName(rset.getString("category_name"));
+					b.setAttributeName(rset.getString("attribute_name"));
+					b.setgImgRename(rset.getString("g_img_rename"));
 
 					list.add(b);
 				}
@@ -129,7 +146,7 @@ public class BoardDao {
 				board.setBoardNo(rset.getInt("board_no"));
 				board.setTitle(rset.getString("title"));
 				board.setContent(rset.getString("content"));
-				board.setUploadDate(rset.getDate("upload_date"));
+				//board.setUploadDate(rset.getDate("upload_date"));
 				board.setUploaderName(rset.getString("user_name"));
 			}
 
