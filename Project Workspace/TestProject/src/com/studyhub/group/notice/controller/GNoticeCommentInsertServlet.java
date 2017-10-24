@@ -1,4 +1,4 @@
-package com.studyhub.group.sharefile.controller;
+package com.studyhub.group.notice.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,23 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.ShareFile;
-import com.studyhub.group.sharefile.model.service.ShareFileService;
-
 /**
- * Servlet implementation class ShareFileCreateServlet
+ * Servlet implementation class GNoticeCommentInsertServlet
  */
-@WebServlet("/sharefilecreate")
-public class ShareFileCreateServlet extends HttpServlet {
+@WebServlet("/gnoticecommentinsert")
+public class GNoticeCommentInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private ShareFileService sfs;
-	private ShareFile shareFile;
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShareFileCreateServlet() {
+    public GNoticeCommentInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

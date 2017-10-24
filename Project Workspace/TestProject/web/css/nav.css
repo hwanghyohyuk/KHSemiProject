@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+#nav_ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+#nav_text {
+	color: white;
+	font-weight: bold;
+}
+
+#nav_li {
+	text-align: center;
+	margin-top: 30px;
+}
+
+#nav_menu {
+	background-color: #004157;
+	position: relative;
+	font-size: 15pt;
+	float: left;
+	left: 0%;
+	top: 0px;;
+	text-align: center;
+	height: 87vh;
+	padding-top: 0px;
+}

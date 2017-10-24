@@ -180,5 +180,45 @@ public class GMainDao {
 		return list;
 	}
 
+
+	public ArrayList<ShareFile> selectGroupShareFile(Connection con, int groupno) {
+ArrayList<ShareFile> list = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select file_no, title, user_name, content, upload_date, originalfilename, downloadcount" +
+					" from tb_share_file" +
+					" join tb_user on (tb_share_file.uploader=tb_user.user_no)" +
+					" where group_no = ? order by file_no desc";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null){
+				list = new ArrayList<ShareFile>();
+				while(rset.next()) {
+					ShareFile sf = new ShareFile();
+					sf.setFileNo(rset.getInt("file_no"));
+					sf.setTitle(rset.getString("title"));
+					sf.setUserName(rset.getString("user_name"));
+					sf.setContent(rset.getString("content"));
+					sf.setUploadDate(rset.getDate("upload_date"));
+					sf.setFileName(rset.getString("originalfilename"));
+					sf.setDownloadCount(rset.getInt("downloadcount"));
+					list.add(sf);
+					System.out.println("bbbb"+ rset.getInt("file_no"));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 	
 }

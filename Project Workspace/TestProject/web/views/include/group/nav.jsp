@@ -4,52 +4,14 @@
 	Group group = (Group)session.getAttribute("group");
 %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>studyHub</title>
-<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
-<style type="text/css">
-	ul {  
-		list-style:none;
-		padding-left: 0;
-	}
-	
-	ul li #nav_text {
-		color: white;
-		font-weight: bold;
-	
-	}
-	
-	ul li {
-		text-align: center;
-		margin-top: 30px;		
-	}
-	
-	div#nav_menu {
-		background-color: #004157;
-		position: relative;
-		font-size: 15pt;
-		float:left;
-		left: 0%; 
-		top: 0px;; 
-		text-align:center; 
-		height: 87vh;
-		padding-top: 0px;
-	}
-</style>
-
-</head>
-<body>
 <div id="nav_menu">
-<ul class="nav nav-stacked">
-	<li><a href="/studyhub/gmainpreview?group_no=<%= group.getGroupNo() %>&reset=0" id="nav_text">[<%= group.getGroupName() %>]</a></li>
-	<li><a href="/studyhub/gnoticepreview?groupno=<%=group.getGroupNo() %>" id="nav_text">공지사항</a></li>
-	<li><a href="/studyhub/schedulepreview?group_no=<%= group.getGroupNo() %>" id="nav_text">스터디일정</a></li>
-	<li><a href=# id="nav_text">파일공유</a></li>
-	<li><a href="/studyhub/gboardpreview?groupno=<%= group.getGroupNo() %>" id="nav_text">자유게시판</a></li>
-	<li><a href="/studyhub/gqnapreview" id="nav_text">Q&A</a></li>
+<ul class="nav nav-stacked" id="nav_ul">
+	<li id="nav_li"><a href="/studyhub/gmainpreview?group_no=<%= group.getGroupNo() %>&reset=0" id="nav_text">[<%= group.getGroupName() %>]</a></li>
+	<li id="nav_li"><a href="/studyhub/gnoticepreview?groupno=<%=group.getGroupNo() %>" id="nav_text">공지사항</a></li>
+	<li id="nav_li"><a href="/studyhub/schedulepreview?group_no=<%= group.getGroupNo() %>" id="nav_text">스터디일정</a></li>
+	<li id="nav_li"><a href="/studyhub/sharedfilepreview?groupno=<%= group.getGroupNo() %>" id="nav_text">파일공유</a></li>
+	<li id="nav_li"><a href="/studyhub/gboardpreview?groupno=<%= group.getGroupNo() %>" id="nav_text">자유게시판</a></li>
+	<li id="nav_li"><a href="/studyhub/gqnapreview" id="nav_text">Q&A</a></li>
 </ul>
 </div>
 
@@ -62,6 +24,3 @@
 			});
 	});
 </script>
-
-</body>
-</html>    

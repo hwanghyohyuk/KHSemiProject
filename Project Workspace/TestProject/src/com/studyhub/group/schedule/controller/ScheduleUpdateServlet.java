@@ -31,8 +31,21 @@ public class ScheduleUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+request.setCharacterEncoding("utf-8");
+		
+		Schedule sc = new Schedule();
+		
+		sc.setScheduleNo(Integer.parseInt(request.getParameter("schedule_no")));
+		sc.setMeetingDate(request.getParameter("modaldate"));
+		sc.setAmpm(request.getParameter("modalampm"));
+		sc.setHour(request.getParameter("modalhour"));
+		sc.setMinute(request.getParameter("modalminute"));
+		sc.setOnoff(request.getParameter("modalonoff"));
+		sc.setMeetingName(request.getParameter("modalcontent"));
+		
+		if(new ScheduleService().updateSchedule(sc) > 0){
+			response.sendRedirect("views/group/groupSchedule/ScheduleMain.jsp");
+		}
 	}
 
 	/**

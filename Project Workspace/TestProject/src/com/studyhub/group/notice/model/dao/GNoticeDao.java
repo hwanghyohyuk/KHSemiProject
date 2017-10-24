@@ -23,7 +23,7 @@ public class GNoticeDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = "select * from tb_g_notice order by tb_g_notice desc";
+		String query = "select * from tb_g_notice order by notice_no desc";
 		try{
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);
@@ -58,7 +58,7 @@ public class GNoticeDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = "select * from tb_g_notice order by tb_g_notice desc";
+		String query = "select * from tb_g_notice order by notice_no desc";
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
@@ -95,7 +95,7 @@ public class GNoticeDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select*from gnotice where gnotice_no";
+		String query = "select * from gnotice where gnotice_no = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -171,6 +171,7 @@ public class GNoticeDao {
 	}
 
 
+	//Comment
 	
 	
 	

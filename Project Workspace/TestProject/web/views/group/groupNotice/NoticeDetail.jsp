@@ -1,38 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import=com.studyhub.common.vo.GNotice"%>
+	pageEncoding="UTF-8" %>
 <!-- 
 작성자 : 윤찬호
 내용 : 그룹 공지 상세보기 페이지
 작성일자 17.10.19
  -->
 <!-- java 구문 -->
+<%@ page import="com.studyhub.common.vo.GNotice" %>
+
+<!-- 초기화 블럭(변수선언 및 초기화) -->
 <%
 	GNotice gNotice = (GNotice) request.getAttribute("gnotice");
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>StudyHub :: 상세보기</title>
-<!-- 초기화 블럭(변수선언 및 초기화) -->
-
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
+<%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
-<!--네비게이션 바 -->
 <%@ include file="/views/include/group/nav.jsp"%>
-<style>
-</style>
-<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
-
-<link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
-<link rel="stylesheet" href="/studyhub/css/bootstrap.css">
-
-</head>
 <!-- 메인 컨텐츠 -->
 
 <!--- 글쓴거 보이는 화면  -->
+<div class = "row">
 <div class="panel panel-info" style="width: 80vw; margin: 3vh 10vw">
 	<div class="panel-heading">
 		<h3 class="panel-title">제목</h3>
@@ -76,9 +65,8 @@
 </table>
 
 
-<!-- /메인 컨텐츠 -->
 
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
 <!--페이지 끝-->
-<%@ include file="/views/include/common/headend.jsp"%>
+<%@ include file="/views/include/common/tail.jsp" %>

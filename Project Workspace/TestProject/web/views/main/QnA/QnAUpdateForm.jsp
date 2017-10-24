@@ -5,12 +5,6 @@
 내용 : QnA질문 수정 페이지  
 작성일자 17.10.19
  -->
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>질문하기::StudyHub</title>
-
 <!-- java 구문 -->
 <%
 	QnA qna = (QnA) request.getAttribute("qna");
@@ -20,9 +14,8 @@
 
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
-<!--헤더 부분-->
-<%@ include file="/views/include/main/header.jsp"%>
 
+<!--자바스크립트 및 CSS-->
 <style>
 #btns {
 	float: right;
@@ -35,13 +28,13 @@
 
 
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
-<link rel="stylesheet" href="/studyhub/css/bootstrap.css">
+<!-- /head , body -->
+<%@ include file="/views/include/common/headend.jsp"%>
 
-<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
+<!--헤더 부분-->
+<%@ include file="/views/include/main/header.jsp"%>
 
-</head>
 <!-- 메인 컨텐츠 -->
-<body>
 
 	<div class="row" id="layout">
 		<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
@@ -77,6 +70,6 @@
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>
 	<!--페이지 끝-->
-	<%@ include file="/views/include/common/headend.jsp"%>
+<%@ include file="/views/include/common/tail.jsp" %>
 </body>
 </html>

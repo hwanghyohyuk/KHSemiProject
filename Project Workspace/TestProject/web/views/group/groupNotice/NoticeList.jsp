@@ -1,45 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-	import="java.util.*, com.studyhub.common.vo.GNotice"%>
+	pageEncoding="UTF-8"%>
+	
 <!-- 
 작성자 : 윤찬호
 내용 : 그룹공지 게시판 리스트 페이지
 작성일자 17.10.19
  -->
 <!-- java 구문 -->
+<%@ page import="java.util.*, com.studyhub.common.vo.GNotice"%>
+<!-- 초기화 블럭(변수선언 및 초기화) -->
 <%
 	ArrayList<GNotice> list = (ArrayList<GNotice>) request.getAttribute("list");
 %>
 
-<!-- 초기화 블럭(변수선언 및 초기화) -->
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>그룹공지::StudyHub</title>
-<script type="text/javascript">
-	function insertPage() {
-		location.href = "/studyhub/views/group/groupNotice/NoticeWriteForm.jsp";
-	}
-</script>
-<!--헤더 부분-->
+<!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
-<%@ include file="/views/include/main/header.jsp"%>
-<!-- 그룹 네비게이션바 -->
-<%@ include file="/views/include/group/nav.jsp"%>
+
 <style>
 #btns {
 	float: right;
 }
 </style>
 
-<link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
-<link rel="stylesheet" href="/studyhub/css/bootstrap.css">
+<script type="text/javascript">
+	function insertPage() {
+		location.href = "/studyhub/views/group/groupNotice/NoticeWriteForm.jsp";
+	}
+</script>
 
-<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
-</head>
+<%@ include file="/views/include/common/headend.jsp"%>
+<!--헤더 부분-->
+<%@ include file="/views/include/main/header.jsp"%>
+<%@ include file="/views/include/group/nav.jsp"%>
+
 <!-- 메인 컨텐츠 -->
-<body>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<h2>공지사항</h2>
@@ -74,5 +68,4 @@
 
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>
-</body>
-</html>
+	

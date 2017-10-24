@@ -8,8 +8,10 @@
 <!-- java 구문 -->
 
 <!-- 초기화 블럭(변수선언 및 초기화) -->
+<%@ include file="/views/include/common/head.jsp"%>
 
 <link rel="stylesheet" href="/studyhub/css/bootstrap2-toggle.min.css"> <!-- 토글버튼 css -->
+<link rel="stylesheet" href="/studyhub/css/bootstrap.min.css">
 <script type="text/javascript" src="/studyhub/js/bootstrap2-toggle.js"></script> <!-- 토글버튼 js -->
 
 <style type="text/css">
@@ -51,11 +53,12 @@
 
 </style>
 <!--헤더 부분-->
-<%@ include file="/views/include/common/head.jsp"%>
+<%@ include file="/views/include/common/headend.jsp"%>
 <%@ include file="/views/include/main/header.jsp"%>
 <%@ include file="/views/include/group/nav.jsp" %>
-<!-- 메인 컨텐츠 -->
 
+
+<!-- 메인 컨텐츠 -->
 <div class="container col-lg-offset-2 col-md-offset-2 col-sm-offset-2">
 <div class="col-md-6 col-sm-6 col-sm-offset-3 col-md-offset-3">
 		<div class="btn btn-default btn-sm" id="serach">
@@ -85,15 +88,10 @@
 		<!-- ajax  -->
 	</div>
 </div>
-	
-	
-
-
 
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
-<!--페이지 끝-->
-<%@ include file="/views/include/common/headend.jsp"%>
+
 
 <script type="text/javascript">
 	$(function(){
@@ -199,5 +197,6 @@
 		selectQnA();
 	}
 </script>
-
+<!--페이지 끝-->
+<%@ include file="/views/include/common/tail.jsp"%>
 <!-- /동균 -->

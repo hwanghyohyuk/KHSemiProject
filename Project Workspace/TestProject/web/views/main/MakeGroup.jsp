@@ -5,7 +5,9 @@
 내용 : OO 페이지
 작성일자 17.10.02
  -->
-<!-- java 구문 -->
+<%@ include file="/views/include/common/head.jsp"%>
+<link rel="stylesheet" href="/studyhub/css/bootstrap2-toggle.min.css">
+<script type="text/javascript" src="/studyhub/js/bootstrap2-toggle.js"></script>
 
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 <style type="text/css">
@@ -27,9 +29,8 @@
 	}
 }
 </style>
-<!--페이지 시작-->
-<%@ include file="/views/include/common/head.jsp"%>
-<!--헤더 부분-->
+
+<%@ include file="/views/include/common/headend.jsp"%>
 <%@ include file="/views/include/main/header.jsp"%>
 
 <script type="text/javascript">

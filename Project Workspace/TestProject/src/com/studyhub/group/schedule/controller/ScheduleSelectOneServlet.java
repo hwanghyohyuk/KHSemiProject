@@ -17,20 +17,17 @@ import org.json.simple.JSONObject;
 import com.studyhub.common.vo.Schedule;
 import com.studyhub.group.schedule.model.service.ScheduleService;
 
-	
 /**
- * Servlet implementation class ScheduleListServlet
+ * Servlet implementation class ScheduleSelectOneServlet
  */
-@WebServlet("/schedulelist")
-public class ScheduleListServlet extends HttpServlet {
+@WebServlet("/scheduleselectone")
+public class ScheduleSelectOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	private Schedule schedule;
-	private ScheduleService scheduleService;
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ScheduleListServlet() {
+    public ScheduleSelectOneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,8 +38,8 @@ public class ScheduleListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		int groupno = Integer.parseInt(request.getParameter("group_no"));
-		ArrayList<Schedule> list = new ScheduleService().selectList(groupno);
+		int scheduleno = Integer.parseInt(request.getParameter("scheduleno"));
+		ArrayList<Schedule> list = new ScheduleService().selectOne(scheduleno);
 		
 		JSONObject json = new JSONObject();
 		JSONArray jarr = new JSONArray();
@@ -66,8 +63,6 @@ public class ScheduleListServlet extends HttpServlet {
 		out.print(json.toJSONString());
 		out.flush();
 		out.close();
-		
-		
 	}
 
 	/**
