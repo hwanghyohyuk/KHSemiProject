@@ -7,7 +7,10 @@ import java.util.HashMap;
 import com.studyhub.common.vo.GNComment;
 import com.studyhub.common.vo.GNotice;
 import com.studyhub.common.vo.Notice;
+import com.studyhub.common.vo.QComment;
 import com.studyhub.group.notice.model.dao.GNoticeDao;
+import com.studyhub.main.qna.model.dao.QnADao;
+
 import static com.studyhub.common.JDBCTemplate.*;
 
 public class GNoticeService {
@@ -62,6 +65,39 @@ public class GNoticeService {
 			rollback(conn);
 		close(conn);		
 		return result;
+	}
+	
+	// GNoticeComment
+
+	public int deleteComment(int cno) {
+		Connection con = getConnection();
+		int result = new GNoticeDao().deleteComment(con, cno);
+		if(result >0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+		
+	}
+
+	public int insertComment(int gnoticeno, String comment, int userno) {
+		Connection con = getConnection();
+		int result = new GNoticeDao().insertComment(con, gnoticeno, comment, userno);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+
+	public ArrayList<GNComment> selectcomment(int gnoticeno) {
+		Connection con = getConnection();
+		ArrayList<GNComment> list = new GNoticeDao().selectComment(con, gnoticeno);
+		close(con);
+		
+		return list;
 	}
 	
 	
