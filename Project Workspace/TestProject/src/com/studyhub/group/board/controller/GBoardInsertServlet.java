@@ -38,15 +38,18 @@ public class GBoardInsertServlet extends HttpServlet {
 				response.setContentType("text/html; charset=utf-8");
 				
 				RequestDispatcher view = null;
+				GBoard gboard = new GBoard();
+				
 				String title = request.getParameter("title");
 				String content = request.getParameter("content");
-				int userNo = Integer.parseInt(request.getParameter("user_no"));
+				String uploader = request.getParameter("uploader");
+				//int userNo = Integer.parseInt(request.getParameter("user_no"));
 				int accessNo = Integer.parseInt(request.getParameter("access_no"));
 				
-				GBoard gboard = new GBoard();
+				
 				gboard.setTitle(title);
 				gboard.setContent(content);
-				gboard.setUserNo(userNo);
+				gboard.setUploader(uploader);
 				gboard.setAccessNo(accessNo);
 				
 				

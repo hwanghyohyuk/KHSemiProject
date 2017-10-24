@@ -42,15 +42,14 @@ public class GBoardDao {
 		
 		String query = "insert into gboard values ("
 				+ "(select max(gboard_no) + 1 from gboard), "
-				+ "?, ?, ?, ?, ?, sysdate, default, 0, "
-				+ "(select max(gboard_no) + 1 from gboard), NULL, "
-				+ "default)";
+				+ "?, ?, sysdate, ?, ?, default, 1)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, b.getTitle());
-			pstmt.setString(2, b.getUploader());
-			pstmt.setString(3, b.getContent());
+			pstmt.setString(2, b.getContent());			
+			pstmt.setString(3, b.getUploader());
+			pstmt.setInt(4, b.getAccessNo());
 			
 			result = pstmt.executeUpdate();
 			

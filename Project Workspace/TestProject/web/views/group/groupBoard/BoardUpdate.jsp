@@ -39,25 +39,22 @@
 	<form action="/studyhub/gboardinsert" method="post">
 		<div class="form-group">
 			<label for="title">제목</label> <input type="text"
-			name="title"
 				class="form-control" id="exampleInputEmail1"
 				aria-describedby="emailHelp" placeholder="제목을 입력하세요">
 		</div>
 		<div class="range">
-		<label for="content">공개범위</label>
+		<label for="Content">공개범위</label>
 		<label class="radio-inline"> <input type="radio"
-			name="access_no" id="inlineRadio1" value="<%=gb.getAccessNo()%>">
+			name="option" id="inlineRadio1" value="option1">
 			전체공개
 		</label> <label class="radio-inline"> <input type="radio"
-			name="access_no" id="inlineRadio2" value="<%=gb.getAccessNo()%>">
+			name="option" id="inlineRadio2" value="option2">
 			회원공개
 		</label>
-		<input type="hidden" name="Uploader" value="<%=user.getUserName()%>">
 		</div>
 		<div class="form-group">
 			<label for="Content">내용</label>
 			<textarea class="form-control" id="Textarea" rows="15"
-			name="content"
 				placeholder="내용을 입력하세요"></textarea>
 		</div>
 		<input type="submit" value="제출하기" id="btns">
