@@ -39,10 +39,35 @@
 		<div class="form-group">
 			<label for="groupname" class="col-sm-2 control-label">모집 그룹</label>
 			<div class="col-sm-4">
-				<select class="form-control">
-					<option>온라인 스터디</option>
-					<option>오프라인 스터디</option>
+			<%if(user!=null){ %>			
+				<select class="form-control" id="bglist" name="bglist">
+					<!--ajax -->
 				</select>
+				
+				<script type="text/javascript">
+						$(function(){
+							var userno = "<%= user.getUserNo()%>";
+							$.ajax({
+								url : "/studyhub/bgrouplist",
+								data : {
+									userno : userno
+								},
+								type : "get",
+								datatype : "json",
+								success : function(data) {
+									var json = JSON.parse(JSON.stringify(data));
+									var values = "";
+									for ( var i in json.list) {
+										values += "<option value="+json.list[i].group_no+">"
+												+ decodeURIComponent(json.list[i].group_name)
+												+ "</option>";
+										}
+									$("#bglist").html(values);
+								}
+							});
+						});
+					</script>
+				<%}%> 
 			</div>
 			<label for="deadline" class="col-sm-2 control-label">마감 날짜</label>
 			<div class="col-sm-4">
