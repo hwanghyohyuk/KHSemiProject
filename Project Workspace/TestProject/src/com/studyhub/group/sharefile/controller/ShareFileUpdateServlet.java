@@ -47,12 +47,13 @@ public class ShareFileUpdateServlet extends HttpServlet {
 		
 		RequestDispatcher view = null;
 		ShareFile sf = null;
+		int returnedResult = 0;
 		
 		if(!ServletFileUpload.isMultipartContent(request)){
 			view = request.getRequestDispatcher("views/group/groupFileShare/fileshareError.jsp");
 			request.setAttribute("message", "form의 enctype속성 누락");
 			view.forward(request, response);
-			
+		}	
 			int maxSize = 1024* 1024 * 10;
 			
 			String root = request.getSession().getServletContext().getRealPath("/");
@@ -60,14 +61,17 @@ public class ShareFileUpdateServlet extends HttpServlet {
 			
 			MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 			
+			int fileno = Integer.parseInt(mrequest.getParameter("fileno"));
 			String title = mrequest.getParameter("title");
 			int userno = Integer.parseInt(mrequest.getParameter("user_no"));
 			String content = mrequest.getParameter("content");
 			int accessno = Integer.parseInt(mrequest.getParameter("access_no"));
 			int groupno = Integer.parseInt(mrequest.getParameter("group_no"));
 			
-			String originalFileName = mrequest.getFilesystemName("upfile");
 			
+			String originalFileName = mrequest.getFilesystemName("upfile");
+			System.out.println("뭐가들어가니?" + originalFileName);
+			//첨부파일까지 같이 수정할때 
 			if(originalFileName !=null){
 				SimpleDateFormat sdf = 
 						new SimpleDateFormat("yyyyMMddHHmmss");
@@ -95,21 +99,24 @@ public class ShareFileUpdateServlet extends HttpServlet {
 					fin.close();
 					fout.close();
 					originalFile.delete();
-			}
-				sf = new ShareFile(title, content, originalFileName,renameFileName, userno, accessno, groupno);
-				
+				}
+				sf = new ShareFile(fileno, title, content, originalFileName,renameFileName, userno, accessno, groupno);
+				returnedResult = new ShareFileService().updateShareFile(sf);
 			}else{
-				sf = new ShareFile(title, content, null,null, userno, accessno, groupno);
+				//첨부파일은 그대로 두고 제목 내용만 수정할 때 
+				System.out.println("이리와야하는데 ㅠㅠㅠ ");
+				sf = new ShareFile(fileno, title, content);
+				returnedResult = new ShareFileService().updateTextOnly(sf);
 			}
-			
-			if(new ShareFileService().insertShareFile(sf) > 0){
+		
+			if(returnedResult > 0){
 				response.sendRedirect("/studyhub/sharedfilepreview?groupno="+groupno);
 			}else{
 				view = request.getRequestDispatcher("views/group/groupFileShare/fileshareError.jsp");
-				request.setAttribute("message", "서비스 : 글 수정 실패!");
+				request.setAttribute("message", "글 수정 실패!");
 				view.forward(request, response);
 			}
-		}
+		
 		
 	}
 

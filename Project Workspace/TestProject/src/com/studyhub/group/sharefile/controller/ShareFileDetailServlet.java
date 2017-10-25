@@ -36,7 +36,7 @@ public class ShareFileDetailServlet extends HttpServlet {
 		int sfno = Integer.parseInt(request.getParameter("sfno"));
 		ShareFileService sfservice = new ShareFileService();
 		
-		sfservice.updateReadCount(sfno);
+		
 		
 		ShareFile sf = sfservice.selectShareFile(sfno);
 		

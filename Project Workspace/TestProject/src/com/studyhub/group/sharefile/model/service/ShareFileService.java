@@ -61,11 +61,33 @@ public class ShareFileService {
 		close(con);
 		return result;
 	}
+
+
+	public int updateTextOnly(ShareFile sf) {
+		Connection con = getConnection();
+		int result = new ShareFileDao().updateTextOnly(con, sf);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+	
 	public ArrayList<ShareFile> selectSearch(String keyword){
 		return null;
 	}
-	
-	public void updateReadCount(int no){
+
+	public void addDownloadCount(String rfileName) {
+		Connection con = getConnection();
+		int result = new ShareFileDao().addDownloadCount(con, rfileName);
+		
+		if(result>0)
+			commit(con);
+		else rollback(con);
+		
+		close(con);
+		return;
 		
 	}
 }

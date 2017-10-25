@@ -14,6 +14,9 @@
 
 <!--자바스크립트 및 CSS-->
 <link rel="stylesheet" type="text/css" href="/studyhub/css/write_form.css">
+<link rel="stylesheet" href="/studyhub/css/bootstrap.min.css">
+<script src="/studyhub/js/bootstrap.min.js"></script>
+<script src="/studyhub/js/fileshareWriteform.js"></script>
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
 
@@ -32,7 +35,7 @@
 				<div class="form-group">
 					<label for="title">제목</label> <input type="text"
 						class="form-control" id="post_title" name="title"
-						aria-describedby="emailHelp" placeholder="제목을 입력하세요">
+						oninput="checkTitle()" placeholder="제목을 입력하세요" >
 				</div>
 				<div class="range">
 					<label for="Content">공개범위</label> <label class="radio-inline">
@@ -44,7 +47,8 @@
 				</div>
 				<div class="upload">
 					<label for="upload">파일첨부</label>
-					<input type="file" name="upfile">
+					<input type="file" name="upfile" id="file" onchange="checkFile()">
+					<h6>(첨부파일 용량제한: 10Mbyte)</h6>
 				</div>
 				<div class="form-group">
 					<label for="Content">내용</label>
@@ -52,8 +56,8 @@
 						name="content" placeholder="파일에 대한 설명을 입력하세요"></textarea>
 				</div>
 
-				<input type="submit" value="제출하기" class="btn btn-info" id="btns">
-				<a href="/studyhub/sharefilelist">&nbsp;&nbsp;목록으로 이동</a> 
+				<input type="submit" value="제출하기" class="btn btn-info" id="btns" disabled="disabled" >
+				<a href="/studyhub/sharedfilepreview?groupno=<%=group.getGroupNo()%>">&nbsp;&nbsp;목록으로 이동</a> 
 				<input type="hidden" name="user_no" value="<%=user.getUserNo()%>">
 				<input type="hidden" name="group_no" value="<%= group.getGroupNo() %>">
 				
