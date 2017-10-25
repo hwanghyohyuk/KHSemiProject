@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import com.studyhub.common.vo.Schedule;
 
 public class ScheduleDao {
-	
-	private Schedule schedule;
 
 	public ArrayList<Schedule> selectList(Connection con, int groupno) {
 		ArrayList<Schedule> list = null;
@@ -24,7 +22,6 @@ public class ScheduleDao {
 					 + " from tb_schedule"
 					 + " where group_no = ?"
 					 + " order by meeting_date asc";
-		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, groupno);
@@ -55,20 +52,20 @@ public class ScheduleDao {
 		return list;
 	}
 
-	public int insertSchedule(Connection con, Schedule sc) {
+	public int insertSchedule(Connection con, Schedule sc, String datetype) {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
 		
 		String query = "insert into tb_schedule values ("
 					+ " (select max(schedule_no)+1 from tb_schedule),"
-					+ " ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ " ?, ?, to_date(?, 'yyyy-MM-dd'), ?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sc.getGroupNo());
 			pstmt.setString(2, sc.getMeetingDate());
-			pstmt.setString(3, sc.getDatetypeDate());
+			pstmt.setString(3, datetype);
 			pstmt.setString(4, sc.getAmpm());
 			pstmt.setString(5, sc.getHour());
 			pstmt.setString(6, sc.getMinute());
@@ -181,7 +178,7 @@ public class ScheduleDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select schedule_no, meeting_name, datetypedate "
+		String query = "select schedule_no, meeting_name, to_char(datetypedate, 'yyyy-MM-dd')as datetype "
 					+ " from tb_schedule "
 					+ " where group_no = ?";
 		
@@ -196,8 +193,7 @@ public class ScheduleDao {
 					Schedule sc = new Schedule();
 					sc.setScheduleNo(rset.getInt("schedule_no"));
 					sc.setMeetingName(rset.getString("meeting_name"));
-					sc.setDatetypeDate(rset.getString("datetypedate"));
-					
+					sc.setDatetypeDate(rset.getString("datetype"));
 					list.add(sc);
 				}
 			}

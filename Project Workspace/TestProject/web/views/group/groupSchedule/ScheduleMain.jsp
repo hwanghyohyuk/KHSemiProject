@@ -160,6 +160,7 @@
 						<input type="text" id="modaldate" disabled>
 						<input type="hidden" id="sc_no">
 						<input type="hidden" id="datetype_date">
+						
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="modal-tag">시간</div>
 					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
@@ -248,7 +249,6 @@
 
 <script type="text/javascript">
 	var authority = "<%= group.getAuthorityNo() %>";
-	var group_no = "<%= group.getGroupNo() %>";
 	$(function() {
 		selectSchedule();
 		calendar();
@@ -256,31 +256,21 @@
 
 	/* 날짜 클릭 이벤트 발생 */
 	function calendar() {
+		var output = JSON.stringify(dateoutput());
+		console.log(output);
 		$("#calendar").fullCalendar({
-			/* editable : true,
 			eventLimit : true,
-			 */
 			 header: {
-		            left: 'prev,next',
+		            left: 'prev,today,next',
 		            center: 'title',
-		            right: 'month,agendaWeek,agendaDay'
-		     },      
-		     events: function (start, end, callback) {
-		            $.ajax({
-		                url: '/studyhub/json/static-calendar-events.json',
-		                datatype: 'json',
-		                success: function (data, text, request) {
-		                	var events = eval(data.jsonTxt);
-		                	callback(events);
-		                }
-		            });
-		        },
-			
+		            right: 'month'
+		     },
+		    events: dateoutput(),
 			dayClick : function(date, allDay, jsEvent, view) {
 				var yy = date.format("YYYY");
 				var mm = date.format("MM");
 				var dd = date.format("DD");
-				var datetype = date.format("YYYYMMDD");
+				var datetype = date.format("YYYY-MM-DD");
 				if (date.format("dd") == "Mo")
 					var ss = "월";
 				else if (date.format("dd") == "Tu")
@@ -315,6 +305,33 @@
 
 			}
 		});
+	}	
+	
+	/* 날짜에 일정 출력 */
+	function dateoutput(){
+		var group_no = "<%= group.getGroupNo() %>";
+		var jsonlist = new Array();
+		$.ajax({
+			url: "/studyhub/dateschedule",
+			data: { group_no: group_no },
+			type: "get",
+			dataType: "json",
+			async: false,
+			success: function(data){
+				var json = JSON.parse(JSON.stringify(data));
+				for ( var i in json.list) {
+					var jsondata = new Object();
+					jsondata.allDay = decodeURIComponent(json.list[i].allDay);
+					jsondata.editable = decodeURIComponent(json.list[i].editable); 
+					jsondata.start = decodeURIComponent(json.list[i].start);
+					jsondata.title = decodeURIComponent(json.list[i].title);
+					
+					jsonlist.push(jsondata);
+					console.log(jsondata);
+				}
+			}
+		});
+		return jsonlist;
 	}
 	
 	/* 일정 리스트클릭 */
@@ -378,7 +395,6 @@
 				$("#dkmodal").modal();
 			}
 		});
-		
 	}
 	
 	/* 일정 등록 */
@@ -444,7 +460,7 @@
 
 	/* 일정 셀렉트 */
 	function selectSchedule() {
-		var group_no = "<%=group.getGroupNo()%>";
+		var group_no = "<%= group.getGroupNo() %>";
 		$.ajax({
 					url : "/studyhub/schedulelist",
 					data : { group_no : group_no },

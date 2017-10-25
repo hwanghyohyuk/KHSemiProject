@@ -49,15 +49,11 @@ public class DateScheduleServlet extends HttpServlet {
 			JSONObject job = new JSONObject();
 			job.put("allDay", URLEncoder.encode("true", "UTF-8"));
 			job.put("editable", URLEncoder.encode("false", "UTF-8"));
-			job.put("end", URLEncoder.encode(sc.getDatetypeDate(), "UTF-8"));
-			job.put("id", sc.getScheduleNo());
 			job.put("start", URLEncoder.encode(sc.getDatetypeDate(), "UTF-8"));
 			job.put("title", URLEncoder.encode(sc.getMeetingName(), "UTF-8"));
 			
 			jarr.add(job);
 		}
-		System.out.println(jarr);
-		System.out.println(1);
 		
 		json.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");

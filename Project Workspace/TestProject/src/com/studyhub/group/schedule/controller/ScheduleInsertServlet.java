@@ -40,9 +40,9 @@ public class ScheduleInsertServlet extends HttpServlet {
 		sc.setMinute(request.getParameter("modalminute"));
 		sc.setOnoff(request.getParameter("modalonoff"));
 		sc.setMeetingName(request.getParameter("modalcontent"));
-		sc.setDatetypeDate(request.getParameter("datetype_date"));		
+		String datetype = request.getParameter("datetype_date");
 		
-		if(new ScheduleService().insertSchedule(sc) > 0){
+		if(new ScheduleService().insertSchedule(sc, datetype) > 0){
 			response.sendRedirect("views/group/groupSchedule/ScheduleMain.jsp");
 		}
 	}

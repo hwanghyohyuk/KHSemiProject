@@ -21,9 +21,9 @@ public class ScheduleService {
 	}
 	
 	// 일정 등록
-	public int insertSchedule(Schedule sc){
+	public int insertSchedule(Schedule sc, String datetype){
 		Connection con = getConnection();
-		int result = new ScheduleDao().insertSchedule(con, sc);
+		int result = new ScheduleDao().insertSchedule(con, sc, datetype);
 		if(result > 0)
 			commit(con);
 		else

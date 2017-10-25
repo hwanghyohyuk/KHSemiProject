@@ -46,7 +46,6 @@ public class GMainPreviewServlet extends HttpServlet {
 		int group_no = Integer.parseInt(request.getParameter("group_no"));
 		int reset = Integer.parseInt(request.getParameter("reset"));
 		int user_no = Integer.parseInt(request.getParameter("user_no"));
-		System.out.println(user_no);
 		
 		Group group = null;
 		RequestDispatcher view = null;
