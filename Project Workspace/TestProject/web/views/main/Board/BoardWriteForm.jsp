@@ -26,34 +26,46 @@
 		</h1>
 	</div>
 
-	<form class="form-horizontal" action="/studyhub/boardinsert" method="post" enctype="multipart/form-data">
+	<form class="form-horizontal" action="/studyhub/boardinsert"
+		method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="btitle" class="col-sm-2 control-label">제목</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" placeholder="제목" name="btitle" id="btitle">
+				<input type="text" class="form-control" placeholder="제목"
+					name="btitle" id="btitle">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="groupname" class="col-sm-2 control-label">모집 그룹</label>
+			<div class="col-sm-4">
+				<select class="form-control">
+					<option>온라인 스터디</option>
+					<option>오프라인 스터디</option>
+				</select>
+			</div>
+			<label for="deadline" class="col-sm-2 control-label">마감 날짜</label>
+			<div class="col-sm-4">
+				<input type="date" name="deadline" id="deadline">
 			</div>
 		</div>
 		<hr>
 		<div class="form-group">
 			<label for="bwriter" class="col-sm-2 control-label">작성자</label>
 			<div class="col-sm-10">
-				<input type="hidden" class="form-control" name="bwriterno" id="bwriterno" value="<%= user.getUserNo() %>">
-				<input type="text" readonly class="form-control" name="bwriter" id="bwriter" value="<%= user.getUserName() %>">
+				<input type="hidden" class="form-control" name="bwriterno"
+					id="bwriterno" value="<%=user.getUserNo()%>"> <input
+					type="text" readonly class="form-control" name="bwriter"
+					id="bwriter" value="<%=user.getUserName()%>">
 			</div>
 		</div>
 		<hr>
 		<div class="form-group">
 			<label for="bcontent" class="col-sm-2 control-label">내용</label>
 			<div class="col-sm-10">
-				<textarea class="form-control" rows="10" name="bcontent" id="bcontent"
-					placeholder="내용"></textarea>
+				<textarea class="form-control" rows="10" name="bcontent"
+					id="bcontent" placeholder="내용"></textarea>
 			</div>
-		</div>
-		<hr>
-		<div class="form-group">
-			<label for="fileupload" class="col-sm-2 control-label">파일
-				업로드</label> <input type="file" id="fileupload">
-			<p class="help-block"></p>
 		</div>
 		<hr>
 		<div class="form-group">

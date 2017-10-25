@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.studyhub.common.vo.Board;
+import com.studyhub.common.vo.Group;
 import com.studyhub.common.vo.QnA;
 
 public class BoardDao {
@@ -48,7 +49,7 @@ public class BoardDao {
 				+ "select rownum rnum, board_no, title, user_name, content, upload_date, deadline_date, "
 				+ "case when deadline_date > sysdate then '모집중' "
 				+ "else '마감' end as status "
-				+ ", group_name, location, category_name, attribute_name, g_img_rename "
+				+ ", group_name, location, category_name, attribute_name, g_img_rename, memberCount "
 				+ "from "
 				+ "(select * "
 				+ "from tb_board "
@@ -60,7 +61,7 @@ public class BoardDao {
 				+ "join (select group_no, count(*) as memberCount "
 				+ "from tb_ung group by group_no) using(group_no) "
 				+ "where authority_no=(select authority_no "
-				+ "from tb_authority where authority_name='그룹장') "
+				+ "from tb_authority where authority_name='그룹장') and job_group=group_no "
 				+ "order by board_no desc)) where rnum >= ? and rnum <= ?";
 
 
@@ -85,13 +86,14 @@ public class BoardDao {
 					b.setUploaderName(rset.getString("user_name"));
 					b.setContent(rset.getString("content"));
 					b.setUploadDate(rset.getDate("upload_date"));
-					b.setDeadlineDate(rset.getDate("upload_date"));
+					b.setDeadlineDate(rset.getDate("deadline_date"));
 					b.setStatus(rset.getString("status"));
 					b.setGroupName(rset.getString("group_name"));
 					b.setLocation(rset.getString("location"));
 					b.setCategoryName(rset.getString("category_name"));
 					b.setAttributeName(rset.getString("attribute_name"));
 					b.setgImgRename(rset.getString("g_img_rename"));
+					b.setMemberCount(rset.getInt("memberCount"));
 
 					list.add(b);
 				}
@@ -170,6 +172,47 @@ public class BoardDao {
 		return 0;
 	}
 
+	public ArrayList<Group> selectGroupList(Connection con, int userNo) {
+		ArrayList<Group> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select tb_group.group_no, group_name from tb_board "
+				+ "join tb_group on(tb_group.group_no=tb_board.job_group) "
+				+ "join tb_ung on(tb_ung.group_no=tb_board.job_group) "
+				+ "where deadline_date<sysdate and uploader = ? "
+				+ "and authority_no = (select authority_no "
+				+ "from tb_authority where authority_name='그룹장')";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+
+			rset = pstmt.executeQuery();
+
+			if (rset != null) {
+				list = new ArrayList<Group>();
+				
+				Group g = new Group();
+				g.setGroupNo(rset.getInt("job_group"));
+				g.setGroupName(rset.getString("group_name"));
+				
+				list.add(g);
+
+				while (rset.next()) {
+					Board b = new Board();
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;		
+	}
+	
 	/*
 	 * public int insertBoard(Connection con, Board b) { int result = 0;
 	 * PreparedStatement pstmt = null;
