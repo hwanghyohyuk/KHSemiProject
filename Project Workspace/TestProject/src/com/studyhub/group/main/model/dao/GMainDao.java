@@ -24,22 +24,20 @@ public class GMainDao {
 	private Schedule schedule;
 	private ShareFile shareFile;
 	
-	public Group selectGroup(Connection con, int group_no, int user_no) {
+	public Group selectGroup(Connection con, int group_no) {
 		group = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select group_no ,group_name, attribute_name, location, category_name, description, authority_no"
-					+ " from tb_group"
+		String query = "select group_no ,group_name, attribute_name, location, category_name, description"
+					+ " from tb_group g"
 					+ " join tb_on_off using(attribute_no)"
 					+ " join tb_category using(category_no)"
-					+ " join (select group_no, authority_no from tb_ung where user_no=?) using(group_no)"
-					+ " where group_no = ?";
+					+ " where g.group_no = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, user_no);
-			pstmt.setInt(2, group_no);
+			pstmt.setInt(1, group_no);
 			
 			rset = pstmt.executeQuery();
 			if(rset.next()){
@@ -51,7 +49,6 @@ public class GMainDao {
 				group.setLocation(rset.getString("location"));
 				group.setCategoryName(rset.getString("category_name"));
 				group.setDescription(rset.getString("description"));
-				group.setAuthorityNo(rset.getInt("authority_no"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -253,51 +253,47 @@
 
 	/* 날짜 클릭 이벤트 발생 */
 	function calendar() {
-		var authority = "<%= group.getAuthorityNo() %>";
-		if( authority == 2 ){
-			$("#calendar").fullCalendar({
-				editable : true,
-				eventLimit : true,
-				dayClick : function(date, allDay, jsEvent, view) {
-					var yy = date.format("YYYY");
-					var mm = date.format("MM");
-					var dd = date.format("DD");
-					if (date.format("dd") == "Mo")
-						var ss = "월";
-					else if (date.format("dd") == "Tu")
-						var ss = "화";
-					else if (date.format("dd") == "We")
-						var ss = "수";
-					else if (date.format("dd") == "Th")
-						var ss = "목";
-					else if (date.format("dd") == "Fr")
-						var ss = "금";
-					else if (date.format("dd") == "Sa")
-						var ss = "토";
-					else
-						var ss = "일";
-					ss += "요일";
-					$("#modaldate").val(yy + "년 " + mm + "월 " + dd + "일 " + ss);
-					$("#modaltime").show();
-					$("#modaltime2").hide();
-					$("#modalonoff").show();
-					$("#modalonoff2").hide();
-					$("#hour").val("00").prop("seleted", true);
-					$("#minute").val("00").prop("seleted", true);
-					$("#modalcontent").val("");
-					$("#insertbtn").show();
-					$("#deletebtn").hide();
-					$("#updatebtn").hide();				
-					$("#dkmodal").modal();
-	
-				}
-			});
-		}
+		$("#calendar").fullCalendar({
+			editable : true,
+			eventLimit : true,
+			dayClick : function(date, allDay, jsEvent, view) {
+				var yy = date.format("YYYY");
+				var mm = date.format("MM");
+				var dd = date.format("DD");
+				if (date.format("dd") == "Mo")
+					var ss = "월";
+				else if (date.format("dd") == "Tu")
+					var ss = "화";
+				else if (date.format("dd") == "We")
+					var ss = "수";
+				else if (date.format("dd") == "Th")
+					var ss = "목";
+				else if (date.format("dd") == "Fr")
+					var ss = "금";
+				else if (date.format("dd") == "Sa")
+					var ss = "토";
+				else
+					var ss = "일";
+				ss += "요일";
+				$("#modaldate").val(yy + "년 " + mm + "월 " + dd + "일 " + ss);
+				$("#modaltime").show();
+				$("#modaltime2").hide();
+				$("#modalonoff").show();
+				$("#modalonoff2").hide();
+				$("#hour").val("00").prop("seleted", true);
+				$("#minute").val("00").prop("seleted", true);
+				$("#modalcontent").val("");
+				$("#insertbtn").show();
+				$("#deletebtn").hide();
+				$("#updatebtn").hide();				
+				$("#dkmodal").modal();
+
+			}
+		});
 	}
 	
 	/* 일정 리스트클릭 */
 	function selectOne(data){
-		var authority = "<%= group.getAuthorityNo() %>";
 		$.ajax({
 			url: "/studyhub/scheduleselectone",
 			data: { scheduleno: data },
@@ -347,13 +343,8 @@
 				}
 				$("#modalcontent").val(meetingName);
 				$("#insertbtn").hide();
-				if( authority == 2 ){
-					$("#deletebtn").show();
-					$("#updatebtn").show();
-				} else {
-					$("#deletebtn").hide();
-					$("#updatebtn").hide();
-				}
+				$("#deletebtn").show();
+				$("#updatebtn").show();	
 				$("#dkmodal").modal();
 			}
 		});
@@ -386,7 +377,7 @@
 	/* 일정 수정 */
 	function updateSchedule() {
 		var scheduleno = $("#sc_no").val();
-		var groupno = "<%=group.getGroupNo()%>";
+		
 		var modaldate = $("#modaldate").val();
 		var modalampm = $("input:radio[name=ampm]:checked").val();		
 		var modalhour = $("#hour option:selected").val();
@@ -395,7 +386,6 @@
 		var modalcontent = $("#modalcontent").val();
 		
 		var queryString = { schedule_no: scheduleno, group_no: groupno, modaldate: modaldate, modalampm: modalampm, modalhour: modalhour, modalminute: modalminute, modalonoff: modalonoff, modalcontent: modalcontent };
-		
 		$.ajax({
 			url: "/studyhub/scheduleupdate",
 			data: queryString,

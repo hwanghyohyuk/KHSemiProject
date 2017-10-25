@@ -24,8 +24,6 @@
 			<!-- ajax로 불러옴 -->
 			</div>
 		</h3>
-		
-		내 권한 <%= group.getAuthorityNo() %>
 	</div>
 </div>
 

@@ -5,13 +5,28 @@
 내용 : 메인 페이지
 작성일자 17.10.16
  -->
-<%@ include file="/views/include/common/head.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>스터디허브 StudyHub</title>
 <!-- css, javascript, jQuery -->
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
+<link rel="stylesheet" href="/studyhub/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/studyhub/css/custom.css">
 
+<script type="text/javascript" src="/studyhub/js/jquery-3.2.1.js"></script>
 <script type="text/javascript" src='/studyhub/js/main.js' ></script>
+<script type="text/javascript" src="/studyhub/js/bootstrap.js"></script>
 <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-<%@ include file="/views/include/common/headend.jsp"%>
+
+<!-- java 구문 -->
+
+<!-- 초기화 블럭(변수선언 및 초기화) -->
+
+<!--페이지 시작-->
+<%@ include file="/views/include/common/head.jsp"%>
+<!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 </head>
 <body>
@@ -157,7 +172,7 @@
 				var values = "";
 				for(var i in json.list){				         
 				    values +=  	"<li class='slide'>" +
-				    		   		"<a href='/studyhub/gmainpreview?group_no=" + json.list[i].group_no + "&reset=0&user_no=" + user_no + "'>" +
+				    		   		"<a href='/studyhub/gmainpreview?group_no=" + json.list[i].group_no + "&reset=0'>" +
 				    		   			"<div>" +
 					 						"<div>" +
 				    		   					"<img id='groupimg' src='/studyhub/images/groupimg/" + decodeURIComponent(json.list[i].renameimg) +"'>" +
@@ -181,5 +196,5 @@
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>
 	<!--페이지 끝-->
-	<%@ include file="/views/include/common/tail.jsp"%>
+	<%@ include file="/views/include/common/headend.jsp"%>
 <!-- /미향 -->

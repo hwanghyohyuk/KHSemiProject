@@ -31,8 +31,8 @@ public class ScheduleUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		System.out.println(1);
+request.setCharacterEncoding("utf-8");
+		
 		Schedule sc = new Schedule();
 		
 		sc.setScheduleNo(Integer.parseInt(request.getParameter("schedule_no")));
@@ -42,7 +42,6 @@ public class ScheduleUpdateServlet extends HttpServlet {
 		sc.setMinute(request.getParameter("modalminute"));
 		sc.setOnoff(request.getParameter("modalonoff"));
 		sc.setMeetingName(request.getParameter("modalcontent"));
-		System.out.println(sc);
 		
 		if(new ScheduleService().updateSchedule(sc) > 0){
 			response.sendRedirect("views/group/groupSchedule/ScheduleMain.jsp");

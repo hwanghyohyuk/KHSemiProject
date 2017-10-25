@@ -150,18 +150,11 @@ public class ScheduleDao {
 		
 		PreparedStatement pstmt = null;
 		
-		String query = "update tb_schedule set ampm=?, hour=?, minute=?, onoff=?, meeting_name=?"
-				+ " where schedule_no = ?";
+		String query = "update tb_schedule set";
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, sc.getAmpm());
-			pstmt.setString(2, sc.getHour());
-			pstmt.setString(3, sc.getMinute());
-			pstmt.setString(4, sc.getOnoff());
-			pstmt.setString(5, sc.getMeetingName());
-			pstmt.setInt(6, sc.getScheduleNo());
-			System.out.println(sc);
+			pstmt.setInt(1, sc.getScheduleNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
