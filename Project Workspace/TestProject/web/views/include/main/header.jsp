@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.studyhub.common.vo.User"%>
 <%
-	User user = (User) session.getAttribute("user");
+	User user = (User)session.getAttribute("user");
 %>
 <!-- 헤더 영역 : 네비게이션 바 -->
 <nav class="navbar navbar-default bg-white" id="navbar">
@@ -47,14 +47,45 @@
 					<%
 						if (user != null) {
 					%>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-expanded="false"><p
-								class="black">
+					<li class="dropdown">
+						<a href="javascript/mygroupdropdown()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+							<p class="black">
 								나의 그룹<span class="caret"></span>
-							</p> </a>
+							</p> 
+						</a>
 						<ul class="dropdown-menu" role="menu" id="mygroupmenu">
-							<!-- ajax로 그룹리스트 불러옴 -->
-						</ul></li>
+							<!-- ajax로 그룹리스트 불러옴 --> 
+						</ul>
+					</li>
+					
+					<script type="text/javascript">
+						$(function mygroupdropdown(){
+							var userno = "<%= user.getUserNo()%>";
+							$.ajax({
+								url : "/studyhub/mygrouppreview",
+								data : {
+									userno : userno
+								},
+								type : "get",
+								datatype : "json",
+								success : function(data) {
+									var json = JSON.parse(JSON.stringify(data));
+									var values = "";
+									for ( var i in json.list) {
+										values += "<li>"
+												+ "<a href='/studyhub/gmainpreview?group_no="
+												+ json.list[i].group_no
+												+ "&reset=0'>"
+												+ decodeURIComponent(json.list[i].group_name)
+												+ "</a>" + "</li>";
+										}
+									var sub = "<li class='divider'></li>"
+											+ "<li><a href='/studyhub/views/main/MakeGroup.jsp'> 새 그룹만들기</a></li>";
+									$("#mygroupmenu").html(values + sub);
+								}
+							});
+						});
+					</script>
 					<%
 						}
 					%>
@@ -144,31 +175,3 @@
 </div>
 <!-- /Modal -->
 
-<script type="text/javascript">
-	$(function(){
-		var userno = "<%=user.getUserNo()%>";
-		$.ajax({
-			url : "/studyhub/mygrouppreview",
-			data : {
-				userno : userno
-			},
-			type : "get",
-			datatype : "json",
-			success : function(data) {
-				var json = JSON.parse(JSON.stringify(data));
-				var values = "";
-				for ( var i in json.list) {
-					values += "<li>"
-							+ "<a href='/studyhub/gmainpreview?group_no="
-							+ json.list[i].group_no
-							+ "&reset=0'>"
-							+ decodeURIComponent(json.list[i].group_name)
-							+ "</a>" + "</li>";
-					}
-				var sub = "<li class='divider'></li>"
-						+ "<li><a href='/studyhub/views/main/MakeGroup.jsp'> 새 그룹만들기</a></li>";
-				$("#mygroupmenu").html(values + sub);
-			}
-		});
-	});
-</script>

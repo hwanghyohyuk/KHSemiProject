@@ -38,8 +38,9 @@
 	$(function(){
 		var groupno = "<%= group.getGroupNo() %>";
 		var reset = "1";
+		var user_no = "<%= navuser.getUserNo() %>";
 		
-		var querystring = { "group_no": groupno, "reset": reset };
+		var querystring = { "group_no": groupno, "reset": reset, "user_no": user_no };
 		$.ajax({
 			url: "/studyhub/gmainpreview",
 			data: querystring,

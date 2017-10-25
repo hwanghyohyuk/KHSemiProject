@@ -28,11 +28,13 @@ public class GMainDao {
 		group = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-
+		
 		String query = "select group_no ,group_name, attribute_name, location, category_name, description"
-				+ " from tb_group g" + " join tb_on_off using(attribute_no)" + " join tb_category using(category_no)"
-				+ " where g.group_no = ?";
-
+					+ " from tb_group g"
+					+ " join tb_on_off using(attribute_no)"
+					+ " join tb_category using(category_no)"
+					+ " where g.group_no = ?";
+		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, group_no);

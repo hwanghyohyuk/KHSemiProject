@@ -377,7 +377,7 @@
 	/* 일정 수정 */
 	function updateSchedule() {
 		var scheduleno = $("#sc_no").val();
-		
+		var groupno = "<%=group.getGroupNo()%>";
 		var modaldate = $("#modaldate").val();
 		var modalampm = $("input:radio[name=ampm]:checked").val();		
 		var modalhour = $("#hour option:selected").val();
