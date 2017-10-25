@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.group.notice.model.service.GNoticeService;
+
 /**
  * Servlet implementation class GNoticeCommentInsertServlet
  */
@@ -26,8 +28,15 @@ public class GNoticeCommentInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		
+		int gnoticeno = Integer.parseInt(request.getParameter("gnoticeno"));
+		String comment = request.getParameter("comment");
+		int userno = Integer.parseInt(request.getParameter("userno"));
+		System.out.println(comment);
+		if(new GNoticeService().insertComment(gnoticeno, comment, userno)>0 ){
+			response.sendRedirect("views/group/groupNotice/NoticeDetail.jsp");
+		}
 	}
 
 	/**
