@@ -107,9 +107,9 @@ public class BoardInsertServlet extends HttpServlet {
 				fout.close();
 				originalFile.delete();
 			}
-			b = new Board(title, content, writer, originalFileName, renameFileName);
+			//b = new Board(title, content, writer, originalFileName, renameFileName);
 		} else // 첨부 파일이 없을 때
-			b = new Board(title, content, writer, null, null);
+			//b = new Board(title, content, writer, null, null);
 
 		// 처리결과에 따라 뷰 지정함
 		if (new BoardService().insertBoard(b) > 0) {
