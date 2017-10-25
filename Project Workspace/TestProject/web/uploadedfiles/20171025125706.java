@@ -28,13 +28,11 @@ public class GMainDao {
 		group = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		String query = "select group_no ,group_name, attribute_name, location, category_name, description"
-					+ " from tb_group g"
-					+ " join tb_on_off using(attribute_no)"
-					+ " join tb_category using(category_no)"
-					+ " where g.group_no = ?";
-		
+				+ " from tb_group g" + " join tb_on_off using(attribute_no)" + " join tb_category using(category_no)"
+				+ " where g.group_no = ?";
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, group_no);
@@ -104,7 +102,7 @@ public class GMainDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select notice_no, title, uploader, upload_date" + " from tb_g_notice"
+		String query = "select notice_no, title, uploader_name, upload_date" + " from tb_g_notice"
 				+ " join tb_user on (tb_g_notice.uploader=tb_user.user_no)" + " where group_no = ?";
 
 		try {
@@ -115,13 +113,13 @@ public class GMainDao {
 			if (rset != null) {
 				list = new ArrayList<GNotice>();
 				while (rset.next()){
+				
 				GNotice gn = new GNotice();
 				gn.setNoticeNo(rset.getInt("notice_no"));
 				gn.setTitle(rset.getString("title"));
-				gn.setContent(rset.getString("content"));
+				gn.setUploader_name(rset.getString("uploader_name"));
 				gn.setUploader(rset.getInt("uploader"));
 				gn.setUploadDate(rset.getDate("upload_date"));
-				gn.setAccessNo(rset.getInt("access_no"));
 				System.out.println(gn);
 				list.add(gn);
 				}
@@ -154,7 +152,7 @@ public class GMainDao {
 					GBoard gb = new GBoard();
 					gb.setgBoardNo(rset.getInt("g_board_no"));
 					gb.setTitle(rset.getString("title"));
-					gb.setUploader(rset.getString("user_no"));
+					gb.setUploader(rset.getString("user_name"));
 					gb.setStrDate(rset.getString("upload_date"));
 					gb.setReadcount(rset.getInt("readcount"));
 					list.add(gb);

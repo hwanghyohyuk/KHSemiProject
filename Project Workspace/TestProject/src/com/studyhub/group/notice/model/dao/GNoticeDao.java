@@ -247,4 +247,28 @@ public class GNoticeDao {
 		return list;
 	}
 
+	public int updateGNotice(Connection con, GNotice gNotice) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, gNotice.getTitle());
+			pstmt.setString(2, gNotice.getContent());
+			pstmt.setInt(3, gNotice.getNoticeNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
+
+	
+
 }

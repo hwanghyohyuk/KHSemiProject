@@ -44,10 +44,12 @@
 			</div>
 			<div class="range">
 				<label for="Content">공개범위</label> <label class="radio-inline">
-					<input type="radio" name="option" id="inlineRadio1" value="option1">
+					<input type="radio" name="access_no" id="inlineRadio1" value="1">
 					전체공개
 				</label> <label class="radio-inline"> <input type="radio"
-					name="option" id="inlineRadio2" value="option2"> 회원공개
+					name="access_no" id="inlineRadio2" value="2"> 회원공개
+				</label> <label class="radio-inline"> <input type="radio"
+					name="access_no" id="inlineRadio3" value="3"> 그룹원공개
 				</label>
 			</div>
 			<div class="form-group">
@@ -55,14 +57,13 @@
 				<textarea class="form-control" id="Textarea" rows="15"
 				name="content" placeholder="내용을 입력하세요"></textarea>
 			</div>
-			<input type="hidden" name="uploader" value="<%= user.getUserNo() %>">
-			<input type="hidden" readonly name = "access_no" value= "<%=user.getUserName() %>">
-			<input type="submit" value="제출하기" id="btns"> <a
+			<input type="hidden" name="uploader" value="<%= group.getUserName()%>">
+			<input type="hidden" readonly name = "access_no" value= "<%=user.getUserNo() %>">
+			<input type="submit" value="제출하기" claoss = "btn btn-info" id="btns"> <a
 				href="/studyhub/gnoticepreview?groupno=<%=group.getGroupNo()%>">목록으로
 				이동</a>
 		</form>
-	</div>
-	
+	</div>	
 </div>
 
 

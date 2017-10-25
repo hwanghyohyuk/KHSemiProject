@@ -58,10 +58,11 @@
 		</div>
 		
 		<input type="submit" value="수정하기" class="btn btn-default" id="btns">
-		<a href="/studyhub/qnalist">목록으로 이동</a>
+		<a href="/studyhub/gnoticelist">목록으로 이동</a>
 		<input type="hidden" name="no" value="<%= gnotice.getNoticeNo() %>">
+		</form>
 	</div>
-	</form>
+</div>
 
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>

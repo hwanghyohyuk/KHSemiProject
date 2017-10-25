@@ -67,6 +67,19 @@ public class GNoticeService {
 		return result;
 	}
 	
+	public int updateGNotice(GNotice gNotice) {
+		Connection con = getConnection();
+		int result = new GNoticeDao().updateGNotice(con, gNotice);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+	
+	
+	
 	// GNoticeComment
 
 	public int deleteComment(int cno) {
@@ -99,6 +112,7 @@ public class GNoticeService {
 		
 		return list;
 	}
+
 	
 	
 	

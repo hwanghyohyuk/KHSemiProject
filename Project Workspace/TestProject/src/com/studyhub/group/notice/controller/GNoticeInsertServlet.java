@@ -45,7 +45,7 @@ public class GNoticeInsertServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		int uploader = Integer.parseInt(request.getParameter("uploader"));
 		int accessNo = Integer.parseInt(request.getParameter("access_no"));
-				
+		
 		gnotice.setTitle(title);
 		gnotice.setContent(content);
 		gnotice.setUploader(uploader);
