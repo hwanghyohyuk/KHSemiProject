@@ -1,14 +1,15 @@
 @CHARSET "UTF-8";
 
 body{
-	background: linear-gradient(white, #4dbbbf);
+	background: #009d9e;
 }
 #signup-area{
 	display: table;
+	background-color: white;
 	padding: 3vh 2vw;
 }
 #signup-area:hover{
-	background-color: rgba(255,255,255, 0.7);
+	box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
 }
 
 /**
@@ -25,7 +26,7 @@ body{
 
 #promo-text {
 	font-weight: bold;
-	color: #001429;
+	color: white;
 	/*width: 8.25em;*/
 	width: 39vw;
 	white-space: nowrap;
@@ -33,6 +34,9 @@ body{
 	border-right: .05em solid;
 	animation: typing 2s steps(24),
 	           caret 1s steps(1) infinite;
+}
+#signup-text{
+	font-weight: bold;
 }
 
 #first-img{

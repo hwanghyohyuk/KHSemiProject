@@ -19,7 +19,7 @@
 <%@ include file="/views/include/main/header.jsp"%>
 
 <!-- 메인 컨텐츠 -->
-<div class="container">
+<div class="container" id="main-area">
 	<div class="col-md-0 hidden-xs" style="height: 50px"></div>
 	<!-- 텍스트 영역 -->
 	<div class="col-md-10 col-lg-10 col-xs-12">
@@ -75,7 +75,7 @@
 		<div class="col-md-12 col-xs-12" style="height: 100px"></div>
 	</div>
 </div>
-
+<button><span></span></button>
 
 <!-- 서브 컨텐츠 -->
 <div class="container" id="intro-2">
