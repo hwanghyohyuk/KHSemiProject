@@ -123,15 +123,99 @@ public class ShareFileDao {
 	
 	
 	public int deleteSharedFile(Connection con, int no){
-		return 0;
+		int result =0;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from tb_share_file where file_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		return result;
 		}
 	
 	public int updateSharedFile(Connection con, ShareFile sf){
-		return 0;
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_share_file set title = ?, content = ?, originalfilename = ?, renamefilename = ? "
+				+"where file_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, sf.getTitle());
+			pstmt.setString(2, sf.getContent());
+			pstmt.setString(3, sf.getFileName());
+			pstmt.setString(4, sf.getRenameFileName());
+			pstmt.setInt(5, sf.getFileNo());
+			
+			result = pstmt.executeUpdate(); 
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int updateTextOnly(Connection con, ShareFile sf){
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_share_file set title = ?, content = ?"
+				+"where file_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, sf.getTitle());
+			pstmt.setString(2, sf.getContent());
+			pstmt.setInt(3, sf.getFileNo());
+			result = pstmt.executeUpdate(); 
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 	public ArrayList<ShareFile> selectTitleSearch(Connection con, String key){
 		return null;
+	}
+
+	
+
+
+	public int addDownloadCount(Connection con, String rfileName) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_share_file set downloadcount = downloadcount + 1 where renamefilename = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, rfileName);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		return result;
+	
 	}
 	
 }

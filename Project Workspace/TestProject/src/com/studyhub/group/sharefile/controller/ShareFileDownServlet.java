@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.group.sharefile.model.service.ShareFileService;
+
 /**
  * Servlet implementation class ShareFileDownServlet
  */
@@ -55,6 +57,8 @@ public class ShareFileDownServlet extends HttpServlet {
 		}
 		downOut.close();
 		bin.close();
+		//downloadCount +1하기
+		new ShareFileService().addDownloadCount(rfileName);
 		
 	}
 
