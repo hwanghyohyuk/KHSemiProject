@@ -15,10 +15,10 @@ public class ShareFileService {
 	
 	public ShareFileService(){}
 
-	
-	public ArrayList<ShareFile> selectList(int no){
+	//list per page
+	public ArrayList<ShareFile> selectList(int currentPage, int limit, int no){
 		Connection con = getConnection();
-		ArrayList<ShareFile> list = new ShareFileDao().selectList(con, no);
+		ArrayList<ShareFile> list = new ShareFileDao().selectList(con, no, currentPage, limit);
 		close(con);
 		return list;
 	}
@@ -75,7 +75,10 @@ public class ShareFileService {
 	}
 	
 	public ArrayList<ShareFile> selectSearch(String keyword){
-		return null;
+		Connection con = getConnection();
+		ArrayList<ShareFile> list = new ShareFileDao().selectSearch(con, keyword);
+		close(con);
+		return list;
 	}
 
 	public void addDownloadCount(String rfileName) {
@@ -90,4 +93,12 @@ public class ShareFileService {
 		return;
 		
 	}
+	
+	public int getListCount(){
+		Connection con = getConnection();
+		int listCount = new ShareFileDao().getListCount(con);
+		close(con);
+		return listCount;
+	}
+	
 }

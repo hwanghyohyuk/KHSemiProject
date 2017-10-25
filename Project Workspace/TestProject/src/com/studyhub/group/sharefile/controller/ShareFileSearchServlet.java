@@ -14,19 +14,16 @@ import com.studyhub.common.vo.ShareFile;
 import com.studyhub.group.sharefile.model.service.ShareFileService;
 
 /**
- * Servlet implementation class ShareFileListServlet
+ * Servlet implementation class ShareFileSearchServlet
  */
-@WebServlet("/sharefilelist")
-public class ShareFileListServlet extends HttpServlet {
+@WebServlet("/sharefilesearch")
+public class ShareFileSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private ShareFileService sfs;
-	private ShareFile shareFile;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShareFileListServlet() {
+    public ShareFileSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,13 +32,11 @@ public class ShareFileListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html charset=utf-8");
-		int no = Integer.parseInt(request.getParameter("groupno"));
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		String keyword = request.getParameter("keyword");
 		
-		int currentPage = 1;
-		int limit = 15;
-		
-		ArrayList<ShareFile> list = new ShareFileService().selectList(currentPage, limit, no);
+		ArrayList<ShareFile> list = new ShareFileService().selectSearch(keyword);
 		
 		RequestDispatcher view = null;
 		
@@ -49,12 +44,12 @@ public class ShareFileListServlet extends HttpServlet {
 			view = request.getRequestDispatcher("views/group/groupFileShare/fileshareList.jsp");
 			request.setAttribute("list", list);
 			view.forward(request, response);
-			
 		}else{
 			view = request.getRequestDispatcher("views/group/groupFileShare/fileshareError.jsp");
-			request.setAttribute("message", "파일 공유 리스트 조회 실패");
+			request.setAttribute("message", "검색 실패");
 			view.forward(request, response);
 		}
+		
 		
 	}
 
