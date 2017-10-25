@@ -19,7 +19,7 @@ public class GBoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "delete from gboard where gboard_no = ?";
+		String query = "delete from tb_g_board where gboard_no = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -40,17 +40,17 @@ public class GBoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "insert into gboard values ("
+		String query = "insert into tb_g_board values ("
 				+ "(select max(gboard_no) + 1 from gboard), "
-				+ "?, ?, ?, ?, ?, sysdate, default, 0, "
-				+ "(select max(gboard_no) + 1 from gboard), NULL, "
-				+ "default)";
+				+ "?, ?, sysdate, ?, ?, ?,0 )";
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, b.getTitle());
-			pstmt.setString(2, b.getUploader());
-			pstmt.setString(3, b.getContent());
+			pstmt.setString(2, b.getContent());			
+			pstmt.setString(3, b.getUploader());
+			pstmt.setInt(4, b.getAccessNo());
+			pstmt.setInt(5, b.getGroupNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -124,7 +124,7 @@ public class GBoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "update gboard set gboard_title = ?, "
+		String query = "update tb_g_board set gboard_title = ?, "
 				+ "gboard_content = ?, "
 				+ "gboard_original_filename = ?, "
 				+ "gboard_rename_filename = ? "

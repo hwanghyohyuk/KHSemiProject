@@ -2,7 +2,7 @@ package com.studyhub.common.vo;
 
 import java.sql.Date;
 
-public class GBoard implements java.io.Serializable{
+public class GBoard implements java.io.Serializable {
 
 	private int gBoardNo;
 	private String title;
@@ -19,8 +19,8 @@ public class GBoard implements java.io.Serializable{
 		super();
 	}
 
-	public GBoard(int gBoardNo, String title, String content, Date uploadDate, String uploader, int userNo,int accessNo,
-			int groupNo) {
+	public GBoard(int gBoardNo, String title, String content, Date uploadDate, String uploader, int userNo,
+			int accessNo, int groupNo) {
 		super();
 		this.gBoardNo = gBoardNo;
 		this.title = title;
@@ -31,8 +31,7 @@ public class GBoard implements java.io.Serializable{
 		this.accessNo = accessNo;
 		this.groupNo = groupNo;
 	}
-	
-	
+
 	public GBoard(int gBoardNo, String title, String content, String strDate, String uploader, int accessNo,
 			int groupNo, int readcount) {
 		super();
@@ -44,9 +43,17 @@ public class GBoard implements java.io.Serializable{
 		this.accessNo = accessNo;
 		this.groupNo = groupNo;
 		this.readcount = readcount;
-	}	
+	}
 
-	
+	public GBoard(String title, String uploader, String content, int accessNo, int groupNo) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.uploader = uploader;
+		this.accessNo = accessNo;
+		this.groupNo = groupNo;
+	}
+
 	public int getUserNo() {
 		return userNo;
 	}
@@ -101,7 +108,7 @@ public class GBoard implements java.io.Serializable{
 
 	public void setUploadDate(Date uploadDate) {
 		this.uploadDate = uploadDate;
-	}
+	} 
 
 	public String getUploader() {
 		return uploader;
@@ -132,10 +139,5 @@ public class GBoard implements java.io.Serializable{
 		return "GBoard [gBoardNo=" + gBoardNo + ", title=" + title + ", content=" + content + ", uploadDate="
 				+ uploadDate + ", uploader=" + uploader + ", accessNo=" + accessNo + ", groupNo=" + groupNo + "]";
 	}
-
-	
-
-
-	
 
 }

@@ -71,7 +71,7 @@ public class GBoardListServlet extends HttpServlet {
 				
 				RequestDispatcher view = null;
 				if(list != null){
-					view = request.getRequestDispatcher("views/board/boardListView.jsp");
+					view = request.getRequestDispatcher("views/group/groupBoard/boardList.jsp");
 					
 					request.setAttribute("list", list);
 					request.setAttribute("currentPage", currentPage);
@@ -82,7 +82,7 @@ public class GBoardListServlet extends HttpServlet {
 					
 					view.forward(request, response);
 				}else{
-					view = request.getRequestDispatcher("views/board/boardError.jsp");
+					view = request.getRequestDispatcher("views/group/groupBoard/BoardError.jsp");
 					request.setAttribute("message", "게시글 페이지별 조회 실패!");
 					view.forward(request, response);
 				}

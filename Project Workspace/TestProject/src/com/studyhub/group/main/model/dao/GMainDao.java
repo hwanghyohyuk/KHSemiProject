@@ -152,7 +152,7 @@ public class GMainDao {
 					GBoard gb = new GBoard();
 					gb.setgBoardNo(rset.getInt("g_board_no"));
 					gb.setTitle(rset.getString("title"));
-					gb.setUploader(rset.getString("user_name"));
+					gb.setUploader(rset.getString("user_no"));
 					gb.setStrDate(rset.getString("upload_date"));
 					gb.setReadcount(rset.getInt("readcount"));
 					list.add(gb);
