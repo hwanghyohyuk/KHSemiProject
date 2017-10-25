@@ -68,7 +68,7 @@ public class GMainPreviewServlet extends HttpServlet {
 				out.close();
 			}
 		}else{
-			group = new GMainService().SelectGroup(group_no);
+			group = new GMainService().SelectGroup(group_no, user_no);
 			if(group != null){
 				HttpSession session = request.getSession();
 				session.setAttribute("group",group);

@@ -159,6 +159,7 @@
 					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 						<input type="text" id="modaldate" disabled>
 						<input type="hidden" id="sc_no">
+						<input type="hidden" id="datetype_date">
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="modal-tag">시간</div>
 					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
@@ -246,6 +247,8 @@
 <%@ include file="/views/include/main/footer.jsp"%>
 
 <script type="text/javascript">
+	var authority = "<%= group.getAuthorityNo() %>";
+	var group_no = "<%= group.getGroupNo() %>";
 	$(function() {
 		selectSchedule();
 		calendar();
@@ -254,12 +257,30 @@
 	/* 날짜 클릭 이벤트 발생 */
 	function calendar() {
 		$("#calendar").fullCalendar({
-			editable : true,
+			/* editable : true,
 			eventLimit : true,
+			 */
+			 header: {
+		            left: 'prev,next',
+		            center: 'title',
+		            right: 'month,agendaWeek,agendaDay'
+		     },      
+		     events: function (start, end, callback) {
+		            $.ajax({
+		                url: '/studyhub/json/static-calendar-events.json',
+		                datatype: 'json',
+		                success: function (data, text, request) {
+		                	var events = eval(data.jsonTxt);
+		                	callback(events);
+		                }
+		            });
+		        },
+			
 			dayClick : function(date, allDay, jsEvent, view) {
 				var yy = date.format("YYYY");
 				var mm = date.format("MM");
 				var dd = date.format("DD");
+				var datetype = date.format("YYYYMMDD");
 				if (date.format("dd") == "Mo")
 					var ss = "월";
 				else if (date.format("dd") == "Tu")
@@ -276,6 +297,7 @@
 					var ss = "일";
 				ss += "요일";
 				$("#modaldate").val(yy + "년 " + mm + "월 " + dd + "일 " + ss);
+				$("#datetype_date").val(datetype);
 				$("#modaltime").show();
 				$("#modaltime2").hide();
 				$("#modalonoff").show();
@@ -283,7 +305,10 @@
 				$("#hour").val("00").prop("seleted", true);
 				$("#minute").val("00").prop("seleted", true);
 				$("#modalcontent").val("");
-				$("#insertbtn").show();
+				if( authority == 2)
+					$("#insertbtn").show();
+				else
+					$("#insertbtn").hide();
 				$("#deletebtn").hide();
 				$("#updatebtn").hide();				
 				$("#dkmodal").modal();
@@ -343,8 +368,13 @@
 				}
 				$("#modalcontent").val(meetingName);
 				$("#insertbtn").hide();
-				$("#deletebtn").show();
-				$("#updatebtn").show();	
+				if( authority == 2){
+					$("#deletebtn").show();
+					$("#updatebtn").show();
+				} else {
+					$("#deletebtn").hide();
+					$("#updatebtn").hide();
+				}
 				$("#dkmodal").modal();
 			}
 		});
@@ -354,6 +384,7 @@
 	/* 일정 등록 */
 	function InsertSchedule() {
 		var groupno = "<%=group.getGroupNo()%>";
+		var datetype =	$("#datetype_date").val();
 		var modaldate = $("#modaldate").val();
 		var modalampm = $("input:radio[name=ampm]:checked").val();		
 		var modalhour = $("#hour option:selected").val();
@@ -361,7 +392,7 @@
 		var modalonoff = $("input:radio[name=onoff]:checked").val();
 		var modalcontent = $("#modalcontent").val();
 		
-		var queryString = { group_no: groupno, modaldate: modaldate, modalampm: modalampm, modalhour: modalhour, modalminute: modalminute, modalonoff: modalonoff, modalcontent: modalcontent };
+		var queryString = { group_no: groupno, modaldate: modaldate, modalampm: modalampm, modalhour: modalhour, modalminute: modalminute, modalonoff: modalonoff, modalcontent: modalcontent, datetype_date: datetype };
 		
 		$.ajax({
 			url: "/studyhub/scheduleinsert",

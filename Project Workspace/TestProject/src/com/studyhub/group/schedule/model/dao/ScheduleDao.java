@@ -62,17 +62,18 @@ public class ScheduleDao {
 		
 		String query = "insert into tb_schedule values ("
 					+ " (select max(schedule_no)+1 from tb_schedule),"
-					+ " ?, ?, ?, ?, ?, ?, ?)";
+					+ " ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sc.getGroupNo());
 			pstmt.setString(2, sc.getMeetingDate());
-			pstmt.setString(3, sc.getAmpm());
-			pstmt.setString(4, sc.getHour());
-			pstmt.setString(5, sc.getMinute());
-			pstmt.setString(6, sc.getOnoff());
-			pstmt.setString(7, sc.getMeetingName());
+			pstmt.setString(3, sc.getDatetypeDate());
+			pstmt.setString(4, sc.getAmpm());
+			pstmt.setString(5, sc.getHour());
+			pstmt.setString(6, sc.getMinute());
+			pstmt.setString(7, sc.getOnoff());
+			pstmt.setString(8, sc.getMeetingName());
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -172,6 +173,41 @@ public class ScheduleDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public ArrayList<Schedule> DateSchedule(Connection con, int groupno) {
+		ArrayList<Schedule> list = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select schedule_no, meeting_name, datetypedate "
+					+ " from tb_schedule "
+					+ " where group_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null){
+				list = new ArrayList<Schedule>();
+				while(rset.next()){
+					Schedule sc = new Schedule();
+					sc.setScheduleNo(rset.getInt("schedule_no"));
+					sc.setMeetingName(rset.getString("meeting_name"));
+					sc.setDatetypeDate(rset.getString("datetypedate"));
+					
+					list.add(sc);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 }
 

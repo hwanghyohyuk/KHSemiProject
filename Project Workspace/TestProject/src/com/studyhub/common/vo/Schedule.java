@@ -11,13 +11,14 @@ public class Schedule implements java.io.Serializable{
 	private String minute;
 	private String onoff;
 	private String meetingName;
+	private String datetypeDate;
 	
 	public Schedule() {
 		super();
 	}
 	
 	public Schedule(int scheduleNo, int groupNo, String meetingDate, String ampm, String hour, String minute, String onoff,
-			String meetingName) {
+			String meetingName, String datetypeDate) {
 		super();
 		this.scheduleNo = scheduleNo;
 		this.groupNo = groupNo;
@@ -27,6 +28,7 @@ public class Schedule implements java.io.Serializable{
 		this.minute = minute;
 		this.onoff = onoff;
 		this.meetingName = meetingName;
+		this.datetypeDate = datetypeDate;
 	}
 	public int getScheduleNo() {
 		return scheduleNo;
@@ -75,7 +77,15 @@ public class Schedule implements java.io.Serializable{
 	}
 	public void setMeetingName(String meetingName) {
 		this.meetingName = meetingName;
+	}	
+	public String getDatetypeDate() {
+		return datetypeDate;
 	}
+
+	public void setDatetypeDate(String datetypeDate) {
+		this.datetypeDate = datetypeDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Schedule [scheduleNo=" + scheduleNo + ", groupNo=" + groupNo + ", meetingDate=" + meetingDate

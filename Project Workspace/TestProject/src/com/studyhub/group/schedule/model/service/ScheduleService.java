@@ -61,4 +61,11 @@ public class ScheduleService {
 		close(con);
 		return result;
 	}
+
+	public ArrayList<Schedule> DateSchedule(int groupno) {
+		Connection con = getConnection();
+		ArrayList<Schedule> list = new ScheduleDao().DateSchedule(con, groupno);
+		close(con);
+		return list;
+	}
 }

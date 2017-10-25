@@ -75,7 +75,7 @@
 										values += "<li>"
 												+ "<a href='/studyhub/gmainpreview?group_no="
 												+ json.list[i].group_no
-												+ "&reset=0'>"
+												+ "&reset=0&user_no=" + userno + "'>"
 												+ decodeURIComponent(json.list[i].group_name)
 												+ "</a>" + "</li>";
 										}
