@@ -31,12 +31,11 @@
 <%@ include file="/views/include/main/header.jsp"%>
 <%@ include file="/views/include/group/nav.jsp"%>
 <!-- 메인 컨텐츠 -->
-
 <div class="row" id="layout">
   <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
   <h2>게시글 작성하기</h2>
   <br>
-	<form action="/studyhub/gboardinsert" method="post">
+	<form action="/studyhub/gboardinsert" method="post"enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="title">제목</label> <input type="text"
 			name="title"
@@ -46,10 +45,10 @@
 		<div class="range">
 		<label for="content">공개범위</label>
 		<label class="radio-inline"> <input type="radio"
-			name="access_no" id="inlineRadio1" value="<%=gb.getAccessNo()%>">
+			name="access_no" id="inlineRadio1" value="1">
 			전체공개
 		</label> <label class="radio-inline"> <input type="radio"
-			name="access_no" id="inlineRadio2" value="<%=gb.getAccessNo()%>">
+			name="access_no" id="inlineRadio2" value="2">
 			회원공개
 		</label>
 		<input type="hidden" name="Uploader" value="<%=user.getUserName()%>">

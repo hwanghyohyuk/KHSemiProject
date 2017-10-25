@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import com.studyhub.common.vo.GBoard;
 import com.studyhub.group.board.model.service.GBoardService;
 
@@ -38,10 +40,17 @@ public class GBoardInsertServlet extends HttpServlet {
 				response.setContentType("text/html; charset=utf-8");
 				
 				RequestDispatcher view = null;
+
+				if(!ServletFileUpload.isMultipartContent(request)){
+					view = request.getRequestDispatcher("/views/group/groupBoard/BoardError.jsp");
+					request.setAttribute("message", "form enctype 속성 사용 안 함!");
+					view.forward(request, response);
+				}
 				GBoard gboard = new GBoard();
 				String title = request.getParameter("title");
-				String content = request.getParameter("content");				
-				int uploader = Integer.parseInt(request.getParameter("uploader"));
+				String content = request.getParameter("content");
+				String uploader = request.getParameter("uploader");
+				System.out.println(request.getParameter("access_no"));
 				int accessNo = Integer.parseInt(request.getParameter("access_no"));
 				int groupNo = Integer.parseInt(request.getParameter("group_no"));
 				
