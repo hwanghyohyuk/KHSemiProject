@@ -321,10 +321,9 @@
 				var json = JSON.parse(JSON.stringify(data));
 				for ( var i in json.list) {
 					var jsondata = new Object();
-					jsondata.allDay = decodeURIComponent(json.list[i].allDay);
-					jsondata.editable = decodeURIComponent(json.list[i].editable); 
 					jsondata.start = decodeURIComponent(json.list[i].start);
-					jsondata.title = decodeURIComponent(json.list[i].title);
+					var replacetitle = decodeURIComponent(json.list[i].title).replace(/\+/gi, " ");
+					jsondata.title = replacetitle;
 					
 					jsonlist.push(jsondata);
 					console.log(jsondata);
@@ -361,9 +360,7 @@
 					scno += json.list[i].schedule_no;
 				}
 				
-				meetingDate = meetingDate.replace("+", " ");
-				meetingDate = meetingDate.replace("+", " ");
-				meetingDate = meetingDate.replace("+", " ");
+				meetingDate = meetingDate.replace(/\+/gi, " ");
 				
 				$("#sc_no").val(scno);
 				$("#modaldate").val(meetingDate);
@@ -419,6 +416,7 @@
 		alert("일정이 등록되었습니다.");
 		$("#dkmodal").modal("hide");
 		selectSchedule();
+		calendar();
 	}
 	
 	/* 일정 수정 */
@@ -442,6 +440,7 @@
 		alert("일정이 수정되었습니다.");
 		$("#dkmodal").modal("hide");
 		selectSchedule();
+		calendar();
 	}
 	
 	/* 일정 삭제 */
@@ -456,6 +455,7 @@
 		alert("일정이 삭제되었습니다.");
 		$("#dkmodal").modal("hide");
 		selectSchedule();
+		calendar();
 	}
 
 	/* 일정 셀렉트 */
@@ -470,9 +470,7 @@
 						var json = JSON.parse(JSON.stringify(data));
 						var values = "";
 						for ( var i in json.list) {
-							var replace = decodeURIComponent(json.list[i].meeting_date).replace('+', ' ');
-							replace = replace.replace('+', ' ');
-							replace = replace.replace('+', ' ');
+							var replace = decodeURIComponent(json.list[i].meeting_date).replace(/\+/gi, ' ');
 							values += 
 								"<div onclick='selectOne(" + json.list[i].schedule_no + ");'>" +
 									"<li class='list-group-item' id='list-group-item'>" +

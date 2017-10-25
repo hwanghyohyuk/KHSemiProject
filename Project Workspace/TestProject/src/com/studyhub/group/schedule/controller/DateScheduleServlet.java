@@ -47,8 +47,6 @@ public class DateScheduleServlet extends HttpServlet {
 		
 		for(Schedule sc : list) {
 			JSONObject job = new JSONObject();
-			job.put("allDay", URLEncoder.encode("true", "UTF-8"));
-			job.put("editable", URLEncoder.encode("false", "UTF-8"));
 			job.put("start", URLEncoder.encode(sc.getDatetypeDate(), "UTF-8"));
 			job.put("title", URLEncoder.encode(sc.getMeetingName(), "UTF-8"));
 			
