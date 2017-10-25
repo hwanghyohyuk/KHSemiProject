@@ -180,7 +180,6 @@ public class ShareFileDao {
 			pstmt.setString(1, sf.getTitle());
 			pstmt.setString(2, sf.getContent());
 			pstmt.setInt(3, sf.getFileNo());
-			System.out.println("여기로 오닝??? ");
 			result = pstmt.executeUpdate(); 
 					
 		} catch (Exception e) {
@@ -196,25 +195,27 @@ public class ShareFileDao {
 		return null;
 	}
 
-	//수정해야됨 ㅋㅋㅋ
-	public void updateReadCount(Connection con, int no) {
+	
+
+
+	public int addDownloadCount(Connection con, String rfileName) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "update tb_qna set readcount = readcount+1 where qna_no = ?";
+		String query = "update tb_share_file set downloadcount = downloadcount + 1 where renamefilename = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, no);
+			pstmt.setString(1, rfileName);
 			
 			result = pstmt.executeUpdate();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally{
 			close(pstmt);
 		}
-		
+		return result;
+	
 	}
 	
 }

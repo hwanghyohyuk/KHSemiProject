@@ -41,68 +41,70 @@
 	<div role="tabpanel">
   	<!-- Tab panes -->
 	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="Reading">...</div>
-	    <div role="tabpanel" class="tab-pane" id="Listening">...</div>
-	    <div role="tabpanel" class="tab-pane" id="blabla">message?s</div>
+	    <div role="tabpanel" class="tab-pane active" id="reading">
+	    
+			<!-- file boxes  -->
+			<div class="fileboxes">
+				<div class="filebox">
+					<a href="/studyhub/views/group/groupFileShare/fileshareWriteform.jsp"><img src="/studyhub/images/plus.png" id="plus-img"></a>
+					<br>
+					<p>새로운 파일 공유하기</p>
+				</div>
+				<%
+					for (ShareFile sf : list) {
+				%>
+			
+				<div class="filebox">
+					<span id="title">
+					<a href="/studyhub/sharefiledetail?sfno=<%=sf.getFileNo() %>">
+					<% if(sf.getTitle().length()>9){ %>
+					<%=sf.getTitle().substring(0, 9) %>..
+					<% }else{ %>
+					<%=sf.getTitle()%>
+					<% } %>
+					</a></span>
+					
+					<hr>
+					 <h6><%=sf.getUserName()%></h6> 
+					 <h6><%=sf.getUploadDate()%> | 다운로드수:
+						<%=sf.getDownloadCount()%> </h6> 
+					<h6 id="filename">
+					<% if(sf.getFileName().length()>15){ %>
+					<%=sf.getFileName().substring(0, 15) %>..
+					<% }else{ %>
+					<%=sf.getFileName()%>
+					<% } %>
+					</h6>
+					<h6>
+						<a href="/studyhub/sharefiledown?ofile=<%=sf.getFileName() %>&rfile=<%=sf.getRenameFileName()%>">
+						<button id="download" onclick="download();">download</button></a>
+					</h6>
+				</div>
+		
+				<%
+					}
+				%>
+		
+				<div class="filebox">
+					<h4>title</h4>
+					<p>content</p>
+					<hr>
+					<p>filename</p>
+					<p>upload_date</p>
+					<button id="download">download</button>
+				</div>
+			</div>
+
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="listening">contents</div>
+	    <div role="tabpanel" class="tab-pane" id="messages">message?s</div>
 	    <div role="tabpanel" class="tab-pane" id="+">...</div>
 	  </div>
 	</div>
 	
 	
 
-	<!-- file boxes  -->
-	<div class="fileboxes">
-	<div class="filebox">
-		<a href="/studyhub/views/group/groupFileShare/fileshareWriteform.jsp"><img src="/studyhub/images/plus.png" id="plus-img"></a>
-		<br>
-		<p>새로운 파일 공유하기</p>
-	</div>
-	<%
-		for (ShareFile sf : list) {
-	%>
 	
-		<div class="filebox">
-			<span id="title">
-			<a href="/studyhub/sharefiledetail?sfno=<%=sf.getFileNo() %>">
-			<% if(sf.getTitle().length()>9){ %>
-			<%=sf.getTitle().substring(0, 9) %>..
-			<% }else{ %>
-			<%=sf.getTitle()%>
-			<% } %>
-			</a></span>
-			
-			<hr>
-			 <h6><%=sf.getUserName()%></h6> 
-			 <h6><%=sf.getUploadDate()%> | 다운로드수:
-				<%=sf.getDownloadCount()%> </h6> 
-			<h6 id="filename">
-			<% if(sf.getFileName().length()>15){ %>
-			<%=sf.getFileName().substring(0, 15) %>..
-			<% }else{ %>
-			<%=sf.getFileName()%>
-			<% } %>
-			</h6>
-			<h6>
-				<a href="/studyhub/sharefiledown?ofile=<%=sf.getFileName() %>&rfile=<%=sf.getRenameFileName()%>">
-				<button id="download" onclick="download();">download</button></a>
-			</h6>
-		</div>
-
-		<%
-			}
-		%>
-
-		<div class="filebox">
-			<h4>title</h4>
-			<p>content</p>
-			<hr>
-			<p>filename</p>
-			<p>upload_date</p>
-			<button id="download">download</button>
-		</div>
-
-
-	</div>
 
 </div>
 <!-- /메인 컨텐츠 -->
