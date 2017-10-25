@@ -16,18 +16,25 @@ public class ShareFileDao {
 	public ShareFileDao(){}
 	
 	
-	public ArrayList<ShareFile> selectList(Connection con, int groupno){
+	public ArrayList<ShareFile> selectList(Connection con, int groupno, int currentPage, int limit){
 		ArrayList<ShareFile> list = null;
-
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select file_no, title, user_name, content, upload_date, originalfilename, renamefilename, downloadcount"
-				+ " from tb_share_file" + " join tb_user on (tb_share_file.uploader=tb_user.user_no)"
-				+ " where group_no = ? order by file_no desc";
+		String query = "select *"
+				+ " from (select rownum rnum, file_no, title, user_name, content, "
+				+ "upload_date, originalfilename, renamefilename, downloadcount"
+				+ " from (select * from tb_share_file order by upload_date desc, file_no asc))" 
+				+ " join tb_user on (tb_share_file.uploader=tb_user.user_no)"
+				+ " where group_no = ? and rnum >= ? and rnum <= ?";
+		
+		int startRow = (currentPage -1) * limit + 1;
+		int endRow = startRow + limit -1;
 
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, groupno);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 
 			rset = pstmt.executeQuery();
 			if (rset != null) {
@@ -99,7 +106,7 @@ public class ShareFileDao {
 		
 		String query = "insert into tb_share_file values "+
 					"((select max(file_no)+1 from tb_share_file), "+
-					"?, ?, default, ?, ?, ?, ?, ?, default)";
+					"?, ?, default, ?, ?, ?, ?, ?, 0)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -191,8 +198,47 @@ public class ShareFileDao {
 		return result;
 	}
 	
-	public ArrayList<ShareFile> selectTitleSearch(Connection con, String key){
-		return null;
+	public ArrayList<ShareFile> selectSearch(Connection con, String keyword){
+		ArrayList<ShareFile> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select file_no, title, user_name, content, upload_date, originalfilename, renamefilename, downloadcount"
+				+ " from tb_share_file" + " join tb_user on (tb_share_file.uploader=tb_user.user_no)"
+				+ " where upper(originalfilename) like ? or upper(title) like ?"
+				+ " order by file_no desc";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			keyword = keyword.toUpperCase();
+			
+			pstmt.setString(1, "%" + keyword + "%");
+			pstmt.setString(2, "%" + keyword + "%");
+
+			rset = pstmt.executeQuery();
+			if (rset != null) {
+				list = new ArrayList<ShareFile>();
+				while (rset.next()) {
+					ShareFile sf = new ShareFile();
+					sf.setFileNo(rset.getInt("file_no"));
+					sf.setTitle(rset.getString("title"));
+					sf.setUserName(rset.getString("user_name"));
+					sf.setContent(rset.getString("content"));
+					sf.setUploadDate(rset.getDate("upload_date"));
+					sf.setFileName(rset.getString("originalfilename"));
+					sf.setRenameFileName(rset.getString("renamefilename"));
+					sf.setDownloadCount(rset.getInt("downloadcount"));
+					list.add(sf);
+
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 	
@@ -216,6 +262,29 @@ public class ShareFileDao {
 		}
 		return result;
 	
+	}
+
+
+	public int getListCount(Connection con) {
+		int result = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) from tb_share_file";
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next())
+				result = rset.getInt(1);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(stmt);
+		}
+		return result;
 	}
 	
 }
