@@ -35,7 +35,15 @@
 		    <li role="presentation"><a href="#listening" aria-controls="listening" role="tab" data-toggle="tab">listening</a></li>
 		    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
 		    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">+</a></li>
+		 	 <!-- search bar -->
+			 <form action="/studyhub/sharefilesearch" method="post">
+			 <input type="search" autocomplete name="keyword" length="15"
+			  placeholder="제목 또는 파일이름..." id="search-input"> &nbsp; 
+			<input type="submit" value="검색" id="search-btn" class="glyphicon glyphicon-search">
+			 </form>
+		 
 		 </ul>
+		
 	</div>
 	
 	<div role="tabpanel">
