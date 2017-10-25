@@ -1,6 +1,8 @@
 package com.studyhub.group.board.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +34,26 @@ public class GBoardViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		response.setContentType("text/html; charset=utf-8");
+		int gboardno = Integer.parseInt(request.getParameter("gboardno"));
+		GBoardService gbservice = new GBoardService();
+		
+		
+		
+		GBoard gb = gbservice.searchBoard(gboardno);
+		
+		RequestDispatcher view = null;
+		if(gb!=null){
+			view = request.getRequestDispatcher("views/group/groupBoard/BoardDetailView.jsp");		
+			request.setAttribute("GBoard", gb);
+			view.forward(request, response);
+		
+		}else{
+			view = request.getRequestDispatcher("views/group/groupBoard/BoardError.jsp");
+			request.setAttribute("message", "상세조회실패");
+			view.forward(request, response);
+		}
 	}
 
 	/**

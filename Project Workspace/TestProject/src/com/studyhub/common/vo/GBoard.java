@@ -2,6 +2,7 @@ package com.studyhub.common.vo;
 
 import java.sql.Date;
 
+
 public class GBoard implements java.io.Serializable {
 
 	private int gBoardNo;
@@ -18,6 +19,21 @@ public class GBoard implements java.io.Serializable {
 	public GBoard() {
 		super();
 	}
+	
+	
+	public GBoard(int gBoardNo, String title, String content, String uploader, Date uploadDate, int readcount, int accessNo, int groupNo
+			) {
+		super();
+		this.gBoardNo = gBoardNo;
+		this.title = title;
+		this.content = content;
+		this.uploadDate = uploadDate;
+		this.uploader = uploader;
+		this.accessNo = accessNo;
+		this.groupNo = groupNo;
+		this.readcount = readcount;
+	}
+
 
 	public GBoard(int gBoardNo, String title, String content, Date uploadDate, String uploader, int userNo,
 			int accessNo, int groupNo) {
@@ -53,6 +69,9 @@ public class GBoard implements java.io.Serializable {
 		this.accessNo = accessNo;
 		this.groupNo = groupNo;
 	}
+
+	
+
 
 	public int getUserNo() {
 		return userNo;

@@ -45,9 +45,9 @@ public class GBoardService {
 	}
 
 	// 페이지별 목록 조회용
-	public ArrayList<GBoard> selectList(int currentPage, int limit) {
+	public ArrayList<GBoard> selectList(int currentPage, int limit, int no) {
 		Connection con = getConnection();
-		ArrayList<GBoard> list = new GBoardDao().selectList(con, currentPage, limit);
+		ArrayList<GBoard> list = new GBoardDao().selectList(con, limit, no);
 		close(con);
 		return list;
 	}
@@ -103,6 +103,7 @@ public class GBoardService {
 		close(con);
 		return listCount;
 	}
+
 
 	
 

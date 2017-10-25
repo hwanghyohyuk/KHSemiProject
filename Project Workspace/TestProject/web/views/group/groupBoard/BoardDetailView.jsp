@@ -6,9 +6,10 @@
 작성일자 17.10.02
  -->
 <!-- java 구문 -->
-
+<%@page import="com.studyhub.common.vo.GBoard" %>
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 
+<%GBoard gb = new GBoard(); %>
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
 
@@ -89,26 +90,27 @@ div#bottom {
 				border="1" width="1100">
 				<tr align="center" height="20">
 					<td width="50">번호</td>
-					<td width="50"></td>
+					<td width="50"><%=gb.getgBoardNo() %></td>
 					<td width="50">제목</td>
-					<td width="470" colspan="4"></td>
+					<td width="470" colspan="4"><%= gb.getTitle() %></td>
 				</tr>
 				<tr align="center" height="20">
 					<td width="50">작성자</td>
-					<td width="100" colspan="2"></td>
+					<td width="100" colspan="2"><%=gb.getUploader() %></td>
 					<td width="50">날짜</td>
-					<td width="100"></td>
+					<td width="100"><%=gb.getStrDate() %></td>
 					<td width="50">조회수</td>
-					<td width="100"></td>
+					<td width="100"><%=gb.getReadcount() %></td>
 				</tr>
 				<tr>
-					<td colspan="10" width="1100" height="200">작성된 글</td>
+					<td colspan="10" width="1100" height="200"><%=gb.getContent() %></td>
 				</tr>
 			</table>
 			<div id="bottom" align="right">
-				<input type="submit" value="수정">&nbsp; <input type="submit"
-					value="삭제"> &nbsp;<input type="submit" value="목록">
-<br>
+				<input type="submit" value="수정">
+				 <input type="submit" value="삭제"> 
+				 <input type="submit" value="목록">
+
 			</div>
 		</div>
 

@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*, com.studyhub.common.vo.GBoard"%>
+	pageEncoding="UTF-8"
+	import="java.util.*, com.studyhub.common.vo.GBoard"%>
 <!-- 
-작성자 : OOO
-내용 : OO 페이지
-작성일자 17.10.02
+작성자 : 조남훈
+내용 : 그룹보드리스트 페이지
+작성일자 17.10.25
  -->
 <!-- java 구문 -->
-<%@ page import="java.util.*, com.studyhub.common.vo.GBoard" %>
+<%@ page import="java.util.*, com.studyhub.common.vo.GBoard"%>
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 <%
-	ArrayList<GBoard> list = (ArrayList<GBoard>)request.getAttribute("list");
+	ArrayList<GBoard> list = (ArrayList<GBoard>) request.getAttribute("list");
 %>
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
@@ -58,7 +59,14 @@
 					%>
 					<tr>
 						<td><%=gb.getgBoardNo()%></td>
-						<td><a herf="/boardview?no=<%=gb.getgBoardNo()%>"><%=gb.getTitle()%></a></td>
+						<td><span id="title">
+					<a href="/studyhub/gboardview?groupno=<%=gb.getgBoardNo() %>">
+					<% if(gb.getTitle().length()>9){ %>
+					<%=gb.getTitle().substring(0, 9) %>..
+					<% }else{ %>
+					<%=gb.getTitle()%>
+					<% } %>
+					</a></span></td>
 						<td><%=gb.getUploader()%></td>
 						<td><%=gb.getUploadDate()%></td>
 						<td><%=gb.getAccessNo()%></td>
@@ -73,9 +81,9 @@
 	</div>
 
 
-<!-- /메인 컨텐츠 -->
+	<!-- /메인 컨텐츠 -->
 
-<!--푸터 부분-->
-<%@ include file="/views/include/main/footer.jsp"%>
-<!--페이지 끝-->
-<%@ include file="/views/include/common/tail.jsp" %>
+	<!--푸터 부분-->
+	<%@ include file="/views/include/main/footer.jsp"%>
+	<!--페이지 끝-->
+	<%@ include file="/views/include/common/tail.jsp"%>

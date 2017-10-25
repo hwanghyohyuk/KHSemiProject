@@ -138,7 +138,7 @@ public class GMainDao {
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select g_board_no, title, user_name, to_char(upload_date, 'yyyyMMdd') as upload_date, readcount"
+		String query = "select g_board_no, title,content, uploader, to_char(upload_date, 'yyyyMMdd') as strdate, readcount,access_no,group_no"
 				+ " from tb_g_board" + " join tb_user on (tb_g_board.uploader=tb_user.user_no)" + " where group_no = ?";
 
 		try {
@@ -152,9 +152,12 @@ public class GMainDao {
 					GBoard gb = new GBoard();
 					gb.setgBoardNo(rset.getInt("g_board_no"));
 					gb.setTitle(rset.getString("title"));
-					gb.setUploader(rset.getString("user_no"));
-					gb.setStrDate(rset.getString("upload_date"));
+					gb.setContent(rset.getString("content"));
+					gb.setUploader(rset.getString("uploader"));
+					gb.setStrDate(rset.getString("strdate"));
 					gb.setReadcount(rset.getInt("readcount"));
+					gb.setAccessNo(rset.getInt("access_no"));
+					gb.setGroupNo(rset.getInt("group_no"));
 					list.add(gb);
 				}
 			}
