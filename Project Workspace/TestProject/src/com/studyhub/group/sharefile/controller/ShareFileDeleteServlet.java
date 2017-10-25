@@ -37,11 +37,13 @@ public class ShareFileDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
-
+		
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
 		int fileno = Integer.parseInt(request.getParameter("fileno"));
 
 		if (new ShareFileService().deleteShareFile(fileno) > 0) {
-			response.sendRedirect("/studyhub/sharefilelist");
+			
+			response.sendRedirect("/studyhub/sharedfilepreview?groupno="+groupno);
 		} else {
 			RequestDispatcher view = request.getRequestDispatcher("views/group/groupFileShare/fileshareError.jsp");
 			request.setAttribute("message", "게시글 삭제 처리 실패!");

@@ -21,7 +21,20 @@ public class ShareFile implements java.io.Serializable{
 	}
 	
 	
+	//insert Servlet에서 쓰는 sharefile 생성자
+	public ShareFile(String title, String content, String fileName, String renameFileName, int uploader, int accessNo,
+			int groupNo) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.fileName = fileName;
+		this.renameFileName = renameFileName;
+		this.uploader = uploader;
+		this.accessNo = accessNo;
+		this.groupNo = groupNo;
+	}
 	
+	// updateServlet에서 쓰는 생성자 (첨부파일까지 다 수정할 떄)
 	public ShareFile(int fileNo, String title, String content, String fileName, String renameFileName, int uploader, int accessNo,
 			int groupNo) {
 		super();
@@ -35,6 +48,13 @@ public class ShareFile implements java.io.Serializable{
 		this.groupNo = groupNo;
 	}
 	
+	//updateServlet에서 쓰는 생성자 (제목내용만 수정할때 )
+	public ShareFile(int fileNo, String title, String content) {
+		super();
+		this.fileNo = fileNo;
+		this.title = title;
+		this.content = content;
+	}
 
 	public ShareFile(int fileNo, String title, String content, Date uploadDate, String fileName, String renameFileName,
 			int groupNo, String userName, int downloadCount) {
@@ -49,19 +69,6 @@ public class ShareFile implements java.io.Serializable{
 		this.userName = userName;
 		this.downloadCount = downloadCount;
 	}
-
-
-
-	/*public ShareFile(int fileNo, String title, String content, Date uploadDate, String fileName, String userName, int downloadCount) {
-		super();
-		this.fileNo = fileNo;
-		this.title = title;
-		this.content = content;
-		this.uploadDate = uploadDate;
-		this.fileName = fileName;
-		this.userName = userName;
-		this.downloadCount = downloadCount;
-	}*/
 
 	public ShareFile(int fileNo, String title, String content, Date uploadDate, String fileName, String renameFileName,
 			 int uploader, int accessNo) {
