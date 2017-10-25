@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+body{
+	background: linear-gradient(white, #4dbbbf);
+}
+#signup-area{
+	display: table;
+	padding: 3vh 2vw;
+}
+#signup-area:hover{
+	background-color: rgba(255,255,255, 0.7);
+}
+
+/**
+ * Typing animation
+ */
+
+@keyframes typing {
+	from { width: 0 }
+}
+
+@keyframes caret {
+	50% { border-right-color: transparent; }
+}
+
+#promo-text {
+	font-weight: bold;
+	color: #001429;
+	/*width: 8.25em;*/
+	width: 39vw;
+	white-space: nowrap;
+	overflow: hidden;
+	border-right: .05em solid;
+	animation: typing 2s steps(24),
+	           caret 1s steps(1) infinite;
+}
+
+#first-img{
+	width: 25vw;
+	margin-top: 10vh;
+}
