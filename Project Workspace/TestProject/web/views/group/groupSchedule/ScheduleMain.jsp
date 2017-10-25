@@ -486,7 +486,7 @@
 									"</li>" +
 									"<li class='list-group-item' id='content'>" +
 										"<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8' id='meeting_name'>" +
-											decodeURIComponent(json.list[i].meeting_name) +
+											decodeURIComponent(json.list[i].meeting_name).replace(/\+/gi, " ") +
 										"</div>" +
 										"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4' id='meeting_onoff'>" +
 											decodeURIComponent(json.list[i].onoff) +
