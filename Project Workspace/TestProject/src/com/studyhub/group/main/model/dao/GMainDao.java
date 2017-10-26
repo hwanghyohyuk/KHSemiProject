@@ -100,43 +100,9 @@ public class GMainDao {
 		}
 		return g;
 	}
+	
+	
 
-	public ArrayList<GNotice> selectGroupNotice(Connection con, int groupno) {
-		ArrayList<GNotice> list = null;
-
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String query = "select notice_no, title, content, uploader, upload_date, access_no" + " from tb_g_notice"
-				+ " join tb_user on (tb_g_notice.uploader=tb_user.user_no)" + " where group_no = ?";
-
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, groupno);
-
-			rset = pstmt.executeQuery();
-			if (rset != null) {
-				list = new ArrayList<GNotice>();
-				while (rset.next()){
-				GNotice gn = new GNotice();
-				gn.setNoticeNo(rset.getInt("notice_no"));
-				gn.setTitle(rset.getString("title"));
-				gn.setContent(rset.getString("content"));
-				gn.setUploader(rset.getInt("uploader"));
-				gn.setUploadDate(rset.getDate("upload_date"));
-				gn.setAccessNo(rset.getInt("access_no"));
-				System.out.println(gn);
-				list.add(gn);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return list;
-	}
 
 	public ArrayList<GBoard> selectGroupBoard(Connection con, int groupno) {
 		ArrayList<GBoard> list = null;
@@ -171,6 +137,7 @@ public class GMainDao {
 		}
 		return list;
 	}
+	
 
 	public ArrayList<ShareFile> selectGroupShareFile(Connection con, int groupno) {
 		ArrayList<ShareFile> list = null;
@@ -210,5 +177,8 @@ public class GMainDao {
 		}
 		return list;
 	}
+
+	
+
 
 }

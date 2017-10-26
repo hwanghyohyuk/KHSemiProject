@@ -28,6 +28,7 @@
 	}
 </script>
 
+
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
@@ -50,10 +51,10 @@
 						for (GNotice gnotice : list) {
 					%>
 					<tr>
-						<td><%=gnotice.getNoticeNo()%></td>
+						<td><%=gnotice.getRownum()%></td>
 						<td id="title_text">
 						<a href="/studyhub/gnoticeview?no=<%=gnotice.getNoticeNo()%>"><%=gnotice.getTitle()%></a></td>
-						<td><%=gnotice.getUploader()%></td>
+						<td><%=gnotice.getUploader_name() %></td>
 						<td><%=gnotice.getUploadDate()%></td>
 					</tr>
 					<%
