@@ -50,7 +50,7 @@
 					<%
 						for (GNotice gnotice : list) {
 					%>
-					<tr>
+					<tr align="center">
 						<td><%=gnotice.getRownum()%></td>
 						<td id="title_text">
 						<a href="/studyhub/gnoticeview?no=<%=gnotice.getNoticeNo()%>"><%=gnotice.getTitle()%></a></td>

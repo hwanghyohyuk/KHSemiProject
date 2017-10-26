@@ -22,25 +22,7 @@
 	margin-top: 8vh;
 }
 </style>
-<script type="text/javascript">
-	function CheckForm(access){
-		var isAccessChk = false;
-		var arr_Access = document.getElementsByName("accessno");
-		for(var i = 0; i<arr_Access.length; i++){
-			if(arr_Access[i].checked == true){
-				isAccessChk = true;
-				break;
-				
-			}
-		}
-		if(!isAccessChk){
-			alert("공개 범위를 선택해주세요");
-			return false;
-		}
-	}
 
-
-</script>
 
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
@@ -62,12 +44,12 @@
 			</div>
 			<div class="range">
 				<label for="Content">공개범위</label> <label class="radio-inline">
-					<input type="radio" name="accessno" id="inlineRadio1" value="1">
-					전체공개
+					<input type="radio" name="accessno" id="inlineRadio1" value="1"
+					> 전체공개
 				</label> <label class="radio-inline"> <input type="radio"
 					name="accessno" id="inlineRadio2" value="2"> 회원공개
 				</label> <label class="radio-inline"> <input type="radio"
-					name="accessno" id="inlineRadio3" value="3"> 그룹원공개
+					name="accessno" id="inlineRadio3" value="3" checked> 그룹원공개
 				</label>
 			</div>
 			<div class="form-group">
