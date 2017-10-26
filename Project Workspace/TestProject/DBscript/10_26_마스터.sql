@@ -677,12 +677,11 @@ INSERT INTO TB_GN_COMMENT VALUES
 
 -----------------------------------------------------------------------
 -- 모집게시판 뷰 생성
-PROMPT CREATE VIEW 모집게시판 뷰..
 create or replace view boardlistview
 as
-select rownum rnum, board_no, title, user_name, content, upload_date, deadline_date, 
+select rownum rnum, board_no, title, user_no,user_name, content, upload_date, deadline_date, 
 case when deadline_date > sysdate then '모집중' 
-else '마감' end as status, group_name, location, category_name, attribute_name, g_img_rename, memberCount 
+else '마감' end as status, group_no,group_name, location, category_name, attribute_name, g_img_rename, memberCount 
 from(select * from tb_board join tb_user on (tb_board.uploader=tb_user.user_no) 
 join tb_ung using(user_no) 
 join tb_group using(group_no) 
@@ -703,7 +702,9 @@ PROMPT SELECT VIEW 모집 게시판 글쓰기 그룹리스트 출력..
 -- 모집 게시판 글쓰기 그룹리스트 출력
 select group_name
 from boardlistview
-where group_name <> (select group_name from boardlistview where status = '모집중') 
+where group_name <> (;
+select group_name from boardlistview where status = '모집중';
+) 
 and user_name = (select user_name from tb_user where user_no = 4);
 ------------------------------------------------------------------------------------------------
 
