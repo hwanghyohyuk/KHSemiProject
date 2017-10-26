@@ -23,6 +23,7 @@
 	#read {
 		width: 100%;
 		height: 180px;
+		margin-top: 20px;
 		text-align: left;
 	}
 	
@@ -87,60 +88,8 @@
 	    background-color: #004157;
 	    border-color: #222d38;
 	}
-	
-	.panel-heading {
-		padding-top: 0px;
-		padding-bottom: 0px;
-		padding-left: 0px;
-		padding-right: 0px;
-	}
 
-	.panel panel-default{
-		margin-top: 20px;
-		padding-left: 0px;
-	}
 	
-	#insertbtn {
-		padding-top: 0px;
-		padding-bottom: 0px;
-		padding-left: 0px;
-		padding-right: 0px;
-	}
-	
-	#widthsize {
-		padding-top: 0px;
-		padding-bottom: 0px;
-		padding-left: 0px;
-		padding-right: 0px;
-		margin-top: 20px;
-	}
-	
-	#commenttitle {
-		width: 100%;
-		border: 1px; 
-		border-radius: 4px;
-		padding-top: 2px;
-		padding-bottom: 2px;
-		padding-left: 5px;
-		padding-right: 5px;
-	}
-	
-	.panel-footer {
-		padding-top: 5px;
-		padding-bottom: 5px;
-		padding-left: 0px;
-		padding-right: 0px;
-		height: 36px;
-	}
-	
-	#commentinsert {
-		padding-top: 2px;
-		padding-bottom: 2px;
-		padding-left: 5px;
-		padding-right: 5px;
-		width: 40px;
-		height: 24px;
-	}
 
 </style>
 <!--헤더 부분-->
@@ -151,62 +100,6 @@
 
 <!-- 메인 컨텐츠 -->
 <div class="container col-lg-offset-2 col-md-offset-2 col-sm-offset-2">
-	<div class='panel-group' id='accordion' role='tablist' aria-multiselectable='true'>
-		
-		<div class='panel panel-default col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='widthsize'>
-			<div class='panel-heading' role='tab' id='heading0'>
-				<h4 class='panel-title'>
-					<div class='btn btn-default btn-sm' id='read'>
-						<div class='col-xs-10 col-sm-10 col-md-11'>
-							<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse0' aria-expanded='false' aria-controls='collapse0'>
-								<div class='panel panel-primary'>
-									<div class='panel-heading' id='title_size'>
-										<div class='col-xs-9 col-sm-9 col-md-10'>
-											<h3 class='panel-title' id='qnatitle'>
-												decodeURIComponent(json.list[i].title).replace(/\+/gi, ' ')
-											</h3>
-										</div>
-										<div class='col-xs-3 col-sm-3 col-md-2' id='uploader'>
-											decodeURIComponent(json.list[i].uploaddate) &nbsp
-											decodeURIComponent(json.list[i].uploader)
-										</div>
-									</div>
-									<div class='panel-body' id='qnaread'>
-										decodeURIComponent(json.list[i].content).replace(/\+/gi, ' ')
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class='col-xs-2 col-sm-2 col-md-1'>
-							<input type='button' id='qnaupdatebtn' name='qnaupdatebtn' class='btn btn-primary' value='수정' onclick='selectOne(" + json.list[i].g_qna_no + ");'>
-						</div>
-						<div class='col-xs-2 col-md-1 col-sm-2'>
-							<input type='button' id='qnadeletebtn' name='qnadeletebtn' class='btn btn-primary' value='삭제' onclick='deleteQnA(" + json.list[i].g_qna_no + ");'>
-						</div>
-					</div>
-	
-				</h4>
-			</div>
-			<div id='collapse0' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading0'>
-				<div class='panel-body' id='commentbody" + json.list[i].g_qna_no + "'>
-				</div>
-				<div class='panel-footer'>
-					<div class='col-lg-11 col-md-11 col-sm-11'>
-						<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle'>
-					</div>
-					<div class='col-lg-1 col-md-1 col-sm-1' id='insertbtn'>
-						<input type='button' id='commentinsert' class='btn btn-primary'	onclick='commentInsert(" + json.list[i].g_qna_no + ")' value='작성'>
-					</div>
-				</div>
-			</div>
-		</div>
-	
-	</div>
-
-
-
-
-
 	<div class="col-md-6 col-sm-6 col-sm-offset-3 col-md-offset-3">
 		<div class="input-group" data-toggle="tooltip" data-placement="top" title="검색어 입력시 자동으로 데이터를 가져옵니다!">
 			<span class="input-group-addon" id="basic-addon1"> <span
@@ -215,7 +108,7 @@
 		</div>
 	</div>
 
-	<div class="col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1" id="widthsize">
+	<div class="col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1">
 		<div class="btn btn-default btn-sm" id="write">
 			<form method="post" name="fr" id="qnainsertform" action="">
 				<input type="hidden" name="userno" id="userno"
@@ -239,17 +132,14 @@
 		<br>
 		<!-- 글 간의 간격 -->
 	</div>
-	
 
-	<div class='panel-group' id='qna_list' role='tablist' aria-multiselectable='true'>
+	<div id="qna_list">
 		<!-- ajax  -->
 	</div>
 	
 	<div id="search_list">
 		<!-- ajax -->
 	</div>
-
-
 </div>
 
 <!-- 모달부분 -->
@@ -346,93 +236,68 @@
 				for(var i in json.list){
 					if(user_no == json.list[i].user_no){
 					values += 
-						"<div class='panel panel-default col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='widthsize'>" +
-							"<div class='panel-heading' role='tab' id='heading" + i + "'>" +
-								"<h4 class='panel-title'>" +
-									"<div class='btn btn-default btn-sm' id='read'>" +
-										"<div class='col-xs-10 col-sm-10 col-md-11'>" +
-											"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + i + "' aria-expanded='false' aria-controls='collapse" + i + "'>" +
-												"<div class='panel panel-primary'>" +
-													"<div class='panel-heading' id='title_size'>" +
-														"<div class='col-xs-9 col-sm-9 col-md-10'>" +
-															"<h3 class='panel-title' id='qnatitle'>" +
-																decodeURIComponent(json.list[i].title).replace(/\+/gi, ' ') + "</h3>" +
-														"</div>" +
-														"<div class='col-xs-3 col-sm-3 col-md-2' id='uploader'>"+
-															decodeURIComponent(json.list[i].uploaddate) + "&nbsp" +
-															decodeURIComponent(json.list[i].uploader) +
-														"</div>" + 
-													"</div>" +
-													"<div class='panel-body' id='qnaread'>" +
-														decodeURIComponent(json.list[i].content).replace(/\+/gi, ' ') +
-													"</div>" +
-												"</div>" +
-											"</a>" +
+						"<div class='col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1'>" +		
+							"<div class='btn btn-default btn-sm' id='read'>" +
+								"<form method='post' name='fr' id='qnainsertform' action=''>" +
+									"<div class='col-xs-10 col-sm-10 col-md-11'>" +
+							            "<div class='panel panel-primary' >" +
+										  "<div class='panel-heading' id='title_size'>" +
+										  	"<div class='col-xs-9 col-sm-9 col-md-10'>" +
+										  		"<h3 class='panel-title' id='qnatitle'>" +
+										    		decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
+										    	"</h3>" +
+										  	"</div>" +
+										    "<div class='col-xs-3 col-sm-3 col-md-2' id='uploader'>" +
+										    	decodeURIComponent(json.list[i].uploaddate) + "&nbsp" +
+										    	decodeURIComponent(json.list[i].uploader) +
+										    "</div>" +
+										  "</div>" +
+										  "<div class='panel-body' id='qnaread'>" +
+										  		decodeURIComponent(json.list[i].content).replace(/\+/gi, " ") +
+										  "</div>" +
 										"</div>" +
-										"<div class='col-xs-2 col-sm-2 col-md-1'>" +
-											"<input type='button' id='qnaupdatebtn' name='qnaupdatebtn' class='btn btn-primary' value='수정' onclick='selectOne(" + json.list[i].g_qna_no + ");'>" +
-										"</div>" +
-										"<div class='col-xs-2 col-md-1 col-sm-2'>" +
-											"<input type='button' id='qnadeletebtn' name='qnadeletebtn'	class='btn btn-primary' value='삭제' onclick='deleteQnA(" + json.list[i].g_qna_no + ");'>" +
-										"</div>" +
+							        "</div>" +
+									"<div class='col-xs-2 col-sm-2 col-md-1'>" +
+										"<input type='button' id='qnaupdatebtn' name='qnaupdatebtn' class='btn btn-primary' value='수정' onclick='selectOne(" + json.list[i].g_qna_no + ");'>" +
 									"</div>" +
-								"</h4>" +
+									"<div class='col-xs-2 col-md-1 col-sm-2'>" +
+										"<input type='button' id='qnadeletebtn' name='qnadeletebtn' class='btn btn-primary' value='삭제' onclick='deleteQnA(" + json.list[i].g_qna_no + ");'>" +
+									"</div>" +		
+								"</form>" +
 							"</div>" +
-							"<div id='collapse" + i + "' class='panel-collapse collapse' role='tabpanel' aria-labelledby='heading" + i + "'>" +
-								"<div class='panel-body' id='commentbody" + json.list[i].g_qna_no + "'>"+
-								"</div>" +
-								"<div class='panel-footer'>" +
-									"<div class='col-lg-11 col-md-11 col-sm-11'>" +
-										"<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle'>" +
-									"</div>" +
-									"<div class='col-lg-1 col-md-1 col-sm-1' id='insertbtn'>" +
-										"<input type='button' id='commentinsert' class='btn btn-primary' onclick='commentInsert(" + json.list[i].g_qna_no + ")' value='작성'>" +
-									"</div>" +
-								"</div>" +
-							"</div>" +
+							"<br>" +
 						"</div>";
 					}
 					else {
 						values += 
-							"<div class='panel panel-default col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='widthsize'>" +
-							"<div class='panel-heading' role='tab' id='heading" + i + "'>" +
-								"<h4 class='panel-title'>" +
-									"<div class='btn btn-default btn-sm' id='read'>" +
+							"<div class='col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1'>" +		
+								"<div class='btn btn-default btn-sm' id='read'>" +
+									"<form method='post' name='fr' id='qnainsertform' action=''>" +
 										"<div class='col-xs-10 col-sm-10 col-md-11'>" +
-											"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + i + "' aria-expanded='false' aria-controls='collapse" + i + "'>" +
-												"<div class='panel panel-primary'>" +
-													"<div class='panel-heading' id='title_size'>" +
-														"<div class='col-xs-9 col-sm-9 col-md-10'>" +
-															"<h3 class='panel-title' id='qnatitle'>" +
-																decodeURIComponent(json.list[i].title).replace(/\+/gi, ' ') + "</h3>" +
-														"</div>" +
-														"<div class='col-xs-3 col-sm-3 col-md-2' id='uploader'>"+
-															decodeURIComponent(json.list[i].uploaddate) + "&nbsp" +
-															decodeURIComponent(json.list[i].uploader) +
-														"</div>" + 
-													"</div>" +
-													"<div class='panel-body' id='qnaread'>" +
-														decodeURIComponent(json.list[i].content).replace(/\+/gi, ' ') +
-													"</div>" +
-												"</div>" +
-											"</a>" +
-										"</div>" +
-									"</div>" +
-								"</h4>" +
-							"</div>" +
-							"<div id='collapse" + i + "' class='panel-collapse collapse' role='tabpanel' aria-labelledby='heading" + i + "'>" +
-								"<div class='panel-body' id='commentbody" + json.list[i].g_qna_no + "'>"+
+								            "<div class='panel panel-primary' >" +
+											  "<div class='panel-heading' id='title_size'>" +
+											  	"<div class='col-xs-9 col-sm-9 col-md-10'>" +
+											  	"<div>" +
+											  		"<input type='test' value='"+ json.list[i].g_qna_no +"' id='g_qna_no'>" +
+											  	"</div>" +
+											  		"<h3 class='panel-title' id='qnatitle'>" +
+											    		decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
+											    	"</h3>" +
+											  	"</div>" +
+											    "<div class='col-xs-3 col-sm-3 col-md-2' id='uploader'>" +
+											    	decodeURIComponent(json.list[i].uploaddate) + "&nbsp" +
+											    	decodeURIComponent(json.list[i].uploader) +
+											    "</div>" +
+											  "</div>" +
+											  "<div class='panel-body' id='qnaread'>" +
+											  		decodeURIComponent(json.list[i].content).replace(/\+/gi, " ") +
+											  "</div>" +
+											"</div>" +
+								        "</div>" +
+									"</form>" +
 								"</div>" +
-								"<div class='panel-footer'>" +
-									"<div class='col-lg-11 col-md-11 col-sm-11'>" +
-										"<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle'>" +
-									"</div>" +
-									"<div class='col-lg-1 col-md-1 col-sm-1' id='insertbtn'>" +
-										"<input type='button' id='commentinsert' class='btn btn-primary' onclick='commentInsert(" + json.list[i].g_qna_no + ")' value='작성'>" +
-									"</div>" +
-								"</div>" +
-							"</div>" +
-						"</div>";
+								"<br>" +
+							"</div>";
 					}
 				}
 				$("#qna_list").html(values);
@@ -517,92 +382,67 @@
 				for(var i in json.list){
 					if(user_no == json.list[i].user_no){
 						values += 
-							"<div class='panel panel-default col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='widthsize'>" +
-								"<div class='panel-heading' role='tab' id='heading" + json.list[i].g_qna_no + "'>" +
-									"<h4 class='panel-title'>" +
-										"<div class='btn btn-default btn-sm' id='read'>" +
-											"<div class='col-xs-10 col-sm-10 col-md-11'>" +
-												"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + json.list[i].g_qna_no + "' aria-expanded='false' aria-controls='collapse" + json.list[i].g_qna_no + "'>" +
-													"<div class='panel panel-primary'>" +
-														"<div class='panel-heading' id='title_size'>" +
-															"<div class='col-xs-9 col-sm-9 col-md-10'>" +
-																"<h3 class='panel-title' id='qnatitle'>" +
-																	decodeURIComponent(json.list[i].title).replace(/\+/gi, ' ') + "</h3>" +
-															"</div>" +
-															"<div class='col-xs-3 col-sm-3 col-md-2' id='uploader'>"+
-																decodeURIComponent(json.list[i].uploaddate) + "&nbsp" +
-																decodeURIComponent(json.list[i].uploader) +
-															"</div>" + 
-														"</div>" +
-														"<div class='panel-body' id='qnaread'>" +
-															decodeURIComponent(json.list[i].content).replace(/\+/gi, ' ') +
-														"</div>" +
-													"</div>" +
-												"</a>" +
+							"<div class='col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1'>" +		
+								"<div class='btn btn-default btn-sm' id='read'>" +
+									"<form method='post' name='fr' id='qnainsertform' action=''>" +
+										"<div class='col-xs-10 col-sm-10 col-md-11'>" +
+								            "<div class='panel panel-primary' >" +
+											  "<div class='panel-heading' id='title_size'>" +
+											  	"<div class='col-xs-9 col-sm-9 col-md-10'>" +
+											  		"<h3 class='panel-title' id='qnatitle'>" +
+											    		decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
+											    	"</h3>" +
+											  	"</div>" +
+											    "<div class='col-xs-3 col-sm-3 col-md-2' id='uploader'>" +
+											    	decodeURIComponent(json.list[i].uploaddate) + "&nbsp" +
+											    	decodeURIComponent(json.list[i].uploader) +
+											    "</div>" +
+											  "</div>" +
+											  "<div class='panel-body' id='qnaread'>" +
+											  		decodeURIComponent(json.list[i].content).replace(/\+/gi, " ") +
+											  "</div>" +
 											"</div>" +
-											"<div class='col-xs-2 col-sm-2 col-md-1'>" +
-												"<input type='button' id='qnaupdatebtn' name='qnaupdatebtn' class='btn btn-primary' value='수정' onclick='selectOne(" + json.list[i].g_qna_no + ");'>" +
-											"</div>" +
-											"<div class='col-xs-2 col-md-1 col-sm-2'>" +
-												"<input type='button' id='qnadeletebtn' name='qnadeletebtn'	class='btn btn-primary' value='삭제' onclick='deleteQnA(" + json.list[i].g_qna_no + ");'>" +
-											"</div>" +
+								        "</div>" +
+										"<div class='col-xs-2 col-sm-2 col-md-1'>" +
+											"<input type='button' id='qnaupdatebtn' name='qnaupdatebtn' class='btn btn-primary' value='수정' onclick='selectOne(" + json.list[i].g_qna_no + ");'>" +
 										"</div>" +
-									"</h4>" +
+										"<div class='col-xs-2 col-md-1 col-sm-2'>" +
+											"<input type='button' id='qnadeletebtn' name='qnadeletebtn' class='btn btn-primary' value='삭제' onclick='deleteQnA(" + json.list[i].g_qna_no + ");'>" +
+										"</div>" +		
+									"</form>" +
 								"</div>" +
-								"<div id='collapse" + json.list[i].g_qna_no + "' class='panel-collapse collapse' role='tabpanel' aria-labelledby='heading" + json.list[i].g_qna_no + "'>" +
-									"<div class='panel-body' id='commentbody" + json.list[i].g_qna_no + "'>"+
-									"</div>" +
-									"<div class='panel-footer'>" +
-										"<div class='col-lg-11 col-md-11 col-sm-11'>" +
-											"<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle'>" +
-										"</div>" +
-										"<div class='col-lg-1 col-md-1 col-sm-1' id='insertbtn'>" +
-											"<input type='button' id='commentinsert' class='btn btn-primary' onclick='commentInsert(" + json.list[i].g_qna_no + ")' value='작성'>" +
-										"</div>" +
-									"</div>" +
-								"</div>" +
+								"<br>" +
 							"</div>";
 						}
 						else {
 							values += 
-								"<div class='panel panel-default col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='widthsize'>" +
-									"<div class='panel-heading' role='tab' id='heading" + json.list[i].g_qna_no + "'>" +
-										"<h4 class='panel-title'>" +
-											"<div class='btn btn-default btn-sm' id='read'>" +
-												"<div class='col-xs-10 col-sm-10 col-md-11'>" +
-													"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + json.list[i].g_qna_no + "' aria-expanded='false' aria-controls='collapse" + json.list[i].g_qna_no + "'>" +
-														"<div class='panel panel-primary'>" +
-															"<div class='panel-heading' id='title_size'>" +
-																"<div class='col-xs-9 col-sm-9 col-md-10'>" +
-																	"<h3 class='panel-title' id='qnatitle'>" +
-																		decodeURIComponent(json.list[i].title).replace(/\+/gi, ' ') + "</h3>" +
-																"</div>" +
-																"<div class='col-xs-3 col-sm-3 col-md-2' id='uploader'>"+
-																	decodeURIComponent(json.list[i].uploaddate) + "&nbsp" +
-																	decodeURIComponent(json.list[i].uploader) +
-																"</div>" + 
-															"</div>" +
-															"<div class='panel-body' id='qnaread'>" +
-																decodeURIComponent(json.list[i].content).replace(/\+/gi, ' ') +
-															"</div>" +
-														"</div>" +
-													"</a>" +
+								"<div class='col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1'>" +		
+									"<div class='btn btn-default btn-sm' id='read'>" +
+										"<form method='post' name='fr' id='qnainsertform' action=''>" +
+											"<div class='col-xs-10 col-sm-10 col-md-11'>" +
+									            "<div class='panel panel-primary' >" +
+												  "<div class='panel-heading' id='title_size'>" +
+												  	"<div class='col-xs-9 col-sm-9 col-md-10'>" +
+												  	"<div>" +
+												  		"<input type='test' value='"+ json.list[i].g_qna_no +"' id='g_qna_no'>" +
+												  	"</div>" +
+												  		"<h3 class='panel-title' id='qnatitle'>" +
+												    		decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
+												    	"</h3>" +
+												  	"</div>" +
+												    "<div class='col-xs-3 col-sm-3 col-md-2' id='uploader'>" +
+												    	decodeURIComponent(json.list[i].uploaddate) + "&nbsp" +
+												    	decodeURIComponent(json.list[i].uploader) +
+												    "</div>" +
+												  "</div>" +
+												  "<div class='panel-body' id='qnaread'>" +
+												  		decodeURIComponent(json.list[i].content).replace(/\+/gi, " ") +
+												  "</div>" +
 												"</div>" +
-											"</div>" +
-										"</h4>" +
+									        "</div>" +
+										"</form>" +
 									"</div>" +
-									"<div id='collapse" + json.list[i].g_qna_no + "' class='panel-collapse collapse' role='tabpanel' aria-labelledby='heading" + json.list[i].g_qna_no + "'>" +
-										"<div class='panel-body' id='commentbody" + json.list[i].g_qna_no + "'>"+
-										"</div>" +
-										"<div class='panel-footer'>" +
-											"<div class='col-lg-11 col-md-11 col-sm-11'>" +
-												"<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle'>" +
-											"</div>" +
-											"<div class='col-lg-1 col-md-1 col-sm-1' id='insertbtn'>" +
-												"<input type='button' id='commentinsert' class='btn btn-primary' onclick='commentInsert(" + json.list[i].g_qna_no + ")' value='작성'>" +
-											"</div>" +
-										"</div>" +
-									"</div>" +
+									"<br>" +
 								"</div>";
 						}
 					}
@@ -614,14 +454,6 @@
 	function qnashow(){
 		$("#qna_list").show();
 		$("#search_list").hide();
-	}
-	
-	function commentconfirm(param){
-		console.log("아코디언 열림 " + param);
-	}
-	
-	function commentInsert(param){
-		
 	}
 </script>
 <%@ include file="/views/include/common/tail.jsp"%>
