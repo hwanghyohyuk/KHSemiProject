@@ -46,8 +46,8 @@ public class GBoardPreviewServlet extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("/views/group/groupBoard/BoardList.jsp");
 		request.setAttribute("list", list);
 		view.forward(request, response);
-		
-	}
+		}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

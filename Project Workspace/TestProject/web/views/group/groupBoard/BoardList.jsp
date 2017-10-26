@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-	import="java.util.*, com.studyhub.common.vo.GBoard"%>
+	pageEncoding="UTF-8"%>
 <!-- 
 작성자 : 조남훈
-내용 : 그룹보드리스트 페이지
+내용 : 그룹 게시판 리스트 페이지
 작성일자 17.10.25
  -->
 <!-- java 구문 -->
@@ -11,6 +10,7 @@
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 <%
 	ArrayList<GBoard> list = (ArrayList<GBoard>) request.getAttribute("list");
+
 %>
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
@@ -35,7 +35,7 @@
 <%@ include file="/views/include/group/nav.jsp"%>
 <!-- 메인 컨텐츠 -->
 <body>
-	<div class="row">
+	<%-- <div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<h2>자유게시판</h2>
 
@@ -59,14 +59,14 @@
 					%>
 					<tr>
 						<td><%=gb.getgBoardNo()%></td>
-						<td><span id="title">
-					<a href="/studyhub/gboardview?groupno=<%=gb.getgBoardNo() %>">
+						<td><a href="/studyhub/gboardview?gbno=<%=gb.getgBoardNo() %>">
 					<% if(gb.getTitle().length()>9){ %>
 					<%=gb.getTitle().substring(0, 9) %>..
 					<% }else{ %>
 					<%=gb.getTitle()%>
 					<% } %>
-					</a></span></td>
+					</a></span>
+					</td>
 						<td><%=gb.getUploader()%></td>
 						<td><%=gb.getUploadDate()%></td>
 						<td><%=gb.getAccessNo()%></td>
@@ -79,7 +79,37 @@
 			</div>
 		</div>
 	</div>
+ --%><div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h2>공지사항</h2>
+			<div class="table-area">
+				<table class="table table-striped" align="center" width="600">
+					<tr align="center">
+						<td>번호</td>
+						<td>제목</td>
+						<td>작성자</td>
+						<td>날짜</td>
+					</tr>
 
+					<%
+						for (GBoard gboard : list) {
+					%>
+					<tr>
+						<td><%=gboard.getgBoardNo()%></td>
+						<td id="title_text">
+						<a href="/studyhub/gboardview?no=<%=gboard.getgBoardNo()%>"><%=gboard.getTitle()%></a></td>
+						<td><%=gboard.getUploader()%></td>
+						<td><%=gboard.getUploadDate()%></td>
+					</tr>
+					<%
+						}
+					%>
+				</table>
+				<!-- /메인 컨텐츠 -->
+				<button onclick="insertPage();" class="btn btn-info">글쓰기</button>
+			</div>
+		</div>
+	</div>
 
 	<!-- /메인 컨텐츠 -->
 

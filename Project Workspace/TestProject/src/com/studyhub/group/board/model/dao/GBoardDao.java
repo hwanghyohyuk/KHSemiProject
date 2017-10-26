@@ -12,154 +12,194 @@ import com.studyhub.group.board.model.service.GBoardService;
 
 
 public class GBoardDao {
+	private GBoard gBoard;
 
-	private GBoard gNboard;
-
-	public int deleteBoard(Connection con, int bnum) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		
-		String query = "delete from tb_g_board where gboard_no = ?";
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, bnum);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			close(pstmt);
-		}
-		
-		return result;
+	public GBoardDao() {
 	}
 
-	public int insertBoard(Connection con, GBoard b) {
-		int result = 0;
+	public GBoard selectOne(Connection conn, int no) {
+		GBoard gBoard = null;
 		PreparedStatement pstmt = null;
-		
-		String query = "insert into tb_g_board values ("
-				+ "(select max(gboard_no) + 1 from gboard), "
-				+ "?, ?, sysdate, ?, ?, ?,0 )";
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, b.getTitle());
-			pstmt.setString(2, b.getContent());			
-			pstmt.setString(3, b.getUploader());
-			pstmt.setInt(4, b.getAccessNo());
-			pstmt.setInt(5, b.getGroupNo());
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			close(pstmt);
-		}
-		
-		return result;
-	}
+		ResultSet rset = null;
 
-	public ArrayList<GBoard> selectList(Connection con, int currentPage, int limit){
-			
-			ArrayList<GBoard> list = null;
-			PreparedStatement pstmt = null;
-			ResultSet rset = null;
-			
-			String query ="select * from ("
-					+ "select rownum rnum, gboard_no, gboard_title, "
-					+ "gboard_uploader, gboard_content, gboard_original_filename, "
-					+ "gboard_rename_filename, gboard_date, gboard_level, "
-					+ "gboard_readcount from (select * from gboard "
-					+ "order by gboard_ref desc, gboard_reply_ref desc, "
-					+ "gboard_level asc, gboard_reply_seq asc)) "
-					+ "where rnum >= ? and rnum <= ?";
-			
-			int startRow = (currentPage -1) * limit + 1;
-			int endRow = startRow + limit - 1;
-			
-			try {
-				pstmt = con.prepareStatement(query);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, endRow);
-				
-				rset = pstmt.executeQuery();
-				
-				if(rset != null){
-					list = new ArrayList<GBoard>();
-					
-					while(rset.next()){
-						GBoard b = new GBoard();
-						
-						b.setgBoardNo(rset.getInt("gboard_no"));
-						b.setTitle(rset.getString("gboard_title"));
-						b.setUploader(rset.getString("gboard_uploader"));
-						b.setContent(rset.getString("gboard_content"));
-						b.setUploadDate(rset.getDate("gboard_uploaderdate"));
-						
-						list.add(b);
-					}
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}finally{
-				close(rset);
-				close(pstmt);
+		String query = "select * from tb_g_board where g_board_no = ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				gBoard = new GBoard();
+				gBoard.setgBoardNo(rset.getInt("notice_no"));
+				gBoard.setTitle(rset.getString("title"));
+				gBoard.setContent(rset.getString("content"));
+				gBoard.setUploadDate(rset.getDate("upload_date"));
+				gBoard.setUploader(rset.getInt("uploader"));
+				gBoard.setAccessNo(rset.getInt("access_no"));
+				gBoard.setGroupNo(rset.getInt("group_no"));
 			}
-			
-			return list;
-	}
-	
 
-	public GBoard searchBoard(Connection con, int bnum) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int updateBoard(Connection con, GBoard b) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		
-		String query = "update tb_g_board set gboard_title = ?, "
-				+ "gboard_content = ?, "
-				+ "gboard_original_filename = ?, "
-				+ "gboard_rename_filename = ? "
-				+ "where gboard_no = ?";
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, b.getTitle());
-			pstmt.setString(2, b.getContent());
-			pstmt.setInt(3, b.getgBoardNo());
-			
-			result = pstmt.executeUpdate();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return gBoard;
+	}
+
+	public int insertGNotice(Connection conn, GBoard gBoard) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "insert into tb_g_board values ((select max(g_board_no)+1 from tb_g_board),"
+				+ " ?, ?, sysdate, ?, ?, ?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, gBoard.getTitle());
+			pstmt.setString(2, gBoard.getContent());
+			pstmt.setInt(3, gBoard.getUploader());
+			pstmt.setInt(4, gBoard.getAccessNo());
+			pstmt.setInt(5, gBoard.getGroupNo());
+			
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			close(pstmt);
 		}
-		
 		return result;
 	}
 
-	public int updateViewBoard(Connection con, GBoard b) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteNotice(Connection conn, int bnum) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "delete from gboard where g_Board_no = ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bnum);
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+
+		return result;
+	}
+	public int updateGNotice(Connection con, GBoard gBoard) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, gBoard.getTitle());
+			pstmt.setString(2, gBoard.getContent());
+			pstmt.setInt(3, gBoard.getgBoardNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
 	}
 
-	public int viewBoard(Connection con, GBoard b) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	/*// GNotice Comment
+	public int deleteComment(Connection con, int cno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "delete from tb_gnotice_comment where comment_no =? ";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, cno);
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
 	}
 
-	public int ListCount(Connection con) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertComment(Connection con, int gnoticeno, String comment, int userno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, gnoticeno);
+			pstmt.setString(2, comment);
+			pstmt.setInt(3, userno);
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
+	public ArrayList<GNComment> selectComment(Connection con, int gnoticeno) {
+		ArrayList<GNComment> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, gnoticeno);
+
+			rset = pstmt.executeQuery();
+			if (rset != null) {
+				list = new ArrayList<GNComment>();
+				while (rset.next()) {
+					GNComment gnc = new GNComment();
+					gnc.setCommentNo(rset.getInt("comment_no"));
+					gnc.setNoticeNo(rset.getInt("notice_no"));
+					gnc.setContent(rset.getString("content"));
+					gnc.setUploadDate(rset.getDate("uploade_date"));
+					gnc.setUploader(rset.getInt("uploader"));
+
+					list.add(gnc);
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println(list);
+		return list;
+	}
+*/
+
+
+	
 
 }
