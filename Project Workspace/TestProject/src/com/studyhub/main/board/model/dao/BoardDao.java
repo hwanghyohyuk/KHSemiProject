@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import com.studyhub.common.vo.Board;
 import com.studyhub.common.vo.Group;
-import com.studyhub.common.vo.QnA;
 
 public class BoardDao {
 
@@ -105,9 +104,24 @@ public class BoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "insert into tb_board values (" + "(select max(board_no) + 1 from board), "
-				+ "?, ?, ?, ?, ?, sysdate, default, 0, " + "(select max(board_no) + 1 from board), NULL, " + "default)";
+		String query = "insert into tb_board values ((select max(board_no) + 1 from tb_board), "
+				+ "?, ?, sysdate, ?, ?, ?)";
 
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, b.getTitle());
+			pstmt.setString(2, b.getContent());
+			pstmt.setDate(3, b.getDeadlineDate());
+			pstmt.setInt(4, b.getUploader());
+			pstmt.setInt(5, b.getGroupNo());
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 
@@ -163,12 +177,11 @@ public class BoardDao {
 		ArrayList<Group> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		String query = "select tb_group.group_no, group_name from tb_board "
 				+ "join tb_group on(tb_group.group_no=tb_board.job_group) "
 				+ "join tb_ung on(tb_ung.group_no=tb_board.job_group) "
-				+ "where deadline_date<sysdate and uploader = ? "
-				+ "and authority_no = (select authority_no "
+				+ "where deadline_date<sysdate and uploader = ? " + "and authority_no = (select authority_no "
 				+ "from tb_authority where authority_name='그룹장')";
 
 		try {
@@ -179,25 +192,25 @@ public class BoardDao {
 
 			if (rset != null) {
 				list = new ArrayList<Group>();
-				
+
 				while (rset.next()) {
-				Group g = new Group();
-				g.setGroupNo(rset.getInt("group_no"));
-				g.setGroupName(rset.getString("group_name"));
-				
-				list.add(g);
+					Group g = new Group();
+					g.setGroupNo(rset.getInt("group_no"));
+					g.setGroupName(rset.getString("group_name"));
+
+					list.add(g);
 				}
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
 
-		return list;		
+		return list;
 	}
-	
+
 	/*
 	 * public int insertBoard(Connection con, Board b) { int result = 0;
 	 * PreparedStatement pstmt = null;

@@ -27,7 +27,7 @@
 	</div>
 
 	<form class="form-horizontal" action="/studyhub/boardinsert"
-		method="post" enctype="multipart/form-data">
+		method="post">
 		<div class="form-group">
 			<label for="btitle" class="col-sm-2 control-label">제목</label>
 			<div class="col-sm-10">
