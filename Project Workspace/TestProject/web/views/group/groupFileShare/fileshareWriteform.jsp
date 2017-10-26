@@ -45,6 +45,15 @@
 						name="access_no" id="inlineRadio2" value="2"> 회원공개
 					</label>
 				</div>
+				<div class="tab-category">
+					<label for="category">카테고리</label>
+					<select name="category">
+					    <option value="<%=sf.getFileCategory()%>">Volvo</option>
+					    <option value="saab">Saab</option>
+					    <option value="fiat">Fiat</option>
+					    <option value="audi">Audi</option>
+					</select>
+				</div>
 				<div class="upload">
 					<label for="upload">파일첨부</label>
 					<input type="file" name="upfile" id="file" onchange="checkFile()">

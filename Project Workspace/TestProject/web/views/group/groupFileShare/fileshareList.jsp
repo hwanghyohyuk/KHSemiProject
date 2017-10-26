@@ -3,6 +3,11 @@
 	import="java.util.*, com.studyhub.common.vo.ShareFile"%>
 <%
 	ArrayList<ShareFile> list = (ArrayList<ShareFile>)request.getAttribute("list");
+	int listCount = ((Integer)request.getAttribute("listCount"));
+	int currentPage = ((Integer)request.getAttribute("currentPage"));
+	int startPage = ((Integer)request.getAttribute("startPage"));
+	int endPage = ((Integer)request.getAttribute("endPage"));
+	int maxPage = ((Integer)request.getAttribute("maxPage"));
 %>
 <!-- 
 작성자 : 구미향
@@ -38,7 +43,7 @@
 		 	 <!-- search bar -->
 			 <form action="/studyhub/sharefilesearch" method="post">
 			 <input type="search" autocomplete name="keyword" length="15"
-			  placeholder="제목 또는 파일이름..." id="search-input"> &nbsp; 
+			  placeholder="제목 또는 파일이름..." id="search-input"> 
 			<input type="submit" value="검색" id="search-btn" class="glyphicon glyphicon-search">
 			 </form>
 		 
@@ -100,6 +105,29 @@
 					<p>filename</p>
 					<p>upload_date</p>
 					<button id="download">download</button>
+				</div>
+			</div>
+			<div class="col-md-8 col-md-offset-5 col-lg-8 col-lg-offset-5 col-sm-8 col-sm-offset-5 col-xs-8 col-xs-offset-5">
+				<div id="pagination">
+					<% if(currentPage <=1){ %>
+						<span> ◀◀  </span>
+					<% }else{ %>
+						<a href="/studyhub/sharefilelist?page=<%= currentPage -1 %>">◀</a>
+					<% } %>
+					
+					<% for (int p=startPage;p<=endPage;p++){ 
+							if(p==currentPage){
+					%>
+					<span>[<%=p %>]</span>
+					<% }else{ %>
+						<a href="/studyhub/sharefilelist?page=<%=p %>"><%=p %></a>
+					<% }} %>
+					
+					<% if(currentPage >= maxPage){ %>
+					<span> ▶▶ </span>
+					<% }else{ %>
+						<a href="/studyhub/sharefilelist?page=<%=currentPage+1 %>">▶</a>
+					<% } %>
 				</div>
 			</div>
 

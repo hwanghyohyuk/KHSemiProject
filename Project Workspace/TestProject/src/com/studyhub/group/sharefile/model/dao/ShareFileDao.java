@@ -21,10 +21,11 @@ public class ShareFileDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = "select *"
-				+ " from (select rownum rnum, file_no, title, user_name, content, "
+				+ " from (select rownum rnum, file_no, group_no, title, user_name, content, "
 				+ "upload_date, originalfilename, renamefilename, downloadcount"
-				+ " from (select * from tb_share_file order by upload_date desc, file_no asc))" 
-				+ " join tb_user on (tb_share_file.uploader=tb_user.user_no)"
+				+ " from (select * from tb_share_file "
+				+ "join tb_user on (tb_share_file.uploader=tb_user.user_no) "
+				+ "order by upload_date desc, file_no asc))" 
 				+ " where group_no = ? and rnum >= ? and rnum <= ?";
 		
 		int startRow = (currentPage -1) * limit + 1;
