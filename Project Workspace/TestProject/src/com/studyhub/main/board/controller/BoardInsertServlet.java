@@ -66,7 +66,7 @@ public class BoardInsertServlet extends HttpServlet {
 		RequestDispatcher view = null;
 		// 처리결과에 따라 뷰 지정함
 		if (new BoardService().insertBoard(b) > 0) {
-			response.sendRedirect("/first/blist?page=1");
+			response.sendRedirect("/studyhub/boardlist?page=1");
 		} else {
 			view = request.getRequestDispatcher("views/main/Board/BoardError.jsp");
 			request.setAttribute("message", "Board 서비스 : 원글 등록 실패!");
