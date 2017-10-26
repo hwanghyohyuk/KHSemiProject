@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.studyhub.common.vo.Board;
+import com.studyhub.common.vo.Group;
 import com.studyhub.main.board.model.dao.BoardDao;
 
 public class BoardService {
@@ -81,6 +82,13 @@ public class BoardService {
 			rollback(con);
 		close(con);
 		return result;
+	}
+
+	public ArrayList<Group> selectGroupList(int userno) {
+		Connection con = getConnection();
+		ArrayList<Group> list = new BoardDao().selectGroupList(con, userno);
+		close(con);
+		return list;
 	}
 
 }
