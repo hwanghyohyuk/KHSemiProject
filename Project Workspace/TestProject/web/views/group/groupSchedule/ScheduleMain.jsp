@@ -159,6 +159,8 @@
 					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 						<input type="text" id="modaldate" disabled>
 						<input type="hidden" id="sc_no">
+						<input type="hidden" id="datetype_date">
+						
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="modal-tag">시간</div>
 					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
@@ -246,6 +248,7 @@
 <%@ include file="/views/include/main/footer.jsp"%>
 
 <script type="text/javascript">
+	var authority = "<%= group.getAuthorityNo() %>";
 	$(function() {
 		selectSchedule();
 		calendar();
@@ -253,13 +256,21 @@
 
 	/* 날짜 클릭 이벤트 발생 */
 	function calendar() {
+		var output = JSON.stringify(dateoutput());
+		console.log(output);
 		$("#calendar").fullCalendar({
-			editable : true,
 			eventLimit : true,
+			 header: {
+		            left: 'prev,today,next',
+		            center: 'title',
+		            right: 'month'
+		     },
+		    events: dateoutput(),
 			dayClick : function(date, allDay, jsEvent, view) {
 				var yy = date.format("YYYY");
 				var mm = date.format("MM");
 				var dd = date.format("DD");
+				var datetype = date.format("YYYY-MM-DD");
 				if (date.format("dd") == "Mo")
 					var ss = "월";
 				else if (date.format("dd") == "Tu")
@@ -276,6 +287,7 @@
 					var ss = "일";
 				ss += "요일";
 				$("#modaldate").val(yy + "년 " + mm + "월 " + dd + "일 " + ss);
+				$("#datetype_date").val(datetype);
 				$("#modaltime").show();
 				$("#modaltime2").hide();
 				$("#modalonoff").show();
@@ -283,13 +295,42 @@
 				$("#hour").val("00").prop("seleted", true);
 				$("#minute").val("00").prop("seleted", true);
 				$("#modalcontent").val("");
-				$("#insertbtn").show();
+				if( authority == 2)
+					$("#insertbtn").show();
+				else
+					$("#insertbtn").hide();
 				$("#deletebtn").hide();
 				$("#updatebtn").hide();				
 				$("#dkmodal").modal();
 
 			}
 		});
+	}	
+	
+	/* 날짜에 일정 출력 */
+	function dateoutput(){
+		var group_no = "<%= group.getGroupNo() %>";
+		var jsonlist = new Array();
+		$.ajax({
+			url: "/studyhub/dateschedule",
+			data: { group_no: group_no },
+			type: "get",
+			dataType: "json",
+			async: false,
+			success: function(data){
+				var json = JSON.parse(JSON.stringify(data));
+				for ( var i in json.list) {
+					var jsondata = new Object();
+					jsondata.start = decodeURIComponent(json.list[i].start);
+					var replacetitle = decodeURIComponent(json.list[i].title).replace(/\+/gi, " ");
+					jsondata.title = replacetitle;
+					
+					jsonlist.push(jsondata);
+					console.log(jsondata);
+				}
+			}
+		});
+		return jsonlist;
 	}
 	
 	/* 일정 리스트클릭 */
@@ -319,9 +360,7 @@
 					scno += json.list[i].schedule_no;
 				}
 				
-				meetingDate = meetingDate.replace("+", " ");
-				meetingDate = meetingDate.replace("+", " ");
-				meetingDate = meetingDate.replace("+", " ");
+				meetingDate = meetingDate.replace(/\+/gi, " ");
 				
 				$("#sc_no").val(scno);
 				$("#modaldate").val(meetingDate);
@@ -343,17 +382,22 @@
 				}
 				$("#modalcontent").val(meetingName);
 				$("#insertbtn").hide();
-				$("#deletebtn").show();
-				$("#updatebtn").show();	
+				if( authority == 2){
+					$("#deletebtn").show();
+					$("#updatebtn").show();
+				} else {
+					$("#deletebtn").hide();
+					$("#updatebtn").hide();
+				}
 				$("#dkmodal").modal();
 			}
 		});
-		
 	}
 	
 	/* 일정 등록 */
 	function InsertSchedule() {
 		var groupno = "<%=group.getGroupNo()%>";
+		var datetype =	$("#datetype_date").val();
 		var modaldate = $("#modaldate").val();
 		var modalampm = $("input:radio[name=ampm]:checked").val();		
 		var modalhour = $("#hour option:selected").val();
@@ -361,7 +405,7 @@
 		var modalonoff = $("input:radio[name=onoff]:checked").val();
 		var modalcontent = $("#modalcontent").val();
 		
-		var queryString = { group_no: groupno, modaldate: modaldate, modalampm: modalampm, modalhour: modalhour, modalminute: modalminute, modalonoff: modalonoff, modalcontent: modalcontent };
+		var queryString = { group_no: groupno, modaldate: modaldate, modalampm: modalampm, modalhour: modalhour, modalminute: modalminute, modalonoff: modalonoff, modalcontent: modalcontent, datetype_date: datetype };
 		
 		$.ajax({
 			url: "/studyhub/scheduleinsert",
@@ -372,6 +416,7 @@
 		alert("일정이 등록되었습니다.");
 		$("#dkmodal").modal("hide");
 		selectSchedule();
+		calendar();
 	}
 	
 	/* 일정 수정 */
@@ -395,6 +440,7 @@
 		alert("일정이 수정되었습니다.");
 		$("#dkmodal").modal("hide");
 		selectSchedule();
+		calendar();
 	}
 	
 	/* 일정 삭제 */
@@ -409,11 +455,12 @@
 		alert("일정이 삭제되었습니다.");
 		$("#dkmodal").modal("hide");
 		selectSchedule();
+		calendar();
 	}
 
 	/* 일정 셀렉트 */
 	function selectSchedule() {
-		var group_no = "<%=group.getGroupNo()%>";
+		var group_no = "<%= group.getGroupNo() %>";
 		$.ajax({
 					url : "/studyhub/schedulelist",
 					data : { group_no : group_no },
@@ -423,9 +470,7 @@
 						var json = JSON.parse(JSON.stringify(data));
 						var values = "";
 						for ( var i in json.list) {
-							var replace = decodeURIComponent(json.list[i].meeting_date).replace('+', ' ');
-							replace = replace.replace('+', ' ');
-							replace = replace.replace('+', ' ');
+							var replace = decodeURIComponent(json.list[i].meeting_date).replace(/\+/gi, ' ');
 							values += 
 								"<div onclick='selectOne(" + json.list[i].schedule_no + ");'>" +
 									"<li class='list-group-item' id='list-group-item'>" +
@@ -441,7 +486,7 @@
 									"</li>" +
 									"<li class='list-group-item' id='content'>" +
 										"<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8' id='meeting_name'>" +
-											decodeURIComponent(json.list[i].meeting_name) +
+											decodeURIComponent(json.list[i].meeting_name).replace(/\+/gi, " ") +
 										"</div>" +
 										"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4' id='meeting_onoff'>" +
 											decodeURIComponent(json.list[i].onoff) +

@@ -14,6 +14,7 @@ public class Group {
 	private String g_img_rename;
 	private String userName; // 그룹장
 	private int memberCount; //그룹인원
+	private int authorityNo; // 권한
 
 	public Group() {
 		super();
@@ -45,7 +46,7 @@ public class Group {
 	}
 
 	public Group(int groupNo, String groupName, String attributeName, String location, String categoryName,
-			String description) {
+			String description, int authorityNo) {
 		super();
 		this.groupNo = groupNo;
 		this.groupName = groupName;
@@ -53,6 +54,7 @@ public class Group {
 		this.location = location;
 		this.categoryName = categoryName;
 		this.description = description;
+		this.authorityNo = authorityNo;
 	}
 
 	public Group(int groupNo, String attributeName, String location, String categoryName, String userName,
@@ -64,6 +66,14 @@ public class Group {
 		this.categoryName = categoryName;
 		this.userName = userName;
 		this.memberCount = memberCount;
+	}
+
+	public int getAuthorityNo() {
+		return authorityNo;
+	}
+
+	public void setAuthorityNo(int authorityNo) {
+		this.authorityNo = authorityNo;
 	}
 
 	public String getUserName() {
