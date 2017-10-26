@@ -51,7 +51,7 @@ public class GNoticeInsertServlet extends HttpServlet {
 		gnotice.setUploader(uploader);
 		gnotice.setAccessNo(accessNo);
 		
-		if(new GNoticeService().insertGNotice(gnotice)>0){
+		if(new GNoticeService().insertGNotice(title, content, accessNo, uploader)>0){
 			response.sendRedirect("/studyhub/gnoticelist");
 		}else{
 			view = request.getRequestDispatcher("/views/group/groupNotice/NoticeError.jsp");

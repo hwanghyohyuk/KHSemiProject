@@ -107,7 +107,7 @@ public class GMainDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select notice_no, title, uploader, upload_date" + " from tb_g_notice"
+		String query = "select notice_no, title, content, uploader, upload_date, access_no" + " from tb_g_notice"
 				+ " join tb_user on (tb_g_notice.uploader=tb_user.user_no)" + " where group_no = ?";
 
 		try {

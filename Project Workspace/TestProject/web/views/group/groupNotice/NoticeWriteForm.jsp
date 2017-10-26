@@ -57,9 +57,8 @@
 				<textarea class="form-control" id="Textarea" rows="15"
 				name="content" placeholder="내용을 입력하세요"></textarea>
 			</div>
-			<input type="hidden" name="uploader" value="<%= group.getUserName()%>">
-			<input type="hidden" readonly name = "access_no" value= "<%=user.getUserNo() %>">
-			<input type="submit" value="제출하기" claoss = "btn btn-info" id="btns"> <a
+			<input type="hidden" name="uploader" value="<%=user.getUserNo() %>">
+			<input type="submit" value="제출하기" class = "btn btn-info" id="btns"> <a
 				href="/studyhub/gnoticepreview?groupno=<%=group.getGroupNo()%>">목록으로
 				이동</a>
 		</form>

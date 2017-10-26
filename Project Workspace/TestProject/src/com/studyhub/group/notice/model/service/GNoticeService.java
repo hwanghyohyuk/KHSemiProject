@@ -44,9 +44,9 @@ public class GNoticeService {
 	}
 		
 	
-	public int insertGNotice(GNotice gnotice){
+	public int insertGNotice(String title, String content, int accessNo, int uploader){
 		Connection conn = getConnection();
-		int result = new GNoticeDao().insertGNotice(conn, gnotice);
+		int result = new GNoticeDao().insertGNotice(conn, title, content, accessNo, uploader);
 		if(result > 0)
 			commit(conn);
 		else

@@ -125,7 +125,7 @@ public class GNoticeDao {
 		return gnotice;
 	}
 
-	public int insertGNotice(Connection conn, GNotice gnotice) {
+	public int insertGNotice(Connection conn, String title, String content, int accessNo, int uploader) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
@@ -133,9 +133,10 @@ public class GNoticeDao {
 				+ " ?, ?, sys_date, ?, 3, ?)";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, gnotice.getTitle());
-			pstmt.setInt(2, gnotice.getUploader());
-			pstmt.setString(3, gnotice.getContent());
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, accessNo);
+			pstmt.setInt(4, uploader);
 
 		} catch (Exception e) {
 			e.printStackTrace();
