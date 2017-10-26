@@ -67,12 +67,13 @@
 		<div class="sub-btns">
 		<a href="/studyhub/sharedfilepreview?groupno=<%=group.getGroupNo()%>">목록으로 이동</a> 
 		
+		<% if(user.getUserName().equals(sf.getUserName())){ %>
 		<a href="/studyhub/sharefileupdateview?no=<%=sf.getFileNo()%>">
 			<button class="btn btn-default btn-sm" id="btns">수정</button></a>
 		<a href="/studyhub/sharefiledelete?fileno=<%=sf.getFileNo()%>&groupno=<%=group.getGroupNo()%>"
 		 onclick="return check();">
 		<button class="btn btn-default btn-sm" id="btns">삭제</button></a> 
-			
+		<% } %>
 		</div>
 	</div>
 </div>

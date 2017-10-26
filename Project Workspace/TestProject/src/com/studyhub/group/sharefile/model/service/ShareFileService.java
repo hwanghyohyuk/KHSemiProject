@@ -107,12 +107,5 @@ public class ShareFileService {
 		close(con);
 		return clist;
 	}
-
-	public ArrayList<String> selectCategoryName(int no) {
-		Connection con = getConnection();
-		ArrayList<String> clist = new ShareFileDao().selectCategoryName(con, no);
-		close(con);
-		return clist;
-	}
 	
 }

@@ -26,7 +26,7 @@ public class ShareFileDao {
 				+ "from (select file_no, fc.group_no, title, user_name, content, upload_date, originalfilename, "
 				+ "renamefilename, downloadcount, file_category_name from tb_share_file sf "
 				+ "join tb_user us on (sf.uploader=us.user_no) join tb_file_category fc "
-				+ "on(sf.file_category_no=fc.file_category_no) where fc.group_no = ? "
+				+ "on(sf.file_category_no=fc.file_category_no) where sf.group_no = ? "
 				+ "order by upload_date desc, file_no asc)) where rnum >= ? and rnum <= ?";
 		
 		int startRow = (currentPage -1) * limit + 1;
@@ -53,7 +53,7 @@ public class ShareFileDao {
 					sf.setDownloadCount(rset.getInt("downloadcount"));
 					sf.setFileCategoryName(rset.getString("file_category_name"));
 					list.add(sf);
-
+					System.out.println("흠.."+rset.getInt("file_no"));
 				}
 			}
 		} catch (Exception e) {
@@ -328,7 +328,7 @@ public class ShareFileDao {
 	}
 
 
-	public ArrayList<String> selectCategoryName(Connection con, int no) {
+	/*public ArrayList<String> selectCategoryName(Connection con, int no) {
 		ArrayList<String> clist = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -356,6 +356,6 @@ public class ShareFileDao {
 		}
 
 		return clist;
-	}
+	}*/
 	
 }

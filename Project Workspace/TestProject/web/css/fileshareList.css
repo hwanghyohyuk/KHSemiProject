@@ -60,6 +60,111 @@ body{
 	margin-top: 4vh;
 	margin-bottom: 2vh;
 }
+
+#search-area{
+	margin-left: 54vw;
+}
+#search-input{
+	height: 4vh;
+    border: 1px solid silver;
+}
+#search-btn{
+ 	display: inline-block;
+	background: #001429;
+	color: white;
+	width: 4vw;
+	height: 4vh;
+	border: 0;
+	outline: 0;
+}
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+	box-sizing: border-box;
+}
+
+<!---카테고리 설정 --->
+*:before,
+*:after{
+	box-sizing: border-box;	
+}
+html,body{
+	min-height: 100%;
+}
+body{
+  user-select: none;
+}
+
+.settings-area{
+	margin-left: 5vw;
+}
+.wrap{
+
+	
+}
+.header{
+	width: 100%;
+	height: 50px;
+	border-radius: 10px 10px 0 0px;
+	font: bold 18px/50px arial;
+	text-align: center;
+	color: white;
+	
+}
+#clist{
+	display: block;
+	width: 100%;
+	height: 90%;
+}
+.wrap-list{
+	height: 85%;
+	padding: 20px 0px;
+	border-radius: 0 0 10px 10px;
+}
+
+input[type="checkbox"]{
+  position: relative;
+  top: 14px;
+  right: 12px;
+  float: right;
+}
+
+.list{
+	list-style: none;
+	color: rgba(0,0,0,.7);
+}
+.list li:nth-child(odd){
+	background: rgba(0,0,50,.1);
+}
+.list li{
+	float: left;
+	width: 40vw;
+}
+label{
+  padding: 10px;
+	cursor: pointer;
+	float: left;
+	width: 95%;
+	transition: all .3s ease;
+}
+/* button */
+.c-btn{
+ 	display: inline-block;
+	background: #001429;
+	color: white;
+	top: 0;
+	left: 0;
+	width: 4vw;
+	height: 4vh;
+	border: 0;
+	outline: 0;
+	margin-top: 5vh;
+ }
+
+
+
 /* 
 #pagination{
 	width: 80vh;

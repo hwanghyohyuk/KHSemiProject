@@ -3,7 +3,7 @@
 	import="java.util.*, com.studyhub.common.vo.ShareFile"%>
 <%
 	ArrayList<ShareFile> list = (ArrayList<ShareFile>)request.getAttribute("list");
-	ArrayList<String> clist = (ArrayList<String>)request.getAttribute("clist");
+	ArrayList<ShareFile> clist = (ArrayList<ShareFile>)request.getAttribute("clist");
 	int listCount = ((Integer)request.getAttribute("listCount"));
 	int currentPage = ((Integer)request.getAttribute("currentPage"));
 	int startPage = ((Integer)request.getAttribute("startPage"));
@@ -23,6 +23,17 @@
 <link rel="stylesheet" type="text/css" href="/studyhub/css/fileshareList.css">
 <link rel="stylesheet" href="/studyhub/css/bootstrap.min.css">
 <script src="/studyhub/js/bootstrap.min.js"></script>
+<script>
+/* $(function(){
+    $('ul.nav-tabs a').click(function (e) {
+      e.preventDefault();
+      $('.tab-content').hide();
+      $(this).show();
+      
+    })
+}) */
+</script>
+
 
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
@@ -39,21 +50,25 @@
 	<div class="category-tab">
 		<ul class="nav nav-tabs">
 		<%
-			for (String cname : clist){
+			for (ShareFile c : clist){
 		%>
 		    <li class="active">  <!-- 이거 한글이라서 Category no로 가져와야함 아오,,  -->
-		    <a href="#<%= cname %>" aria-controls="<%= cname %>" role="tab" data-toggle="tab"><%= cname %></a></li>
+		    <a href="#category<%= c.getFileCategoryNo() %>" 
+		    aria-controls="category<%= c.getFileCategoryNo() %>" role="tab" data-toggle="tab">
+		    <%= c.getFileCategoryName() %></a></li>
+		    
+
+		    
 		<% } %>
 		
+		<!-- 그룹장만 카테고리 추가, 삭제, 수정 가능  -->
 		<% if(group.getAuthorityNo()==2){ %>
-		    <li><a href="#setting" aria-controls="setting" role="tab" data-toggle="tab">+</a></li>
+		    <li><a href="#add" aria-controls="add" role="tab" data-toggle="tab">
+		    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+		    <li><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">
+		    	<span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
 		<% } %>
-		 	 <!-- search bar -->
-			 <form action="/studyhub/sharefilesearch" method="post">
-			 <input type="search" autocomplete name="keyword" length="15"
-			  placeholder="제목 또는 파일이름..." id="search-input"> 
-			<input type="submit" value="검색" id="search-btn" class="glyphicon glyphicon-search">
-			 </form>
+		
 		 </ul>
 		
 	</div>
@@ -62,9 +77,17 @@
 	 <!-- 카테고리(탭) 하나씩 -->
 		
 	  <div class="tab-content">
-	  <% for (String cname : clist){ %>
-	    <div class="tab-pane fade in active" id="<%= cname %>">
+	  <% for (ShareFile c : clist){ %>
+	    <div class="tab-pane fade in active" id="category<%= c.getFileCategoryNo() %>">
 	    
+	    	<!-- search bar -->
+		 	 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				 <form action="/studyhub/sharefilesearch" method="post" id="search-area">
+				 <input type="search" autocomplete name="keyword" length="15"
+				  placeholder="제목 또는 파일이름..." id="search-input"> 
+				<input type="submit" value="검색" id="search-btn" class="glyphicon glyphicon-search">
+				 </form>
+			 </div>
 			<!-- file boxes  -->
 			<div class="fileboxes">
 				<div class="filebox">
@@ -74,7 +97,7 @@
 				</div>
 				<%
 					for (ShareFile sf : list) {
-						if(cname.equals(sf.getFileCategoryName())){
+						if(c.getFileCategoryName().equals(sf.getFileCategoryName())){
 				%>
 			
 				<div class="filebox">
@@ -104,24 +127,23 @@
 					</h6>
 				</div>
 		
-				<div class="filebox">
+				<!-- 예시 div... <div class="filebox">
 					<h4>title</h4>
 					<p>content</p>
 					<hr>
 					<p>filename</p>
 					<p>upload_date</p>
 					<button id="download">download</button>
-				</div>
+				</div> -->
+				<% }} %>
 			</div>
-			<%
-					}}
-			%>
+			
 			<div class="col-md-8 col-md-offset-5 col-lg-8 col-lg-offset-5 col-sm-8 col-sm-offset-5 col-xs-8 col-xs-offset-5">
 				<div id="pagination">
 					<% if(currentPage <=1){ %>
-						<span> ◀◀  </span>
+						<span> ◀◀ &nbsp; </span>
 					<% }else{ %>
-						<a href="/studyhub/sharefilelist?page=<%= currentPage -1 %>">◀</a>
+						<a href="/studyhub/sharefilelist?page=<%= currentPage -1 %>&groupno=<%= group.getGroupNo()%>">◀◀&nbsp;</a>
 					<% } %>
 					
 					<% for (int p=startPage;p<=endPage;p++){ 
@@ -129,13 +151,13 @@
 					%>
 					<span>[<%=p %>]</span>
 					<% }else{ %>
-						<a href="/studyhub/sharefilelist?page=<%=p %>"><%=p %></a>
+						<a href="/studyhub/sharefilelist?page=<%=p %>&groupno=<%= group.getGroupNo()%>"><%=p %></a>
 					<% }} %>
 					
 					<% if(currentPage >= maxPage){ %>
-					<span> ▶▶ </span>
+					<span>&nbsp; ▶▶ </span>
 					<% }else{ %>
-						<a href="/studyhub/sharefilelist?page=<%=currentPage+1 %>">▶</a>
+						<a href="/studyhub/sharefilelist?page=<%=currentPage+1 %>&groupno=<%= group.getGroupNo()%>">&nbsp;▶▶</a>
 					<% } %>
 				</div>
 			</div>
@@ -143,30 +165,46 @@
 
 	    </div>
 	    <% } %>
-	    <script>
-	    $('#setting').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})  
-
-$('#').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-}) 
-
-
-</script>
-	    
-	    <div class="tab-pane fade" id="세팅">새 카테고리 추가하는 div - 곧 할 예정... </div>
-	    
-	    
+	  
+	    <div class="tab-pane fade" id="add">새 카테고리 추가하는 div:누르면 바로 커서뜨고 이름써서 카테고리추가가능하도록. </div>
+	    <div class="tab-pane fade" id="settings">
+	    	<div class="settings-area">
+	    		<h3><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 카테고리설정</h3>
+	    		
+	    		<div class="wrap">
+						<div class="wrap-list">
+							<ol class="list">
+								<% for(ShareFile sf : clist){ %>
+								<li>
+									<input type="checkbox" id="check<%=sf.getFileCategoryNo() %>">
+									<label for="check"><%= sf.getFileCategoryName() %></label>
+								</li>
+								<% } %>
+								<li>
+									<input type="checkbox" id="check2">
+									<label for="check-2">Practice</label>
+								</li>
+								<li>
+									<input type="checkbox" id="check3">
+									<label for="check-3">Sleep</label>
+								</li>
+							</ol>
+						</div>
+						<div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3" 
+								id="buttons">
+						<a href="/studyhub/filecategoryadd?no=<%=group.getGroupNo()%>"><button class="c-btn">추가</button></a>
+						<a href="/studyhub/filecategoryedit?no=<%=group.getGroupNo()%>"><button class="c-btn">수정</button></a>
+	    				<a href="/studyhub/filecategorydelete?no=<%=group.getGroupNo()%>"><button class="c-btn">삭제</button></a>
+	    				</div>
+					</div>
+	    		
+	    		
+	    	</div>
+	     </div>
 	    
 	  </div>
 	<!-- </div> -->
-	
-	
 
-	
 </div>
 </div>
 <!-- /메인 컨텐츠 -->
