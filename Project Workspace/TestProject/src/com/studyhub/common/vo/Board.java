@@ -18,6 +18,7 @@ public class Board implements java.io.Serializable {
 	private String categoryName;
 	private String attributeName;
 	private String gImgRename;
+	private int memberCount;
 
 	public Board() {
 		super();
@@ -172,6 +173,23 @@ public class Board implements java.io.Serializable {
 
 	public void setgImgRename(String gImgRename) {
 		this.gImgRename = gImgRename;
+	}
+
+	public int getMemberCount() {
+		return memberCount;
+	}
+
+	public void setMemberCount(int memberCount) {
+		this.memberCount = memberCount;
+	}
+
+	@Override
+	public String toString() {
+		return "Board [boardNo=" + boardNo + ", title=" + title + ", content=" + content + ", uploader=" + uploader
+				+ ", uploaderName=" + uploaderName + ", uploadDate=" + uploadDate + ", deadlineDate=" + deadlineDate
+				+ ", status=" + status + ", groupNo=" + groupNo + ", groupName=" + groupName + ", location=" + location
+				+ ", categoryName=" + categoryName + ", attributeName=" + attributeName + ", gImgRename=" + gImgRename
+				+ ", memberCount=" + memberCount + "]";
 	}
 
 }
