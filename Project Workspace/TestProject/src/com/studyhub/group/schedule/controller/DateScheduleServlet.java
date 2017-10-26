@@ -1,26 +1,33 @@
 package com.studyhub.group.schedule.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.studyhub.common.vo.Schedule;
 import com.studyhub.group.schedule.model.service.ScheduleService;
 
 /**
- * Servlet implementation class ScheduleInsertServlet
+ * Servlet implementation class DateScheduleServlet
  */
-@WebServlet("/scheduleinsert")
-public class ScheduleInsertServlet extends HttpServlet {
+@WebServlet("/dateschedule")
+public class DateScheduleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ScheduleInsertServlet() {
+    public DateScheduleServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +38,27 @@ public class ScheduleInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		Schedule sc = new Schedule();
+		int groupno = Integer.parseInt(request.getParameter("group_no"));
 		
-		sc.setGroupNo(Integer.parseInt(request.getParameter("group_no")));
-		sc.setMeetingDate(request.getParameter("modaldate"));
-		sc.setAmpm(request.getParameter("modalampm"));
-		sc.setHour(request.getParameter("modalhour"));
-		sc.setMinute(request.getParameter("modalminute"));
-		sc.setOnoff(request.getParameter("modalonoff"));
-		sc.setMeetingName(request.getParameter("modalcontent"));
-		String datetype = request.getParameter("datetype_date");
+		ArrayList<Schedule> list = new ScheduleService().DateSchedule(groupno);
 		
-		if(new ScheduleService().insertSchedule(sc, datetype) > 0){
-			response.sendRedirect("views/group/groupSchedule/ScheduleMain.jsp");
+		JSONObject json = new JSONObject();
+		JSONArray jarr = new JSONArray();
+		
+		for(Schedule sc : list) {
+			JSONObject job = new JSONObject();
+			job.put("start", URLEncoder.encode(sc.getDatetypeDate(), "UTF-8"));
+			job.put("title", URLEncoder.encode(sc.getMeetingName(), "UTF-8"));
+			
+			jarr.add(job);
 		}
+		
+		json.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(json.toJSONString());
+		out.flush();
+		out.close();
 	}
 
 	/**

@@ -17,10 +17,10 @@ public class GMainService {
 	private Schedule schedule;
 	private ShareFile shareFile;
 	
-	public Group SelectGroup(int group_no) {
+	public Group SelectGroup(int group_no, int user_no) {
 		Connection con = getConnection();
 		gmd = new GMainDao();
-		group = gmd.selectGroup(con, group_no);
+		group = gmd.selectGroup(con, group_no, user_no);
 		close(con);
 		return group;
 	}
