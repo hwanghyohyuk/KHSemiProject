@@ -47,25 +47,30 @@ public class SearchGroupQnAServlet extends HttpServlet {
 		JSONObject json = new JSONObject();
 		JSONArray jarr = new JSONArray();
 		
-		for(GQNA gq : qnalist){
-			JSONObject job = new JSONObject();
-			job.put("g_qna_no", gq.getgQnaNo());
-			job.put("title", URLEncoder.encode(gq.getTitle(), "UTF-8"));
-			job.put("content", URLEncoder.encode(gq.getContent(), "UTF-8"));
-			job.put("uploaddate", URLEncoder.encode(gq.getStrDate(), "UTF-8"));
-			job.put("uploader", URLEncoder.encode(gq.getUploader_name(), "UTF-8"));
-			job.put("access_no", gq.getAccessNo());
-			job.put("groupno", gq.getGroupNo());
-			job.put("user_no", gq.getUploader());
-			
-			jarr.add(job);
+		if(qnalist != null) {
+			for(GQNA gq : qnalist){
+				JSONObject job = new JSONObject();
+				job.put("g_qna_no", gq.getgQnaNo());
+				job.put("title", URLEncoder.encode(gq.getTitle(), "UTF-8"));
+				job.put("content", URLEncoder.encode(gq.getContent(), "UTF-8"));
+				job.put("uploaddate", URLEncoder.encode(gq.getStrDate(), "UTF-8"));
+				job.put("uploader", URLEncoder.encode(gq.getUploader_name(), "UTF-8"));
+				job.put("access_no", gq.getAccessNo());
+				job.put("groupno", gq.getGroupNo());
+				job.put("user_no", gq.getUploader());
+				
+				jarr.add(job);
+			}
+			json.put("list", jarr);
+			response.setContentType("application/json; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(json.toJSONString());
+			out.flush();
+			out.close();
+			}
+		else {
+			response.sendRedirect("views/group/groupQnA/QnAList.jsp");
 		}
-		json.put("list", jarr);
-		response.setContentType("application/json; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.print(json.toJSONString());
-		out.flush();
-		out.close();
 	}
 
 	/**

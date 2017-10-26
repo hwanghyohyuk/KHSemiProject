@@ -167,6 +167,7 @@ public class GroupQnADao {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		searchdata = "%" + searchdata + "%";
 		
 		String query = 	"select g_qna_no, group_no, searchdata " +
 						"from (select g_qna_no, group_no, title || content || to_char(upload_date, 'yyyyMMdd') || user_name as searchdata " +
@@ -174,7 +175,7 @@ public class GroupQnADao {
 						"from tb_g_qna " +
 						"join tb_user on (user_no=uploader)) " +
 						"where group_no = ?) " +
-						"where searchdata like '%?%'";
+						"where searchdata like ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -188,7 +189,6 @@ public class GroupQnADao {
 				while(rset.next()){
 					int gqnano = 0;
 					gqnano = rset.getInt("g_qna_no");
-					System.out.println("g_qna_no : " + gqnano);
 					groupnolist.add(gqnano);
 				}
 			}
@@ -204,28 +204,28 @@ public class GroupQnADao {
 	}
 
 	public ArrayList<GQNA> GQNAList(Connection con, int groupno, ArrayList<Integer> groupnolist) {
-		ArrayList<GQNA> qnalist = null;
-		
-		for(int i = 0; i < groupnolist.size(); i++){
-			PreparedStatement pstmt = null;
-			ResultSet rset = null;
-			
-			GQNA gq = null;
-				
-			String query = 	"select g_qna_no, title, content, to_char(upload_date, 'yyyyMMdd') as str_date, user_name, access_no, group_no, uploader " +
-							"from tb_g_qna " +
-							"join tb_user on (tb_g_qna.uploader = tb_user.user_no) " +
-							"where group_no = ? and g_qna_no = ? " + 
-							"order by (g_qna_no) desc";
-			
-			try {
+		ArrayList<GQNA> qnalist = new ArrayList<GQNA>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			for (int i = 0; i < groupnolist.size(); i++) {
+				System.out.println(i);
+				GQNA gq = null;
+
+				String query = "select g_qna_no, title, content, to_char(upload_date, 'yyyyMMdd') as str_date, user_name, access_no, group_no, uploader "
+						+ "from tb_g_qna " + "join tb_user on (tb_g_qna.uploader = tb_user.user_no) "
+						+ "where group_no = ? and g_qna_no = ? " + "order by (g_qna_no) desc";
+
 				pstmt = con.prepareStatement(query);
 				pstmt.setInt(1, groupno);
 				pstmt.setInt(2, groupnolist.get(i));
-				
+
 				rset = pstmt.executeQuery();
 				
-				if(rset.next()){
+				
+				if (rset.next()) {
 					gq = new GQNA();
 					gq.setgQnaNo(rset.getInt("g_qna_no"));
 					gq.setTitle(rset.getString("title"));
@@ -238,13 +238,15 @@ public class GroupQnADao {
 					
 					qnalist.add(gq);
 				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
-		
-		System.out.println(qnalist);
+
 		return qnalist;
 	}
 

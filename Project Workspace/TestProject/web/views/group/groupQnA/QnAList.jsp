@@ -368,7 +368,9 @@
 		$("#qna_list").hide();
 		$("#search_list").show();
 		var groupno = "<%= group.getGroupNo() %>";
+		var user_no = "<%= user.getUserNo() %>";
 		var searchdata = $("#qnasearch").val();
+		console.log(searchdata);
 		$.ajax({
 			url: "/studyhub/searchgroupqna",
 			data: { searchdata: searchdata, groupno: groupno },
@@ -444,8 +446,8 @@
 								"</div>";
 						}
 					}
+				$("#search_list").html(values);
 			}
-			$("#search_list").html(values);
 		});
 	}
 	
