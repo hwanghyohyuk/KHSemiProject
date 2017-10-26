@@ -35,51 +35,7 @@
 <%@ include file="/views/include/group/nav.jsp"%>
 <!-- 메인 컨텐츠 -->
 <body>
-	<%-- <div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<h2>자유게시판</h2>
-
-			<div align="center">
-				<form action="#" method="post">
-					<input type="search" autocomplete name="keyword" length="50">
-					&nbsp; <input type="submit" value="제목검색" class="btn btn-default">
-				</form>
-
-			</div>
-
-			<div class="table-area">
-				<table class="table table-striped" align="center" width="600">
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>날짜</th>
-					<th>조회수</th>
-					<%
-						for (GBoard gb : list) {
-					%>
-					<tr>
-						<td><%=gb.getgBoardNo()%></td>
-						<td><a href="/studyhub/gboardview?gbno=<%=gb.getgBoardNo() %>">
-					<% if(gb.getTitle().length()>9){ %>
-					<%=gb.getTitle().substring(0, 9) %>..
-					<% }else{ %>
-					<%=gb.getTitle()%>
-					<% } %>
-					</a></span>
-					</td>
-						<td><%=gb.getUploader()%></td>
-						<td><%=gb.getUploadDate()%></td>
-						<td><%=gb.getAccessNo()%></td>
-					</tr>
-					<%
-						}
-					%>
-				</table>
-				<button onclick="insertPage();" class="btn btn-info">글쓰기</button>
-			</div>
-		</div>
-	</div>
- --%><div class="row">
+	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<h2>공지사항</h2>
 			<div class="table-area">
@@ -98,7 +54,7 @@
 						<td><%=gboard.getgBoardNo()%></td>
 						<td id="title_text">
 						<a href="/studyhub/gboardview?no=<%=gboard.getgBoardNo()%>"><%=gboard.getTitle()%></a></td>
-						<td><%=gboard.getUploader()%></td>
+						<td><%=gboard.getUploaderName() %></td>
 						<td><%=gboard.getUploadDate()%></td>
 					</tr>
 					<%

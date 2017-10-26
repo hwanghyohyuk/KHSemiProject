@@ -44,18 +44,13 @@ public class GBoardInsertServlet extends HttpServlet {
 				
 				RequestDispatcher view = null;
 				GBoard gboard = new GBoard();
-
-				if(!ServletFileUpload.isMultipartContent(request)){
-					view = request.getRequestDispatcher("/views/group/groupBoard/BoardError.jsp");
-					request.setAttribute("message", "form enctype 속성 사용 안 함!");
-					view.forward(request, response);
-				}
+			
 
 				String title = request.getParameter("title");
 				String content = request.getParameter("content");
 				int uploader = Integer.parseInt(request.getParameter("uploader"));
-				int accessNo = Integer.parseInt(request.getParameter("access_no"));
-				int groupNo = Integer.parseInt(request.getParameter("group_no"));
+				int accessNo = Integer.parseInt(request.getParameter("accessno"));
+				int groupNo = Integer.parseInt(request.getParameter("groupno"));
 				
 				gboard.setTitle(title);
 				gboard.setContent(content);

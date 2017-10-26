@@ -53,4 +53,9 @@ public class GMainService {
 		close(con);
 		return list;
 	}
+
+	public int getListCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

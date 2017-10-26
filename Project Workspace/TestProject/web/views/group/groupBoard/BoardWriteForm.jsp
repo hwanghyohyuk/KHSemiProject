@@ -35,7 +35,7 @@
 	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
 		<h2>게시글 작성</h2>
 		<br>
-		<form action="/studyhub/gboardcreate" method="post">
+		<form action="/studyhub/gboardinsert" method="post">
 			<div class="form-group">
 				<label for="title">제목</label> <input type="text"
 					class="form-control" id="exampleInputEmail1"
