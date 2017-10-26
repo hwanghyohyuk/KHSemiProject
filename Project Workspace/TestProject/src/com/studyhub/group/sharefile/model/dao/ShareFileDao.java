@@ -22,11 +22,12 @@ public class ShareFileDao {
 		ResultSet rset = null;
 		String query = "select *"
 				+ " from (select rownum rnum, file_no, group_no, title, user_name, content, "
-				+ "upload_date, originalfilename, renamefilename, downloadcount"
-				+ " from (select * from tb_share_file "
-				+ "join tb_user on (tb_share_file.uploader=tb_user.user_no) "
-				+ "order by upload_date desc, file_no asc))" 
-				+ " where group_no = ? and rnum >= ? and rnum <= ?";
+				+ "upload_date, originalfilename, renamefilename, downloadcount, file_category_name "
+				+ "from (select file_no, fc.group_no, title, user_name, content, upload_date, originalfilename, "
+				+ "renamefilename, downloadcount, file_category_name from tb_share_file sf "
+				+ "join tb_user us on (sf.uploader=us.user_no) join tb_file_category fc "
+				+ "on(sf.file_category_no=fc.file_category_no) where fc.group_no = ? "
+				+ "order by upload_date desc, file_no asc)) where rnum >= ? and rnum <= ?";
 		
 		int startRow = (currentPage -1) * limit + 1;
 		int endRow = startRow + limit -1;
@@ -50,6 +51,7 @@ public class ShareFileDao {
 					sf.setFileName(rset.getString("originalfilename"));
 					sf.setRenameFileName(rset.getString("renamefilename"));
 					sf.setDownloadCount(rset.getInt("downloadcount"));
+					sf.setFileCategoryName(rset.getString("file_category_name"));
 					list.add(sf);
 
 				}
@@ -107,7 +109,7 @@ public class ShareFileDao {
 		
 		String query = "insert into tb_share_file values "+
 					"((select max(file_no)+1 from tb_share_file), "+
-					"?, ?, default, ?, ?, ?, ?, ?, 0)";
+					"?, ?, default, ?, ?, ?, ?, ?, 0, ?)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -118,6 +120,7 @@ public class ShareFileDao {
 			pstmt.setInt(5, sf.getGroupNo());
 			pstmt.setInt(6, sf.getUploader());
 			pstmt.setInt(7, sf.getAccessNo());
+			pstmt.setInt(8, sf.getFileCategoryNo());
 			
 			result = pstmt.executeUpdate(); 
 					
@@ -286,6 +289,73 @@ public class ShareFileDao {
 			close(stmt);
 		}
 		return result;
+	}
+
+
+	public ArrayList<ShareFile> selectCategory(Connection con, int no) {
+		
+		ArrayList<ShareFile> clist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select distinct tb_file_category.file_category_no, tb_file_category.file_category_name from tb_file_category"
+				+ " join tb_share_file on(tb_share_file.file_category_no = tb_file_category.file_category_no)"
+				+ " where tb_share_file.group_no = ?";
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			rset = pstmt.executeQuery();
+			if (rset != null) {
+				clist = new ArrayList<ShareFile>();
+				while (rset.next()) {
+					ShareFile sf = new ShareFile();
+					sf.setFileCategoryNo(rset.getInt("file_category_no"));
+					sf.setFileCategoryName(rset.getString("file_category_name"));
+					clist.add(sf);
+					
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+
+		return clist;
+	}
+
+
+	public ArrayList<String> selectCategoryName(Connection con, int no) {
+		ArrayList<String> clist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select distinct file_category_name from tb_file_category where group_no = ?";
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			rset = pstmt.executeQuery();
+			if (rset != null) {
+				clist = new ArrayList<String>();
+				while (rset.next()) {
+					String cname = rset.getString("file_category_name");
+					clist.add(cname);
+					
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+
+		return clist;
 	}
 	
 }

@@ -3,6 +3,7 @@
 	import="java.util.*, com.studyhub.common.vo.ShareFile"%>
 <%
 	ArrayList<ShareFile> list = (ArrayList<ShareFile>)request.getAttribute("list");
+	ArrayList<String> clist = (ArrayList<String>)request.getAttribute("clist");
 	int listCount = ((Integer)request.getAttribute("listCount"));
 	int currentPage = ((Integer)request.getAttribute("currentPage"));
 	int startPage = ((Integer)request.getAttribute("startPage"));
@@ -33,38 +34,47 @@
 
 
 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+<div class="container">
 	<!-- Tab -->
 	<div class="category-tab">
-		<ul class="nav nav-tabs" role="tablist">
-		    <li role="presentation" class="active"><a href="#reading" aria-controls="reading" role="tab" data-toggle="tab">Reading</a></li>
-		    <li role="presentation"><a href="#listening" aria-controls="listening" role="tab" data-toggle="tab">listening</a></li>
-		    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-		    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">+</a></li>
+		<ul class="nav nav-tabs">
+		<%
+			for (String cname : clist){
+		%>
+		    <li class="active">  <!-- 이거 한글이라서 Category no로 가져와야함 아오,,  -->
+		    <a href="#<%= cname %>" aria-controls="<%= cname %>" role="tab" data-toggle="tab"><%= cname %></a></li>
+		<% } %>
+		
+		<% if(group.getAuthorityNo()==2){ %>
+		    <li><a href="#setting" aria-controls="setting" role="tab" data-toggle="tab">+</a></li>
+		<% } %>
 		 	 <!-- search bar -->
 			 <form action="/studyhub/sharefilesearch" method="post">
 			 <input type="search" autocomplete name="keyword" length="15"
 			  placeholder="제목 또는 파일이름..." id="search-input"> 
 			<input type="submit" value="검색" id="search-btn" class="glyphicon glyphicon-search">
 			 </form>
-		 
 		 </ul>
 		
 	</div>
 	
-	<div role="tabpanel">
-  	<!-- Tab panes -->
+	<!-- <div role="tabpanel"> -->
+	 <!-- 카테고리(탭) 하나씩 -->
+		
 	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="reading">
+	  <% for (String cname : clist){ %>
+	    <div class="tab-pane fade in active" id="<%= cname %>">
 	    
 			<!-- file boxes  -->
 			<div class="fileboxes">
 				<div class="filebox">
-					<a href="/studyhub/views/group/groupFileShare/fileshareWriteform.jsp"><img src="/studyhub/images/plus.png" id="plus-img"></a>
+					<a href="/studyhub/sharefileinsertview?no=<%=group.getGroupNo()%>"><img src="/studyhub/images/plus.png" id="plus-img"></a>
 					<br>
 					<p>새로운 파일 공유하기</p>
 				</div>
 				<%
 					for (ShareFile sf : list) {
+						if(cname.equals(sf.getFileCategoryName())){
 				%>
 			
 				<div class="filebox">
@@ -94,10 +104,6 @@
 					</h6>
 				</div>
 		
-				<%
-					}
-				%>
-		
 				<div class="filebox">
 					<h4>title</h4>
 					<p>content</p>
@@ -107,6 +113,9 @@
 					<button id="download">download</button>
 				</div>
 			</div>
+			<%
+					}}
+			%>
 			<div class="col-md-8 col-md-offset-5 col-lg-8 col-lg-offset-5 col-sm-8 col-sm-offset-5 col-xs-8 col-xs-offset-5">
 				<div id="pagination">
 					<% if(currentPage <=1){ %>
@@ -130,18 +139,35 @@
 					<% } %>
 				</div>
 			</div>
+			
 
 	    </div>
-	    <div role="tabpanel" class="tab-pane" id="listening">contents</div>
-	    <div role="tabpanel" class="tab-pane" id="messages">message?s</div>
-	    <div role="tabpanel" class="tab-pane" id="+">...</div>
+	    <% } %>
+	    <script>
+	    $('#setting').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})  
+
+$('#').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+}) 
+
+
+</script>
+	    
+	    <div class="tab-pane fade" id="세팅">새 카테고리 추가하는 div - 곧 할 예정... </div>
+	    
+	    
+	    
 	  </div>
-	</div>
+	<!-- </div> -->
 	
 	
 
 	
-
+</div>
 </div>
 <!-- /메인 컨텐츠 -->
 

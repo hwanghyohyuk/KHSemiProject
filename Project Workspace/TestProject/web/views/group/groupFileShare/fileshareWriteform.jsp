@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*, com.studyhub.common.vo.ShareFile" %>
+<% ArrayList<ShareFile> clist = (ArrayList<ShareFile>)request.getAttribute("clist"); %>
 <!-- 
 작성자 : 구미향
 내용 : 파일공유 write Form  페이지
@@ -48,10 +49,9 @@
 				<div class="tab-category">
 					<label for="category">카테고리</label>
 					<select name="category">
-					    <option value="<%=sf.getFileCategory()%>">Volvo</option>
-					    <option value="saab">Saab</option>
-					    <option value="fiat">Fiat</option>
-					    <option value="audi">Audi</option>
+					<% for (ShareFile sf : clist){ %>
+					    <option value="<%=sf.getFileCategoryNo()%>"><%=sf.getFileCategoryName()%></option>
+					<% } %>  
 					</select>
 				</div>
 				<div class="upload">
