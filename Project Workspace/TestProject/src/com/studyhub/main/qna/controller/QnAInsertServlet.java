@@ -40,6 +40,7 @@ public class QnAInsertServlet extends HttpServlet {
 		RequestDispatcher view = null;
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		content = content.replaceAll("\n","<br>");
 		int userNo = Integer.parseInt(request.getParameter("user_no"));
 		int accessNo = Integer.parseInt(request.getParameter("access_no"));
 		

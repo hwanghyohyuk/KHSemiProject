@@ -107,5 +107,16 @@ public class ShareFileService {
 		close(con);
 		return clist;
 	}
+
+	public int addCategory(String cname, int groupno) {
+		Connection con = getConnection();
+		int result = new ShareFileDao().addCategory(con, cname, groupno);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
 	
 }

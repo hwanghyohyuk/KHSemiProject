@@ -58,7 +58,7 @@ public class ShareFileInsertServlet extends HttpServlet {
 		String title = mrequest.getParameter("title");
 		int userno = Integer.parseInt(mrequest.getParameter("user_no"));
 		String content = mrequest.getParameter("content");
-		content = content.replace("\r\n","<br>");
+		content = content.replaceAll("\n","<br>");
 		int accessno = Integer.parseInt(mrequest.getParameter("access_no"));
 		int groupno = Integer.parseInt(mrequest.getParameter("group_no"));
 		int categoryno = Integer.parseInt(mrequest.getParameter("category"));

@@ -17,6 +17,13 @@
 <!--자바스크립트 및 CSS-->
 <link rel="stylesheet" type="text/css" href="/studyhub/css/write_form.css">
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
+<script>
+function onTestChange() {
+	var text = $("#textarea").val();
+	text = text.replace(/\r?\n/g, '<br />');
+	console.log("working");
+}
+</script>
 
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
@@ -47,7 +54,7 @@
 				</div>
 				<div class="form-group">
 					<label for="Content">내용</label>
-					<textarea class="form-control" id="Textarea" rows="15"
+					<textarea class="form-control" id="textarea" rows="15" onkeypress="onTestChange();"
 						name="content" placeholder="내용을 입력하세요"></textarea>
 				</div>
 

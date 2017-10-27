@@ -1,27 +1,33 @@
 package com.studyhub.group.sharefile.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.studyhub.common.vo.ShareFile;
 import com.studyhub.group.sharefile.model.service.ShareFileService;
 
 /**
- * Servlet implementation class FileCategoryAddServlet
+ * Servlet implementation class FileCategorySelectServlet
  */
-@WebServlet("/filecategoryadd")
-public class FileCategoryAddServlet extends HttpServlet {
+@WebServlet("/filecategoryselect")
+public class FileCategorySelectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FileCategoryAddServlet() {
+    public FileCategorySelectServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,21 +36,26 @@ public class FileCategoryAddServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8");
-		
-		RequestDispatcher view = null;
-		String cname = request.getParameter("cname");
 		int groupno = Integer.parseInt(request.getParameter("groupno"));
+		ArrayList<ShareFile> list = new ShareFileService().selectCategory(groupno);
+		System.out.println("list: "+ list + "groupno" + groupno);
 		
-		if(new ShareFileService().addCategory(cname, groupno) >0 ){
-			response.sendRedirect("/studyhub/sharedfilepreview?groupno="+groupno);
-		}else{
-			view= request.getRequestDispatcher("views/group/groupFileShare/fileshareError.jsp");
-			request.setAttribute("message", "카테고리 추가 실패!");
-			view.forward(request, response);
+		JSONObject json = new JSONObject();
+		JSONArray jarr = new JSONArray();
+		
+		for(ShareFile sf : list){
+			JSONObject job = new JSONObject();
+			job.put("categoryno", sf.getFileCategoryNo());
+			job.put("cname", URLEncoder.encode(sf.getFileCategoryName(), "UTF-8"));
+			System.out.println("for문 sf" + sf);
+			jarr.add(job);
 		}
-		
+		json.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(json.toJSONString());
+		out.flush();
+		out.close();
 	}
 
 	/**
