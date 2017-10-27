@@ -46,6 +46,7 @@ public class GBoardUpdateServlet extends HttpServlet {
 		
 		//수정 updateBoard(gNboard)
 		if(new GBoardService().updateGBoard(gboard)>0){
+System.out.println(response.sendRedirect("/studyhub/gboardlist"););
 			response.sendRedirect("/studyhub/gboardlist");
 		}else{
 			view = request.getRequestDispatcher("/views/group/groupBoard/BoardError.jsp");
