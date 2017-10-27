@@ -1,6 +1,9 @@
 package com.studyhub.main.board.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +34,28 @@ public class BoardDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		
+		bs = new BoardService();
+		int result = bs.deleteBoard(bno);
+		
+		RequestDispatcher view = null;
+		if(result>0){
+			PrintWriter pw = response.getWriter();
+			pw.println("<script type='text/javascript'>");
+			pw.println("alert('해당 게시글이 정상적으로 삭제되었습니다.');");
+			pw.println("location.href='/studyhub/boardlist?page=1'");
+			pw.println("</script>");
+			pw.flush();
+			pw.close();
+		} else {
+			view = request.getRequestDispatcher("views/main/Board/BoardError.jsp");
+			request.setAttribute("message", "Board 서비스 : 모집글 삭제 실패!");
+			view.forward(request, response);
+		}
 	}
 
 	/**

@@ -166,9 +166,23 @@ public class BoardDao {
 
 	
 
-	public int deleteBoard(Connection con, int bnum) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteBoard(Connection con, int bno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "delete from tb_board where board_no = ?";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, bno);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 	public int updateBoard(Connection con, Board b) {
@@ -183,8 +197,9 @@ public class BoardDao {
 
 		
 		String query = "select group_no, group_name "
-				+ "from boardlistview "
-				+ "where user_name = (select user_name from tb_user where user_no = ?) and "
+				+ "from tb_ung "
+				+ "join tb_group using(group_no) "
+				+ "where user_no = ? and "
 				+ "group_name not in (select group_name from boardlistview where status = '모집중')";
 
 		try {

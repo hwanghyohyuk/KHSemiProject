@@ -37,25 +37,64 @@
 			<label for="btitle" class="col-sm-3 control-label">제목</label>
 			<div class="col-sm-3">
 				<p class="pull-left control-label"><%=board.getTitle()%>
-				<p>
+				</p>
 			</div>
-			<label for="btitle" class="col-sm-3 control-label">작성 날짜</label>
+			<label for="btitle" class="col-sm-3 control-label">작성자</label>
 			<div class="col-sm-3">
-				<p class="pull-left control-label"><%=board.getUploadDate()%>
-				<p>
+				<p class="pull-left control-label"><%=board.getUploaderName()%>
+				</p>
 			</div>
 		</div>
 		<hr>
 		<div class="form-group">
-			<label for="btitle" class="col-sm-3 control-label">제목</label>
+			<label for="btitle" class="col-sm-3 control-label">모집 기간</label>
 			<div class="col-sm-3">
-				<p class="pull-left control-label"><%=board.getTitle()%>
-				<p>
+				<p class="pull-left control-label"><%=board.getUploadDate()%> ~ <%=board.getDeadlineDate()%>
+				</p>
 			</div>
-			<label for="btitle" class="col-sm-3 control-label">마감 날짜</label>
+			<label for="btitle" class="col-sm-3 control-label">모집 상태</label>
 			<div class="col-sm-3">
-				<p class="pull-left control-label"><%=board.getDeadlineDate()%>
-				<p>
+				<p class="pull-left control-label"><%=board.getStatus()%>
+				</p>
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="btitle" class="col-sm-3 control-label">내용</label>
+			<div class="col-sm-9">
+				<%=(board.getContent()).replaceAll("\n", "<br>") %>
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="btitle" class="col-sm-3 control-label">그룹정보</label>
+			<div class="col-sm-1">
+				<img id="groupimg" src="/imamges/groupimg/<%=board.getgImgRename()%>">
+			</div>
+			<label for="btitle" class="col-sm-2 control-label">그룹명</label>
+			<div class="col-sm-1">
+				<p class="pull-left control-label"><%=board.getGroupName()%>
+				</p>
+			</div>
+			<label for="btitle" class="col-sm-2 control-label">스터디 방식</label>
+			<div class="col-sm-3">
+				<p class="pull-left control-label"><%=board.getAttributeName()%>
+				</p>
+			</div>
+			<label for="btitle" class="col-sm-2 control-label">스터디 지역</label>
+			<div class="col-sm-1">
+				<p class="pull-left control-label"><%=board.getLocation()%>
+				</p>
+			</div>
+			<label for="btitle" class="col-sm-2 control-label">스터디 분류</label>
+			<div class="col-sm-3">
+				<p class="pull-left control-label"><%=board.getCategoryName()%>
+				</p>
+			</div>
+			<label for="btitle" class="col-sm-2 control-label">그룹원 수</label>
+			<div class="col-sm-1">
+				<p class="pull-left control-label"><%=board.getMemberCount()%>
+				</p>
 			</div>
 		</div>
 	</form>
@@ -64,6 +103,15 @@
 		<%
 			if (user.getUserNo() == board.getUploader()) {
 		%>
+		<a class="btn btn-default pull-right"
+			href="javascript:checkDelete(<%=board.getBoardNo()%>)">삭제</a>
+			<script type="text/javascript">
+			function checkDelete(bno){
+				if (confirm('해당 게시글을 삭제하시겠습니까?')) {
+				    location.href="/studyhub/boarddelete?bno="+bno;
+				} 
+			}
+			</script>
 		<a class="btn btn-default pull-right"
 			href="/studyhub/boardupdate.move?bno=<%=board.getBoardNo()%>">수정</a>
 		<%
