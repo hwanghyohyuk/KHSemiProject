@@ -45,7 +45,7 @@ public class GNoticeUpdateServlet extends HttpServlet {
 		RequestDispatcher view = null;
 		
 		if(new GNoticeService().updateGNotice(gNotice)>0){
-			response.sendRedirect("/studyhub/gnoticelist");
+			response.sendRedirect("/studyhub/gnoticepreview");
 		}else{
 			view = request.getRequestDispatcher("/views/group/groupNotice/NoticeError.jsp");
 			request.setAttribute("message", "수정실패");
