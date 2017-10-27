@@ -14,6 +14,7 @@ public class GBoard implements java.io.Serializable {
 	private int accessNo;
 	private String accessRight;
 	private int groupNo;
+	private int readCount;
 
 	public GBoard() {
 		super();
@@ -21,8 +22,11 @@ public class GBoard implements java.io.Serializable {
 
 	
 
+
+
+
 	public GBoard(int rownum, int gBoardNo, String title, String content, Date uploadDate, int uploader,
-			String uploaderName, int accessNo, String accessRight, int groupNo) {
+			String uploaderName, int accessNo, String accessRight, int groupNo, int readCount) {
 		super();
 		this.rownum = rownum;
 		this.gBoardNo = gBoardNo;
@@ -34,7 +38,11 @@ public class GBoard implements java.io.Serializable {
 		this.accessNo = accessNo;
 		this.accessRight = accessRight;
 		this.groupNo = groupNo;
+		this.readCount = readCount;
 	}
+
+
+
 
 
 
@@ -123,13 +131,35 @@ public class GBoard implements java.io.Serializable {
 
 
 
+	public int getReadCount() {
+		return readCount;
+	}
+
+
+
+
+
+
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
+	}
+
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "GBoard [rownum=" + rownum + ", gBoardNo=" + gBoardNo + ", title=" + title + ", content=" + content
 				+ ", uploadDate=" + uploadDate + ", uploader=" + uploader + ", uploaderName=" + uploaderName
-				+ ", accessNo=" + accessNo + ", accessRight=" + accessRight + ", groupNo=" + groupNo + "]";
+				+ ", accessNo=" + accessNo + ", accessRight=" + accessRight + ", groupNo=" + groupNo + ", readCount="
+				+ readCount + "]";
 	}
 
 
+
+
+ 
 
 }

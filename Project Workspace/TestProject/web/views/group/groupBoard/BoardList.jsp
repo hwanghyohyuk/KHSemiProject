@@ -37,7 +37,7 @@
 <body>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<h2>공지사항</h2>
+			<h2>자유게시판</h2>
 			<div class="table-area">
 				<table class="table table-striped" align="center" width="600">
 					<tr align="center">
@@ -45,6 +45,7 @@
 						<td>제목</td>
 						<td>작성자</td>
 						<td>날짜</td>
+						<td>조회수</td>
 					</tr>
 
 					<%
@@ -55,7 +56,8 @@
 						<td id="title_text">
 						<a href="/studyhub/gboardview?no=<%=gboard.getgBoardNo()%>"><%=gboard.getTitle()%></a></td>
 						<td><%=gboard.getUploaderName() %></td>
-						<td><%=gboard.getUploadDate()%></td>
+						<td><%=gboard.getUploadDate()%></td>						
+						<td><%=gboard.getReadCount() %></td>
 					</tr>
 					<%
 						}

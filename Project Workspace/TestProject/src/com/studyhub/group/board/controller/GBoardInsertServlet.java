@@ -43,7 +43,7 @@ public class GBoardInsertServlet extends HttpServlet {
 				response.setContentType("text/html; charset=utf-8");
 				
 				RequestDispatcher view = null;
-				GBoard gboard = new GBoard();
+				gNboard = new GBoard();
 			
 
 				String title = request.getParameter("title");
@@ -52,15 +52,17 @@ public class GBoardInsertServlet extends HttpServlet {
 				int accessNo = Integer.parseInt(request.getParameter("accessno"));
 				int groupNo = Integer.parseInt(request.getParameter("groupno"));
 				
-				gboard.setTitle(title);
-				gboard.setContent(content);
-				gboard.setUploader(uploader);
-				gboard.setAccessNo(accessNo);
-				gboard.setGroupNo(groupNo);								
+				gNboard.setTitle(title);
+				gNboard.setContent(content);
+				gNboard.setUploader(uploader);
+				gNboard.setAccessNo(accessNo);
+				gNboard.setGroupNo(groupNo);								
 				
-				if(new GBoardService().insertGBoard(gboard)>0){
+				
+				if(new GBoardService().insertGBoard(gNboard)>0){
 					response.sendRedirect("/studyhub/gboardpreview?groupno="+groupNo);
 				}else{
+					
 					RequestDispatcher errorPage = request.getRequestDispatcher("/views/group/groupBoard/BoardError.jsp");
 					request.setAttribute("message", "질문 등록 실패");
 					errorPage.forward(request, response);

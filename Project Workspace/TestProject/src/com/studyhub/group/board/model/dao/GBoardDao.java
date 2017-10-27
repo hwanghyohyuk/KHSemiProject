@@ -50,7 +50,7 @@ public class GBoardDao {
 		PreparedStatement pstmt = null;
 
 		String query = "insert into tb_g_board values ((select max(g_board_no)+1 from tb_g_board),"
-				+ " ?, ?,  sysdate, ? , ?, ?)";
+				+ " ?, ?,  sysdate, ? , ?, ?, 0)";
 		try {
 			pstmt = conn.prepareStatement(query);
 
@@ -59,9 +59,9 @@ public class GBoardDao {
 			pstmt.setInt(3, gBoard.getUploader());
 			pstmt.setInt(4, gBoard.getAccessNo());
 			pstmt.setInt(5, gBoard.getGroupNo());
+			
 
 			result = pstmt.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
