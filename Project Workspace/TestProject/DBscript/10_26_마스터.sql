@@ -457,7 +457,7 @@ ALTER TABLE TB_SCHEDULE
   COMMENT ON COLUMN TB_FILE_CATEGORY.GROUP_NO IS '그룹번호';
   
   ALTER TABLE TB_FILE_CATEGORY
-  ADD CONSTRAINT FK_FILE_CATEGORY FOREIGN KEY(FILE_CATEGORY_NO) REFERENCES TB_GROUP;  
+  ADD CONSTRAINT FK_FILE_CATEGORY FOREIGN KEY(GROUP_NO) REFERENCES TB_GROUP;  
   
 -- 23.파일공유게시판 테이블 생성
 PROMPT CREATING SHARE_FILE TABLE...
@@ -650,9 +650,9 @@ INSERT INTO TB_SHARE_FILE VALUES(2,'회화를 위한','You can do it!',SYSDATE,'
 --------------------------------------------------
 PROMPT INSERT DATA 모집게시판...
 INSERT INTO TB_BOARD VALUES(1, '토익스터디', '장소 : 신촌, 주1회 모여서 스터디',
-            '17/09/23','17/10/23',2,1);
+            '2017-9-27','2017-10-23',2,1);
 INSERT INTO TB_BOARD VALUES(2, '영어회화스터디', '장소 : 강남, 주2회 스터디',
-            '17/09/25','17/10/25',4,2);
+            '2017-9-27','2017-10-31',4,2);
 
             
 PROMPT INSERT DATA 모집게시판 댓글...
@@ -700,12 +700,10 @@ where rnum >= 1 and rnum <= 10;
 
 PROMPT SELECT VIEW 모집 게시판 글쓰기 그룹리스트 출력..
 -- 모집 게시판 글쓰기 그룹리스트 출력
-select group_name
+select group_no, group_name
 from boardlistview
-where group_name <> (;
-select group_name from boardlistview where status = '모집중';
-) 
-and user_name = (select user_name from tb_user where user_no = 4);
+where user_name = (select user_name from tb_user where user_no = 2) and
+group_name not in (select group_name from boardlistview where status = '모집중');
 ------------------------------------------------------------------------------------------------
 
 COMMIT;
