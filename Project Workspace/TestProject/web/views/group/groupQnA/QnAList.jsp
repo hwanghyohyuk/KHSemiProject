@@ -112,10 +112,10 @@
 		padding-bottom: 0px;
 		padding-left: 0px;
 		padding-right: 0px;
-		margin-top: 20px;
+		margin-bottom: 20px;
 	}
 	
-	#commenttitle {
+	.commenttile {
 		width: 100%;
 		border: 1px; 
 		border-radius: 4px;
@@ -158,7 +158,7 @@
 	}
 	
 	#commentwriter{
-		padding-left: 5px;
+		padding-left: 10px;
 		padding-right: 5px;
 	}
 	
@@ -173,7 +173,11 @@
 		padding-bottom: 5px;
 		height: 30px;
 	}
-
+	
+	.glyphicon.glyphicon-remove{
+		padding-top: 4px;
+		height: 20px;
+	}
 
 </style>
 <!--헤더 부분-->
@@ -226,16 +230,16 @@
 						
 						<li>
 							<div class='col-lg-1 col-md-1 col-sm-1' id="commentwriter">
-								<a href="#">
-									<span class='glyphicon glyphicon-remove'></span>
-								</a>
 								이름
 							</div>
 							<div class='col-lg-9 col-md-9 col-sm-9'>
 								내용
 							</div>
 							<div class='col-lg-2 col-md-2 col-sm-2'>
-								2017-10-27
+								2017-10-27&nbsp;
+								<a href="#">
+									<span class='glyphicon glyphicon-remove'></span>
+								</a>
 							</div>
 						</li>
 						
@@ -243,10 +247,10 @@
 				</div>
 				<div class='panel-footer'>
 					<div class='col-lg-11 col-md-11 col-sm-11'>
-						<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle'>
+						<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle' class='commenttile'>
 					</div>
 					<div class='col-lg-1 col-md-1 col-sm-1' id='insertbtn'>
-						<input type='button' id='commentinsert' class='btn btn-primary'	onclick='commentInsert(" + json.list[i].g_qna_no + ")' value='작성'>
+						<input type='button' id='commentinsert' class='btn btn-primary'	onclick='test()' value='작성'>
 					</div>
 				</div>
 			</div>
@@ -436,7 +440,7 @@
 									"</div>" +
 									"<div class='panel-footer'>" +
 										"<div class='col-lg-11 col-md-11 col-sm-11'>" +
-											"<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle'>" +
+											"<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle" + json.list[i].g_qna_no + "' class='commenttile'>" +
 										"</div>" +
 										"<div class='col-lg-1 col-md-1 col-sm-1' id='insertbtn'>" +
 											"<input type='button' id='commentinsert' class='btn btn-primary'	onclick='commentInsert(" + json.list[i].g_qna_no + ")' value='작성'>" +
@@ -481,7 +485,7 @@
 								"</div>" +
 								"<div class='panel-footer'>" +
 									"<div class='col-lg-11 col-md-11 col-sm-11'>" +
-										"<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle'>" +
+									"<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle" + json.list[i].g_qna_no + "' class='commenttile'>" +
 									"</div>" +
 									"<div class='col-lg-1 col-md-1 col-sm-1' id='insertbtn'>" +
 										"<input type='button' id='commentinsert' class='btn btn-primary'	onclick='commentInsert(" + json.list[i].g_qna_no + ")' value='작성'>" +
@@ -613,7 +617,7 @@
 									"</div>" +
 									"<div class='panel-footer'>" +
 										"<div class='col-lg-11 col-md-11 col-sm-11'>" +
-											"<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle'>" +
+										"<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle" + json.list[i].g_qna_no + "' class='commenttile'>" +
 										"</div>" +
 										"<div class='col-lg-1 col-md-1 col-sm-1' id='insertbtn'>" +
 											"<input type='button' id='commentinsert' class='btn btn-primary'	onclick='commentInsert(" + json.list[i].g_qna_no + ")' value='작성'>" +
@@ -657,7 +661,7 @@
 										"</div>" +
 										"<div class='panel-footer'>" +
 											"<div class='col-lg-11 col-md-11 col-sm-11'>" +
-												"<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle'>" +
+											"<input type='text' placeholder='지금, 댓글을 작성해보세요!' id='commenttitle" + json.list[i].g_qna_no + "' class='commenttile'>" +
 											"</div>" +
 											"<div class='col-lg-1 col-md-1 col-sm-1' id='insertbtn'>" +
 												"<input type='button' id='commentinsert' class='btn btn-primary'	onclick='commentInsert(" + json.list[i].g_qna_no + ")' value='작성'>" +
@@ -679,6 +683,7 @@
 	
 	function commentconfirm(param){// param 으로 gqnano가 넘어옴
 		var groupno = "<%= group.getGroupNo() %>";
+		var userno = "<%= user.getUserNo() %>";
 		$.ajax({
 			url: "/studyhub/gqnacommentselect",
 			data: { gqnano: param, groupno: groupno },
@@ -688,29 +693,70 @@
 				var json = JSON.parse(JSON.stringify(data));
 				var values = "";
 				for(var i in json.list){
-					values += 
-						"<li>" +
-							"<div class='col-lg-1 col-md-1 col-sm-1' id='commentwriter'>" +
-								"<a href='#'>" +
-									"<span class='glyphicon glyphicon-remove'></span>" +
-								"</a>" +
-								"이름" +
-							"</div>" +
-							"<div class='col-lg-9 col-md-9 col-sm-9'>" +
-								"내용" +
-							"</div>" +
-							"<div class='col-lg-2 col-md-2 col-sm-2'>" +
-								"2017-10-27" +
-							"</div>" +
-						"</li>";
+					if(userno == json.list[i].uploader){
+						values += 
+							"<li>" +
+								"<div class='col-lg-1 col-md-1 col-sm-1' id='commentwriter'>" +
+									decodeURIComponent(json.list[i].user_name).replace(/\+/gi, " ") +
+								"</div>" +
+								"<div class='col-lg-9 col-md-9 col-sm-9'>" +
+									decodeURIComponent(json.list[i].content).replace(/\+/gi, " ") +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2'>" +
+									decodeURIComponent(json.list[i].strdate) + "&nbsp;&nbsp;" +
+									"<a onclick='commentDelete(" + json.list[i].comment_no + ", " + json.list[i].gqnano + ")'>" +
+										"<span class='glyphicon glyphicon-remove'></span>" +
+									"</a>" +
+								"</div>" +
+							"</li>";
+					} else {
+						values += 
+							"<li>" +
+								"<div class='col-lg-1 col-md-1 col-sm-1' id='commentwriter'>" +
+									decodeURIComponent(json.list[i].user_name).replace(/\+/gi, " ") +
+								"</div>" +
+								"<div class='col-lg-9 col-md-9 col-sm-9'>" +
+									decodeURIComponent(json.list[i].content).replace(/\+/gi, " ") +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2'>" +
+									decodeURIComponent(json.list[i].strdate) + "&nbsp;&nbsp;" +
+								"</div>" +
+							"</li>";
+					}
 				}
+				$("#commentbody"+param).html(values);
 			}
-			$("#commentbody"+param).html(values);
 		});
 	}
 	
 	function commentInsert(param){
-		
+		var gqnano = param;
+		var content = $("#commenttitle"+param).val();
+		var user_no = "<%= user.getUserNo() %>";
+		$.ajax({
+			url: "/studyhub/gqnacommentinsert",
+			data: { gqnano: gqnano, userno: user_no, content: content },
+			type: "get",
+			dataType: "json",
+			async: false
+		});
+		$("#commenttitle"+param).val("");
+		alert("등록되었습니다.");
+		commentconfirm(gqnano);
+	}
+	
+	function commentDelete(param, param2){
+		var commentno = param;
+		var gqnano = param2;
+		$.ajax({
+			url: "/studyhub/gnacommentdelete",
+			data: { commentno: commentno },
+			type: "get",
+			dataType: "json",
+			async: false
+		})
+		alert("삭제되었습니다.");
+		commentconfirm(gqnano);
 	}
 </script>
 <%@ include file="/views/include/common/tail.jsp"%>

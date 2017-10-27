@@ -5,6 +5,7 @@ import static com.studyhub.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.studyhub.common.vo.GQComment;
 import com.studyhub.common.vo.GQNA;
 import com.studyhub.group.qna.model.dao.GroupQnADao;
 
@@ -69,6 +70,35 @@ public class GroupQnAService {
 		ArrayList<GQNA> qnalist = new GroupQnADao().GQNAList(con, groupno, groupnolist);
 		close(con);
 		return qnalist;
+	}
+
+	public ArrayList<GQComment> SelectComment(int gqnano) {
+		Connection con = getConnection();
+		ArrayList<GQComment> list = new GroupQnADao().SelectComment(con, gqnano);
+		close(con);
+		return list;
+	}
+
+	public int DeleteComment(int commentno) {
+		Connection con = getConnection();
+		int result = new GroupQnADao().DeleteComment(con, commentno);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+
+	public int InsertComment(int gqnano, int userno, String content) {
+		Connection con = getConnection();
+		int result = new GroupQnADao().InsetComment(con, gqnano, userno, content);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
 	}
 
 }

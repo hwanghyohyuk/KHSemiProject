@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.studyhub.common.vo.GQComment;
 import com.studyhub.common.vo.GQNA;
 
 public class GroupQnADao {
@@ -249,5 +250,93 @@ public class GroupQnADao {
 
 		return qnalist;
 	}
+
+	public ArrayList<GQComment> SelectComment(Connection con, int gqnano) {
+		ArrayList<GQComment> list = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select comment_no, content, to_char(upload_date, 'yyyy-MM-dd') as str_date, user_name, g_qna_no, uploader "
+					+ "from tb_gq_comment "
+					+ "join tb_user on (uploader=user_no) "
+					+ "where g_qna_no = ? "
+					+ "order by comment_no asc";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, gqnano);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null) {
+				list = new ArrayList<GQComment>();
+				while(rset.next()) {
+					GQComment gqc = new GQComment();
+					gqc.setCommentNo(rset.getInt("comment_no"));
+					gqc.setUploaderName(rset.getString("user_name"));
+					gqc.setStrDate(rset.getString("str_date"));
+					gqc.setContent(rset.getString("content"));
+					gqc.setgQnaNo(rset.getInt("g_qna_no"));
+					gqc.setUploader(rset.getInt("uploader"));
+					
+					list.add(gqc);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public int DeleteComment(Connection con, int commentno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from tb_gq_comment where comment_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, commentno);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int InsetComment(Connection con, int gqnano, int userno, String content) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into tb_gq_comment values ( " +
+						"(select max(comment_no)+1 from tb_gq_comment), " +
+						"?, ?, sysdate, ?, 1)";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, gqnano);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, userno);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 }
