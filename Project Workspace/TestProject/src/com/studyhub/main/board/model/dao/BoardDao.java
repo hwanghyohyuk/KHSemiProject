@@ -12,7 +12,7 @@ import com.studyhub.common.vo.Group;
 
 public class BoardDao {
 
-	private Board board;
+	private Board b;
 
 	public int getListCount(Connection con) {
 		// 총 게시글 갯수 조회용
@@ -65,6 +65,7 @@ public class BoardDao {
 
 					b.setBoardNo(rset.getInt("board_no"));
 					b.setTitle(rset.getString("title"));
+					b.setUploader(rset.getInt("user_no"));
 					b.setUploaderName(rset.getString("user_name"));
 					b.setContent(rset.getString("content"));
 					b.setUploadDate(rset.getDate("upload_date"));
@@ -89,6 +90,48 @@ public class BoardDao {
 		}
 
 		return list;
+	}
+	
+	public Board selectBoard(Connection con, int bno) {
+		b = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select * from boardlistview "
+				+ "where board_no = ?";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, bno);
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				b = new Board();
+				b.setBoardNo(rset.getInt("board_no"));
+				b.setTitle(rset.getString("title"));
+				b.setUploader(rset.getInt("user_no"));
+				b.setUploaderName(rset.getString("user_name"));
+				b.setContent(rset.getString("content"));
+				b.setUploadDate(rset.getDate("upload_date"));
+				b.setDeadlineDate(rset.getDate("deadline_date"));
+				b.setStatus(rset.getString("status"));
+				b.setGroupName(rset.getString("group_name"));
+				b.setLocation(rset.getString("location"));
+				b.setCategoryName(rset.getString("category_name"));
+				b.setAttributeName(rset.getString("attribute_name"));
+				b.setgImgRename(rset.getString("g_img_rename"));
+				b.setMemberCount(rset.getInt("memberCount"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return b;
 	}
 
 	public int insertBoard(Connection con, Board b) {
@@ -121,38 +164,7 @@ public class BoardDao {
 		return 0;
 	}
 
-	public Board selectBoard(Connection con, int bno) {
-		board = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String query = "select board_no, title, content, upload_date, user_name " + "from tb_board "
-				+ "join tb_user on (tb_board.uploader = tb_user.user_no) " + "where board_no = ?";
-
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, bno);
-
-			rset = pstmt.executeQuery();
-
-			if (rset.next()) {
-				board = new Board();
-				board.setBoardNo(rset.getInt("board_no"));
-				board.setTitle(rset.getString("title"));
-				board.setContent(rset.getString("content"));
-				// board.setUploadDate(rset.getDate("upload_date"));
-				board.setUploaderName(rset.getString("user_name"));
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-
-		return board;
-	}
+	
 
 	public int deleteBoard(Connection con, int bnum) {
 		// TODO Auto-generated method stub

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 
-작성자 : OOO
-내용 : OO 페이지
-작성일자 17.10.02
+작성자 : 황효혁
+내용 : 모집게시판 글쓰기 페이지
+작성일자 17.10.27
  -->
 <!-- java 구문 -->
 

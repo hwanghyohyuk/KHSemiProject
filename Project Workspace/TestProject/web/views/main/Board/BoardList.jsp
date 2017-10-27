@@ -63,7 +63,7 @@ height:100px;
 				for (Board b : list) {
 			%>			
 				<tr>
-					<td><img id="groupimg" src="/imamges/groupimg/<%=b.getgImgRename()%>" style></td>
+					<td><img id="groupimg" src="/imamges/groupimg/<%=b.getgImgRename()%>"></td>
 					<td><%=b.getCategoryName() %></td>
 					<td><%=b.getGroupName() %></td>
 					<td>

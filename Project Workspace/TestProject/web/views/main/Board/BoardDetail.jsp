@@ -14,7 +14,12 @@
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
 <!--자바스크립트 및 CSS-->
-
+<style>
+#groupimg {
+	width: 100px;
+	height: 100px;
+}
+</style>
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
@@ -24,35 +29,48 @@
 <div class="container">
 	<div class="page-header">
 		<h1>
-			모집게시판 <small>글쓰기</small>
+			모집게시판 <small>글 읽기</small>
 		</h1>
 	</div>
 	<form class="form-horizontal">
 		<div class="form-group">
-			<label for="inputEmail3" class="col-sm-2 control-label">제목</label>
-			<div class="col-sm-10">
-				<%=board.getTitle()%>
+			<label for="btitle" class="col-sm-3 control-label">제목</label>
+			<div class="col-sm-3">
+				<p class="pull-left control-label"><%=board.getTitle()%>
+				<p>
+			</div>
+			<label for="btitle" class="col-sm-3 control-label">작성 날짜</label>
+			<div class="col-sm-3">
+				<p class="pull-left control-label"><%=board.getUploadDate()%>
+				<p>
 			</div>
 		</div>
 		<hr>
 		<div class="form-group">
-			<label for="inputPassword3" class="col-sm-2 control-label">내용</label>
-			<div class="col-sm-10">
-				<%=board.getContent()%>
+			<label for="btitle" class="col-sm-3 control-label">제목</label>
+			<div class="col-sm-3">
+				<p class="pull-left control-label"><%=board.getTitle()%>
+				<p>
 			</div>
-		</div>
-		<hr>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<a href="/studyhub/boarddelete?bno=<%=board.getBoardNo()%>" class="btn btn-primary main-back pull-right">삭제</a> <a
-					href="/studyhub/boardupdateview?bno=<%=board.getBoardNo()%>" class="btn btn-primary main-back pull-right">수정</a> <a
-					href="/studyhub/boardlist" class="btn btn-primary main-back pull-right">목록</a>
+			<label for="btitle" class="col-sm-3 control-label">마감 날짜</label>
+			<div class="col-sm-3">
+				<p class="pull-left control-label"><%=board.getDeadlineDate()%>
+				<p>
 			</div>
 		</div>
 	</form>
-
-
-
+	<hr>
+	<div class="col-sm-offset-2 col-sm-10">
+		<%
+			if (user.getUserNo() == board.getUploader()) {
+		%>
+		<a class="btn btn-default pull-right"
+			href="/studyhub/boardupdate.move?bno=<%=board.getBoardNo()%>">수정</a>
+		<%
+			}
+		%>
+		<a class="btn btn-default pull-right" href="/studyhub/boardlist">목록</a>
+	</div>
 </div>
 <!-- /메인 컨텐츠 -->
 
