@@ -91,4 +91,11 @@ public class BoardService {
 		return list;
 	}
 
+	public int getGroupCount() {
+		Connection con = getConnection();
+		int groupCount = new BoardDao().getGroupCount(con);
+		close(con);
+		return groupCount;
+	}
+
 }

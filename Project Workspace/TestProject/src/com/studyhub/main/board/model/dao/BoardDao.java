@@ -170,9 +170,10 @@ public class BoardDao {
 		ResultSet rset = null;
 
 		
-		String query = "select group_name from boardlistview "
-				+ "where group_name <> (select group_name from boardlistview where status = '모집중') "
-				+ "and user_name = (select user_name from tb_user where user_no = ?)";
+		String query = "select group_no, group_name "
+				+ "from boardlistview "
+				+ "where user_name = (select user_name from tb_user where user_no = ?) and "
+				+ "group_name not in (select group_name from boardlistview where status = '모집중')";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -199,6 +200,31 @@ public class BoardDao {
 		}
 
 		return list;
+	}
+
+	public int getGroupCount(Connection con) {
+		// 모집 그룹 수 조회용
+				int result = 0;
+				Statement stmt = null;
+				ResultSet rset = null;
+
+				String query = "select count(*) from boardlistview where status = '모집중'";
+
+				try {
+					stmt = con.createStatement();
+					rset = stmt.executeQuery(query);
+
+					if (rset.next())
+						result = rset.getInt(1);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					close(rset);
+					close(stmt);
+				}
+
+				return result;
 	}
 
 	/*
