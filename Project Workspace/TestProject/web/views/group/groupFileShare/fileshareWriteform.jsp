@@ -19,6 +19,7 @@
 <script src="/studyhub/js/bootstrap.min.js"></script>
 <script src="/studyhub/js/fileshareWriteform.js"></script>
 
+
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
 
@@ -62,11 +63,11 @@
 				</div>
 				<div class="form-group">
 					<label for="Content">내용</label>
-					<textarea class="form-control" id="Textarea" rows="8"
+					<textarea class="form-control" id="textarea" rows="8"
 						name="content" placeholder="파일에 대한 설명을 입력하세요"></textarea>
 				</div>
 
-				<input type="submit" value="제출하기" class="btn btn-info" id="btns" disabled="disabled" >
+				<input type="submit" value="제출하기" class="btn btn-info" onclick="return enter();" id="btns" disabled="disabled" >
 				<a href="/studyhub/sharedfilepreview?groupno=<%=group.getGroupNo()%>">&nbsp;&nbsp;목록으로 이동</a> 
 				<input type="hidden" name="user_no" value="<%=user.getUserNo()%>">
 				<input type="hidden" name="group_no" value="<%= group.getGroupNo() %>">

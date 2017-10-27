@@ -181,12 +181,7 @@
 								</li>
 								<% } %>
 								<li>
-									<input type="checkbox" id="check2">
-									<label for="check-2">Practice</label>
-								</li>
-								<li>
-									<input type="checkbox" id="check3">
-									<label for="check-3">Sleep</label>
+									<input type="text" id="add-area" placeholder="추가할 카테고리이름을 입력하세요">
 								</li>
 							</ol>
 						</div>
