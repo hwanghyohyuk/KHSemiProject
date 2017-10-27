@@ -36,13 +36,15 @@ public class GNoticeViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-		int gno = Integer.parseInt(request.getParameter("gno"));
-		
+	
+		int gno = Integer.parseInt(request.getParameter("no"));
+		//System.out.println(gno);
 		gNoticeService = new GNoticeService();
 		gNotice = gNoticeService.selectGNotice(gno);
+		
 				
 		RequestDispatcher view = null;
-		
+	
 		if(gNotice != null){
 			view = request.getRequestDispatcher("views/group/groupNotice/NoticeDetail.jsp");
 			request.setAttribute("gNotice", gNotice);

@@ -53,10 +53,10 @@ public class GNoticeInsertServlet extends HttpServlet {
 		gNotice.setAccessNo(accessNo);
 		gNotice.setGroupNo(groupNo);
 				
-		
 		if(new GNoticeService().insertGNotice(gNotice)>0){
 			response.sendRedirect("/studyhub/gnoticepreview?groupno="+groupNo);
 		}else{
+			
 			view = request.getRequestDispatcher("/views/group/groupNotice/NoticeError.jsp");
 			request.setAttribute("message", "공지글 등록 실패");
 			view.forward(request, response);

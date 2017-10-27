@@ -39,7 +39,7 @@
 		<div class="col-md-8 col-md-offset-2">
 			<h2>공지사항</h2>
 			<div class="table-area">
-				<table class="table table-striped" align="center" width="600">
+				<table class="table table-bordered table-condensed table-responsive" align="center" width="600">
 					<tr align="center">
 						<td>번호</td>
 						<td>제목</td>

@@ -21,9 +21,10 @@ public class GNoticeService {
 	
 	//GNotice
 		
-	public GNotice selectGNotice(int no){
-		Connection conn = getConnection();
-		GNotice gnotice = new GNoticeDao().selectOne(conn, no);
+	public GNotice selectGNotice(int gno){
+		Connection con = getConnection();
+		GNotice gnotice = new GNoticeDao().selectGNotice(con, gno);
+		close(con);
 		return gnotice;
 	}
 		
@@ -40,9 +41,9 @@ public class GNoticeService {
 	}	
 	
 
-	public int deleteGNotice(int bnum) {
+	public int deleteGNotice(int gno) {
 		Connection conn = getConnection();
-		int result = new GNoticeDao().deleteNotice(conn, bnum);
+		int result = new GNoticeDao().deleteNotice(conn, gno);
 		if(result >0 )
 			commit(conn);
 		else

@@ -70,7 +70,7 @@ public class GNoticePreviewServlet extends HttpServlet {
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listCount", listCount);
-			System.out.println(list + ", " + currentPage + ", " + maxPage + ", " + startPage + ", " + endPage + ", " + listCount);
+			//System.out.println(list + ", " + currentPage + ", " + maxPage + ", " + startPage + ", " + endPage + ", " + listCount);
 			view.forward(request, response);
 		}else{
 			view = request.getRequestDispatcher("views/group/groupNotice/NoticeError.jsp");

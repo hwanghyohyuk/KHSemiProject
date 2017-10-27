@@ -15,28 +15,29 @@ public class GNoticeDao {
 	public GNoticeDao() {
 	}
 
-	public GNotice selectOne(Connection conn, int no) {
-		GNotice gnotice = null;
+	public GNotice selectGNotice(Connection con, int gno) {
+		gNotice = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from tb_g_notice where notice_no = ?";
+		String query = "select notice_no, title, content, upload_date, user_name from tb_g_notice join tb_user on(tb_g_notice.uploader = tb_user.user_no) where notice_no = ?";
+		//String query = "";
 
 		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, no);
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, gno);
 
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
-				gnotice = new GNotice();
-				gnotice.setNoticeNo(rset.getInt("notice_no"));
-				gnotice.setTitle(rset.getString("title"));
-				gnotice.setContent(rset.getString("content"));
-				gnotice.setUploadDate(rset.getDate("upload_date"));
-				gnotice.setUploader(rset.getInt("uploader"));
-				gnotice.setAccessNo(rset.getInt("access_no"));
-				gnotice.setGroupNo(rset.getInt("group_no"));
+				gNotice = new GNotice();
+				gNotice.setNoticeNo(rset.getInt("notice_no"));
+				gNotice.setTitle(rset.getString("title"));
+				gNotice.setContent(rset.getString("content"));
+				gNotice.setUploadDate(rset.getDate("upload_date"));
+				gNotice.setUploader_name(rset.getString("user_name"));
+				//gNotice.setAccessNo(rset.getInt("access_no"));
+				//gNotice.setGroupNo(rset.getInt("group_no"));
 			}
 
 		} catch (Exception e) {
@@ -46,7 +47,7 @@ public class GNoticeDao {
 			close(rset);
 		}
 
-		return gnotice;
+		return gNotice;
 	}
 
 	public int insertGNotice(Connection conn, GNotice gNotice) {
@@ -74,7 +75,7 @@ public class GNoticeDao {
 		return result;
 	}
 
-	public int deleteNotice(Connection conn, int bnum) {
+	public int deleteNotice(Connection conn, int gno) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
@@ -82,7 +83,7 @@ public class GNoticeDao {
 
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, bnum);
+			pstmt.setInt(1, gno);
 
 			result = pstmt.executeUpdate();
 
@@ -176,7 +177,7 @@ public class GNoticeDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "";
+		String query = "update tb_g_notice set title = ?, content = ? " + "where notice_no = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -202,7 +203,7 @@ public class GNoticeDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "delete from tb_gnotice_comment where comment_no =? ";
+		String query = "delete from tb_g_notice_comment where comment_no =? ";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -273,7 +274,7 @@ public class GNoticeDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println(list);
+		//System.out.println(list);
 		return list;
 	}
 
