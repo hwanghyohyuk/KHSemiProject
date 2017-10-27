@@ -127,7 +127,7 @@ public class GroupQnADao {
 					gq.setContent(rset.getString("content"));
 					gq.setStrDate(rset.getString("str_date"));
 					gq.setUploader_name("user_name");
-					System.out.println(gq);
+					
 					list.add(gq);
 				}
 			}
@@ -212,7 +212,6 @@ public class GroupQnADao {
 
 		try {
 			for (int i = 0; i < groupnolist.size(); i++) {
-				System.out.println(i);
 				GQNA gq = null;
 
 				String query = "select g_qna_no, title, content, to_char(upload_date, 'yyyyMMdd') as str_date, user_name, access_no, group_no, uploader "
