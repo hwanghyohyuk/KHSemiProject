@@ -457,7 +457,7 @@ ALTER TABLE TB_SCHEDULE
   COMMENT ON COLUMN TB_FILE_CATEGORY.GROUP_NO IS '그룹번호';
   
   ALTER TABLE TB_FILE_CATEGORY
-  ADD CONSTRAINT FK_FILE_CATEGORY FOREIGN KEY(FILE_CATEGORY_NO) REFERENCES TB_GROUP;  
+  ADD CONSTRAINT FK_FILE_CATEGORY FOREIGN KEY(GROUP_NO) REFERENCES TB_GROUP;  
   
 -- 23.파일공유게시판 테이블 생성
 PROMPT CREATING SHARE_FILE TABLE...
@@ -700,12 +700,10 @@ where rnum >= 1 and rnum <= 10;
 
 PROMPT SELECT VIEW 모집 게시판 글쓰기 그룹리스트 출력..
 -- 모집 게시판 글쓰기 그룹리스트 출력
-select group_name
+select group_no, group_name
 from boardlistview
-where group_name <> (;
-select group_name from boardlistview where status = '모집중';
-) 
-and user_name = (select user_name from tb_user where user_no = 4);
+where user_name = (select user_name from tb_user where user_no = 2) and
+group_name not in (select group_name from boardlistview where status = '모집중');
 ------------------------------------------------------------------------------------------------
 
 COMMIT;
