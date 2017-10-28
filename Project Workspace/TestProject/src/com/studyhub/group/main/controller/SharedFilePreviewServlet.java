@@ -50,6 +50,7 @@ public class SharedFilePreviewServlet extends HttpServlet {
 		
 		int listCount = sfservice.getListCount();
 		ArrayList<ShareFile> list = sfservice.selectList(currentPage, limit, no);
+		ArrayList<ShareFile> clist = sfservice.selectCategory(no); //카테고리(탭) 표시
 		
 		int maxPage = (int)((double)listCount / limit + 0.95); //total # of pages
 		int startPage = ((int)((double)currentPage / limit + 0.95) - 1) * limit + 1;
@@ -61,6 +62,7 @@ public class SharedFilePreviewServlet extends HttpServlet {
 		if(list!=null){
 			view = request.getRequestDispatcher("views/group/groupFileShare/fileshareList.jsp");
 			request.setAttribute("list", list);
+			request.setAttribute("clist", clist);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("maxPage", maxPage);
 			request.setAttribute("startPage", startPage);

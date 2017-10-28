@@ -1,4 +1,4 @@
-package com.studyhub.main.qna.controller;
+package com.studyhub.group.sharefile.controller;
 
 import java.io.IOException;
 
@@ -9,23 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.QnA;
-import com.studyhub.main.qna.model.service.QnAService;
+import com.studyhub.group.sharefile.model.service.ShareFileService;
 
 /**
- * Servlet implementation class QnAInsertServlet
+ * Servlet implementation class FileCategoryAddServlet
  */
-@WebServlet("/qnainsert")
-public class QnAInsertServlet extends HttpServlet {
+@WebServlet("/filecategoryadd")
+public class FileCategoryAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private QnAService qs;
-	private QnA qna;
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnAInsertServlet() {
+    public FileCategoryAddServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,25 +34,15 @@ public class QnAInsertServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		RequestDispatcher view = null;
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		content = content.replaceAll("\n","<br>");
-		int userNo = Integer.parseInt(request.getParameter("user_no"));
-		int accessNo = Integer.parseInt(request.getParameter("access_no"));
+		String cname = request.getParameter("cname");
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
 		
-		QnA qna = new QnA();
-		qna.setTitle(title);
-		qna.setContent(content);
-		qna.setUserNo(userNo);
-		qna.setAccessNo(accessNo);
-		
-		
-		if(new QnAService().insertQNA(qna)>0){
-			response.sendRedirect("/studyhub/qnalist");
+		if(new ShareFileService().addCategory(cname, groupno) >0 ){
+			response.sendRedirect("/studyhub/sharedfilepreview?groupno="+groupno);
 		}else{
-			RequestDispatcher errorPage = request.getRequestDispatcher("/views/main/QnA/QnAError.jsp");
-			request.setAttribute("message", "질문 등록 실패");
-			errorPage.forward(request, response);
+			view= request.getRequestDispatcher("views/group/groupFileShare/fileshareError.jsp");
+			request.setAttribute("message", "카테고리 추가 실패!");
+			view.forward(request, response);
 		}
 		
 	}

@@ -2,12 +2,13 @@
 	pageEncoding="UTF-8"
 	import="java.util.*, com.studyhub.common.vo.ShareFile"%>
 <%
-	ArrayList<ShareFile> list = (ArrayList<ShareFile>)request.getAttribute("list");
-	int listCount = ((Integer)request.getAttribute("listCount"));
-	int currentPage = ((Integer)request.getAttribute("currentPage"));
-	int startPage = ((Integer)request.getAttribute("startPage"));
-	int endPage = ((Integer)request.getAttribute("endPage"));
-	int maxPage = ((Integer)request.getAttribute("maxPage"));
+	ArrayList<ShareFile> list = (ArrayList<ShareFile>) request.getAttribute("list");
+	ArrayList<ShareFile> clist = (ArrayList<ShareFile>) request.getAttribute("clist");
+	int listCount = ((Integer) request.getAttribute("listCount"));
+	int currentPage = ((Integer) request.getAttribute("currentPage"));
+	int startPage = ((Integer) request.getAttribute("startPage"));
+	int endPage = ((Integer) request.getAttribute("endPage"));
+	int maxPage = ((Integer) request.getAttribute("maxPage"));
 %>
 <!-- 
 작성자 : 구미향
@@ -19,9 +20,21 @@
 <%@ include file="/views/include/common/head.jsp"%>
 
 <!--자바스크립트 및 CSS-->
-<link rel="stylesheet" type="text/css" href="/studyhub/css/fileshareList.css">
+<link rel="stylesheet" type="text/css"
+	href="/studyhub/css/fileshareList.css">
 <link rel="stylesheet" href="/studyhub/css/bootstrap.min.css">
 <script src="/studyhub/js/bootstrap.min.js"></script>
+<script>
+	/* $(function(){
+	 $('ul.nav-tabs a').click(function (e) {
+	 e.preventDefault();
+	 $('.tab-content').hide();
+	 $(this).show();
+	
+	 })
+	 }) */
+</script>
+
 
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
@@ -33,115 +46,425 @@
 
 
 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-	<!-- Tab -->
-	<div class="category-tab">
-		<ul class="nav nav-tabs" role="tablist">
-		    <li role="presentation" class="active"><a href="#reading" aria-controls="reading" role="tab" data-toggle="tab">Reading</a></li>
-		    <li role="presentation"><a href="#listening" aria-controls="listening" role="tab" data-toggle="tab">listening</a></li>
-		    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-		    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">+</a></li>
-		 	 <!-- search bar -->
-			 <form action="/studyhub/sharefilesearch" method="post">
-			 <input type="search" autocomplete name="keyword" length="15"
-			  placeholder="제목 또는 파일이름..." id="search-input"> 
-			<input type="submit" value="검색" id="search-btn" class="glyphicon glyphicon-search">
-			 </form>
-		 
-		 </ul>
-		
-	</div>
-	
-	<div role="tabpanel">
-  	<!-- Tab panes -->
-	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="reading">
-	    
-			<!-- file boxes  -->
-			<div class="fileboxes">
-				<div class="filebox">
-					<a href="/studyhub/views/group/groupFileShare/fileshareWriteform.jsp"><img src="/studyhub/images/plus.png" id="plus-img"></a>
-					<br>
-					<p>새로운 파일 공유하기</p>
-				</div>
+	<div class="container">
+		<!-- Tab -->
+		<div class="category-tab">
+			<ul class="nav nav-tabs">
 				<%
-					for (ShareFile sf : list) {
+					for (ShareFile c : clist) {
+						if(c.getFileCategoryNo() ==1){
 				%>
-			
-				<div class="filebox">
-					<span id="title">
-					<a href="/studyhub/sharefiledetail?sfno=<%=sf.getFileNo() %>">
-					<% if(sf.getTitle().length()>9){ %>
-					<%=sf.getTitle().substring(0, 9) %>..
-					<% }else{ %>
-					<%=sf.getTitle()%>
-					<% } %>
-					</a></span>
-					
-					<hr>
-					 <h6><%=sf.getUserName()%></h6> 
-					 <h6><%=sf.getUploadDate()%> | 다운로드수:
-						<%=sf.getDownloadCount()%> </h6> 
-					<h6 id="filename">
-					<% if(sf.getFileName().length()>15){ %>
-					<%=sf.getFileName().substring(0, 15) %>..
-					<% }else{ %>
-					<%=sf.getFileName()%>
-					<% } %>
-					</h6>
-					<h6>
-						<a href="/studyhub/sharefiledown?ofile=<%=sf.getFileName() %>&rfile=<%=sf.getRenameFileName()%>">
-						<button id="download" onclick="download();">download</button></a>
-					</h6>
-				</div>
-		
+				<li class="active">
+				<a
+					href="#category<%=c.getFileCategoryNo()%>"
+					aria-controls="category<%=c.getFileCategoryNo()%>" role="tab"
+					data-toggle="tab"> <%=c.getFileCategoryName()%></a>
+				</li>
+				<% } %>
+				<li>
+				<a
+					href="#category<%=c.getFileCategoryNo()%>"
+					aria-controls="category<%=c.getFileCategoryNo()%>" role="tab"
+					data-toggle="tab"> <%=c.getFileCategoryName()%></a>
+				</li>
+				
+				<% } %>
+
+				<!-- 그룹장만 카테고리 추가, 삭제, 수정 가능  -->
+				<%
+					if (group.getAuthorityNo() == 2) {
+				%>
+				<li><a href="#add" aria-controls="add" role="tab"
+					data-toggle="tab"> <span class="glyphicon glyphicon-plus"
+						aria-hidden="true"></span></a></li>
+				<li><a href="#settings" aria-controls="settings" role="tab"
+					data-toggle="tab"> <span class="glyphicon glyphicon-cog"
+						aria-hidden="true"></span></a></li>
 				<%
 					}
 				%>
-		
-				<div class="filebox">
+
+			</ul>
+
+		</div>
+
+		<!-- <div role="tabpanel"> -->
+		<!-- 카테고리(탭) 하나씩 -->
+
+		<div class="tab-content">
+			<%
+				for (ShareFile c : clist) {
+					if(c.getFileCategoryNo()==1){  //기본카테고리(탭 active)
+			%>
+			<div class="tab-pane fade in active"
+				id="category<%=c.getFileCategoryNo()%>">
+
+				<!-- search bar -->
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<form action="/studyhub/sharefilesearch" method="post"
+						id="search-area">
+						<input type="search" autocomplete name="keyword" length="15"
+							placeholder="제목 또는 파일이름..." id="search-input"> <input
+							type="submit" value="검색" id="search-btn"
+							class="glyphicon glyphicon-search">
+					</form>
+				</div>
+				<!-- file boxes  -->
+				<div class="fileboxes">
+					<div class="filebox">
+						<a href="/studyhub/sharefileinsertview?no=<%=group.getGroupNo()%>"><img
+							src="/studyhub/images/plus.png" id="plus-img"></a> <br>
+						<p>새로운 파일 공유하기</p>
+					</div>
+					<%
+						for (ShareFile sf : list) {
+								if (c.getFileCategoryNo() == sf.getFileCategoryNo()) {
+					%>
+
+					<div class="filebox">
+						<span id="title"> <a
+							href="/studyhub/sharefiledetail?sfno=<%=sf.getFileNo()%>"> <%
+ 	if (sf.getTitle().length() > 9) {
+ %>
+								<%=sf.getTitle().substring(0, 9)%>.. <%
+									} else {
+								%> <%=sf.getTitle()%>
+								<%
+									}
+								%>
+						</a></span>
+
+						<hr>
+						<h6><%=sf.getUserName()%></h6>
+						<h6><%=sf.getUploadDate()%>
+							| 다운로드수:
+							<%=sf.getDownloadCount()%>
+						</h6>
+						<h6 id="filename">
+							<%
+								if (sf.getFileName().length() > 15) {
+							%>
+							<%=sf.getFileName().substring(0, 15)%>..
+							<%
+								} else {
+							%>
+							<%=sf.getFileName()%>
+							<%
+								}
+							%>
+						</h6>
+						<h6>
+							<a
+								href="/studyhub/sharefiledown?ofile=<%=sf.getFileName()%>&rfile=<%=sf.getRenameFileName()%>">
+								<button id="download" onclick="download();">download</button>
+							</a>
+						</h6>
+					</div>
+
+					<!-- 예시 div... <div class="filebox">
 					<h4>title</h4>
 					<p>content</p>
 					<hr>
 					<p>filename</p>
 					<p>upload_date</p>
 					<button id="download">download</button>
-				</div>
-			</div>
-			<div class="col-md-8 col-md-offset-5 col-lg-8 col-lg-offset-5 col-sm-8 col-sm-offset-5 col-xs-8 col-xs-offset-5">
-				<div id="pagination">
-					<% if(currentPage <=1){ %>
-						<span> ◀◀  </span>
-					<% }else{ %>
-						<a href="/studyhub/sharefilelist?page=<%= currentPage -1 %>">◀</a>
-					<% } %>
-					
-					<% for (int p=startPage;p<=endPage;p++){ 
-							if(p==currentPage){
+				</div> -->
+					<%
+						}
+							}
 					%>
-					<span>[<%=p %>]</span>
-					<% }else{ %>
-						<a href="/studyhub/sharefilelist?page=<%=p %>"><%=p %></a>
-					<% }} %>
-					
-					<% if(currentPage >= maxPage){ %>
-					<span> ▶▶ </span>
-					<% }else{ %>
-						<a href="/studyhub/sharefilelist?page=<%=currentPage+1 %>">▶</a>
-					<% } %>
+				</div>
+
+				<div
+					class="col-md-8 col-md-offset-5 col-lg-8 col-lg-offset-5 col-sm-8 col-sm-offset-5 col-xs-8 col-xs-offset-5">
+					<div id="pagination">
+						<%
+							if (currentPage <= 1) {
+						%>
+						<span> ◀◀ &nbsp; </span>
+						<%
+							} else {
+						%>
+						<a
+							href="/studyhub/sharefilelist?page=<%=currentPage - 1%>&groupno=<%=group.getGroupNo()%>">◀◀&nbsp;</a>
+						<%
+							}
+						%>
+
+						<%
+							for (int p = startPage; p <= endPage; p++) {
+									if (p == currentPage) {
+						%>
+						<span>[<%=p%>]
+						</span>
+						<%
+							} else {
+						%>
+						<a
+							href="/studyhub/sharefilelist?page=<%=p%>&groupno=<%=group.getGroupNo()%>"><%=p%></a>
+						<%
+							}
+								}
+						%>
+
+						<%
+							if (currentPage >= maxPage) {
+						%>
+						<span>&nbsp; ▶▶ </span>
+						<%
+							} else {
+						%>
+						<a
+							href="/studyhub/sharefilelist?page=<%=currentPage + 1%>&groupno=<%=group.getGroupNo()%>">&nbsp;▶▶</a>
+						<%
+							}
+						%>
+					</div>
+				</div>
+
+
+			</div>
+			<%
+				}
+			%>
+			<div class="tab-pane fade"
+				id="category<%=c.getFileCategoryNo()%>">
+
+				<!-- search bar -->
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<form action="/studyhub/sharefilesearch" method="post"
+						id="search-area">
+						<input type="search" autocomplete name="keyword" length="15"
+							placeholder="제목 또는 파일이름..." id="search-input"> <input
+							type="submit" value="검색" id="search-btn"
+							class="glyphicon glyphicon-search">
+					</form>
+				</div>
+				<!-- file boxes  -->
+				<div class="fileboxes">
+					<div class="filebox">
+						<a href="/studyhub/sharefileinsertview?no=<%=group.getGroupNo()%>"><img
+							src="/studyhub/images/plus.png" id="plus-img"></a> <br>
+						<p>새로운 파일 공유하기</p>
+					</div>
+					<%
+						for (ShareFile sf : list) {
+							if (c.getFileCategoryNo() == sf.getFileCategoryNo()) {
+					%>
+
+					<div class="filebox">
+						<span id="title"> <a
+							href="/studyhub/sharefiledetail?sfno=<%=sf.getFileNo()%>"> <%
+ 	if (sf.getTitle().length() > 9) {
+ %>
+								<%=sf.getTitle().substring(0, 9)%>.. <%
+									} else {
+								%> <%=sf.getTitle()%>
+								<%
+									}
+								%>
+						</a></span>
+
+						<hr>
+						<h6><%=sf.getUserName()%></h6>
+						<h6><%=sf.getUploadDate()%>
+							| 다운로드수:
+							<%=sf.getDownloadCount()%>
+						</h6>
+						<h6 id="filename">
+							<%
+								if (sf.getFileName().length() > 15) {
+							%>
+							<%=sf.getFileName().substring(0, 15)%>..
+							<%
+								} else {
+							%>
+							<%=sf.getFileName()%>
+							<%
+								}
+							%>
+						</h6>
+						<h6>
+							<a
+								href="/studyhub/sharefiledown?ofile=<%=sf.getFileName()%>&rfile=<%=sf.getRenameFileName()%>">
+								<button id="download" onclick="download();">download</button>
+							</a>
+						</h6>
+					</div>
+
+					<!-- 예시 div... <div class="filebox">
+					<h4>title</h4>
+					<p>content</p>
+					<hr>
+					<p>filename</p>
+					<p>upload_date</p>
+					<button id="download">download</button>
+				</div> -->
+					<%
+						}
+							}
+					%>
+				</div>
+
+				<div
+					class="col-md-8 col-md-offset-5 col-lg-8 col-lg-offset-5 col-sm-8 col-sm-offset-5 col-xs-8 col-xs-offset-5">
+					<div id="pagination">
+						<%
+							if (currentPage <= 1) {
+						%>
+						<span> ◀◀ &nbsp; </span>
+						<%
+							} else {
+						%>
+						<a
+							href="/studyhub/sharefilelist?page=<%=currentPage - 1%>&groupno=<%=group.getGroupNo()%>">◀◀&nbsp;</a>
+						<%
+							}
+						%>
+
+						<%
+							for (int p = startPage; p <= endPage; p++) {
+									if (p == currentPage) {
+						%>
+						<span>[<%=p%>]
+						</span>
+						<%
+							} else {
+						%>
+						<a
+							href="/studyhub/sharefilelist?page=<%=p%>&groupno=<%=group.getGroupNo()%>"><%=p%></a>
+						<%
+							}
+								}
+						%>
+
+						<%
+							if (currentPage >= maxPage) {
+						%>
+						<span>&nbsp; ▶▶ </span>
+						<%
+							} else {
+						%>
+						<a
+							href="/studyhub/sharefilelist?page=<%=currentPage + 1%>&groupno=<%=group.getGroupNo()%>">&nbsp;▶▶</a>
+						<%
+							}
+						%>
+					</div>
+				</div>
+
+
+			</div>
+			
+			
+			<% } %>
+
+			<div class="tab-pane fade" id="add">새 카테고리 추가하는 div:누르면 바로 커서뜨고
+				이름써서 카테고리추가가능하도록.</div>
+			<div class="tab-pane fade" id="settings">
+				<div class="settings-area">
+					<h3>
+						<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+						카테고리설정
+					</h3>
+
+					<div class="wrap">
+						<div class="wrap-list">
+							<ol class="list">
+								<%
+									for (ShareFile sf : clist) {
+								%>
+								<li><input type="checkbox"
+									id="check<%=sf.getFileCategoryNo()%>"> <label
+									for="check"><%=sf.getFileCategoryName()%></label></li>
+								<%
+									}
+								%>
+								<li>
+									
+								</li>
+							</ol>
+							<form class="form-inline">
+										<div class="form-group">
+											<input type="text" class="name-form" id="name-area" name="cname"
+												placeholder="추가할 카테고리명을 입력...">
+												<button class="c-btn" onclick="add();">추가</button> 
+							</div></form>
+						</div>
+						<div
+							class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3"
+							id="buttons">
+							<a
+								href="/studyhub/filecategoryedit?no=<%=group.getGroupNo()%>"><button
+									class="c-btn">수정</button></a> <a
+								href="/studyhub/filecategorydelete?no=<%=group.getGroupNo()%>"><button
+									class="c-btn">삭제</button></a>
+						</div>
+						
+						<script type="text/javascript">
+							$(function(){
+								select();
+							});
+							
+							function add(){
+								if($("#name-area").val() ==""){
+									alert("카테고리 이름을 입력하세요");
+									focus("#name-area");
+								}else{
+									var cname = $("#name-area").val(); 
+									console.log("cname:"+cname);
+									var groupno = <%=group.getGroupNo()%>;
+									console.log("groupno:"+groupno);
+									var queryString = { cname : cname, groupno: groupno};
+									
+									$.ajax({
+										url: "/studyhub/filecategoryadd",
+										data: queryString,
+										type: "get",
+										dataType: "json"
+									});
+									$("#name-area").val("");
+									select();
+									return true;
+								}
+							}
+							function select(){
+								var groupno = <%=group.getGroupNo()%>;
+								$.ajax({
+									url: "/studyhub/filecategoryselect",
+									data: { groupno : groupno },
+									type: "get",
+									dataType: "json",
+									success: function(data){
+										var json = JSON.parse(JSON.stringify(data));
+										console.log("json:"+json);
+										var values = "";
+										for(var i in json.list){
+											values +="<li><input type='checkbox' id='check" + json.list[i].categoryno +"'>"+
+											"<label for='check'>"+ decodeURIComponent(json.list[i].cname)+"</label></li>"
+			
+										}
+										$(".list").html(values);
+									},
+									error: function(xhr, status, error){
+										alert("error\nxhr: " + xhr + ", status: " + status +", error: " + error);
+									}
+									
+								});
+							}
+						
+						</script>
+						
+					</div>
+
+
 				</div>
 			</div>
 
-	    </div>
-	    <div role="tabpanel" class="tab-pane" id="listening">contents</div>
-	    <div role="tabpanel" class="tab-pane" id="messages">message?s</div>
-	    <div role="tabpanel" class="tab-pane" id="+">...</div>
-	  </div>
+		</div>
+		<!-- </div> -->
+
 	</div>
-	
-	
-
-	
-
 </div>
 <!-- /메인 컨텐츠 -->
 

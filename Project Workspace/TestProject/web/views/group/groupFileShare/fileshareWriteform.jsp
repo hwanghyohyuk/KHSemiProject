@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*, com.studyhub.common.vo.ShareFile" %>
+<% ArrayList<ShareFile> clist = (ArrayList<ShareFile>)request.getAttribute("clist"); %>
 <!-- 
 작성자 : 구미향
 내용 : 파일공유 write Form  페이지
@@ -17,6 +18,8 @@
 <link rel="stylesheet" href="/studyhub/css/bootstrap.min.css">
 <script src="/studyhub/js/bootstrap.min.js"></script>
 <script src="/studyhub/js/fileshareWriteform.js"></script>
+
+
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
 
@@ -48,10 +51,9 @@
 				<div class="tab-category">
 					<label for="category">카테고리</label>
 					<select name="category">
-					    <option value="<%=sf.getFileCategory()%>">Volvo</option>
-					    <option value="saab">Saab</option>
-					    <option value="fiat">Fiat</option>
-					    <option value="audi">Audi</option>
+					<% for (ShareFile sf : clist){ %>
+					    <option value="<%=sf.getFileCategoryNo()%>"><%=sf.getFileCategoryName()%></option>
+					<% } %>  
 					</select>
 				</div>
 				<div class="upload">
@@ -61,11 +63,11 @@
 				</div>
 				<div class="form-group">
 					<label for="Content">내용</label>
-					<textarea class="form-control" id="Textarea" rows="8"
+					<textarea class="form-control" id="textarea" rows="8"
 						name="content" placeholder="파일에 대한 설명을 입력하세요"></textarea>
 				</div>
 
-				<input type="submit" value="제출하기" class="btn btn-info" id="btns" disabled="disabled" >
+				<input type="submit" value="제출하기" class="btn btn-info" onclick="return enter();" id="btns" disabled="disabled" >
 				<a href="/studyhub/sharedfilepreview?groupno=<%=group.getGroupNo()%>">&nbsp;&nbsp;목록으로 이동</a> 
 				<input type="hidden" name="user_no" value="<%=user.getUserNo()%>">
 				<input type="hidden" name="group_no" value="<%= group.getGroupNo() %>">
