@@ -10,12 +10,15 @@ public class GNComment implements java.io.Serializable{
 	private Date uploadDate;
 	private int uploader;
 	private int accessNo;
+	private String uploaderName;
+	private String strUploadDate;
 
 	public GNComment() {
 		super();
 	}
 
-	public GNComment(int commentNo, int noticeNo, String content, Date uploadDate, int uploader, int accessNo) {
+	public GNComment(int commentNo, int noticeNo, String content, 
+					Date uploadDate, int uploader, int accessNo, String uploaderName, String strUploadDate) {
 		super();
 		this.commentNo = commentNo;
 		this.noticeNo = noticeNo;
@@ -23,6 +26,8 @@ public class GNComment implements java.io.Serializable{
 		this.uploadDate = uploadDate;
 		this.uploader = uploader;
 		this.accessNo = accessNo;
+		this.uploaderName = uploaderName;
+		this.strUploadDate = strUploadDate;
 	}
 
 	public int getCommentNo() {
@@ -73,10 +78,33 @@ public class GNComment implements java.io.Serializable{
 		this.accessNo = accessNo;
 	}
 
+	public String getUploaderName() {
+		return uploaderName;
+	}
+
+	public void setUploaderName(String uploaderName) {
+		this.uploaderName = uploaderName;		
+	}
+	
+	
+
+	public String getStrUploadDate() {
+		return strUploadDate;
+	}
+
+	public void setStrUploadDate(String strUploadDate) {
+		this.strUploadDate = strUploadDate;
+	}
+
 	@Override
 	public String toString() {
-		return "GNComment [commentNo=" + commentNo + ", noticeNo=" + noticeNo + ", content=" + content + ", uploader="
-				+ uploader + ", accessNo=" + accessNo + "]";
+		return "GNComment [commentNo=" + commentNo + ", noticeNo=" + noticeNo + ", content=" + content + ", uploadDate="
+				+ uploadDate + ", uploader=" + uploader + ", accessNo=" + accessNo + ", uploaderName=" + uploaderName
+				+ ", strUploadDate=" + strUploadDate + "]";
 	}
+
+	
+	
+
 
 }

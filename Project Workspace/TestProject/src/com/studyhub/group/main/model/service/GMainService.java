@@ -33,13 +33,6 @@ public class GMainService {
 
 	}
 
-	public ArrayList<GNotice> selectGroupNotice(int groupno) {
-		Connection con = getConnection();
-		ArrayList<GNotice> list = new GMainDao().selectGroupNotice(con, groupno);
-		close(con);
-		return list;
-	}
-	
 	public ArrayList<GBoard> selectGroupBoard(int groupno) {
 		Connection con = getConnection();
 		ArrayList<GBoard> list = new GMainDao().selectGroupBoard(con, groupno);

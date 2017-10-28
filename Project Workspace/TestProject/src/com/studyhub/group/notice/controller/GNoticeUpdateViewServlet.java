@@ -1,6 +1,8 @@
 package com.studyhub.group.notice.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,8 +34,21 @@ public class GNoticeUpdateViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html; charset=utf-8");
+		
+		GNotice gNotice = new GNoticeService().selectGNotice(Integer.parseInt(request.getParameter("no")));
+		
+		RequestDispatcher view = null;
+				
+		if(gNotice != null){
+			view = request.getRequestDispatcher("/views/group/groupNotice/NoticeUpdateForm.jsp");
+			request.setAttribute("gNotice", gNotice);
+			view.forward(request, response);
+		}else{
+			view = request.getRequestDispatcher("/views/group/groupNotice/NoticeError.jsp");
+			request.setAttribute("message", "수정화면 출력 실패");
+			view.forward(request, response);
+		}
 	}
 
 	/**

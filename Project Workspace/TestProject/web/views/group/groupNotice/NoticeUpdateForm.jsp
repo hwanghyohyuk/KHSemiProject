@@ -33,35 +33,39 @@
 <!-- 메인 컨텐츠 -->
 <div class="row" id="layout">
   <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
-  <h2>질문하기</h2>
+  <h2>그룹 공지 수정</h2>
   <br>
 	<form action="/studyhub/gnoticeupdate" method="post">
 		<div class="form-group">
 			<label for="title">제목</label> <input type="text"
 				class="form-control" id="post_title" name="title"
-				aria-describedby="emailHelp" value= <%= gnotice.getTitle() %>>
+				aria-describedby="emailHelp" value= <%=gnotice.getTitle() %>>
 		</div>
 		<div class="range">
 		<label for="Content">공개범위</label>
 		<label class="radio-inline"> <input type="radio"
-			name="access_no" id="inlineRadio1" value="1" checked>
+			name="accessno" id="inlineRadio1" value="1" checked>
 			전체공개
 		</label> <label class="radio-inline"> <input type="radio"
-			name="access_no" id="inlineRadio2" value="2">
-			회원공개
+			name="accessno" id="inlineRadio2" value="2">
+			회원공개			
+		</label> <label class="radio-inline"> <input type="radio"
+			name="accessno" id="inlineRadio2" value="3" checked>
+			그룹원공개			
 		</label>
 		</div>
 		<div class="form-group">
 			<label for="Content">내용</label>
 			<textarea class="form-control" id="Textarea" rows="15" name="content"
-				><%= gnotice.getContent() %></textarea>
+				><%=gnotice.getContent() %></textarea>
 		</div>
 		
 		<input type="submit" value="수정하기" class="btn btn-default" id="btns">
-		<a href="/studyhub/qnalist">목록으로 이동</a>
-		<input type="hidden" name="no" value="<%= gnotice.getNoticeNo() %>">
+		<a href="/studyhub/gnoticepreview?groupno=<%=group.getGroupNo()%>">목록으로 이동</a>
+		<input type="hidden" name="no" value="<%=gnotice.getNoticeNo() %>">
+		</form>
 	</div>
-	</form>
+</div>
 
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>

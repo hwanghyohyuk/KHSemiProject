@@ -28,6 +28,7 @@
 	}
 </script>
 
+
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
@@ -38,7 +39,7 @@
 		<div class="col-md-8 col-md-offset-2">
 			<h2>공지사항</h2>
 			<div class="table-area">
-				<table class="table table-striped" align="center" width="600">
+				<table class="table table-bordered table-condensed table-responsive" align="center" width="600">
 					<tr align="center">
 						<td>번호</td>
 						<td>제목</td>
@@ -49,11 +50,11 @@
 					<%
 						for (GNotice gnotice : list) {
 					%>
-					<tr>
-						<td><%=gnotice.getNoticeNo()%></td>
+					<tr align="center">
+						<td><%=gnotice.getRownum()%></td>
 						<td id="title_text">
 						<a href="/studyhub/gnoticeview?no=<%=gnotice.getNoticeNo()%>"><%=gnotice.getTitle()%></a></td>
-						<td><%=gnotice.getUploader()%></td>
+						<td><%=gnotice.getUploader_name() %></td>
 						<td><%=gnotice.getUploadDate()%></td>
 					</tr>
 					<%
