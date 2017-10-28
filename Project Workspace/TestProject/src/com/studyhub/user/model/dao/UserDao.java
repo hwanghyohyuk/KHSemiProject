@@ -10,43 +10,42 @@ import com.studyhub.common.vo.User;
 public class UserDao implements CryptTemplate {
 
 	private User user;
-	
+
 	public User selectUser(Connection conn, String useremail, String userpwd) {
 		// TODO Auto-generated method stub
-		
+
 		String query = "select * from tb_user where email=? and user_pwd=?";
 		user = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		AesUtil util = new AesUtil(KEY_SIZE, ITERATION_COUNT);
-		String encrypt = util.encrypt(SALT, IV, PASSPHRASE, userpwd);
-		System.out.println(encrypt);
-		try{
+		String encryptPwd = util.encrypt(SALT, IV, PASSPHRASE, userpwd);
+		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, useremail);
-			pstmt.setString(2, encrypt);
-			
+			pstmt.setString(2, encryptPwd);
+
 			rset = pstmt.executeQuery();
-			
-			if(rset.next()){
+
+			if (rset.next()) {
 				user = new User();
 				user.setEmail(useremail);
-				user.setUserPwd(encrypt);
+				user.setUserPwd(encryptPwd);
 				user.setUserNo(rset.getInt("user_no"));
 				user.setUserName(rset.getString("user_name"));
 				user.setPhone(rset.getString("phone"));
-			}else{
-				
+			} else {
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
+
 		return user;
 	}
 
@@ -55,37 +54,36 @@ public class UserDao implements CryptTemplate {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		boolean result = false;
-		
+
 		AesUtil util = new AesUtil(KEY_SIZE, ITERATION_COUNT);
-		String encrypt = util.encrypt(SALT, IV, PASSPHRASE, user.getUserPwd());
-		System.out.println(encrypt);
-		try{
+		String encryptPwd = util.encrypt(SALT, IV, PASSPHRASE, user.getUserPwd());
+		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, user.getEmail());
 			pstmt.setString(2, user.getUserName());
-			pstmt.setString(3, encrypt);
+			pstmt.setString(3, encryptPwd);
 			pstmt.setString(4, user.getPhone());
-			
+
 			rset = pstmt.executeQuery();
 			System.out.println(rset);
 			result = true;
-			
-		}catch (SQLException e) {
+
+		} catch (SQLException e) {
 			return false;
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
-		}		
+		}
 		return result;
 	}
 
 	public int checkEmail(Connection conn, String userEmail) {
 		String query = "select count(*) from tb_user where email=?";
-				
+
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userEmail);
@@ -98,6 +96,79 @@ public class UserDao implements CryptTemplate {
 			e.printStackTrace();
 		} finally {
 			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int checkName(Connection conn, String userEmail, String userName) {
+		String query = "select count(*) from tb_user where email=? and user_name=?";
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userEmail);
+			pstmt.setString(2, userName);
+			rset = pstmt.executeQuery();
+
+			if (rset.next())
+				result = rset.getInt(1);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int checkPwd(Connection conn, String userEmail, String userName, String userPwd) {
+		String query = "select count(*) from tb_user where email=? and user_name=? and user_pwd=?";
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userEmail);
+			pstmt.setString(2, userName);
+			pstmt.setString(3, userPwd);
+			rset = pstmt.executeQuery();
+
+			if (rset.next())
+				result = rset.getInt(1);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int modifyPwd(Connection conn, String decryptEmail, String newPwd) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "update tb_user set user_pwd=? where email=?";
+		AesUtil util = new AesUtil(KEY_SIZE, ITERATION_COUNT);
+		String encryptPwd = util.encrypt(SALT, IV, PASSPHRASE, newPwd);
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, encryptPwd);
+			pstmt.setString(2, decryptEmail);
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			close(pstmt);
 		}
 		return result;

@@ -2,12 +2,11 @@
 	pageEncoding="UTF-8"%>
 <!-- 
 작성자 : 황효혁
-내용 : 비밀번호 찾기 페이지
+내용 : 이메일 찾기 페이지
 작성일자 17.10.05
  -->
 <!-- java 구문 -->
 <% String email = String.valueOf(request.getAttribute("userEmail")); %>
-<% String name = String.valueOf(request.getAttribute("userName")); %>
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 
 <!--페이지 시작-->
@@ -23,31 +22,30 @@
 	<div class="row">
 		<div class="col-sm-3 col-xs-2"></div>
 		<div class="col-sm-6 col-xs-8">
-		<p>기억나는 비밀번호를 입력해주세요</p>
-		<p>현재 이메일 : <%=email%></p>
-		<p>현재 사용자 이름 : <%=name%></p>
-			<form action="/studyhub/findpwdprocess" method="post" name="findpwd">
+			<p>사용자 이름을 입력해주세요</p>
+			<p>현재 이메일 : <%=email%></p>
+			<form action="/studyhub/findnameprocess" method="post" name="findname">
 				<div class="form-group">
 					<input type="hidden" id="email" name="email" value="<%=email%>">
-					<input type="hidden" id="name" name="name" value="<%=name%>">
-					<input type="password" class="form-control"
-						id="pwd" placeholder="비밀번호" name="pwd" oninput='emptyCheck()'>
+					<input type="text" class="form-control" id="name"
+						placeholder="사용자 이름" name="name" oninput='emptyCheck()'>
 				</div>
 				<a href="/studyhub/login" class="btn btn-default pull-left">이전화면</a>
-				<button type="submit" class="btn btn-primary main-back pull-right" id="findwpdbtn" disabled="disabled">비밀번호 확인</button>
+				<button type="submit" class="btn btn-primary pull-right main-back" id=findnamebtn disabled="disabled">사용자 이름 확인</button>
 			</form>
 		</div>
 		<div class="col-sm-3 col-xs-2"></div>
 	</div>
 </div>
 <!-- /메인 컨텐츠 -->
+
 <script type="text/javascript">
 function emptyCheck() {
-	var pwd = $("#pwd").val();
-	if(pwd==""){
-		$("#findwpdbtn").prop("disabled", true);
+	var name = $("#name").val();
+	if(name==""){
+		$("#findnamebtn").prop("disabled", true);
 	}else{
-		$("#findwpdbtn").prop("disabled", false);
+		$("#findnamebtn").prop("disabled", false);
 	}
 }
 </script>
