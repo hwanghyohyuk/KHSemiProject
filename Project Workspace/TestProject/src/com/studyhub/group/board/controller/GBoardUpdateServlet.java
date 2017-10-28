@@ -35,25 +35,22 @@ public class GBoardUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 게시글 수정페이지 출력 처리용 컨트롤러
+		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-		
-		int bnum = Integer.parseInt(request.getParameter("bnum"));
-		int currentPage = Integer.parseInt(request.getParameter("page"));
-		
 		GBoard gboard = new GBoard();
-		gboard.setgBoardNo(bnum);
-		int result = new GBoardService().updateViewBoard(gboard);
-				
+		gboard.setgBoardNo(Integer.parseInt(request.getParameter("no")));
+		gboard.setTitle(request.getParameter("title"));
+		gboard.setContent(request.getParameter("content"));
 		
 		RequestDispatcher view = null;
-		if(gboard != null){
-			view = request.getRequestDispatcher("views/gboard/gboardError.jsp");
-			request.setAttribute("gboard", gboard);
-			request.setAttribute("currentPage", currentPage);
-			view.forward(request, response);
+		
+		//수정 updateBoard(gNboard)
+		if(new GBoardService().updateGBoard(gboard)>0){
+System.out.println(response.sendRedirect("/studyhub/gboardlist"););
+			response.sendRedirect("/studyhub/gboardlist");
 		}else{
-			view = request.getRequestDispatcher("views/gboard/gboardError.jsp");
-			request.setAttribute("message", "수정페이지 출력 요청 실패!");
+			view = request.getRequestDispatcher("/views/group/groupBoard/BoardError.jsp");
+			request.setAttribute("message", "수정실패");
 			view.forward(request, response);
 		}
 	}

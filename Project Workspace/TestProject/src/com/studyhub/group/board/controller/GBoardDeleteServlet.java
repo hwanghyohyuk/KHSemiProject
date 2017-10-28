@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studyhub.group.board.model.service.GBoardService;
-
+import com.studyhub.common.vo.*;
 
 /**
  * Servlet implementation class GBoardDeleteServlet
@@ -33,13 +33,13 @@ public class GBoardDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+			//게시글 삭제
 		response.setContentType("text/html; charset=utf-8");
 		
-		int bnum = Integer.parseInt(request.getParameter("bnum"));
+		int no = Integer.parseInt(request.getParameter("no"));
 		
-		if(new GBoardService().deleteBoard(bnum) > 0){
-			response.sendRedirect("/first/blist?page=1");
+		if(new GBoardService().deleteGBoard(no) > 0){
+			response.sendRedirect("/studyhub/gboardlist");
 		}else{
 			RequestDispatcher view = request.getRequestDispatcher("views/board/boardError.jsp");
 			request.setAttribute("message", "게시글 삭제 처리 실패!");

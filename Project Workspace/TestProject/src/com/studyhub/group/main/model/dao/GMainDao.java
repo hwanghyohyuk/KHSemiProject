@@ -28,14 +28,12 @@ public class GMainDao {
 		group = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		String query = "select group_no ,group_name, attribute_name, location, category_name, description, authority_no"
-					+ " from tb_group"
-					+ " join tb_on_off using(attribute_no)"
-					+ " join tb_category using(category_no)"
-					+ " join (select group_no, authority_no from tb_ung where user_no=?) using(group_no)"
-					+ " where group_no = ?";
-		
+				+ " from tb_group" + " join tb_on_off using(attribute_no)" + " join tb_category using(category_no)"
+				+ " join (select group_no, authority_no from tb_ung where user_no=?) using(group_no)"
+				+ " where group_no = ?";
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, user_no);
@@ -109,12 +107,19 @@ public class GMainDao {
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select g_board_no, title, user_name, to_char(upload_date, 'yyyyMMdd') as upload_date, readcount"
-				+ " from tb_g_board" + " join tb_user on (tb_g_board.uploader=tb_user.user_no)" + " where group_no = ?";
 
+		String query = "select rownum, title, content, uploader, upload_date, user_name, access_no, access_right"
+				+ "from("
+				+ "select * from tb_g_board "
+				+ "join tb_user on(tb_user.user_no=tb_g_board.uploader)"
+				+ "join tb_access using(access_no) where group_no = ? order by g_board_no asc) "
+				+ "where rownum >= ? and rownum<= ? order by rownum desc";
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, groupno);
+			pstmt.setInt(2, groupno);
+			pstmt.setInt(3, groupno);
+			// 수정
 
 			rset = pstmt.executeQuery();
 			if (rset != null) {
@@ -123,9 +128,10 @@ public class GMainDao {
 					GBoard gb = new GBoard();
 					gb.setgBoardNo(rset.getInt("g_board_no"));
 					gb.setTitle(rset.getString("title"));
-					gb.setUploader(rset.getString("user_no"));
-					gb.setStrDate(rset.getString("upload_date"));
-					gb.setReadcount(rset.getInt("readcount"));
+					gb.setContent(rset.getString("content"));
+					gb.setUploadDate(rset.getDate("upload_date"));
+					gb.setUploader(rset.getInt("uploader"));
+					gb.setAccessNo(rset.getInt("access_no"));
 					list.add(gb);
 				}
 			}

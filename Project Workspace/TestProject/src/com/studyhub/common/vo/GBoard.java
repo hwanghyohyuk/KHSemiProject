@@ -4,79 +4,47 @@ import java.sql.Date;
 
 public class GBoard implements java.io.Serializable {
 
+	private int rownum;
 	private int gBoardNo;
 	private String title;
 	private String content;
 	private Date uploadDate;
-	private String strDate;
-	private String uploader;
-	private int userNo;
+	private int uploader;
+	private String uploaderName;
 	private int accessNo;
+	private String accessRight;
 	private int groupNo;
-	private int readcount;
+	private int readCount;
 
 	public GBoard() {
 		super();
 	}
 
-	public GBoard(int gBoardNo, String title, String content, Date uploadDate, String uploader, int userNo,
-			int accessNo, int groupNo) {
+	
+
+
+
+
+	public GBoard(int rownum, int gBoardNo, String title, String content, Date uploadDate, int uploader,
+			String uploaderName, int accessNo, String accessRight, int groupNo, int readCount) {
 		super();
+		this.rownum = rownum;
 		this.gBoardNo = gBoardNo;
 		this.title = title;
 		this.content = content;
 		this.uploadDate = uploadDate;
 		this.uploader = uploader;
-		this.userNo = userNo;
+		this.uploaderName = uploaderName;
 		this.accessNo = accessNo;
+		this.accessRight = accessRight;
 		this.groupNo = groupNo;
+		this.readCount = readCount;
 	}
 
-	public GBoard(int gBoardNo, String title, String content, String strDate, String uploader, int accessNo,
-			int groupNo, int readcount) {
-		super();
-		this.gBoardNo = gBoardNo;
-		this.title = title;
-		this.content = content;
-		this.strDate = strDate;
-		this.uploader = uploader;
-		this.accessNo = accessNo;
-		this.groupNo = groupNo;
-		this.readcount = readcount;
-	}
 
-	public GBoard(String title, String uploader, String content, int accessNo, int groupNo) {
-		super();
-		this.title = title;
-		this.content = content;
-		this.uploader = uploader;
-		this.accessNo = accessNo;
-		this.groupNo = groupNo;
-	}
 
-	public int getUserNo() {
-		return userNo;
-	}
 
-	public void setUserNo(int userNo) {
-		this.userNo = userNo;
-	}
 
-	public int getReadcount() {
-		return readcount;
-	}
-
-	public void setReadcount(int readcount) {
-		this.readcount = readcount;
-	}
-
-	public String getStrDate() {
-		return strDate;
-	}
-
-	public void setStrDate(String strDate) {
-		this.strDate = strDate;
-	}
 
 	public int getgBoardNo() {
 		return gBoardNo;
@@ -108,13 +76,13 @@ public class GBoard implements java.io.Serializable {
 
 	public void setUploadDate(Date uploadDate) {
 		this.uploadDate = uploadDate;
-	} 
+	}
 
-	public String getUploader() {
+	public int getUploader() {
 		return uploader;
 	}
 
-	public void setUploader(String uploader) {
+	public void setUploader(int uploader) {
 		this.uploader = uploader;
 	}
 
@@ -134,10 +102,64 @@ public class GBoard implements java.io.Serializable {
 		this.groupNo = groupNo;
 	}
 
+	public String getUploaderName() {
+		return uploaderName;
+	}
+
+	public void setUploaderName(String uploaderName) {
+		this.uploaderName = uploaderName;
+	}
+
+	public String getAccessRight() {
+		return accessRight;
+	}
+
+	public void setAccessRight(String accessRight) {
+		this.accessRight = accessRight;
+	}
+
+	
+	public int getRownum() {
+		return rownum;
+	}
+
+
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
+
+
+
+	public int getReadCount() {
+		return readCount;
+	}
+
+
+
+
+
+
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
+	}
+
+
+
+
+
+
 	@Override
 	public String toString() {
-		return "GBoard [gBoardNo=" + gBoardNo + ", title=" + title + ", content=" + content + ", uploadDate="
-				+ uploadDate + ", uploader=" + uploader + ", accessNo=" + accessNo + ", groupNo=" + groupNo + "]";
+		return "GBoard [rownum=" + rownum + ", gBoardNo=" + gBoardNo + ", title=" + title + ", content=" + content
+				+ ", uploadDate=" + uploadDate + ", uploader=" + uploader + ", uploaderName=" + uploaderName
+				+ ", accessNo=" + accessNo + ", accessRight=" + accessRight + ", groupNo=" + groupNo + ", readCount="
+				+ readCount + "]";
 	}
+
+
+
+
+ 
 
 }

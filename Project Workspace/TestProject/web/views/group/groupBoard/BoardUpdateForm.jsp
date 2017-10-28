@@ -33,14 +33,14 @@
 <!-- 메인 컨텐츠 -->
 <div class="row" id="layout">
 	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
-		<h2>게시글 작성</h2>
+		<h2>게시글 수정</h2>
 		<br>
-		<form action="/studyhub/gboardinsert" method="post">
+		<form action="/studyhub/gboardupdate" method="post">
 			<div class="form-group">
 				<label for="title">제목</label> <input type="text"
 					class="form-control" id="exampleInputEmail1"
 					name="title" 
-					aria-describedby="emailHelp" placeholder="제목을 입력하세요">
+					aria-describedby="emailHelp" value="<%=gb.getTitle() %>" >
 			</div>
 			<div class="range">
 				<label for="Content">공개범위</label> <label class="radio-inline">
@@ -55,13 +55,12 @@
 			<div class="form-group">
 				<label for="Content">내용</label>
 				<textarea class="form-control" id="Textarea" rows="15"
-				name="content" placeholder="내용을 입력하세요"></textarea>
+				name="content" value="<%=gb.getContent() %>" ></textarea>
 			</div>
 			<input type="hidden" name="uploader" value="<%=user.getUserNo() %>">
 			<input type="hidden" name="groupno" value="<%=group.getGroupNo() %>">
-			<input type="submit" value="제출하기" class = "btn btn-info" id="btns"> <a
-				href="/studyhub/gboardpreview?groupno=<%=group.getGroupNo()%>">목록으로
-				이동</a>
+			<input type="submit" value="수정하기" class = "btn btn-info" id="btns"> <a
+				href="/studyhub/gboardpreview?groupno=<%=group.getGroupNo()%>">취소</a>
 		</form>
 	</div>	
 </div>
