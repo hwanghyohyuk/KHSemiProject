@@ -9,6 +9,8 @@ public class GQComment implements java.io.Serializable{
 	private Date uploadDate;
 	private int uploader;
 	private int accessNo;
+	private String uploaderName;
+	private String strDate;
 
 	public GQComment() {
 		super();
@@ -22,6 +24,35 @@ public class GQComment implements java.io.Serializable{
 		this.uploadDate = uploadDate;
 		this.uploader = uploader;
 		this.accessNo = accessNo;
+	}
+	
+	
+
+	public GQComment(int commentNo, int gQnaNo, String content, String uploaderName, String strDate, int gqnano, int uploader) {
+		super();
+		this.commentNo = commentNo;
+		this.gQnaNo = gQnaNo;
+		this.content = content;
+		this.uploaderName = uploaderName;
+		this.strDate = strDate;
+		this.gQnaNo = gqnano;
+		this.uploader = uploader;
+	}
+
+	public String getUploaderName() {
+		return uploaderName;
+	}
+
+	public void setUploaderName(String uploaderName) {
+		this.uploaderName = uploaderName;
+	}
+
+	public String getStrDate() {
+		return strDate;
+	}
+
+	public void setStrDate(String strDate) {
+		this.strDate = strDate;
 	}
 
 	public int getCommentNo() {

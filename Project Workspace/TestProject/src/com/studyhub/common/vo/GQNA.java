@@ -40,6 +40,21 @@ public class GQNA implements java.io.Serializable{
 		this.accessNo = accessNo;
 		this.groupNo = groupNo;
 	}
+	
+	
+
+	public GQNA(int gQnaNo, String title, String content, Date uploadDate, int uploader, String uploader_name,
+			int accessNo, int groupNo, String strDate) {
+		super();
+		this.gQnaNo = gQnaNo;
+		this.title = title;
+		this.content = content;
+		this.uploader = uploader;
+		this.uploader_name = uploader_name;
+		this.accessNo = accessNo;
+		this.groupNo = groupNo;
+		this.strDate = strDate;
+	}
 
 	public int getgQnaNo() {
 		return gQnaNo;

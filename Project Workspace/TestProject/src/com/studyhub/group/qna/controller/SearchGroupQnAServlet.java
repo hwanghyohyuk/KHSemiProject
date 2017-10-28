@@ -16,52 +16,61 @@ import org.json.simple.JSONObject;
 
 import com.studyhub.common.vo.GQNA;
 import com.studyhub.group.qna.model.service.GroupQnAService;
-import com.studyhub.main.qna.model.service.QnAService;
 
 /**
- * Servlet implementation class SelectGroupQnAServlet
+ * Servlet implementation class SearchGroupQnAServlet
  */
-@WebServlet("/selectgroupqna")
-public class SelectGroupQnAServlet extends HttpServlet {
+@WebServlet("/searchgroupqna")
+public class SearchGroupQnAServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectGroupQnAServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+    public SearchGroupQnAServlet() {
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
+		String searchdata = request.getParameter("searchdata");
 		int groupno = Integer.parseInt(request.getParameter("groupno"));
-		ArrayList<GQNA> list = new GroupQnAService().selectGroupQnA(groupno);
+		
+		ArrayList<Integer> gqnanolist = new GroupQnAService().GroupNoList(groupno, searchdata);
+		
+		ArrayList<GQNA> qnalist = new GroupQnAService().GQNAlist(groupno, gqnanolist);
 		
 		JSONObject json = new JSONObject();
 		JSONArray jarr = new JSONArray();
 		
-		for(GQNA gq : list){
-			JSONObject job = new JSONObject();
-			job.put("g_qna_no", gq.getgQnaNo());
-			job.put("title", URLEncoder.encode(gq.getTitle(), "UTF-8"));
-			job.put("content", URLEncoder.encode(gq.getContent(), "UTF-8"));
-			job.put("uploaddate", URLEncoder.encode(gq.getStrDate(), "UTF-8"));
-			job.put("uploader", URLEncoder.encode(gq.getUploader_name(), "UTF-8"));
-			job.put("access_no", gq.getAccessNo());
-			job.put("groupno", gq.getGroupNo());
-			job.put("user_no", gq.getUploader());
-			
-			jarr.add(job);
+		if(qnalist != null) {
+			for(GQNA gq : qnalist){
+				JSONObject job = new JSONObject();
+				job.put("g_qna_no", gq.getgQnaNo());
+				job.put("title", URLEncoder.encode(gq.getTitle(), "UTF-8"));
+				job.put("content", URLEncoder.encode(gq.getContent(), "UTF-8"));
+				job.put("uploaddate", URLEncoder.encode(gq.getStrDate(), "UTF-8"));
+				job.put("uploader", URLEncoder.encode(gq.getUploader_name(), "UTF-8"));
+				job.put("access_no", gq.getAccessNo());
+				job.put("groupno", gq.getGroupNo());
+				job.put("user_no", gq.getUploader());
+				
+				jarr.add(job);
+			}
+			json.put("list", jarr);
+			response.setContentType("application/json; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(json.toJSONString());
+			out.flush();
+			out.close();
+			}
+		else {
+			response.sendRedirect("views/group/groupQnA/QnAList.jsp");
 		}
-		json.put("list", jarr);
-		response.setContentType("application/json; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.print(json.toJSONString());
-		out.flush();
-		out.close();
 	}
 
 	/**
@@ -73,6 +82,3 @@ public class SelectGroupQnAServlet extends HttpServlet {
 	}
 
 }
-
-
-
