@@ -16,7 +16,7 @@ import com.studyhub.main.board.model.service.BoardService;
  * Servlet implementation class BoardUpdateView
  */
 @WebServlet("/boardupdate.move")
-public class BoardUpdateView extends HttpServlet {
+public class BoardUpdateMoveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private BoardService bs;
@@ -25,7 +25,7 @@ public class BoardUpdateView extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardUpdateView() {
+    public BoardUpdateMoveServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

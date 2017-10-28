@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import com.studyhub.common.vo.Board;
 import com.studyhub.common.vo.Group;
+import com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations.RSAKeyValueResolver;
 
 public class BoardDao {
 
@@ -116,6 +117,7 @@ public class BoardDao {
 				b.setUploadDate(rset.getDate("upload_date"));
 				b.setDeadlineDate(rset.getDate("deadline_date"));
 				b.setStatus(rset.getString("status"));
+				b.setGroupNo(rset.getInt("group_no"));
 				b.setGroupName(rset.getString("group_name"));
 				b.setLocation(rset.getString("location"));
 				b.setCategoryName(rset.getString("category_name"));
@@ -159,13 +161,6 @@ public class BoardDao {
 		return result;
 	}
 
-	public int addReadCount(Connection con, int bnum) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	
-
 	public int deleteBoard(Connection con, int bno) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -186,8 +181,28 @@ public class BoardDao {
 	}
 
 	public int updateBoard(Connection con, Board b) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "update tb_board set title=?, content=?, upload_date=sysdate, deadline_date=?, job_group=? "
+				+ "where board_no=?";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, b.getTitle());
+			pstmt.setString(2, b.getContent());
+			pstmt.setDate(3, b.getDeadlineDate());
+			pstmt.setInt(4, b.getGroupNo());
+			pstmt.setInt(5, b.getBoardNo());
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 	public ArrayList<Group> selectGroupList(Connection con, int userNo) {

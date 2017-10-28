@@ -53,7 +53,7 @@ public class BoardDeleteServlet extends HttpServlet {
 			pw.close();
 		} else {
 			view = request.getRequestDispatcher("views/main/Board/BoardError.jsp");
-			request.setAttribute("message", "Board 서비스 : 모집글 삭제 실패!");
+			request.setAttribute("message", "모집게시판 서비스 : 모집글 삭제 실패!");
 			view.forward(request, response);
 		}
 	}

@@ -24,8 +24,8 @@
 <!--자바스크립트 및 CSS-->
 <style>
 #groupimg{
-width:100px;
-height:100px;
+width:140px;
+height:140px;
 }
 </style>
 <!-- /head , body -->
@@ -63,7 +63,7 @@ height:100px;
 				for (Board b : list) {
 			%>			
 				<tr>
-					<td><img id="groupimg" src="/imamges/groupimg/<%=b.getgImgRename()%>"></td>
+					<td><img id="groupimg" src="/imamges/groupimg/<%=b.getgImgRename()%>" class="img-rounded"></td>
 					<td><%=b.getCategoryName() %></td>
 					<td><%=b.getGroupName() %></td>
 					<td>

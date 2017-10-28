@@ -16,8 +16,8 @@
 <!--자바스크립트 및 CSS-->
 <style>
 #groupimg {
-	width: 100px;
-	height: 100px;
+	width: 140px;
+	height: 140px;
 }
 </style>
 <!-- /head , body -->
@@ -34,12 +34,12 @@
 	</div>
 	<form class="form-horizontal">
 		<div class="form-group">
-			<label for="btitle" class="col-sm-3 control-label">제목</label>
+			<label class="col-sm-3 control-label">제목</label>
 			<div class="col-sm-3">
 				<p class="pull-left control-label"><%=board.getTitle()%>
 				</p>
 			</div>
-			<label for="btitle" class="col-sm-3 control-label">작성자</label>
+			<label class="col-sm-3 control-label">작성자</label>
 			<div class="col-sm-3">
 				<p class="pull-left control-label"><%=board.getUploaderName()%>
 				</p>
@@ -47,12 +47,12 @@
 		</div>
 		<hr>
 		<div class="form-group">
-			<label for="btitle" class="col-sm-3 control-label">모집 기간</label>
+			<label class="col-sm-3 control-label">모집 기간</label>
 			<div class="col-sm-3">
 				<p class="pull-left control-label"><%=board.getUploadDate()%> ~ <%=board.getDeadlineDate()%>
 				</p>
 			</div>
-			<label for="btitle" class="col-sm-3 control-label">모집 상태</label>
+			<label class="col-sm-3 control-label">모집 상태</label>
 			<div class="col-sm-3">
 				<p class="pull-left control-label"><%=board.getStatus()%>
 				</p>
@@ -60,39 +60,39 @@
 		</div>
 		<hr>
 		<div class="form-group">
-			<label for="btitle" class="col-sm-3 control-label">내용</label>
+			<label class="col-sm-3 control-label">내용</label>
 			<div class="col-sm-9">
 				<%=(board.getContent()).replaceAll("\n", "<br>") %>
 			</div>
 		</div>
 		<hr>
 		<div class="form-group">
-			<label for="btitle" class="col-sm-3 control-label">그룹정보</label>
-			<div class="col-sm-1">
-				<img id="groupimg" src="/imamges/groupimg/<%=board.getgImgRename()%>">
+			<label class="col-sm-3 control-label">그룹정보</label>
+			<div class="col-sm-2">
+				<img id="groupimg" src="/imamges/groupimg/<%=board.getgImgRename()%>" class="img-rounded">
 			</div>
-			<label for="btitle" class="col-sm-2 control-label">그룹명</label>
-			<div class="col-sm-1">
+			<label class="col-sm-2 control-label">그룹명</label>
+			<div class="col-sm-5">
 				<p class="pull-left control-label"><%=board.getGroupName()%>
 				</p>
 			</div>
-			<label for="btitle" class="col-sm-2 control-label">스터디 방식</label>
-			<div class="col-sm-3">
+			<label class="col-sm-2 control-label">스터디 방식</label>
+			<div class="col-sm-5">
 				<p class="pull-left control-label"><%=board.getAttributeName()%>
 				</p>
 			</div>
-			<label for="btitle" class="col-sm-2 control-label">스터디 지역</label>
-			<div class="col-sm-1">
+			<label class="col-sm-2 control-label">스터디 지역</label>
+			<div class="col-sm-5">
 				<p class="pull-left control-label"><%=board.getLocation()%>
 				</p>
 			</div>
-			<label for="btitle" class="col-sm-2 control-label">스터디 분류</label>
-			<div class="col-sm-3">
+			<label class="col-sm-2 control-label">스터디 분류</label>
+			<div class="col-sm-5">
 				<p class="pull-left control-label"><%=board.getCategoryName()%>
 				</p>
 			</div>
-			<label for="btitle" class="col-sm-2 control-label">그룹원 수</label>
-			<div class="col-sm-1">
+			<label class="col-sm-2 control-label">그룹원 수</label>
+			<div class="col-sm-5">
 				<p class="pull-left control-label"><%=board.getMemberCount()%>
 				</p>
 			</div>

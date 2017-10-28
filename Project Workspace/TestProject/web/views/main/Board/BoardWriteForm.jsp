@@ -58,7 +58,7 @@
 									var json = JSON.parse(JSON.stringify(data));
 									var values = "";
 									for ( var i in json.list) {
-										values += "<option value="+json.list[i].group_no+">"
+										values += "<option value='"+json.list[i].group_no+"' >"
 												+ decodeURIComponent(json.list[i].group_name)
 												+ "</option>";
 										}
