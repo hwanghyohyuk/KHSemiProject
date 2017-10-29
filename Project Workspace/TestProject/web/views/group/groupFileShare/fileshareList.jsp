@@ -412,10 +412,9 @@
 									focus("#name-area");
 								}else{
 									var cname = $("#name-area").val(); 
-									console.log("cname:"+cname);
+									
 									var groupno = <%=group.getGroupNo()%>;
-									console.log("groupno:"+groupno);
-									var queryString = { cname : cname, groupno: groupno};
+									var queryString = { groupno: groupno, cname : cname };
 									
 									$.ajax({
 										url: "/studyhub/filecategoryadd",
@@ -472,5 +471,3 @@
 <%@ include file="/views/include/main/footer.jsp"%>
 
 <%@ include file="/views/include/common/tail.jsp"%>
-</body>
-</html>

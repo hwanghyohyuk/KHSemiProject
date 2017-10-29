@@ -328,7 +328,7 @@ public class ShareFileDao {
 	}
 
 
-	public int addCategory(Connection con, String cname, int groupno) {
+	public int addCategory(Connection con, int groupno, String cname) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		

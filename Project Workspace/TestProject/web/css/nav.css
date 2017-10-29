@@ -29,6 +29,9 @@
 
 /* footer */
 
+.text-center{
+	margin-top: 100vh;
+}
 footer {
   color: white;
 }

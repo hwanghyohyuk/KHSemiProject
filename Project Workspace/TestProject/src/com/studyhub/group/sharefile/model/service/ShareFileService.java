@@ -108,9 +108,9 @@ public class ShareFileService {
 		return clist;
 	}
 
-	public int addCategory(String cname, int groupno) {
+	public int addCategory(int groupno, String cname) {
 		Connection con = getConnection();
-		int result = new ShareFileDao().addCategory(con, cname, groupno);
+		int result = new ShareFileDao().addCategory(con, groupno, cname);
 		if(result>0)
 			commit(con);
 		else
