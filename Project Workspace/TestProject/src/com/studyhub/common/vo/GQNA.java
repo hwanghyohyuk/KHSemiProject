@@ -57,6 +57,14 @@ public class GQNA implements java.io.Serializable{
 		this.strDate = strDate;
 		this.commentcount = commentcount;
 	}
+	
+	public GQNA(int gQnaNo, String title, String uploader_name, String strDate) {
+		super();
+		this.gQnaNo = gQnaNo;
+		this.title = title;
+		this.uploader_name = uploader_name;
+		this.strDate = strDate;
+	}
 
 	public int getCommentcount() {
 		return commentcount;

@@ -44,6 +44,16 @@ public class Schedule implements java.io.Serializable{
 		this.meetingName = meetingName;
 	}
 
+	public Schedule(int scheduleNo, String meetingDate, String ampm, String hour, String minute, String meetingName) {
+		super();
+		this.scheduleNo = scheduleNo;
+		this.meetingDate = meetingDate;
+		this.ampm = ampm;
+		this.hour = hour;
+		this.minute = minute;
+		this.meetingName = meetingName;
+	}
+
 	public int getScheduleNo() {
 		return scheduleNo;
 	}

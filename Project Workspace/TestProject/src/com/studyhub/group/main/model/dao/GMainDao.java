@@ -29,7 +29,7 @@ public class GMainDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select group_no ,group_name, attribute_name, location, category_name, description, authority_no"
+		String query = "select group_no ,group_name, attribute_name, location, category_name, description, authority_no, group_state"
 				+ " from tb_group" + " join tb_on_off using(attribute_no)" + " join tb_category using(category_no)"
 				+ " join (select group_no, authority_no from tb_ung where user_no=?) using(group_no)"
 				+ " where group_no = ?";
@@ -50,6 +50,7 @@ public class GMainDao {
 				group.setCategoryName(rset.getString("category_name"));
 				group.setDescription(rset.getString("description"));
 				group.setAuthorityNo(rset.getInt("authority_no"));
+				group.setGroupState(rset.getInt("group_state"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -206,7 +207,250 @@ public class GMainDao {
 		return result;
 	}
 
+	public int RemoveGroup(Connection con, int groupno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_group set group_state = 2, delete_date = sysdate + 7 where group_no = ? ";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int RemoveCancel(Connection con, int groupno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_group set group_state = 0 where group_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<GQNA> top3qna(Connection con, int groupno) {
+		ArrayList<GQNA> list = null;
+			
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+			
+		String query = "select g_qna_no, title, user_name, strdate from ("
+					+ "select rownum as rnum, g_qna_no, title, user_name, to_char(upload_date, 'yyyy-MM-dd') as strdate "
+					+ "from tb_g_qna "
+					+ "join tb_user on (uploader=user_no) "
+					+ "where group_no = ? "
+					+ "order by g_qna_no desc) "
+					+ "where rnum < 4";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null) {
+				list = new ArrayList<GQNA>();
+				while(rset.next()) {
+					GQNA gq = new GQNA();
+					gq.setgQnaNo(rset.getInt("g_qna_no"));
+					gq.setTitle(rset.getString("title"));
+					gq.setUploader_name(rset.getString("user_name"));
+					gq.setStrDate(rset.getString("strdate"));
+					
+					list.add(gq);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<GNotice> top5notice(Connection con, int groupno) {
+		ArrayList<GNotice> list = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+			
+		String query = "select notice_no, title, user_name, strdate from ("
+					+ "select rownum as rnum, notice_no, title, user_name, to_char(upload_date, 'yyyy-MM-dd') as strdate "
+					+ "from tb_g_notice "
+					+ "join tb_user on (uploader=user_no) "
+					+ "where group_no = ? "
+					+ "order by notice_no desc) "
+					+ "where rnum < 6";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null) {
+				list = new ArrayList<GNotice>();
+				while(rset.next()) {
+					GNotice nt = new GNotice();
+					nt.setNoticeNo(rset.getInt("notice_no"));
+					nt.setTitle(rset.getString("title"));
+					nt.setUploader_name(rset.getString("user_name"));
+					nt.setStrDate(rset.getString("strdate"));
+					
+					list.add(nt);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 	
+	public ArrayList<Schedule> top5schedule(Connection con, int groupno) {
+		ArrayList<Schedule> list = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+			
+		String query = "select schedule_no, meeting_date, ampm, hour, minute, meeting_name  from ("
+					+ "select rownum as rnum, schedule_no, meeting_date, ampm, hour, minute, meeting_name "
+					+ "from tb_schedule "
+					+ "where group_no = ? "
+					+ "order by datetypedate asc) "
+					+ "where rnum < 6";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null) {
+				list = new ArrayList<Schedule>();
+				while(rset.next()) {
+					Schedule sc = new Schedule();
+					sc.setScheduleNo(rset.getInt("schedule_no"));
+					sc.setMeetingDate(rset.getString("meeting_date"));
+					sc.setAmpm(rset.getString("ampm"));
+					sc.setHour(rset.getString("hour"));
+					sc.setMinute(rset.getString("minute"));
+					sc.setMeetingName(rset.getString("meeting_name"));
+					
+					list.add(sc);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 
+	public ArrayList<GBoard> top3board(Connection con, int groupno) {
+		ArrayList<GBoard> list = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+			
+		String query = "select g_board_no, title, user_name, strdate from ("
+					+ "select rownum as rnum, g_board_no, title, user_name, to_char(upload_date, 'yyyy-MM-dd') as strdate "
+					+ "from tb_g_board "
+					+ "join tb_user on (uploader=user_no) "
+					+ "where group_no = ? "
+					+ "order by readcount desc) "
+					+ "where rnum < 4";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null) {
+				list = new ArrayList<GBoard>();
+				while(rset.next()) {
+					GBoard b = new GBoard();
+					b.setgBoardNo(rset.getInt("g_board_no"));
+					b.setTitle(rset.getString("title"));
+					b.setUploaderName(rset.getString("user_name"));
+					b.setStrDate(rset.getString("strdate"));
+					
+					list.add(b);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 
+	public ArrayList<ShareFile> top3sharefile(Connection con, int groupno) {
+		ArrayList<ShareFile> list = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+			
+		String query = "select file_no, title, user_name, strdate from ("
+					+ "select rownum as rnum, file_no, title, user_name, to_char(upload_date, 'yyyy-MM-dd') as strdate "
+					+ "from tb_share_file "
+					+ "join tb_user on (uploader=user_no) "
+					+ "where group_no = ? "
+					+ "order by downloadcount desc) "
+					+ "where rnum < 4";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null) {
+				list = new ArrayList<ShareFile>();
+				while(rset.next()) {
+					ShareFile sf = new ShareFile();
+					sf.setFileNo(rset.getInt("file_no"));
+					sf.setTitle(rset.getString("title"));
+					sf.setUserName(rset.getString("user_name"));
+					sf.setStrDate(rset.getString("strdate"));
+					
+					list.add(sf);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 }

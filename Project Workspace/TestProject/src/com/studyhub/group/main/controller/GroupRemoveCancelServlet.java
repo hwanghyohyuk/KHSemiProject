@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.studyhub.group.main.model.service.GMainService;
 
 /**
- * Servlet implementation class GroupOutServlet
+ * Servlet implementation class GroupRemoveCancelServlet
  */
-@WebServlet("/groupout")
-public class GroupOutServlet extends HttpServlet {
+@WebServlet("/groupremovecancel")
+public class GroupRemoveCancelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GroupOutServlet() {
+    public GroupRemoveCancelServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +30,10 @@ public class GroupOutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		int userno = Integer.parseInt(request.getParameter("userno"));
 		int groupno = Integer.parseInt(request.getParameter("groupno"));
-		int authorityno = Integer.parseInt(request.getParameter("authorityno"));
 		
-		if(authorityno == 2) { // 그룹 해제(그룹장)
-			if(new GMainService().RemoveGroup(groupno) > 0 )
-				response.sendRedirect("views/main/GroupMain.jsp");
-		} else { // 그룹 탈퇴(회원)
-			if(new GMainService().GroupOut(userno, groupno) > 0)
-				response.sendRedirect("views/main/main.jsp");
+		if(new GMainService().RemoveCancel(groupno) > 0 ) {
+			response.sendRedirect("/views/group/GroupMain.jsp");
 		}
 	}
 

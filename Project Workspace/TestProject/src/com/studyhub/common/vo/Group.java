@@ -15,6 +15,7 @@ public class Group {
 	private String userName; // 그룹장
 	private int memberCount; //그룹인원
 	private int authorityNo; // 권한
+	private int groupState;
 
 	public Group() {
 		super();
@@ -46,7 +47,7 @@ public class Group {
 	}
 
 	public Group(int groupNo, String groupName, String attributeName, String location, String categoryName,
-			String description, int authorityNo) {
+			String description, int authorityNo, int groupState) {
 		super();
 		this.groupNo = groupNo;
 		this.groupName = groupName;
@@ -55,6 +56,7 @@ public class Group {
 		this.categoryName = categoryName;
 		this.description = description;
 		this.authorityNo = authorityNo;
+		this.groupState = groupState;
 	}
 
 	public Group(int groupNo, String attributeName, String location, String categoryName, String userName,
@@ -66,6 +68,14 @@ public class Group {
 		this.categoryName = categoryName;
 		this.userName = userName;
 		this.memberCount = memberCount;
+	}
+
+	public int getGroupState() {
+		return groupState;
+	}
+
+	public void setGroupState(int groupState) {
+		this.groupState = groupState;
 	}
 
 	public int getAuthorityNo() {

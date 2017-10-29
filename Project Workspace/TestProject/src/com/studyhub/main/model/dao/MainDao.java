@@ -65,7 +65,7 @@ public class MainDao {
 		
 		String query = "insert into tb_group values ("
 					+  "(select max(group_no) + 1 from tb_group), "
-					+  "?, ?, ?, ?, ?, ?, ?)";
+					+  "?, ?, ?, ?, ?, ?, ?, default, sysdate)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -93,7 +93,7 @@ public class MainDao {
 		
 		String query = "insert into tb_ung values ("
 					+  "(select max(ung_no) + 1 from tb_ung), "
-					+  "?, ?, 2)";
+					+  "?, ?, 2, 0)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
