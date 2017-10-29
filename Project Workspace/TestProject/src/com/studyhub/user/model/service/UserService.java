@@ -125,4 +125,10 @@ public class UserService {
 		close(conn);
 		return result;
 	}
+
+
+	public int changeState(String decryptEmail, int i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

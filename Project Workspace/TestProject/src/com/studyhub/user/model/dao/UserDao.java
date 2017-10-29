@@ -173,4 +173,25 @@ public class UserDao implements CryptTemplate {
 		}
 		return result;
 	}
+
+	public int changeState(Connection conn, String decryptEmail, int pwdState) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "update tb_user set pwd_state=? where email=?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, pwdState);
+			pstmt.setString(2, decryptEmail);
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }
