@@ -203,7 +203,7 @@ public class GNoticeDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "delete from tb_g_notice_comment where comment_no =? ";
+		String query = "delete from tb_gn_comment where comment_no =? ";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -220,17 +220,19 @@ public class GNoticeDao {
 		return result;
 	}
 
-	public int insertComment(Connection con, int gnoticeno, String comment, int userno) {
+	public int insertComment(Connection con, int gnoticeno, String comment, int uploader) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "";
+		String query = "insert into tb_g_notice comment values("+
+						"(select max(comment_no)+1 from tb_gn_comment),"+
+						"?, ?, sysdate, ?, 1)";
 
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, gnoticeno);
 			pstmt.setString(2, comment);
-			pstmt.setInt(3, userno);
+			pstmt.setInt(3, uploader);
 
 			result = pstmt.executeUpdate();
 
@@ -247,7 +249,10 @@ public class GNoticeDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "";
+		String query = "select comment_no, notice_no, content, to_char(upload_date, 'yyyyMMdd') as str_date, user_name " +
+						"from tb_gn_comment "
+						+"join tb_user on (tb_gn_comment.uploader = tb_user.user_no) "
+						+"where notice_no = ? order by comment_no desc";
 
 		try {
 			pstmt = con.prepareStatement(query);

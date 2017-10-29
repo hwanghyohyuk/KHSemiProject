@@ -39,7 +39,7 @@ public class GNoticeDeleteServlet extends HttpServlet {
 		int gno= Integer.parseInt(request.getParameter("no"));
 		
 		if(new GNoticeService().deleteGNotice(gno) > 0){
-			response.sendRedirect("/studyhub/gnoticepreview");
+			response.sendRedirect("/studyhub/gnoticelist");
 		}else{
 			RequestDispatcher view = request.getRequestDispatcher("/views/group/groupNotice/NoticeError.jsp");
 			request.setAttribute("message", "게시글 삭제 실패");
