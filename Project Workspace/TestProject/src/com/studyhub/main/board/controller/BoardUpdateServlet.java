@@ -21,7 +21,7 @@ public class BoardUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private BoardService bs;
-	private Board board;
+	private Board b;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -45,7 +45,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		int bwriterNo = Integer.parseInt(request.getParameter("bwriterno"));
 		String bcontent = request.getParameter("bcontent");
 		
-		Board b = new Board();
+		b = new Board();
 		b.setBoardNo(bno);
 		b.setTitle(btitle);
 		b.setContent(bcontent);
@@ -53,9 +53,12 @@ public class BoardUpdateServlet extends HttpServlet {
 		b.setDeadlineDate(deadline);
 		b.setGroupNo(groupno);
 		
+		bs = new BoardService();
+		int result=bs.updateBoard(b);
+		
 		RequestDispatcher view = null;
 		// 처리결과에 따라 뷰 지정함
-		if (new BoardService().updateBoard(b) > 0) {
+		if (result > 0) {
 			response.sendRedirect("/studyhub/boardlist?page=1");
 		} else {
 			view = request.getRequestDispatcher("views/main/Board/BoardError.jsp");

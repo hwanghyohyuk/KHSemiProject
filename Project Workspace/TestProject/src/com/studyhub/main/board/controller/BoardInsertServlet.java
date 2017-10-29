@@ -31,7 +31,7 @@ public class BoardInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private BoardService bs;
-	private Board board;
+	private Board b;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -56,19 +56,22 @@ public class BoardInsertServlet extends HttpServlet {
 		int bwriterNo = Integer.parseInt(request.getParameter("bwriterno"));
 		String bcontent = request.getParameter("bcontent");
 		
-		Board b = new Board();
+		b = new Board();
 		b.setTitle(btitle);
 		b.setContent(bcontent);
 		b.setUploader(bwriterNo);
 		b.setDeadlineDate(deadline);
 		b.setGroupNo(groupno);
 		
+		bs = new BoardService();
+		int result=bs.insertBoard(b);
+		
 		RequestDispatcher view = null;
 		// 처리결과에 따라 뷰 지정함
-		if (new BoardService().insertBoard(b) > 0) {
+		if (result>0) {
 			response.sendRedirect("/studyhub/boardlist?page=1");
 		} else {
-			view = request.getRequestDispatcher("views/main/Board/BoardError.jsp");
+			view = request.getRequestDispatcher("/views/main/Board/BoardError.jsp");
 			request.setAttribute("message", "모집게시판 서비스 : 모집글 등록 실패!");
 			view.forward(request, response);
 		}

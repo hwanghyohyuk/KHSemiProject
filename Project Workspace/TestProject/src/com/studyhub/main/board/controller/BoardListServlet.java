@@ -35,7 +35,7 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+				request.setCharacterEncoding("utf-8");
 				response.setContentType("text/html; charset=utf-8");
 				
 				int currentPage = 1;
@@ -49,7 +49,16 @@ public class BoardListServlet extends HttpServlet {
 				
 				int groupCount = bs.getGroupCount();
 				
-				ArrayList<Board> list = bs.selectList(currentPage, limit);
+			
+				
+				String keyword =null;
+				ArrayList<Board> list=null;
+				if((keyword = request.getParameter("keyword"))!=null ){
+					list = bs.selectList(currentPage, limit, keyword);
+				}else{
+					list = bs.selectList(currentPage, limit);
+				}
+				
 				int maxPage = (int)((double)listCount / limit + 0.9);
 				int startPage = ((int)((double)currentPage / limit + 0.9) - 1) * limit + 1;
 				int endPage = startPage + limit - 1;
@@ -67,6 +76,7 @@ public class BoardListServlet extends HttpServlet {
 					request.setAttribute("endPage", endPage);
 					request.setAttribute("listCount", listCount);
 					request.setAttribute("groupCount", groupCount);
+					request.setAttribute("alert", request.getParameter("alert"));
 					
 					view.forward(request, response);
 				}else{

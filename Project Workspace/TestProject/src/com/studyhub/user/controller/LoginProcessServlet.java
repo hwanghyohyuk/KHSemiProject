@@ -45,19 +45,23 @@ public class LoginProcessServlet extends HttpServlet {
       String userPwd = request.getParameter("pwd");
       uService = new UserService();
       user = uService.loginCheck(userEmail, userPwd);
+      RequestDispatcher view = null;
       if (user != null) {
          HttpSession session = request.getSession();
          session.setAttribute("user", user);
          System.out.println("Session ID : " + session.getId());
+        
          if(userEmail.equals("admin@admin.com")){
-            RequestDispatcher view = request.getRequestDispatcher("/views/admin/MainDashBoard.jsp");
+            view = request.getRequestDispatcher("/views/admin/MainDashBoard.jsp");
             view.forward(request, response);
          }else{
             response.sendRedirect("/studyhub/main");
          }         
       }else{
-         RequestDispatcher view = request.getRequestDispatcher("/views/user/Loginerror.jsp");
-         view.forward(request, response);
+        view = request.getRequestDispatcher("/views/user/userError.jsp");
+		request.setAttribute("messageheader", "로그인 오류");
+		request.setAttribute("message", "이메일 혹은 비밀번호를 확인해주세요.");
+		view.forward(request, response);
       }
    }
 

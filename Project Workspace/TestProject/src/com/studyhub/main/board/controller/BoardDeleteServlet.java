@@ -41,16 +41,9 @@ public class BoardDeleteServlet extends HttpServlet {
 		
 		bs = new BoardService();
 		int result = bs.deleteBoard(bno);
-		
 		RequestDispatcher view = null;
 		if(result>0){
-			PrintWriter pw = response.getWriter();
-			pw.println("<script type='text/javascript'>");
-			pw.println("alert('해당 게시글이 정상적으로 삭제되었습니다.');");
-			pw.println("location.href='/studyhub/boardlist?page=1'");
-			pw.println("</script>");
-			pw.flush();
-			pw.close();
+			response.sendRedirect("/studyhub/boardlist?page=1");
 		} else {
 			view = request.getRequestDispatcher("views/main/Board/BoardError.jsp");
 			request.setAttribute("message", "모집게시판 서비스 : 모집글 삭제 실패!");

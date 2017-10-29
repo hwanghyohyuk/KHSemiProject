@@ -10,7 +10,6 @@ import com.studyhub.common.vo.Group;
 import com.studyhub.main.board.model.dao.BoardDao;
 
 public class BoardService {
-
 	private BoardDao bd;
 	private Board board;
 
@@ -29,6 +28,14 @@ public class BoardService {
 	public ArrayList<Board> selectList(int currentPage, int limit) {
 		Connection con = getConnection();
 		ArrayList<Board> list = new BoardDao().selectList(con, currentPage, limit);
+		close(con);
+		return list;
+	}
+	
+	//검색 목록 조회용
+	public ArrayList<Board> selectList(int currentPage, int limit, String keyword) {
+		Connection con = getConnection();
+		ArrayList<Board> list = new BoardDao().selectList(con, currentPage, limit, keyword);
 		close(con);
 		return list;
 	}
@@ -86,5 +93,7 @@ public class BoardService {
 		close(con);
 		return groupCount;
 	}
+
+	
 
 }
