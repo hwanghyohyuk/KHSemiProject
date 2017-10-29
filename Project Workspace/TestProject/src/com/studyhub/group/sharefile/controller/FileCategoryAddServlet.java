@@ -39,7 +39,7 @@ public class FileCategoryAddServlet extends HttpServlet {
 		String cname = request.getParameter("cname");
 		
 		if(new ShareFileService().addCategory(groupno, cname) >0 ){
-			response.sendRedirect("/studyhub/sharedfilepreview?groupno="+groupno);
+			response.sendRedirect("/studyhub/sharedfilepreview?page=1&groupno="+groupno);
 		}else{
 			view= request.getRequestDispatcher("views/group/groupFileShare/fileshareError.jsp");
 			request.setAttribute("message", "카테고리 추가 실패!");

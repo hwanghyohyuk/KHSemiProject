@@ -24,17 +24,6 @@
 	href="/studyhub/css/fileshareList.css">
 <link rel="stylesheet" href="/studyhub/css/bootstrap.min.css">
 <script src="/studyhub/js/bootstrap.min.js"></script>
-<script>
-	/* $(function(){
-	 $('ul.nav-tabs a').click(function (e) {
-	 e.preventDefault();
-	 $('.tab-content').hide();
-	 $(this).show();
-	
-	 })
-	 }) */
-</script>
-
 
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
@@ -60,7 +49,7 @@
 					aria-controls="category<%=c.getFileCategoryNo()%>" role="tab"
 					data-toggle="tab"> <%=c.getFileCategoryName()%></a>
 				</li>
-				<% } %>
+				<% }else{ %>
 				<li>
 				<a
 					href="#category<%=c.getFileCategoryNo()%>"
@@ -68,7 +57,7 @@
 					data-toggle="tab"> <%=c.getFileCategoryName()%></a>
 				</li>
 				
-				<% } %>
+				<% }} %>
 
 				<!-- 그룹장만 카테고리 추가, 삭제, 수정 가능  -->
 				<%
@@ -118,14 +107,14 @@
 					</div>
 					<%
 						for (ShareFile sf : list) {
-								if (c.getFileCategoryNo() == sf.getFileCategoryNo()) {
+								if (c.getFileCategoryName().equals(sf.getFileCategoryName())) { //각 카테고리에 속한 파일만 뜨도록.다뜨는게아니라.. 
 					%>
 
 					<div class="filebox">
 						<span id="title"> <a
 							href="/studyhub/sharefiledetail?sfno=<%=sf.getFileNo()%>"> <%
- 	if (sf.getTitle().length() > 9) {
- %>
+ 							if (sf.getTitle().length() > 9) {
+ 								%>
 								<%=sf.getTitle().substring(0, 9)%>.. <%
 									} else {
 								%> <%=sf.getTitle()%>
@@ -225,9 +214,10 @@
 
 			</div>
 			<%
-				}
+				}else{
 			%>
-			<div class="tab-pane fade"
+			<!-- 사용자가 추가한 카테고리들  -->
+			<div class="tab-pane fade"  
 				id="category<%=c.getFileCategoryNo()%>">
 
 				<!-- search bar -->
@@ -249,7 +239,8 @@
 					</div>
 					<%
 						for (ShareFile sf : list) {
-							if (c.getFileCategoryNo() == sf.getFileCategoryNo()) {
+							%><%-- 확인용.. <p><%=c.getFileCategoryName()%> and <%=sf.getFileCategoryName() %></p>   --%><% 
+							if (c.getFileCategoryName().equals(sf.getFileCategoryName())) {
 					%>
 
 					<div class="filebox">
@@ -357,7 +348,7 @@
 			</div>
 			
 			
-			<% } %>
+			<% }} %>
 
 			<div class="tab-pane fade" id="add">새 카테고리 추가하는 div:누르면 바로 커서뜨고
 				이름써서 카테고리추가가능하도록.</div>
@@ -384,12 +375,12 @@
 									
 								</li>
 							</ol>
-							<form class="form-inline">
+							
 										<div class="form-group">
 											<input type="text" class="name-form" id="name-area" name="cname"
 												placeholder="추가할 카테고리명을 입력...">
 												<button class="c-btn" onclick="add();">추가</button> 
-							</div></form>
+							</div>
 						</div>
 						<div
 							class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3"
