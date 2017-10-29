@@ -6,13 +6,21 @@
 작성일자 17.10.27
  -->
 <!-- java 구문 -->
-
+<%@page import="java.util.*, java.text.SimpleDateFormat"%>
 <!-- 초기화 블럭(변수선언 및 초기화) -->
-
+<%
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+Calendar cal = new GregorianCalendar(Locale.KOREA);
+cal.setTime(new Date());
+cal.add(Calendar.DAY_OF_YEAR, 1);
+String startDate = sdf.format(cal.getTime());
+cal.add(Calendar.DAY_OF_YEAR, 6);
+String deadlineDate = sdf.format(cal.getTime());
+%>
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
 <!--자바스크립트 및 CSS-->
-
+<script type="text/javascript" src='/studyhub/js/board.js' ></script>
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
@@ -27,7 +35,7 @@
 	</div>
 
 	<form class="form-horizontal" action="/studyhub/boardinsert"
-		method="post">
+		method="post" id='boardinsert' name='boardinsert'>
 		<div class="form-group">
 			<label for="btitle" class="col-sm-2 control-label">제목</label>
 			<div class="col-sm-10">
@@ -57,11 +65,15 @@
 								success : function(data) {
 									var json = JSON.parse(JSON.stringify(data));
 									var values = "";
+									if(json.list.length>0){
 									for ( var i in json.list) {
 										values += "<option value='"+json.list[i].group_no+"' >"
 												+ decodeURIComponent(json.list[i].group_name)
 												+ "</option>";
 										}
+									}else{
+										values += "<option value='0' >등록할 그룹 없음</option>";
+									}
 									$("#bglist").html(values);
 								}
 							});
@@ -71,7 +83,7 @@
 			</div>
 			<label for="deadline" class="col-sm-2 control-label">마감 날짜</label>
 			<div class="col-sm-4">
-				<input type="date" name="deadline" id="deadline">
+				<input type="date" name="deadline" id="deadline" required value='<%=deadlineDate%>' min='<%= startDate %>'>
 			</div>
 		</div>
 		<hr>
@@ -95,7 +107,8 @@
 		<hr>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-primary main-back pull-right">등록</button>
+				<a class="btn btn-primary main-back pull-right" href="#" onclick="boardInsert()">등록</a>
+				<a class="btn btn-default pull-right" href="/studyhub/boardlist">취소</a>
 			</div>
 		</div>
 	</form>
