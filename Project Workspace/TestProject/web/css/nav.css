@@ -29,11 +29,10 @@
 
 /* footer */
 
-.text-center{
-	margin-top: 100vh;
-}
+
 footer {
   color: white;
+  margin-top: 100vh;
 }
 footer h3 {
   margin-bottom: 30px;

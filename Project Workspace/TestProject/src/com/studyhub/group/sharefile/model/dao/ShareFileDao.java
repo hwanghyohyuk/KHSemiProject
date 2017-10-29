@@ -300,7 +300,7 @@ public class ShareFileDao {
 		String query = "select distinct tb_file_category.file_category_no, tb_file_category.file_category_name "
 				+ "from tb_file_category left join tb_share_file "
 				+ "on(tb_share_file.file_category_no = tb_file_category.file_category_no)"
-				+ " where tb_file_category.group_no = ?";
+				+ " where tb_file_category.group_no = ? order by tb_file_category.file_category_no asc";
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, no);
@@ -349,6 +349,52 @@ public class ShareFileDao {
 		
 		return result;
 	}
+	
+	public int deleteCategory(Connection con, int cno){
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from tb_file_category where file_category_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, cno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
+	
+	public int editCategory(Connection con, ShareFile sf){
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_file_category set file_category_name = ? "
+				+"where file_category_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, sf.getFileCategoryName());
+			pstmt.setInt(2, sf.getFileCategoryNo());
+			
+			result = pstmt.executeUpdate(); 
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
 
 
 	/*public ArrayList<String> selectCategoryName(Connection con, int no) {

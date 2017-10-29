@@ -104,7 +104,7 @@ public class ShareFileUpdateServlet extends HttpServlet {
 				returnedResult = new ShareFileService().updateShareFile(sf);
 			}else{
 				//첨부파일은 그대로 두고 제목 내용만 수정할 때 
-				System.out.println("이리와야하는데 ㅠㅠㅠ ");
+				
 				sf = new ShareFile(fileno, title, content);
 				returnedResult = new ShareFileService().updateTextOnly(sf);
 			}
