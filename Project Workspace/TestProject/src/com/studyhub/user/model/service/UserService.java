@@ -127,8 +127,16 @@ public class UserService {
 	}
 
 
-	public int changeState(String decryptEmail, int i) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int changeState(String decryptEmail, int pwdState) {
+		Connection conn = getConnection();
+		uDao = new UserDao();
+		int result = uDao.changeState(conn, decryptEmail, pwdState);
+		if (result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 }
