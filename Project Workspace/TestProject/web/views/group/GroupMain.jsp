@@ -282,16 +282,23 @@
 		var userno = "<%= user.getUserNo() %>";
 		var groupno = "<%= group.getGroupNo() %>";
 		var authorityno = "<%= group.getAuthorityNo() %>";
-		$.ajax({
-			url: "/studyhub/groupout",
-			data: { userno: userno, groupno: groupno, authorityno: authorityno },
-			type: "get",
-			dataType: "json",
-			asyng: false
-		});
-		location.href="/studyhub/main";
-		alert("그룹에서 탈퇴하였습니다.");
-		return false;
+		if(confirm("정말로 탈퇴 하시겠습니까?")){
+			if(confirm("그룹에서 탈퇴됩니다.")){
+				$.ajax({
+					url: "/studyhub/groupout",
+					data: { userno: userno, groupno: groupno, authorityno: authorityno },
+					type: "get",
+					dataType: "json",
+					asyng: false
+				});
+				location.href="/studyhub/main";
+				alert("그룹에서 탈퇴하였습니다.");
+				return false;
+			}
+			return false;
+		} else {
+			return false;
+		}
 	}
 </script>
 
