@@ -7,9 +7,8 @@ import java.util.HashMap;
 import com.studyhub.common.vo.GNComment;
 import com.studyhub.common.vo.GNotice;
 import com.studyhub.common.vo.Notice;
-import com.studyhub.common.vo.QComment;
 import com.studyhub.group.notice.model.dao.GNoticeDao;
-import com.studyhub.main.qna.model.dao.QnADao;
+
 
 import static com.studyhub.common.JDBCTemplate.*;
 
@@ -21,32 +20,18 @@ public class GNoticeService {
 	public GNoticeService(){}
 	
 	//GNotice
-	
-	public ArrayList<GNotice> selectList(){
-		Connection conn = getConnection();
-		ArrayList<GNotice> list = new GNoticeDao().selectList(conn);
-		close(conn);
-		return list;	
 		
-	}
-	
-	public HashMap <Integer, GNotice> selectMap(){
-		Connection conn = getConnection();
-		HashMap <Integer, GNotice> map = new GNoticeDao().selectMap(conn);
-		close(conn);
-		return map;
-	}
-	
-	public GNotice selectGNotice(int no){
-		Connection conn = getConnection();
-		GNotice gnotice = new GNoticeDao().selectOne(conn, no);
+	public GNotice selectGNotice(int gno){
+		Connection con = getConnection();
+		GNotice gnotice = new GNoticeDao().selectGNotice(con, gno);
+		close(con);
 		return gnotice;
 	}
 		
 	
-	public int insertGNotice(GNotice gnotice){
+	public int insertGNotice(GNotice gNotice){
 		Connection conn = getConnection();
-		int result = new GNoticeDao().insertGNotice(conn, gnotice);
+		int result = new GNoticeDao().insertGNotice(conn, gNotice);
 		if(result > 0)
 			commit(conn);
 		else
@@ -56,9 +41,9 @@ public class GNoticeService {
 	}	
 	
 
-	public int deleteGNotice(int bnum) {
+	public int deleteGNotice(int gno) {
 		Connection conn = getConnection();
-		int result = new GNoticeDao().deleteNotice(conn, bnum);
+		int result = new GNoticeDao().deleteNotice(conn, gno);
 		if(result >0 )
 			commit(conn);
 		else
@@ -66,6 +51,35 @@ public class GNoticeService {
 		close(conn);		
 		return result;
 	}
+	
+	public int updateGNotice(GNotice gNotice) {
+		Connection con = getConnection();
+		int result = new GNoticeDao().updateGNotice(con, gNotice);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+
+	public ArrayList<GNotice> selectGroupNotice(int groupno, int currentPage, int limit) {
+		Connection con = getConnection();
+		ArrayList<GNotice> list = new GNoticeDao().selectGroupNotice(con, groupno, currentPage, limit);
+		close(con);
+		return list;
+	}
+
+	
+	//전체 게시글 갯수 조회
+	public int getListCount() {
+		Connection con = getConnection();
+		int listCount = new GNoticeDao().getListCount(con);
+		close(con);
+		return listCount;
+	}
+	
+	
 	
 	// GNoticeComment
 
@@ -99,6 +113,11 @@ public class GNoticeService {
 		
 		return list;
 	}
+
+
+	
+
+
 	
 	
 	

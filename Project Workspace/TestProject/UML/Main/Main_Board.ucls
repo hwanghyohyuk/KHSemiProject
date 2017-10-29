@@ -55,8 +55,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="com.studyhub.main.board.controller.BoardUpdateView" project="StudyHub" 
-    file="/StudyHub/src/com/studyhub/main/board/controller/BoardUpdateView.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="com.studyhub.main.board.controller.BoardUpdateMoveServlet" project="StudyHub" 
+    file="/StudyHub/src/com/studyhub/main/board/controller/BoardUpdateMoveServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="135" width="288" x="1681" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -92,142 +93,194 @@
     </display>  
   </class>  
   <association id="11">    
-    <bendpoint x="1215" y="333"/>    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="12" name="board"/>      
-      <multiplicity id="13" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="12" name="bs">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="13" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="14">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="15" name="bs"/>      
-      <multiplicity id="16" minimum="0" maximum="1"/>    
+      <attribute id="15" name="bs">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="16" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="17">    
-    <bendpoint x="1299" y="212"/>    
-    <bendpoint x="1299" y="333"/>    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="18" name="board"/>      
-      <multiplicity id="19" minimum="0" maximum="1"/>    
+    <bendpoint x="1463" y="212"/>    
+    <bendpoint x="1463" y="333"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="18" name="board">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="19" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="20">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="21" name="bs"/>      
-      <multiplicity id="22" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="21" name="bs">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="22" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="23">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="24" name="bs"/>      
-      <multiplicity id="25" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="24" name="bd">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="25" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="26">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="27" name="bs"/>      
-      <multiplicity id="28" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="27" name="bs">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="28" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="29">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="30" name="bs"/>      
-      <multiplicity id="31" minimum="0" maximum="1"/>    
+    <bendpoint x="643" y="212"/>    
+    <bendpoint x="643" y="333"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="30" name="board">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="31" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="32">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="33" name="bs"/>      
-      <multiplicity id="34" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="33" name="bs">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="34" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="35">    
-    <bendpoint x="643" y="212"/>    
-    <bendpoint x="643" y="333"/>    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="36" name="board"/>      
-      <multiplicity id="37" minimum="0" maximum="1"/>    
+    <bendpoint x="807" y="212"/>    
+    <bendpoint x="807" y="333"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="36" name="board">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="37" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="38">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="39" name="bd"/>      
-      <multiplicity id="40" minimum="0" maximum="1"/>    
+    <bendpoint x="1236" y="212"/>    
+    <bendpoint x="1236" y="333"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="39" name="board">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="40" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="41">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="42" name="board"/>      
-      <multiplicity id="43" minimum="0" maximum="1"/>    
+    <bendpoint x="1627" y="212"/>    
+    <bendpoint x="1627" y="333"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="42" name="board">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="43" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="44">    
-    <bendpoint x="1627" y="212"/>    
-    <bendpoint x="1627" y="333"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="45" name="board"/>      
-      <multiplicity id="46" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="45" name="bs">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="46" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="47">    
-    <bendpoint x="1236" y="212"/>    
-    <bendpoint x="1236" y="333"/>    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="48" name="board"/>      
-      <multiplicity id="49" minimum="0" maximum="1"/>    
+    <bendpoint x="1299" y="212"/>    
+    <bendpoint x="1299" y="333"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="48" name="board">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="49" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="50">    
-    <bendpoint x="1463" y="212"/>    
-    <bendpoint x="1463" y="333"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="51" name="board"/>      
-      <multiplicity id="52" minimum="0" maximum="1"/>    
+    <bendpoint x="1215" y="333"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="51" name="board">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="52" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="53">    
-    <bendpoint x="807" y="212"/>    
-    <bendpoint x="807" y="333"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="54" name="board"/>      
-      <multiplicity id="55" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="56">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="57" name="bs"/>      
-      <multiplicity id="58" minimum="0" maximum="1"/>    
+      <attribute id="54" name="bs">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="55" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  

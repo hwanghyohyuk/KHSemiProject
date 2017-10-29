@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 
-작성자 : OOO
-내용 : OO 페이지
-작성일자 17.10.02
+작성자 : 황효혁
+내용 : 모집게시판 글쓰기 페이지
+작성일자 17.10.27
  -->
 <!-- java 구문 -->
 
@@ -27,7 +27,7 @@
 	</div>
 
 	<form class="form-horizontal" action="/studyhub/boardinsert"
-		method="post" enctype="multipart/form-data">
+		method="post">
 		<div class="form-group">
 			<label for="btitle" class="col-sm-2 control-label">제목</label>
 			<div class="col-sm-10">
@@ -58,7 +58,7 @@
 									var json = JSON.parse(JSON.stringify(data));
 									var values = "";
 									for ( var i in json.list) {
-										values += "<option value="+json.list[i].group_no+">"
+										values += "<option value='"+json.list[i].group_no+"' >"
 												+ decodeURIComponent(json.list[i].group_name)
 												+ "</option>";
 										}

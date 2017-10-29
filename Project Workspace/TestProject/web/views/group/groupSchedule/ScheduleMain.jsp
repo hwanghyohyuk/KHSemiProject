@@ -119,6 +119,31 @@
 #meeting_name {
 	padding-left: 7px;
 }
+
+.panel-primary>.panel-heading {
+   	color: #fff;
+    background-color: #004157;
+   	border-color: #004157;
+}
+	
+.btn-primary {
+	color: #fff;
+	background-color: #004157;
+	border-color: #222d38;
+}
+
+.fc-event, .fc-event-dot {
+    background-color: #004157;
+}
+
+.fc-event {
+    position: relative;
+    display: block;
+    font-size: .85em;
+    line-height: 1.3;
+    border-radius: 3px;
+    border: 1px solid #2c7598;
+}
 </style>
 
 <%@ include file="/views/include/common/headend.jsp"%>

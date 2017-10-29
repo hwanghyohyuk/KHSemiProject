@@ -44,17 +44,6 @@ public class BoardService {
 		return result;
 	}
 
-	public void addReadCount(int bno) {
-		Connection con = getConnection();
-		int result = new BoardDao().addReadCount(con, bno);
-		if (result > 0)
-			commit(con);
-		else
-			rollback(con);
-		close(con);
-		return;
-	}
-
 	public Board selectBoard(int bno) {
 		Connection con = getConnection();
 		Board board = new BoardDao().selectBoard(con, bno);
@@ -89,6 +78,13 @@ public class BoardService {
 		ArrayList<Group> list = new BoardDao().selectGroupList(con, userno);
 		close(con);
 		return list;
+	}
+
+	public int getGroupCount() {
+		Connection con = getConnection();
+		int groupCount = new BoardDao().getGroupCount(con);
+		close(con);
+		return groupCount;
 	}
 
 }

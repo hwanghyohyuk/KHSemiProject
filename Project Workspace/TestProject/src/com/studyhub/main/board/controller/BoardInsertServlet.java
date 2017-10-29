@@ -51,7 +51,6 @@ public class BoardInsertServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 
 		String btitle = request.getParameter("btitle");
-		System.out.println("bglist : "+request.getParameter("bglist"));
 		int groupno = Integer.parseInt(request.getParameter("bglist"));
 		Date deadline = Date.valueOf(request.getParameter("deadline"));
 		int bwriterNo = Integer.parseInt(request.getParameter("bwriterno"));
@@ -70,7 +69,7 @@ public class BoardInsertServlet extends HttpServlet {
 			response.sendRedirect("/studyhub/boardlist?page=1");
 		} else {
 			view = request.getRequestDispatcher("views/main/Board/BoardError.jsp");
-			request.setAttribute("message", "Board 서비스 : 원글 등록 실패!");
+			request.setAttribute("message", "모집게시판 서비스 : 모집글 등록 실패!");
 			view.forward(request, response);
 		}
 	}

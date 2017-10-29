@@ -1,6 +1,6 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*, com.studyhub.common.vo.GBoard"%>
+	pageEncoding="UTF-8" %>
 <!-- 
 작성자 : OOO
 내용 : OO 페이지
@@ -32,38 +32,40 @@
 <%@ include file="/views/include/group/nav.jsp"%>
 <!-- 메인 컨텐츠 -->
 <div class="row" id="layout">
-  <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
-  <h2>게시글 작성하기</h2>
-  <br>
-	<form action="/studyhub/gboardinsert" method="post"enctype="multipart/form-data">
-		<div class="form-group">
-			<label for="title">제목</label> <input type="text"
-			name="title"
-				class="form-control" id="exampleInputEmail1"
-				aria-describedby="emailHelp" placeholder="제목을 입력하세요">
-		</div>
-		<div class="range">
-		<label for="content">공개범위</label>
-		<label class="radio-inline"> <input type="radio"
-			name="access_no" id="inlineRadio1" value="1">
-			전체공개
-		</label> <label class="radio-inline"> <input type="radio"
-			name="access_no" id="inlineRadio2" value="2">
-			회원공개
-		</label>
-		<input type="hidden" name="Uploader" value="<%=user.getUserName()%>">
-		</div>
-		<div class="form-group">
-			<label for="Content">내용</label>
-			<textarea class="form-control" id="Textarea" rows="15"
-			name="content"
-				placeholder="내용을 입력하세요"></textarea>
-		</div>
-		<input type="submit" value="제출하기" id="btns">
-		<a href="/studyhub/gboardpreview?groupno=<%=gb.getgBoardNo()%>">목록으로 이동</a>
-	
-	</div>
-	</form>
+	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
+		<h2>게시글 작성</h2>
+		<br>
+		<form action="/studyhub/gboardinsert" method="post">
+			<div class="form-group">
+				<label for="title">제목</label> <input type="text"
+					class="form-control" id="exampleInputEmail1"
+					name="title" 
+					aria-describedby="emailHelp" placeholder="제목을 입력하세요">
+			</div>
+			<div class="range">
+				<label for="Content">공개범위</label> <label class="radio-inline">
+					<input type="radio" name="accessno" id="inlineRadio1" value="1">
+					전체공개
+				</label> <label class="radio-inline"> <input type="radio"
+					name="accessno" id="inlineRadio2" value="2"> 회원공개
+				</label> <label class="radio-inline"> <input type="radio"
+					name="accessno" id="inlineRadio3" value="3"> 그룹원공개
+				</label>
+			</div>
+			<div class="form-group">
+				<label for="Content">내용</label>
+				<textarea class="form-control" id="Textarea" rows="15"
+				name="content" placeholder="내용을 입력하세요"></textarea>
+			</div>
+			<input type="hidden" name="uploader" value="<%=user.getUserNo() %>">
+			<input type="hidden" name="groupno" value="<%=group.getGroupNo() %>">
+			<input type="submit" value="제출하기" class = "btn btn-info" id="btns"> <a
+				href="/studyhub/gboardpreview?groupno=<%=group.getGroupNo()%>">목록으로
+				이동</a>
+		</form>
+	</div>	
+</div>
+
 
 
 <!-- /메인 컨텐츠 -->

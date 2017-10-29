@@ -1,4 +1,4 @@
-package com.studyhub.group.board.controller;
+package com.studyhub.group.qna.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,22 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.GBoard;
-import com.studyhub.group.board.model.service.GBoardService;
+import com.studyhub.group.qna.model.service.GroupQnAService;
 
 /**
- * Servlet implementation class GBoardSearchServlet
+ * Servlet implementation class UpdateGroupQnAServlet
  */
-@WebServlet("/gboardsearch")
-public class GBoardSearchServlet extends HttpServlet {
+@WebServlet("/updategroupqna")
+public class UpdateGroupQnAServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	private GBoard gNboard;
-	private GBoardService gNboardService;
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GBoardSearchServlet() {
+    public UpdateGroupQnAServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +28,15 @@ public class GBoardSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		
+		int gqnano = Integer.parseInt(request.getParameter("gqnano"));
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		if(new GroupQnAService().UpdateGroupQnA(gqnano, title, content) > 0) {
+			response.sendRedirect("views/group/groupQnA/QnAList.jsp");
+		}
 	}
 
 	/**

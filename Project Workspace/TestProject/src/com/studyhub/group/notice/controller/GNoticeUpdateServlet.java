@@ -1,6 +1,8 @@
 package com.studyhub.group.notice.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +36,22 @@ public class GNoticeUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
+		
+		gNotice = new GNotice();
+		gNotice.setNoticeNo(Integer.parseInt(request.getParameter("no")));
+		gNotice.setTitle(request.getParameter("title"));
+		gNotice.setContent(request.getParameter("content"));
+		
+		RequestDispatcher view = null;
+		
+		if(new GNoticeService().updateGNotice(gNotice)>0){
+			response.sendRedirect("/studyhub/gnoticepreview");
+		}else{
+			view = request.getRequestDispatcher("/views/group/groupNotice/NoticeError.jsp");
+			request.setAttribute("message", "수정실패");
+			view.forward(request, response);
+		}
+		
 	}
 
 	/**

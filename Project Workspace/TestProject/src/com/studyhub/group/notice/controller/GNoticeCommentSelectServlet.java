@@ -36,7 +36,7 @@ public class GNoticeCommentSelectServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int gnoticeno = Integer.parseInt(request.getParameter("gnoticeno"));
+		int gnoticeno = Integer.parseInt(request.getParameter("no"));
 		ArrayList<GNComment> list = new GNoticeService().selectcomment(gnoticeno);
 		System.out.println(gnoticeno);
 		JSONObject json = new JSONObject();
@@ -47,8 +47,8 @@ public class GNoticeCommentSelectServlet extends HttpServlet {
 			job.put("gnoticeno", gnc.getNoticeNo());
 			job.put("comment", URLEncoder.encode(gnc.getContent(), "UTF-8"));
 			job.put("commentno", gnc.getCommentNo());
-			job.put("uploaddate", gnc.getUploadDate());
-			job.put("username", gnc.getUploader());
+			job.put("uploaddate", URLEncoder.encode(gnc.getStrUploadDate(), "UTF-8"));
+			job.put("username", URLEncoder.encode(gnc.getUploaderName(), "UTF-8"));
 			
 			jarr.add(job);
 						

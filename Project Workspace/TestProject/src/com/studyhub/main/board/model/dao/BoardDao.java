@@ -9,10 +9,11 @@ import java.util.ArrayList;
 
 import com.studyhub.common.vo.Board;
 import com.studyhub.common.vo.Group;
+import com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations.RSAKeyValueResolver;
 
 public class BoardDao {
 
-	private Board board;
+	private Board b;
 
 	public int getListCount(Connection con) {
 		// 총 게시글 갯수 조회용
@@ -65,6 +66,7 @@ public class BoardDao {
 
 					b.setBoardNo(rset.getInt("board_no"));
 					b.setTitle(rset.getString("title"));
+					b.setUploader(rset.getInt("user_no"));
 					b.setUploaderName(rset.getString("user_name"));
 					b.setContent(rset.getString("content"));
 					b.setUploadDate(rset.getDate("upload_date"));
@@ -90,29 +92,14 @@ public class BoardDao {
 
 		return list;
 	}
-
-	public int insertBoard(Connection con, Board b) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-
-		String query = "insert into tb_board values (" + "(select max(board_no) + 1 from board), "
-				+ "?, ?, ?, ?, ?, sysdate, default, 0, " + "(select max(board_no) + 1 from board), NULL, " + "default)";
-
-		return result;
-	}
-
-	public int addReadCount(Connection con, int bnum) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
 	public Board selectBoard(Connection con, int bno) {
-		board = null;
+		b = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select board_no, title, content, upload_date, user_name " + "from tb_board "
-				+ "join tb_user on (tb_board.uploader = tb_user.user_no) " + "where board_no = ?";
+		String query = "select * from boardlistview "
+				+ "where board_no = ?";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -121,12 +108,22 @@ public class BoardDao {
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
-				board = new Board();
-				board.setBoardNo(rset.getInt("board_no"));
-				board.setTitle(rset.getString("title"));
-				board.setContent(rset.getString("content"));
-				// board.setUploadDate(rset.getDate("upload_date"));
-				board.setUploaderName(rset.getString("user_name"));
+				b = new Board();
+				b.setBoardNo(rset.getInt("board_no"));
+				b.setTitle(rset.getString("title"));
+				b.setUploader(rset.getInt("user_no"));
+				b.setUploaderName(rset.getString("user_name"));
+				b.setContent(rset.getString("content"));
+				b.setUploadDate(rset.getDate("upload_date"));
+				b.setDeadlineDate(rset.getDate("deadline_date"));
+				b.setStatus(rset.getString("status"));
+				b.setGroupNo(rset.getInt("group_no"));
+				b.setGroupName(rset.getString("group_name"));
+				b.setLocation(rset.getString("location"));
+				b.setCategoryName(rset.getString("category_name"));
+				b.setAttributeName(rset.getString("attribute_name"));
+				b.setgImgRename(rset.getString("g_img_rename"));
+				b.setMemberCount(rset.getInt("memberCount"));
 			}
 
 		} catch (Exception e) {
@@ -136,27 +133,89 @@ public class BoardDao {
 			close(pstmt);
 		}
 
-		return board;
+		return b;
 	}
 
-	public int deleteBoard(Connection con, int bnum) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertBoard(Connection con, Board b) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "insert into tb_board values ((select max(board_no) + 1 from tb_board), "
+				+ "?, ?, sysdate, ?, ?, ?)";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, b.getTitle());
+			pstmt.setString(2, b.getContent());
+			pstmt.setDate(3, b.getDeadlineDate());
+			pstmt.setInt(4, b.getUploader());
+			pstmt.setInt(5, b.getGroupNo());
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteBoard(Connection con, int bno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "delete from tb_board where board_no = ?";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, bno);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 	public int updateBoard(Connection con, Board b) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "update tb_board set title=?, content=?, upload_date=sysdate, deadline_date=?, job_group=? "
+				+ "where board_no=?";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, b.getTitle());
+			pstmt.setString(2, b.getContent());
+			pstmt.setDate(3, b.getDeadlineDate());
+			pstmt.setInt(4, b.getGroupNo());
+			pstmt.setInt(5, b.getBoardNo());
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 	public ArrayList<Group> selectGroupList(Connection con, int userNo) {
 		ArrayList<Group> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+
 		
-		String query = "select group_name from boardlistview "
-				+ "where group_name <> (select group_name from boardlistview where status = '모집중') "
-				+ "and user_name = (select user_name from tb_user where user_no = ?)";
+		String query = "select group_no, group_name "
+				+ "from tb_ung "
+				+ "join tb_group using(group_no) "
+				+ "where user_no = ? and "
+				+ "group_name not in (select group_name from boardlistview where status = '모집중')";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -166,25 +225,50 @@ public class BoardDao {
 
 			if (rset != null) {
 				list = new ArrayList<Group>();
-				
+
 				while (rset.next()) {
-				Group g = new Group();
-				g.setGroupNo(rset.getInt("group_no"));
-				g.setGroupName(rset.getString("group_name"));
-				
-				list.add(g);
+					Group g = new Group();
+					g.setGroupNo(rset.getInt("group_no"));
+					g.setGroupName(rset.getString("group_name"));
+
+					list.add(g);
 				}
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
 
-		return list;		
+		return list;
 	}
-	
+
+	public int getGroupCount(Connection con) {
+		// 모집 그룹 수 조회용
+				int result = 0;
+				Statement stmt = null;
+				ResultSet rset = null;
+
+				String query = "select count(*) from boardlistview where status = '모집중'";
+
+				try {
+					stmt = con.createStatement();
+					rset = stmt.executeQuery(query);
+
+					if (rset.next())
+						result = rset.getInt(1);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					close(rset);
+					close(stmt);
+				}
+
+				return result;
+	}
+
 	/*
 	 * public int insertBoard(Connection con, Board b) { int result = 0;
 	 * PreparedStatement pstmt = null;

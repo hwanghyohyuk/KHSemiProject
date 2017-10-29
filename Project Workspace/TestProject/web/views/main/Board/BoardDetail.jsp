@@ -14,7 +14,12 @@
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
 <!--자바스크립트 및 CSS-->
-
+<style>
+#groupimg {
+	width: 140px;
+	height: 140px;
+}
+</style>
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
@@ -24,35 +29,96 @@
 <div class="container">
 	<div class="page-header">
 		<h1>
-			모집게시판 <small>글쓰기</small>
+			모집게시판 <small>글 읽기</small>
 		</h1>
 	</div>
 	<form class="form-horizontal">
 		<div class="form-group">
-			<label for="inputEmail3" class="col-sm-2 control-label">제목</label>
-			<div class="col-sm-10">
-				<%=board.getTitle()%>
+			<label class="col-sm-3 control-label">제목</label>
+			<div class="col-sm-3">
+				<p class="pull-left control-label"><%=board.getTitle()%>
+				</p>
+			</div>
+			<label class="col-sm-3 control-label">작성자</label>
+			<div class="col-sm-3">
+				<p class="pull-left control-label"><%=board.getUploaderName()%>
+				</p>
 			</div>
 		</div>
 		<hr>
 		<div class="form-group">
-			<label for="inputPassword3" class="col-sm-2 control-label">내용</label>
-			<div class="col-sm-10">
-				<%=board.getContent()%>
+			<label class="col-sm-3 control-label">모집 기간</label>
+			<div class="col-sm-3">
+				<p class="pull-left control-label"><%=board.getUploadDate()%> ~ <%=board.getDeadlineDate()%>
+				</p>
+			</div>
+			<label class="col-sm-3 control-label">모집 상태</label>
+			<div class="col-sm-3">
+				<p class="pull-left control-label"><%=board.getStatus()%>
+				</p>
 			</div>
 		</div>
 		<hr>
 		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<a href="/studyhub/boarddelete?bno=<%=board.getBoardNo()%>" class="btn btn-primary main-back pull-right">삭제</a> <a
-					href="/studyhub/boardupdateview?bno=<%=board.getBoardNo()%>" class="btn btn-primary main-back pull-right">수정</a> <a
-					href="/studyhub/boardlist" class="btn btn-primary main-back pull-right">목록</a>
+			<label class="col-sm-3 control-label">내용</label>
+			<div class="col-sm-9">
+				<%=(board.getContent()).replaceAll("\n", "<br>") %>
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">그룹정보</label>
+			<div class="col-sm-2">
+				<img id="groupimg" src="/imamges/groupimg/<%=board.getgImgRename()%>" class="img-rounded">
+			</div>
+			<label class="col-sm-2 control-label">그룹명</label>
+			<div class="col-sm-5">
+				<p class="pull-left control-label"><%=board.getGroupName()%>
+				</p>
+			</div>
+			<label class="col-sm-2 control-label">스터디 방식</label>
+			<div class="col-sm-5">
+				<p class="pull-left control-label"><%=board.getAttributeName()%>
+				</p>
+			</div>
+			<label class="col-sm-2 control-label">스터디 지역</label>
+			<div class="col-sm-5">
+				<p class="pull-left control-label"><%=board.getLocation()%>
+				</p>
+			</div>
+			<label class="col-sm-2 control-label">스터디 분류</label>
+			<div class="col-sm-5">
+				<p class="pull-left control-label"><%=board.getCategoryName()%>
+				</p>
+			</div>
+			<label class="col-sm-2 control-label">그룹원 수</label>
+			<div class="col-sm-5">
+				<p class="pull-left control-label"><%=board.getMemberCount()%>
+				</p>
 			</div>
 		</div>
 	</form>
-
-
-
+	<hr>
+	<div class="col-sm-offset-2 col-sm-10">
+		<%
+			if (user.getUserNo() == board.getUploader()) {
+		%>
+		<a class="btn btn-default pull-right"
+			href="javascript:checkDelete(<%=board.getBoardNo()%>)">삭제</a>
+			<script type="text/javascript">
+			function checkDelete(bno){
+				if (confirm('해당 게시글을 삭제하시겠습니까?')) {
+				    location.href="/studyhub/boarddelete?bno="+bno;
+				} 
+			}
+			</script>
+		<a class="btn btn-default pull-right"
+			href="/studyhub/boardupdate.move?bno=<%=board.getBoardNo()%>">수정</a>
+		<%
+			}
+		%>
+		<a class="btn btn-default pull-right" href="/studyhub/boardlist">목록</a>
+	</div>
 </div>
 <!-- /메인 컨텐츠 -->
 

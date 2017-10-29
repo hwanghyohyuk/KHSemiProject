@@ -1,32 +1,25 @@
-package com.studyhub.group.notice.controller;
+package com.studyhub.group.qna.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.common.vo.GNotice;
-import com.studyhub.group.notice.model.service.GNoticeService;
+import com.studyhub.group.qna.model.service.GroupQnAService;
 
 /**
- * Servlet implementation class GNoticeListServlet
+ * Servlet implementation class GQNACommentInsertServlet
  */
-@WebServlet("/gnoticelist")
-public class GNoticeListServlet extends HttpServlet {
+@WebServlet("/gqnacommentinsert")
+public class GQNACommentInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private GNotice gNotice;
-	private GNoticeService gNoticeService;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GNoticeListServlet() {
+    public GQNACommentInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,21 +28,16 @@ public class GNoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 공지글 조회용
+		request.setCharacterEncoding("utf-8");
 		
-		ArrayList<GNotice> list = new GNoticeService().selectList();
+		int gqnano = Integer.parseInt(request.getParameter("gqnano"));
+		int userno = Integer.parseInt(request.getParameter("userno"));
+		String content = request.getParameter("content");
+		System.out.println(content);
 		
-		RequestDispatcher view = null;
-		if(list != null){
-			view = request.getRequestDispatcher("views/group/groupNotice/NoticeList.jsp");
-			request.setAttribute("list", list);
-			view.forward(request, response);
-		}else{
-			view = request.getRequestDispatcher("views/group/groupNotice/NoticeError.jsp");
-			request.setAttribute("message",	"공지글 조회 실패");
-			view.forward(request, response);
+		if(new GroupQnAService().InsertComment(gqnano, userno, content) > 0 ) {
+			response.sendRedirect("views/group/groupQnA/QnAList.jsp");
 		}
-		
 	}
 
 	/**

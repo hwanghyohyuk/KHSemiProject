@@ -13,6 +13,7 @@
 <%
 	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 	int listCount = ((Integer) request.getAttribute("listCount")).intValue();
+	int groupCount = ((Integer) request.getAttribute("groupCount")).intValue();
 	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 	int startPage = ((Integer) request.getAttribute("startPage")).intValue();
 	int endPage = ((Integer) request.getAttribute("endPage")).intValue();
@@ -23,8 +24,8 @@
 <!--자바스크립트 및 CSS-->
 <style>
 #groupimg{
-width:100px;
-height:100px;
+width:140px;
+height:140px;
 }
 </style>
 <!-- /head , body -->
@@ -38,8 +39,7 @@ height:100px;
 		<h1>
 			모집게시판 <small>원하는 그룹을 찾자.</small>
 		</h1>
-		<br>총 게시글 갯수 :
-		<%=listCount%>
+		<br>총 게시글 수 : <%=listCount%> &nbsp;&nbsp;&nbsp;모집 그룹 수 : <%=groupCount%>
 	</div>
 	<div>
 		<table class="table table-hover">
@@ -63,7 +63,7 @@ height:100px;
 				for (Board b : list) {
 			%>			
 				<tr>
-					<td><img id="groupimg" src="/imamges/groupimg/<%=b.getgImgRename()%>" style></td>
+					<td><img id="groupimg" src="/imamges/groupimg/<%=b.getgImgRename()%>" class="img-rounded"></td>
 					<td><%=b.getCategoryName() %></td>
 					<td><%=b.getGroupName() %></td>
 					<td>
@@ -91,7 +91,29 @@ height:100px;
 		<%
 			if (user != null) {
 		%>
-		<a class="btn btn-default" href="/studyhub/boardinsert.move">글쓰기</a>
+		<a class="btn btn-default" href="javascript:grouplistcheck()">글쓰기</a>
+		<script type="text/javascript">
+		function grouplistcheck(){
+			var userno = "<%= user.getUserNo()%>";
+			$.ajax({
+				url : "/studyhub/bgrouplist",
+				data : {
+					userno : userno
+				},
+				type : "get",
+				datatype : "json",
+				success : function(data) {
+					var json = JSON.parse(JSON.stringify(data));
+					var values = "";
+					if(json.list!=''){
+						location.href='/studyhub/boardinsert.move';
+					}else{
+						alert("모집할 그룹이 없습니다.");
+					}
+				}
+			});
+		}
+		</script>
 		<%
 			} else {
 		%>

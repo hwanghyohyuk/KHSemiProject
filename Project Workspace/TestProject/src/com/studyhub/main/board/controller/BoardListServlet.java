@@ -47,6 +47,8 @@ public class BoardListServlet extends HttpServlet {
 			
 				int listCount = bs.getListCount();
 				
+				int groupCount = bs.getGroupCount();
+				
 				ArrayList<Board> list = bs.selectList(currentPage, limit);
 				int maxPage = (int)((double)listCount / limit + 0.9);
 				int startPage = ((int)((double)currentPage / limit + 0.9) - 1) * limit + 1;
@@ -64,6 +66,7 @@ public class BoardListServlet extends HttpServlet {
 					request.setAttribute("startPage", startPage);
 					request.setAttribute("endPage", endPage);
 					request.setAttribute("listCount", listCount);
+					request.setAttribute("groupCount", groupCount);
 					
 					view.forward(request, response);
 				}else{

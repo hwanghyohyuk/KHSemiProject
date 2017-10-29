@@ -15,8 +15,8 @@ import com.studyhub.main.board.model.service.BoardService;
 /**
  * Servlet implementation class BoardUpdateView
  */
-@WebServlet("/boardupdateview")
-public class BoardUpdateView extends HttpServlet {
+@WebServlet("/boardupdate.move")
+public class BoardUpdateMoveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private BoardService bs;
@@ -25,7 +25,7 @@ public class BoardUpdateView extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardUpdateView() {
+    public BoardUpdateMoveServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,7 +50,7 @@ public class BoardUpdateView extends HttpServlet {
 			view.forward(request, response);
 		} else {
 			view = request.getRequestDispatcher("/views/main/Board/BoardError.jsp");
-			request.setAttribute("message", "상세조회실패");
+			request.setAttribute("message", "글 수정 페이지 로드 실패");
 			view.forward(request, response);
 		}
 	}

@@ -1,6 +1,9 @@
 package com.studyhub.main.board.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,10 +37,31 @@ public class BoardUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-		int bno = Integer.parseInt(request.getParameter("bno"));
 
-		bs = new BoardService();
-		board = bs.selectBoard(bno);
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		String btitle = request.getParameter("btitle");
+		int groupno = Integer.parseInt(request.getParameter("bglist"));
+		Date deadline = Date.valueOf(request.getParameter("deadline"));
+		int bwriterNo = Integer.parseInt(request.getParameter("bwriterno"));
+		String bcontent = request.getParameter("bcontent");
+		
+		Board b = new Board();
+		b.setBoardNo(bno);
+		b.setTitle(btitle);
+		b.setContent(bcontent);
+		b.setUploader(bwriterNo);
+		b.setDeadlineDate(deadline);
+		b.setGroupNo(groupno);
+		
+		RequestDispatcher view = null;
+		// 처리결과에 따라 뷰 지정함
+		if (new BoardService().updateBoard(b) > 0) {
+			response.sendRedirect("/studyhub/boardlist?page=1");
+		} else {
+			view = request.getRequestDispatcher("views/main/Board/BoardError.jsp");
+			request.setAttribute("message", "모집게시판 서비스 : 모집글 수정 실패!");
+			view.forward(request, response);
+		}
 		
 		
 

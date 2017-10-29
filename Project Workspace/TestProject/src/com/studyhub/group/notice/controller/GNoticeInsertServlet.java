@@ -39,21 +39,24 @@ public class GNoticeInsertServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf8"); 
 		
 		RequestDispatcher view = null;
-		GNotice gnotice = new GNotice();
+		gNotice = new GNotice();
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		int uploader = Integer.parseInt(request.getParameter("uploader"));
-		int accessNo = Integer.parseInt(request.getParameter("access_no"));
+		int accessNo = Integer.parseInt(request.getParameter("accessno"));
+		int groupNo = Integer.parseInt(request.getParameter("groupno"));
 				
-		gnotice.setTitle(title);
-		gnotice.setContent(content);
-		gnotice.setUploader(uploader);
-		gnotice.setAccessNo(accessNo);
-		
-		if(new GNoticeService().insertGNotice(gnotice)>0){
-			response.sendRedirect("/studyhub/gnoticelist");
+		gNotice.setTitle(title);
+		gNotice.setContent(content);
+		gNotice.setUploader(uploader);
+		gNotice.setAccessNo(accessNo);
+		gNotice.setGroupNo(groupNo);
+				
+		if(new GNoticeService().insertGNotice(gNotice)>0){
+			response.sendRedirect("/studyhub/gnoticepreview?groupno="+groupNo);
 		}else{
+			
 			view = request.getRequestDispatcher("/views/group/groupNotice/NoticeError.jsp");
 			request.setAttribute("message", "공지글 등록 실패");
 			view.forward(request, response);
