@@ -24,8 +24,6 @@
 		<div class="col-sm-3 col-xs-2"></div>
 		<div class="col-sm-6 col-xs-8">
 		<p>기억나는 비밀번호를 입력해주세요</p>
-		<p>현재 이메일 : <%=email%></p>
-		<p>현재 사용자 이름 : <%=name%></p>
 			<form action="/studyhub/findpwdprocess" method="post" name="findpwd">
 				<div class="form-group">
 					<input type="hidden" id="email" name="email" value="<%=email%>">

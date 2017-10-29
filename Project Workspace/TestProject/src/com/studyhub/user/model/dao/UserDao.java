@@ -6,6 +6,7 @@ import static com.studyhub.common.JDBCTemplate.*;
 import com.studyhub.common.CryptTemplate;
 import com.studyhub.common.vo.AesUtil;
 import com.studyhub.common.vo.User;
+import com.sun.org.apache.xml.internal.resolver.tools.ResolvingParser;
 
 public class UserDao implements CryptTemplate {
 
@@ -35,6 +36,9 @@ public class UserDao implements CryptTemplate {
 				user.setUserNo(rset.getInt("user_no"));
 				user.setUserName(rset.getString("user_name"));
 				user.setPhone(rset.getString("phone"));
+				user.setUserState(rset.getInt("user_state"));
+				user.setPwdState(rset.getInt("pwd_state"));
+				user.setDeleteDate(rset.getDate("delete_date"));
 			} else {
 
 			}
@@ -162,6 +166,27 @@ public class UserDao implements CryptTemplate {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, encryptPwd);
+			pstmt.setString(2, decryptEmail);
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int changeState(Connection conn, String decryptEmail, int pwdState) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "update tb_user set pwd_state=? where email=?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, pwdState);
 			pstmt.setString(2, decryptEmail);
 
 			result = pstmt.executeUpdate();
