@@ -13,6 +13,7 @@ public class GQNA implements java.io.Serializable{
 	private int accessNo;
 	private int groupNo;
 	private String strDate;
+	private int commentcount;
 
 	public GQNA() {
 		super();
@@ -44,7 +45,7 @@ public class GQNA implements java.io.Serializable{
 	
 
 	public GQNA(int gQnaNo, String title, String content, Date uploadDate, int uploader, String uploader_name,
-			int accessNo, int groupNo, String strDate) {
+			int accessNo, int groupNo, String strDate, int commentcount) {
 		super();
 		this.gQnaNo = gQnaNo;
 		this.title = title;
@@ -54,6 +55,15 @@ public class GQNA implements java.io.Serializable{
 		this.accessNo = accessNo;
 		this.groupNo = groupNo;
 		this.strDate = strDate;
+		this.commentcount = commentcount;
+	}
+
+	public int getCommentcount() {
+		return commentcount;
+	}
+
+	public void setCommentcount(int commentcount) {
+		this.commentcount = commentcount;
 	}
 
 	public int getgQnaNo() {

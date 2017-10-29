@@ -53,6 +53,7 @@ public class SelectGroupQnAServlet extends HttpServlet {
 			job.put("access_no", gq.getAccessNo());
 			job.put("groupno", gq.getGroupNo());
 			job.put("user_no", gq.getUploader());
+			job.put("commentcount", gq.getCommentcount());
 			
 			jarr.add(job);
 		}

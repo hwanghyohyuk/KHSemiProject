@@ -178,6 +178,15 @@
 		padding-top: 4px;
 		height: 20px;
 	}
+	
+	#commentcount{
+		height: 80px;
+		padding-top: 15px;
+	}
+	
+	#qnaupdatebtn{
+		margin-bottom: 10px;
+	}
 
 </style>
 <!--헤더 부분-->
@@ -349,6 +358,9 @@
 													"</div>" +
 												"</div>" +
 											"</a>" +
+										"</div>" +
+										"<div class='col-xs-2 col-md-1 col-sm-2' id='commentcount'>" +
+											"댓글 " +json.list[i].commentcount + " 개" +
 										"</div>" +
 										"<div class='col-xs-2 col-sm-2 col-md-1'>" +
 											"<input type='button' id='qnaupdatebtn' name='qnaupdatebtn' class='btn btn-primary' value='수정' onclick='selectOne(" + json.list[i].g_qna_no + ");'>" +

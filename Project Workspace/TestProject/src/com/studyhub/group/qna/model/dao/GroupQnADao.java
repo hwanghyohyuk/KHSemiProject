@@ -42,9 +42,10 @@ public class GroupQnADao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = 	"select g_qna_no, title, content, to_char(upload_date, 'yyyyMMdd') as str_date, user_name, access_no, group_no, uploader " +
+		String query = 	"select g_qna_no, title, content, to_char(upload_date, 'yyyyMMdd') as str_date, user_name, access_no, group_no, uploader, NVL(commentcount, 0) as commentcount " +
 						"from tb_g_qna " +
 						"join tb_user on (tb_g_qna.uploader = tb_user.user_no) " +
+						"left outer join (select g_qna_no, count(*) as commentcount from tb_gq_comment group by g_qna_no) using (g_qna_no) " +
 						"where group_no = ? " + 
 						"order by (g_qna_no) desc";
 			
@@ -65,6 +66,7 @@ public class GroupQnADao {
 					gq.setAccessNo(rset.getInt("access_no"));
 					gq.setGroupNo(rset.getInt("group_no"));
 					gq.setUploader(rset.getInt("uploader"));
+					gq.setCommentcount(rset.getInt("commentcount"));
 					
 					list.add(gq);
 					

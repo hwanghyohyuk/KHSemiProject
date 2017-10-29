@@ -51,4 +51,11 @@ public class GMainService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public int GroupOut(int userno, int groupno) {
+		Connection con = getConnection();
+		int result = new GMainDao().GroupOut(con, userno, groupno);
+		close(con);
+		return result;
+	}
 }
