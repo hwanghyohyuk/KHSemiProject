@@ -212,7 +212,7 @@ public class GMainDao {
 		
 		PreparedStatement pstmt = null;
 		
-		String query = "update tb_group set group_state = 2, delete_date = sysdate + 7 where group_no = ? ";
+		String query = "update tb_group set group_state = 1, delete_date = sysdate + 7 where group_no = ? ";
 		
 		try {
 			pstmt = con.prepareStatement(query);

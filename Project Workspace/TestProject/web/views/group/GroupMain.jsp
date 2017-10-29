@@ -72,7 +72,7 @@
 	<div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-9 col-xs-9">
 		<h3><%= group.getGroupName() %>
 			&nbsp;&nbsp;&nbsp; 
-			<% if( group.getAuthorityNo() == 2 && group.getGroupState() == 2){ %>
+			<% if( group.getAuthorityNo() == 2 && group.getGroupState() == 1){ %>
 				<a href="#" onclick='return removecancel()'>그룹해제 취소</a>
 			<% } %>
 			<div id="groupinfo">
