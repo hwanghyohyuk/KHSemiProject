@@ -29,7 +29,8 @@ public class MainDao {
 						  		+ "group by group_no) "
 						  + "using(group_no) "
 						  + "join tb_group using(group_no) "
-						  + "where user_no = ?";
+						  + "where user_no = ? "
+						  + "and ung_state = 0";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -148,6 +149,7 @@ public class MainDao {
 					+  "where user_no = (select user_no "
 					+ 					"from tb_user "
 					+					"where email = ?) "
+					+  "and ung_state = 0 "
 					+  "group by user_no";
 		
 		try {

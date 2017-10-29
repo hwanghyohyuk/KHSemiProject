@@ -279,7 +279,18 @@
 	}
 	
 	function groupout(){
-		alert("그룹탈퇴 준비중");
+		var userno = "<%= user.getUserNo() %>";
+		var groupno = "<%= group.getGroupNo() %>";
+		var authorityno = "<%= group.getAuthorityNo() %>";
+		$.ajax({
+			url: "/studyhub/groupout",
+			data: { userno: userno, groupno: groupno, authorityno: authorityno },
+			type: "get",
+			dataType: "json",
+			asyng: false
+		});
+		location.href="/studyhub/main";
+		alert("그룹에서 탈퇴하였습니다.");
 		return false;
 	}
 </script>

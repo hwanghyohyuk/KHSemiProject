@@ -184,6 +184,28 @@ public class GMainDao {
 		return list;
 	}
 
+	public int GroupOut(Connection con, int userno, int groupno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_ung set ung_state = 1 where user_no = ? and group_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userno);
+			pstmt.setInt(2, groupno);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 
 
