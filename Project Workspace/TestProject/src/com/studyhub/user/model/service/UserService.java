@@ -125,4 +125,18 @@ public class UserService {
 		close(conn);
 		return result;
 	}
+
+
+	public int changeState(String decryptEmail, int pwdState) {
+		Connection conn = getConnection();
+		uDao = new UserDao();
+		int result = uDao.changeState(conn, decryptEmail, pwdState);
+		if (result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }

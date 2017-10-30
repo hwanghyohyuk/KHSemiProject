@@ -38,6 +38,14 @@ public class GNotice implements java.io.Serializable {
 		this.strDate = strDate;
 	}
 
+	public GNotice(int noticeNo, String title, String uploader_name, String strDate) {
+		super();
+		this.noticeNo = noticeNo;
+		this.title = title;
+		this.uploader_name = uploader_name;
+		this.strDate = strDate;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

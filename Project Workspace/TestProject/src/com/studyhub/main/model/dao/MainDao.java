@@ -30,7 +30,8 @@ public class MainDao {
 						  + "using(group_no) "
 						  + "join tb_group using(group_no) "
 						  + "where user_no = ? "
-						  + "and ung_state = 0";
+						  + "and ung_state = 0 "
+						  + "and group_state in (0, 1)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -65,7 +66,7 @@ public class MainDao {
 		
 		String query = "insert into tb_group values ("
 					+  "(select max(group_no) + 1 from tb_group), "
-					+  "?, ?, ?, ?, ?, ?, ?)";
+					+  "?, ?, ?, ?, ?, ?, ?, default, sysdate)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -93,7 +94,7 @@ public class MainDao {
 		
 		String query = "insert into tb_ung values ("
 					+  "(select max(ung_no) + 1 from tb_ung), "
-					+  "?, ?, 2)";
+					+  "?, ?, 2, 0)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -146,10 +147,12 @@ public class MainDao {
 		
 		String query = "select count(*) "
 					+  "from tb_ung "
+					+  "join tb_group using(group_no) "
 					+  "where user_no = (select user_no "
 					+ 					"from tb_user "
 					+					"where email = ?) "
 					+  "and ung_state = 0 "
+					+  "and group_state in (0, 1) "
 					+  "group by user_no";
 		
 		try {

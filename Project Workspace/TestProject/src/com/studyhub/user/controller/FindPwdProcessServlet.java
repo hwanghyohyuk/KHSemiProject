@@ -65,6 +65,12 @@ public class FindPwdProcessServlet extends HttpServlet implements CryptTemplate 
 					}else{
 						System.out.println("비밀번호 변경 실패");
 					}
+					int PwdState = us.changeState(decryptEmail,1);//0:일반,1:임시
+					if(PwdState>0){
+						System.out.println("임시 상태 변경 성공");
+					}else{
+						System.out.println("임시 상태 변경 실패");
+					}					
 				}else{
 					request.setAttribute("messageheader", "메일 전송 오류");
 					request.setAttribute("message", "메일 전송 실패");

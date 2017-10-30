@@ -60,7 +60,8 @@
 		<% if(sf.getFileName()==null){ %>
 		<span>첨부파일 없음</span>
 		<% }else{ %>
-		<span>다운로드 받기: <a href="/studyhub/sharefiledown?ofile=<%=sf.getFileName() %>&rfile=<%=sf.getRenameFileName()%>"><%=sf.getFileName() %></a></span>
+		<span class="glyphicon glyphicon-paperclip"></span>
+		<span>file: <a href="/studyhub/sharefiledown?ofile=<%=sf.getFileName() %>&rfile=<%=sf.getRenameFileName()%>"><%=sf.getFileName() %></a></span>
 		<% } %>
 		</div>
 		<hr>

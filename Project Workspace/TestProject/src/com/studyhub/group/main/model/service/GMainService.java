@@ -58,4 +58,53 @@ public class GMainService {
 		close(con);
 		return result;
 	}
+
+	public int RemoveGroup(int groupno) {
+		Connection con = getConnection();
+		int result = new GMainDao().RemoveGroup(con, groupno);
+		close(con);
+		return result;
+	}
+
+	public int RemoveCancel(int groupno) {
+		Connection con = getConnection();
+		int result = new GMainDao().RemoveCancel(con, groupno);
+		close(con);
+		return result;
+	}
+
+	public ArrayList<GQNA> top3qna(int groupno) {
+		Connection con = getConnection();
+		ArrayList<GQNA> list = new GMainDao().top3qna(con,groupno);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<GNotice> top5notice(int groupno) {
+		Connection con = getConnection();
+		ArrayList<GNotice> list = new GMainDao().top5notice(con,groupno);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<Schedule> top5schedule(int groupno) {
+		Connection con = getConnection();
+		ArrayList<Schedule> list = new GMainDao().top5schedule(con, groupno);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<GBoard> top3board(int groupno) {
+		Connection con = getConnection();
+		ArrayList<GBoard> list = new GMainDao().top3board(con, groupno);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<ShareFile> top3sharefile(int groupno) {
+		Connection con = getConnection();
+		ArrayList<ShareFile> list = new GMainDao().top3sharefile(con, groupno);
+		close(con);
+		return list;
+	}
 }

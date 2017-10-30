@@ -34,11 +34,12 @@ public class FileCategoryAddServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		RequestDispatcher view = null;
-		String cname = request.getParameter("cname");
-		int groupno = Integer.parseInt(request.getParameter("groupno"));
 		
-		if(new ShareFileService().addCategory(cname, groupno) >0 ){
-			response.sendRedirect("/studyhub/sharedfilepreview?groupno="+groupno);
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
+		String cname = request.getParameter("cname");
+		
+		if(new ShareFileService().addCategory(groupno, cname) >0 ){
+			response.sendRedirect("/studyhub/sharedfilepreview?page=1&groupno="+groupno);
 		}else{
 			view= request.getRequestDispatcher("views/group/groupFileShare/fileshareError.jsp");
 			request.setAttribute("message", "카테고리 추가 실패!");
