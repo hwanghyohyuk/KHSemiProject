@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.studyhub.common.vo.Board;
 
 import com.studyhub.common.vo.Group;
+import com.studyhub.common.vo.Message;
 import com.studyhub.common.vo.UNG;
 import com.studyhub.main.model.dao.MainDao;
 
@@ -59,5 +60,19 @@ public class MainService {
 		int result = new MainDao().countGroup(con, userEmail);
 		close(con);
 		return result;
+	}
+
+	public int MessageCount(int userno) {
+		Connection con = getConnection();
+		int result = new MainDao().MessageCount(con, userno);
+		close(con);
+		return result;
+	}
+
+	public ArrayList<Message> MessageSelect(int userno) {
+		Connection con = getConnection();
+		ArrayList<Message> list = new MainDao().MessageSelect(con, userno);
+		close(con);
+		return list;
 	}
 }

@@ -26,8 +26,8 @@
 .list-group-item {
 	margin-top: 0px;
 	padding-left: 7px;
-	padding-right: 7px;
-}
+	padding-right: 7px;/* 
+} */
 
 #list-group {
 	padding-top: 10px;

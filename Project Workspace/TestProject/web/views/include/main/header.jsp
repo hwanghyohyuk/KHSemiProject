@@ -94,6 +94,101 @@
 					<%
 						if (user != null) {
 					%>
+					<li class='drop-down' id='message'>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+							<P class='black'>
+								<span class='badge' id="messagecount">
+								</span>
+								&nbsp;&nbsp;메시지함  <span class="caret"></span>
+							</P>
+						</a>
+						<ul class="dropdown-menu" role="menu" id="mymessage">
+							<!-- ajax로 그룹리스트 불러옴 -->
+						</ul>
+					</li>
+					<script type="text/javascript">
+						$(function (){
+							messagecount();
+							messageselect();
+						});
+								
+						function messagecount(){
+							var userno = "<%= user.getUserNo() %>";
+							$.ajax({
+								url: "/studyhub/messagecount",
+								data: { userno: userno },
+								type: "get",
+								dataType: "json",
+								success: function (data){
+									var json = JSON.parse(JSON.stringify(data));
+									var values = "";
+									values += json.messagecount;
+									$("#messagecount").html(values);
+								}
+							});
+						}
+						
+						function messageselect(){
+							var userno ="<%= user.getUserNo() %>";
+							$.ajax({
+								url: "/studyhub/messageselect",
+								data: { userno: userno },
+								type: "get",
+								dataType: "json",
+								success: function(data){
+									var json = JSON.parse(JSON.stringify(data));
+									var values = "";
+									for(var i in json.list){
+										values += 	"<li style='width: 400px; height: 40px; margin-top: 10px;'>" +
+														"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3' style='height: 34px; padding-top: 7px;'>" +
+															decodeURIComponent(json.list[i].groupname).replace(/\+/gi, " ") +
+														"</div>" +
+														"<div class='col-lg-5 col-md-5 col-sm-5 col-xs-5' style='height: 34px; padding-top: 7px;'>" +
+															decodeURIComponent(json.list[i].message).replace(/\+/gi, " ") +
+														"</div>";
+										if(json.list[i].messagestate == 0){
+										values += "<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='padding-left: 0px;'>" +
+															"<button type='button' class='btn btn-success' onclick='agree(" + json.list[i].messageno + "," + json.list[i].receiver + ", " + json.list[i].sender + "," + json.list[i].groupno + ")'>수락</button>" + 
+															/* 수락 누르면 ung인서트하고 메시지상태 2로 업뎃*/
+														"</div>" +
+														"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='padding-left: 0px;'>" +
+															"<button type='button' class='btn btn-danger' onclick='negative(" + json.list[i].messageno + "," + json.list[i].receiver + ", " + json.list[i].sender + "," + json.list[i].groupno + ")'>거절</button>" +
+															/* 거절 누르면  메시지상태2로 업뎃*/
+														"</div>" +
+													"</li>";
+										} else if (json.list[i].messagestate == 1) {
+											values += 	"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4' style='padding-left: 0px;'>" +
+															"<button type='button' class='btn btn-primary' onclick='confiem=(" + json.list[i].messageno + ")'>확인</button>" +
+															/* 확인누르면 메시지상태 2로 업뎃 */
+														"</div>" +
+													"</li>";
+										} else {
+											values += 	"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4' style='padding-left: 0px;'>" +
+														"</div>" +
+													"</li>";
+										}
+									}
+									var sub = 	"<li style='width: 400px; height: 30px;line-height:30px;'>" +
+													"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
+														"그룹명" +
+													"</div>" +
+													"<div class='col-lg-5 col-md-5 col-sm-5 col-xs-5'>" +
+														"내용" +
+													"</div>" +
+													"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+														"수락" +
+													"</div>" +
+													"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+														"거절" +
+													"</div>" +
+												"</li>" +
+												"<hr style='margin:0 auto'>";
+									$("#mymessage").html(sub + values);
+								}
+							});
+						}
+					</script>
+					
 					<li><a href="/studyhub/myinfo"><p class="black"><%=user.getUserName()%></p></a></li>
 					<li><a href="/studyhub/logout"><p class="black">로그아웃</p></a></li>
 					<%

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import com.studyhub.common.vo.Board;
 import com.studyhub.common.vo.Group;
+import com.studyhub.common.vo.Message;
 import com.studyhub.common.vo.UNG;
 
 public class MainDao {
@@ -30,7 +31,7 @@ public class MainDao {
 						  + "using(group_no) "
 						  + "join tb_group using(group_no) "
 						  + "where user_no = ? "
-						  + "and ung_state = 0 "
+						  + "and ung_state = 1 "
 						  + "and group_state in (0, 1)";
 		
 		try {
@@ -151,7 +152,7 @@ public class MainDao {
 					+  "where user_no = (select user_no "
 					+ 					"from tb_user "
 					+					"where email = ?) "
-					+  "and ung_state = 0 "
+					+  "and ung_state = 1 "
 					+  "and group_state in (0, 1) "
 					+  "group by user_no";
 		
@@ -169,4 +170,74 @@ public class MainDao {
 		return result;
 	}
 
+	public int MessageCount(Connection con, int userno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) as messagecount " +
+						"from tb_message " +
+						"where message_state = 0 " +
+						"and receiver = ? " +
+						"group by receiver";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userno);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null){
+				while(rset.next()){
+					result = rset.getInt("messagecount");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Message> MessageSelect(Connection con, int userno) {
+		ArrayList<Message> list = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select message_no, message, group_no, group_name, sender, receiver, message_state "
+				+ "from tb_message "
+				+ "join tb_group using(group_no) "
+				+ "where receiver = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userno);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null){
+				list = new ArrayList<Message>();
+				while(rset.next()){
+					Message m = new Message();
+					m.setMessageNo(rset.getInt("message_no"));
+					m.setMessage(rset.getString("message"));
+					m.setGroupNo(rset.getInt("group_no"));
+					m.setGroupName(rset.getString("group_name"));
+					m.setSenderNo(rset.getInt("sender"));
+					m.setReceiverNo(rset.getInt("receiver"));
+					m.setMessageState(rset.getInt("message_state"));
+					
+					list.add(m);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 }

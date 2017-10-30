@@ -107,4 +107,48 @@ public class GMainService {
 		close(con);
 		return list;
 	}
+
+	public ArrayList<UNG> SelectUser(int groupno, int userno) {
+		Connection con = getConnection();
+		ArrayList<UNG> list = new GMainDao().SelectUser(con, groupno, userno);
+		close(con);
+		return list;
+	}
+
+	public int InviteGroup(int ungno) {
+		Connection con = getConnection();
+		int result = new GMainDao().InviteGroup(con, ungno);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		return result;
+	}
+
+	public int RemoveUser(int ungno) {
+		Connection con = getConnection();
+		int result = new GMainDao().RemoveUser(con, ungno);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		return result;
+	}
+
+	public int OutUser(int ungno) {
+		Connection con = getConnection();
+		int result = new GMainDao().OutUser(con, ungno);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		return result;
+	}
+
+	public ArrayList<UNG> SelectUser2(int groupno, int userno) {
+		Connection con = getConnection();
+		ArrayList<UNG> list = new GMainDao().SelectUser2(con, groupno, userno);
+		close(con);
+		return list;
+	}
 }

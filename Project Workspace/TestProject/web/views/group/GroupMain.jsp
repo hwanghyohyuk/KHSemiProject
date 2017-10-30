@@ -61,6 +61,30 @@
 		padding-left: 5px;
 		height: 40px;
 	}
+	
+	#userlist {
+		height: 300px;
+		overflow:auto;
+	}
+	
+	#modal-body {
+		height: 330px;
+	}
+	
+	.modal-header {
+		background-color: #004157;
+		color: white;
+	}
+	
+	#userlistli {
+		text-align: center;
+	}
+	
+	#success, #outuser {
+		height: 20px;
+		width: 100%;
+		padding-top: 0px;
+	}
 </style>
 
 <%@ include file="/views/include/common/headend.jsp"%>
@@ -235,7 +259,34 @@
 	<% } %>
 </div>
 
-<!-- /메인 컨텐츠 -->
+<!-- 회원관리 모달 -->
+	<div class="modal fade" id="userinfomodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<% if( group.getAuthorityNo() == 2 ){ %>
+					<h4 class="modal-title" id="myModalLabel">회원 관리</h4>
+					<% } else { %>
+					<h4 class="modal-title" id="myModalLabel">회원 정보</h4>
+					<% } %>
+				</div>
+				<div class="modal-body" id="modal-body">
+					<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12' id='userlist'>
+					<ul class='list-group' id="userlistul">
+						
+					</ul>
+				</div>
+				</div>
+				<div class="modal-footer" id="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
@@ -294,13 +345,186 @@
 		});
 	}
 	
+	// 모달 실행
 	function usermanage(){
-		alert("회원관리 준비중");
+		$("#userinfomodal").modal();
+		selectuser();
+	}
+	
+	// 회원 관리 ( 그룹장 )
+	function selectuser(){
+		var groupno = "<%= group.getGroupNo() %>";
+		var user_no = "<%= user.getUserNo() %>";
+		var authorityno = "<%= group.getAuthorityNo() %>";
+		$.ajax({
+			url: '/studyhub/selectuser',
+			data: { groupno: groupno, userno: user_no, authorityno: authorityno },
+			type: "get",
+			dataType: "json",
+			success: function(data){
+				var json = JSON.parse(JSON.stringify(data));
+				var values = "";
+				var listtitle = "";
+				for(var i in json.list){
+					values += "<li class='list-group-item' id='userlistli'>" +
+								"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-2'>" +
+									decodeURIComponent(json.list[i].email).replace(/\+/gi, " ") +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+									decodeURIComponent(json.list[i].username).replace(/\+/gi, " ") +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>";
+								if(decodeURIComponent(json.list[i].ungstate).replace(/\+/gi, " ") == 0){
+									values += "대기" +
+												"</div>" +
+												"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+													"<button type='button' onclick='invitegroup(" + json.list[i].ungno + ")' class='btn btn-success' id='success'>승인</button>" +
+												"</div>" +
+												"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+													"<button type='button' onclick='removeuser(" + json.list[i].ungno + ")' class='btn btn-danger' id='removeuser'>거절</button>" +
+												"</div>" +
+											"</li>";
+								} else {
+									values += "회원" +
+												"</div>" +
+												"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+												"</div>" +
+												"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+													"<button type='button' onclick='outuser(" + json.list[i].ungno + ")' class='btn btn-danger' id='outuser'>추방</button>" +
+												"</div>" +
+											"</li>";
+								}
+				}
+				listtitle += 	"<li class='list-group-item' id='userlistli'>" +
+									"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-2'>" +
+									"이메일" +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+									"이름" +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+									"상태" +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+									"승인" +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+									"거절" +
+								"</div>" +
+							"</li>";
+				$("#userlistul").html(listtitle + values);
+			}
+		});
 		return false;
 	}
 	
+	// 가입승인
+	function invitegroup(param){
+		var groupno = "<%= group.getGroupNo() %>";
+		
+		$.ajax({
+			url: "/studyhub/usermanage",
+			data: { ungno: ungno, state: 1 },
+			type: "get",
+			async: false
+		});
+		alert("가입을 승인하였습니다.");
+		selectuser();
+	}
+	
+	// 승인 거절
+	function removeuser(param){
+		var ungno = param;
+		$.ajax({
+			url: "/studyhub/usermanage",
+			data: { ungno: ungno, state: 2 },
+			type: "get",
+			async: false
+		});
+		alert("가입을 거절하였습니다.");
+		selectuser();
+	}
+	
+	// 추방
+	function outuser(param){
+		var ungno = param;
+		$.ajax({
+			url: "/studyhub/usermanage",
+			data: { ungno: ungno, state: 3 },
+			type: "get",
+			sync: false
+		});
+		alert("회원을 추방하였습니다.");
+		selectuser();
+	}
+	
+	//회원 정보 ( 그룹원 )
 	function userinfo(){
-		alert("회원정보 준비중");
+		$("#userinfomodal").modal();
+		selectuser2();
+	}
+	
+	function selectuser2(){
+		var groupno = "<%= group.getGroupNo() %>";
+		var user_no = "<%= user.getUserNo() %>";
+		var authorityno = "<%= group.getAuthorityNo() %>";
+		$.ajax({
+			url: '/studyhub/selectuser',
+			data: { groupno: groupno, userno: user_no, authorityno: authorityno },
+			type: "get",
+			dataType: "json",
+			success: function(data){
+				var json = JSON.parse(JSON.stringify(data));
+				var values = "";
+				var listtitle = "";
+				for(var i in json.list){
+					values += "<li class='list-group-item' id='userlistli'>" +
+									"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-2'>" +
+									decodeURIComponent(json.list[i].email).replace(/\+/gi, " ") +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+									decodeURIComponent(json.list[i].username).replace(/\+/gi, " ") +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>";
+								if(json.list[i].authorityno == 2){
+									values += "그룹장" +
+												"</div>" +
+												"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+												"</div>" +
+												"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+												"</div>" +
+											"</li>";
+								} else {
+									values += "회원" +
+												"</div>" +
+												"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+												"</div>" +
+												"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+													"<button type='button' onclick='outuser(" + json.list[i].ungno + ")' class='btn btn-danger' id='outuser'>추방</button>" +
+												"</div>" +
+											"</li>";
+								}
+				}
+				listtitle += 	"<li class='list-group-item' id='userlistli'>" +
+									"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-2'>" +
+									"이메일" +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+									"이름" +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+									"상태" +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+									"승인" +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+									"거절" +
+								"</div>" +
+							"</li>";
+				$("#userlistul").html(listtitle + values);
+			}
+		});
 		return false;
 	}
 	
@@ -409,7 +633,8 @@
 				var notice5 = "";
 				for(var i in json.list){
 					if( i == 0 ){
-						notice1 += "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
+						notice1 += 	"<a href='/studyhub/gnoticeview?no=" + json.list[i].noticeno + "'>" +
+									"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
 										decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
@@ -417,9 +642,11 @@
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
 										decodeURIComponent(json.list[i].uploaddate) +
-									"</div>";
+									"</div>" +
+									"</a>";
 					} else if( i == 1 ){
-						notice2 += "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
+						notice2 += 	"<a href='/studyhub/gnoticeview?no=" + json.list[i].noticeno + "'>" +
+									"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
 										decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
@@ -427,9 +654,11 @@
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
 										decodeURIComponent(json.list[i].uploaddate) +
-									"</div>";
+									"</div>" +
+									"</a>";
 					} else if( i == 2 ){
-						notice3 += "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
+						notice3 += 	"<a href='/studyhub/gnoticeview?no=" + json.list[i].noticeno + "'>" +
+									"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
 										decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
@@ -437,9 +666,11 @@
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
 										decodeURIComponent(json.list[i].uploaddate) +
-									"</div>";
+									"</div>" +
+									"</a>";
 					} else if( i == 3 ){
-						notice4 += "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
+						notice4 += 	"<a href='/studyhub/gnoticeview?no=" + json.list[i].noticeno + "'>" +
+									"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
 										decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
@@ -447,9 +678,11 @@
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
 										decodeURIComponent(json.list[i].uploaddate) +
-									"</div>";
+									"</div>" +
+									"</a>";
 					} else {
-						notice5 += "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
+						notice5 += 	"<a href='/studyhub/gnoticeview?no=" + json.list[i].noticeno + "'>" +
+									"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
 										decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
@@ -457,7 +690,8 @@
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
 										decodeURIComponent(json.list[i].uploaddate) +
-									"</div>";
+									"</div>" +
+									"</a>";
 					}
 				}
 				if(notice1 != "")
@@ -590,7 +824,8 @@
 				var board3 = "";
 				for(var i in json.list){
 					if(i == 0){
-						board1 += "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
+						board1 += 	"<a href='/studyhub/gboardview?no=" + json.list[i].gboardno + "'>" +
+									"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
 										decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
@@ -598,9 +833,11 @@
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
 										decodeURIComponent(json.list[i].uploaddate) +
-									"</div>";
+									"</div>" +
+									"</a>";
 					} else if (i == 1){
-						board2 += "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
+						board2 += 	"<a href='/studyhub/gboardview?no=" + json.list[i].gboardno + "'>" +
+									"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
 										decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
@@ -608,9 +845,11 @@
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
 										decodeURIComponent(json.list[i].uploaddate) +
-									"</div>";
+									"</div>" + 
+									"</a>";
 					} else {
-						board3 += "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
+						board3 += 	"<a href='/studyhub/gboardview?no=" + json.list[i].gboardno + "'>" +
+									"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
 										decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
@@ -618,7 +857,8 @@
 									"</div>" +
 									"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
 										decodeURIComponent(json.list[i].uploaddate) +
-									"</div>";
+									"</div>" +
+									"</a>";
 					}
 				}
 				if(board1 != "")
@@ -654,7 +894,8 @@
 				var sharefile3 = "";
 				for(var i in json.list){
 					if(i == 0){
-						sharefile1 += "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
+						sharefile1 += 	"<a href='/studyhub/sharefiledetail?sfno=" + json.list[i].fileno + "'>" +
+										"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
 											decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
 										"</div>" +
 										"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
@@ -662,9 +903,11 @@
 										"</div>" +
 										"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
 											decodeURIComponent(json.list[i].uploaddate) +
-										"</div>";
+										"</div>" +
+										"</a>";
 					} else if (i == 1){
-						sharefile1 += "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
+						sharefile1 += 	"<a href='/studyhub/sharefiledetail?sfno=" + json.list[i].fileno + "'>" +
+										"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
 											decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
 										"</div>" +
 										"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
@@ -672,9 +915,11 @@
 										"</div>" +
 										"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
 											decodeURIComponent(json.list[i].uploaddate) +
-										"</div>";
+										"</div>" +
+										"</a>";
 					} else {
-						sharefile1 += "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
+						sharefile1 += 	"<a href='/studyhub/sharefiledetail?sfno=" + json.list[i].fileno + "'>" +
+										"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
 											decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +
 										"</div>" +
 										"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
@@ -682,7 +927,8 @@
 										"</div>" +
 										"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
 											decodeURIComponent(json.list[i].uploaddate) +
-										"</div>";
+										"</div>" +
+										"</a>";
 					}
 				}
 				if(sharefile1 != "")

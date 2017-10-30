@@ -453,4 +453,145 @@ public class GMainDao {
 		
 		return list;
 	}
+
+	public ArrayList<UNG> SelectUser(Connection con, int groupno, int userno) {
+		ArrayList<UNG> list = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select ung_no, email, user_name, ung_state "
+					+ "from tb_ung "
+					+ "join tb_user using(user_no) "
+					+ "where group_no = ? "
+					+ "and user_no <> ? "
+					+ "and ung_state in (0,1)";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			pstmt.setInt(2, userno);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null){
+				list = new ArrayList<UNG>();
+				while(rset.next()){
+					UNG u = new UNG();
+					u.setUngNo(rset.getInt("ung_no"));
+					u.setEmail(rset.getString("email"));
+					u.setUserName(rset.getString("user_name"));
+					u.setUngState(rset.getInt("ung_state"));
+					
+					list.add(u);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int InviteGroup(Connection con, int ungno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_ung set ung_state where ung_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, ungno);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int RemoveUser(Connection con, int ungno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from tb_ung where ung_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, ungno);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int OutUser(Connection con, int ungno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_ung set ung_state = 2 where ung_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, ungno);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<UNG> SelectUser2(Connection con, int groupno, int userno) {
+ArrayList<UNG> list = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select ung_no, email, user_name, ung_state, authority_no "
+					+ "from tb_ung "
+					+ "join tb_user using(user_no) "
+					+ "where group_no = ? "
+					+ "and user_no <> ? "
+					+ "and ung_state = 1";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			pstmt.setInt(2, userno);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null){
+				list = new ArrayList<UNG>();
+				while(rset.next()){
+					UNG u = new UNG();
+					u.setUngNo(rset.getInt("ung_no"));
+					u.setEmail(rset.getString("email"));
+					u.setUserName(rset.getString("user_name"));
+					u.setUngState(rset.getInt("ung_state"));
+					u.setAuthorityNo(rset.getInt("authority_no"));
+					
+					list.add(u);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 }
