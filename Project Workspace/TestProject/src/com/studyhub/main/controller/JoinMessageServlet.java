@@ -31,13 +31,16 @@ public class JoinMessageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int sender = Integer.parseInt(request.getParameter("sender"));
-		int receiver = Integer.parseInt(request.getParameter("receiver"));
-		int groupNo = Integer.parseInt(request.getParameter("groupno"));
+		int senderNo = Integer.parseInt(request.getParameter("senderNo"));
+		int receiverNo = Integer.parseInt(request.getParameter("receiverNo"));
+		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 		
-		System.out.println("sender : "+sender+"\nreceiver : "+receiver+"\ngroupNo : "+groupNo);
+		System.out.println("senderNo : "+senderNo+"\nsenderNo : "+senderNo+"\ngroupNo : "+groupNo);
 		ms = new MainService();
-		int insertMessage = ms.insertMessage(sender,receiver,groupNo);
+		int insertUnG = ms.inserUnG(senderNo, groupNo, 0);
+		int insertMessage = ms.InsertMessage3(groupNo, senderNo, receiverNo);
+		
+	}		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

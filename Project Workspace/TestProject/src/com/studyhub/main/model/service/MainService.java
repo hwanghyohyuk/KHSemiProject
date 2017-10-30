@@ -37,9 +37,9 @@ public class MainService {
 		return result;
 	}
 
-	public int inserUnG(int userno, Group groupno, int i) {
+	public int inserUnG(int userNo, int groupNo, int authorityNo, int ungState) {
 		Connection con = getConnection();
-		int result = new MainDao().InsertUnG(con, userno, groupno, i);
+		int result = new MainDao().insertUnG(con, userNo, groupNo, authorityNo, ungState);
 		if (result > 0)
 			commit(con);
 		else
@@ -48,11 +48,11 @@ public class MainService {
 		return result;
 	}
 
-	public Group selectGroupNo(String groupname) {
+	public int selectGroupNo(String groupname) {
 		Connection con = getConnection();
-		Group group = new MainDao().selectGroupNo(con, groupname);
+		int groupNo = new MainDao().selectGroupNo(con, groupname);
 		close(con);
-		return group;
+		return groupNo;
 	}
 
 	public int countGroup(String userEmail) {
@@ -98,7 +98,7 @@ public class MainService {
 		return result;
 	}
 
-	public int InsertMessage(int groupno, int sender, int receiver) {
+	public int insertMessage(int groupno, int sender, int receiver) {
 		Connection con = getConnection();
 		int result = new MainDao().InsertMessage(con, groupno, sender, receiver);
 		if(result > 0)
@@ -112,6 +112,17 @@ public class MainService {
 	public int InsertMessage2(int groupno, int sender, int receiver) {
 		Connection con = getConnection();
 		int result = new MainDao().InsertMessage2(con, groupno, sender, receiver);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+	
+	public int InsertMessage3(int groupno, int sender, int receiver) {
+		Connection con = getConnection();
+		int result = new MainDao().InsertMessage3(con, groupno, sender, receiver);
 		if(result > 0)
 			commit(con);
 		else

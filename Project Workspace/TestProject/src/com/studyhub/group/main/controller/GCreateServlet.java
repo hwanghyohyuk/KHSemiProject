@@ -102,9 +102,8 @@ public class GCreateServlet extends HttpServlet {
 			location = mrequest.getParameter("group_location");
 		}
 
-		int userno = Integer.parseInt(mrequest.getParameter("user_no"));
+		int userNo = Integer.parseInt(mrequest.getParameter("user_no"));
 		String userEmail = mrequest.getParameter("user_email");
-		int mygroup = 0;
 
 		String description = mrequest.getParameter("group_description");
 
@@ -144,8 +143,8 @@ public class GCreateServlet extends HttpServlet {
 
 		// 처리결과에 따라 뷰 지정함
 		if (new MainService().insertGroup(g) > 0) {
-			Group groupno = new MainService().selectGroupNo(groupname);
-			if (new MainService().inserUnG(userno, groupno, 2) > 0)
+			int groupNo = new MainService().selectGroupNo(groupname);
+			if (new MainService().inserUnG(userNo, groupNo, 2, 1) > 0)
 				response.sendRedirect("/studyhub/main");
 		}
 	}

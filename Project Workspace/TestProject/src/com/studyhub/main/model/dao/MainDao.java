@@ -89,19 +89,20 @@ public class MainDao {
 		return result;
 	}
 
-	public int InsertUnG(Connection con, int userno, Group groupno, int i) {
+	public int insertUnG(Connection con, int userNo, int groupNo, int authorityNo, int ungState) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
 		String query = "insert into tb_ung values ("
 					+  "(select max(ung_no) + 1 from tb_ung), "
-					+  "?, ?, ?, 0)";
+					+  "?, ?, ?, ?)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, userno);
-			pstmt.setInt(2, groupno.getGroupNo());
-			pstmt.setInt(3, i);
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, groupNo);
+			pstmt.setInt(3, authorityNo);
+			pstmt.setInt(4, ungState);
 			
 			result = pstmt.executeUpdate();
 			
@@ -110,12 +111,11 @@ public class MainDao {
 		} finally {
 			close(pstmt);
 		}
-		
 		return result;
 	}
 
-	public Group selectGroupNo(Connection con, String groupname) {
-		Group group = null;
+	public int selectGroupNo(Connection con, String groupname) {
+		int groupNo = 0;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -128,8 +128,7 @@ public class MainDao {
 			
 			rset = pstmt.executeQuery();
 			if(rset.next()){
-				group = new Group();
-				group.setGroupNo(rset.getInt("group_no"));
+				groupNo = rset.getInt("group_no");
 			}
 			
 		} catch (Exception e) {
@@ -139,7 +138,7 @@ public class MainDao {
 			close(pstmt);
 		}
 		
-		return group ;
+		return groupNo ;
 	}
 	
 	public int countGroup(Connection con, String userEmail) {
@@ -334,4 +333,28 @@ int result = 0;
 		}
 		return result;
 	}
+	
+	public int InsertMessage3(Connection con, int groupno, int sender, int receiver) {
+		int result = 0;
+				
+				PreparedStatement pstmt = null;
+				
+				String query = "insert into tb_message values("
+						+ "(select max(message_no) + 1 from tb_message) "
+						+ ", ?, ?, ?, 1, '가입신청을 하였습니다.') ";
+				
+				try {
+					pstmt = con.prepareStatement(query);
+					pstmt.setInt(1, groupno);
+					pstmt.setInt(2, sender);
+					pstmt.setInt(3, receiver);
+					
+					result = pstmt.executeUpdate();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					close(pstmt);
+				}
+				return result;
+			}
 }
