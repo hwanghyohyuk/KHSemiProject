@@ -139,46 +139,52 @@
 									var json = JSON.parse(JSON.stringify(data));
 									var values = "";
 									for(var i in json.list){
-										values += 	"<li style='width: 400px; height: 40px; margin-top: 10px;'>" +
-														"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3' style='height: 34px; padding-top: 7px;'>" +
+										values += 	"<li style='width: 680px; height: 40px; margin-top: 10px;'>" +
+														"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='height: 34px; padding-top: 7px;'>" +
 															decodeURIComponent(json.list[i].groupname).replace(/\+/gi, " ") +
 														"</div>" +
-														"<div class='col-lg-5 col-md-5 col-sm-5 col-xs-5' style='height: 34px; padding-top: 7px;'>" +
+														"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+															decodeURIComponent(json.list[i].username).replace(/\+/gi, " ") +
+														"</div>" +
+														"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6' style='height: 34px; padding-top: 7px;'>" +
 															decodeURIComponent(json.list[i].message).replace(/\+/gi, " ") +
 														"</div>";
 										if(json.list[i].messagestate == 0){
-										values += "<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='padding-left: 0px;'>" +
+										values += "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1' style='padding-left: 0px;'>" +
 															"<button type='button' class='btn btn-success' onclick='agree(" + json.list[i].messageno + "," + json.list[i].receiver + ", " + json.list[i].sender + "," + json.list[i].groupno + ")'>수락</button>" + 
 															/* 수락 누르면 ung인서트하고 메시지상태 2로 업뎃*/
 														"</div>" +
-														"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='padding-left: 0px;'>" +
+														"<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1' style='padding-left: 0px;'>" +
 															"<button type='button' class='btn btn-danger' onclick='negative(" + json.list[i].messageno + "," + json.list[i].receiver + ", " + json.list[i].sender + "," + json.list[i].groupno + ")'>거절</button>" +
 															/* 거절 누르면  메시지상태2로 업뎃*/
 														"</div>" +
 													"</li>";
 										} else if (json.list[i].messagestate == 1) {
-											values += 	"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4' style='padding-left: 0px;'>" +
-															"<button type='button' class='btn btn-primary' onclick='confirm=(" + json.list[i].messageno + ")'>확인</button>" +
+											values += 	"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='padding-left: 0px;'>" +
+															"<button type='button' class='btn btn-primary' onclick='confirm(" + json.list[i].messageno + ")'>확인</button>" +
 															/* 확인누르면 메시지상태 2로 업뎃 */
 														"</div>" +
 													"</li>";
 										} else {
-											values += 	"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4' style='padding-left: 0px;'>" +
+											values += 	"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='padding-left: 0px;'>" +
 														"</div>" +
 													"</li>";
 										}
 									}
-									var sub = 	"<li style='width: 400px; height: 30px;line-height:30px;'>" +
-													"<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3'>" +
+									var sub = 	"<li style='width: 680px; height: 30px;line-height:30px;'>" +
+													"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
 														"그룹명" +
 													"</div>" +
-													"<div class='col-lg-5 col-md-5 col-sm-5 col-xs-5'>" +
+													"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+														"보낸이" +
+													"</div>" +
+													"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
 														"내용" +
 													"</div>" +
-													"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+													"<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1' style='padding-left: 0px;'>" +
 														"수락" +
 													"</div>" +
-													"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+													"<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1' style='padding-left: 0px;'>" +
 														"거절" +
 													"</div>" +
 												"</li>" +
@@ -196,6 +202,31 @@
 								type: "get",
 								async: false
 							});
+							alert("초대를 수락하였습니다.");
+							messagecount();
+							messageselect();
+						}
+						
+						function negative(messageno, receiver, sender, groupno){
+							$.ajax({
+								data: { messageno: messageno, receiver: receiver, sender: sender, groupno: groupno, state: 0 },
+								url: "/studyhub/inviteprocess",
+								type: "get",
+								async: false
+							});
+							alert("초대를 거절하였습니다.");
+							messagecount();
+							messageselect();
+						}
+						
+						function confirm(messageno){
+							$.ajax({
+								data: { messageno: messageno, receiver: 1, sender: 1, groupno: 1, state: 2 },
+								url: "/studyhub/inviteprocess",
+								type: "get",
+								async: false
+							});
+							messagecount();
 							messageselect();
 						}
 					</script>

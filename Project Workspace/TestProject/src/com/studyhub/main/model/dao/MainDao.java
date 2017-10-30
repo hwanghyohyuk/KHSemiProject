@@ -89,18 +89,19 @@ public class MainDao {
 		return result;
 	}
 
-	public int InsertUnG(Connection con, int userno, Group groupno) {
+	public int InsertUnG(Connection con, int userno, Group groupno, int i) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
 		String query = "insert into tb_ung values ("
 					+  "(select max(ung_no) + 1 from tb_ung), "
-					+  "?, ?, 2, 0)";
+					+  "?, ?, ?, 0)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, userno);
 			pstmt.setInt(2, groupno.getGroupNo());
+			pstmt.setInt(3, i);
 			
 			result = pstmt.executeUpdate();
 			
@@ -178,7 +179,7 @@ public class MainDao {
 		
 		String query = "select count(*) as messagecount " +
 						"from tb_message " +
-						"where message_state = 0 " +
+						"where message_state in (0,1) " +
 						"and receiver = ? " +
 						"group by receiver";
 		
@@ -206,9 +207,10 @@ public class MainDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select message_no, message, group_no, group_name, sender, receiver, message_state "
+		String query = "select message_no, message, group_no, group_name, sender, receiver, message_state, user_name "
 				+ "from tb_message "
 				+ "join tb_group using(group_no) "
+				+ "join tb_user on (sender=user_no) "
 				+ "where receiver = ?";
 		
 		try {
@@ -227,6 +229,7 @@ public class MainDao {
 					m.setSenderNo(rset.getInt("sender"));
 					m.setReceiverNo(rset.getInt("receiver"));
 					m.setMessageState(rset.getInt("message_state"));
+					m.setUserName(rset.getString("user_name"));
 					
 					list.add(m);
 				}
@@ -239,5 +242,96 @@ public class MainDao {
 		}
 		
 		return list;
+	}
+
+	public int InviteAgree(Connection con, int groupno, int receiver) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into tb_ung values ("
+				+ "(select max(ung_no) + 1 from tb_message) "
+				+ ", ?, ?, 1, 1)";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, receiver);
+			pstmt.setInt(2, groupno);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int changeMessage1(Connection con, int messageno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_message set message_state = 2 where message_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, messageno);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int InsertMessage(Connection con, int groupno, int sender, int receiver) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into tb_message values("
+				+ "(select max(message_no) + 1 from tb_message) "
+				+ ", ?, ?, ?, 1, '가입초대를 승인하였습니다.') ";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			pstmt.setInt(2, receiver);
+			pstmt.setInt(3, sender);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int InsertMessage2(Connection con, int groupno, int sender, int receiver) {
+int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into tb_message values("
+				+ "(select max(message_no) + 1 from tb_message) "
+				+ ", ?, ?, ?, 1, '가입초대를 거절하였습니다.') ";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			pstmt.setInt(2, receiver);
+			pstmt.setInt(3, sender);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }
