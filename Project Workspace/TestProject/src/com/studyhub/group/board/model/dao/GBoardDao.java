@@ -3,6 +3,8 @@ package com.studyhub.group.board.model.dao;
 import static com.studyhub.common.JDBCTemplate.*;
 import java.sql.*;
 import java.util.ArrayList;
+
+import com.studyhub.common.vo.GBComment;
 import com.studyhub.common.vo.GBoard;
 
 public class GBoardDao {
@@ -44,7 +46,7 @@ public class GBoardDao {
 
 		return gBoard;
 	}
-	
+
 	public int insertGBoard(Connection conn, GBoard gBoard) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -59,7 +61,6 @@ public class GBoardDao {
 			pstmt.setInt(3, gBoard.getUploader());
 			pstmt.setInt(4, gBoard.getAccessNo());
 			pstmt.setInt(5, gBoard.getGroupNo());
-			
 
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -95,7 +96,7 @@ public class GBoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "";
+		String query = "update tb_g_board set title = ?, content = ? " + "where g_board_no = ?";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -192,52 +193,83 @@ public class GBoardDao {
 	}
 
 	
+	public int deleteComment(Connection con, int cno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
 
-	/*
-	 * // GNotice Comment public int deleteComment(Connection con, int cno) {
-	 * int result = 0; PreparedStatement pstmt = null;
-	 * 
-	 * String query = "delete from tb_gnotice_comment where comment_no =? ";
-	 * 
-	 * try { pstmt = con.prepareStatement(query); pstmt.setInt(1, cno);
-	 * 
-	 * result = pstmt.executeUpdate();
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); } finally { close(pstmt); }
-	 * 
-	 * return result; }
-	 * 
-	 * public int insertComment(Connection con, int gnoticeno, String comment,
-	 * int userno) { int result = 0; PreparedStatement pstmt = null;
-	 * 
-	 * String query = "";
-	 * 
-	 * try { pstmt = con.prepareStatement(query); pstmt.setInt(1, gnoticeno);
-	 * pstmt.setString(2, comment); pstmt.setInt(3, userno);
-	 * 
-	 * result = pstmt.executeUpdate();
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); } finally { close(pstmt); }
-	 * return result; } public ArrayList<GNComment> selectComment(Connection
-	 * con, int gnoticeno) { ArrayList<GNComment> list = null; PreparedStatement
-	 * pstmt = null; ResultSet rset = null;
-	 * 
-	 * String query = "";
-	 * 
-	 * try { pstmt = con.prepareStatement(query); pstmt.setInt(1, gnoticeno);
-	 * 
-	 * rset = pstmt.executeQuery(); if (rset != null) { list = new
-	 * ArrayList<GNComment>(); while (rset.next()) { GNComment gnc = new
-	 * GNComment(); gnc.setCommentNo(rset.getInt("comment_no"));
-	 * gnc.setNoticeNo(rset.getInt("notice_no"));
-	 * gnc.setContent(rset.getString("content"));
-	 * gnc.setUploadDate(rset.getDate("uploade_date"));
-	 * gnc.setUploader(rset.getInt("uploader"));
-	 * 
-	 * list.add(gnc); }
-	 * 
-	 * } } catch (Exception e) { e.printStackTrace(); } finally { close(rset);
-	 * close(pstmt); } System.out.println(list); return list; }
-	 */
+		String query = "delete from tb_gboard_comment where comment_no =? ";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, cno);
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int insertComment(Connection con, int gboardno, String comment, int userno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, gboardno);
+			pstmt.setString(2, comment);
+			pstmt.setInt(3, userno);
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<GBComment> selectComment(Connection con, int gboardno) {
+		ArrayList<GBComment> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, gboardno);
+
+			rset = pstmt.executeQuery();
+			if (rset != null) {
+				list = new ArrayList<GBComment>();
+				while (rset.next()) {
+					GBComment gnc = new GBComment();
+					gnc.setCommentNo(rset.getInt("comment_no"));
+					gnc.setgBoardNo(rset.getInt("gboard_no"));
+					gnc.setContent(rset.getString("content"));
+					gnc.setUploadDate(rset.getDate("uploade_date"));
+					gnc.setUploader(rset.getInt("uploader"));
+
+					list.add(gnc);
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println(list);
+		return list;
+	}
 
 }

@@ -36,27 +36,29 @@
 		<h2>게시글 수정</h2>
 		<br>
 		<form action="/studyhub/gboardupdate" method="post">
-			<div class="form-group">
-				<label for="title">제목</label> <input type="text"
-					class="form-control" id="exampleInputEmail1"
-					name="title" 
-					aria-describedby="emailHelp" value="<%=gb.getTitle() %>" >
-			</div>
-			<div class="range">
-				<label for="Content">공개범위</label> <label class="radio-inline">
-					<input type="radio" name="accessno" id="inlineRadio1" value="1">
-					전체공개
-				</label> <label class="radio-inline"> <input type="radio"
-					name="accessno" id="inlineRadio2" value="2"> 회원공개
-				</label> <label class="radio-inline"> <input type="radio"
-					name="accessno" id="inlineRadio3" value="3"> 그룹원공개
-				</label>
-			</div>
-			<div class="form-group">
-				<label for="Content">내용</label>
-				<textarea class="form-control" id="Textarea" rows="15"
-				name="content" value="<%=gb.getContent() %>" ></textarea>
-			</div>
+				<div class="form-group">
+			<label for="title">제목</label> <input type="text"
+				class="form-control" id="post_title" name="title"
+				aria-describedby="emailHelp" value= <%=gb.getTitle() %>>
+		</div>
+		<div class="range">
+		<label for="Content">공개범위</label>
+		<label class="radio-inline"> <input type="radio"
+			name="accessno" id="inlineRadio1" value="1" checked>
+			전체공개
+		</label> <label class="radio-inline"> <input type="radio"
+			name="accessno" id="inlineRadio2" value="2">
+			회원공개			
+		</label> <label class="radio-inline"> <input type="radio"
+			name="accessno" id="inlineRadio2" value="3" checked>
+			그룹원공개			
+		</label>
+		</div>
+		<div class="form-group">
+			<label for="Content">내용</label>
+			<textarea class="form-control" id="Textarea" rows="15" name="content"
+				><%=gb.getContent() %></textarea>
+		</div>
 			<input type="hidden" name="uploader" value="<%=user.getUserNo() %>">
 			<input type="hidden" name="groupno" value="<%=group.getGroupNo() %>">
 			<input type="submit" value="수정하기" class = "btn btn-info" id="btns"> <a

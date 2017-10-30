@@ -36,9 +36,9 @@ public class GBoardDeleteServlet extends HttpServlet {
 			//게시글 삭제
 		response.setContentType("text/html; charset=utf-8");
 		
-		int no = Integer.parseInt(request.getParameter("no"));
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		if(new GBoardService().deleteGBoard(no) > 0){
+		if(new GBoardService().deleteGBoard(bno) > 0){
 			response.sendRedirect("/studyhub/gboardlist");
 		}else{
 			RequestDispatcher view = request.getRequestDispatcher("views/board/boardError.jsp");
