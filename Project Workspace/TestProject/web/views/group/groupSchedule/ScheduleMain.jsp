@@ -26,8 +26,8 @@
 .list-group-item {
 	margin-top: 0px;
 	padding-left: 7px;
-	padding-right: 7px;
-}
+	padding-right: 7px;/* 
+} */
 
 #list-group {
 	padding-top: 10px;
@@ -440,8 +440,7 @@
 		});
 		alert("일정이 등록되었습니다.");
 		$("#dkmodal").modal("hide");
-		selectSchedule();
-		calendar();
+		location.href="/studyhub/schedulepreview?group_no=groupno";
 	}
 	
 	/* 일정 수정 */
@@ -464,12 +463,12 @@
 		});
 		alert("일정이 수정되었습니다.");
 		$("#dkmodal").modal("hide");
-		selectSchedule();
-		calendar();
+		location.href="/studyhub/schedulepreview?group_no=groupno";
 	}
 	
 	/* 일정 삭제 */
 	function deleteSchedule() {
+		var groupno = "<%= group.getGroupNo() %>";
 		var scheduleno = $("#sc_no").val();
 		$.ajax({
 			url: "/studyhub/scheduledelete",
@@ -479,8 +478,7 @@
 		});
 		alert("일정이 삭제되었습니다.");
 		$("#dkmodal").modal("hide");
-		selectSchedule();
-		calendar();
+		location.href="/studyhub/schedulepreview?group_no=groupno";
 	}
 
 	/* 일정 셀렉트 */

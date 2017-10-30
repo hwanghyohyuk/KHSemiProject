@@ -11,6 +11,9 @@ public class UNG implements Serializable {
 	private String groupName;
 	private int count;
 	private String renameimg;
+	private String email;
+	private String userName;
+	private int ungState;
 
 	public UNG() {
 		super();
@@ -32,6 +35,39 @@ public class UNG implements Serializable {
 		this.renameimg = renameimg;
 	}
 	
+	public UNG(int ungNo, String email, String userName, int ungState, int authorityNo) {
+		super();
+		this.ungNo = ungNo;
+		this.email = email;
+		this.userName = userName;
+		this.ungState = ungState;
+		this.authorityNo = authorityNo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public int getUngState() {
+		return ungState;
+	}
+
+	public void setUngState(int ungState) {
+		this.ungState = ungState;
+	}
+
 	public String getGroupName() {
 		return groupName;
 	}
