@@ -597,14 +597,14 @@ INSERT INTO TB_GROUP VALUES(1, 'TOEIC', 1, '서울', 1, '토익온오프라인�
 INSERT INTO TB_GROUP VALUES(2, '영어회화방',  2, '경기도', 2, '만나서회화까지', null, null,DEFAULT,null);
 
 PROMPT INSERT DATA UNG!...
-INSERT INTO TB_UNG VALUES(1,2,1,2,DEFAULT); -- 유저2번 그룹1번 그룹장
-INSERT INTO TB_UNG VALUES(2,3,1,1,DEFAULT); -- 유저3번 그룹1번 회원
-INSERT INTO TB_UNG VALUES(3,5,1,1,DEFAULT); -- 유저5번 그룹1번 회원
-INSERT INTO TB_UNG VALUES(4,6,1,1,DEFAULT); -- 유저6번 그룹1번 회원
-INSERT INTO TB_UNG VALUES(5,4,2,2,DEFAULT); -- 유저4번 그룹2번 그룹장
-INSERT INTO TB_UNG VALUES(6,2,2,1,DEFAULT); -- 유저2번 그룹2번 회원(유저2번은 그룹1번 그룹장)
-INSERT INTO TB_UNG VALUES(7,3,2,1,DEFAULT); -- 유저3번 그룹2번 회원
-INSERT INTO TB_UNG VALUES(8,6,2,1,DEFAULT); -- 유저6번 그룹2번 회원
+INSERT INTO TB_UNG VALUES(1,2,1,2,1); -- 유저2번 그룹1번 그룹장
+INSERT INTO TB_UNG VALUES(2,3,1,1,1); -- 유저3번 그룹1번 회원
+INSERT INTO TB_UNG VALUES(3,5,1,1,1); -- 유저5번 그룹1번 회원
+INSERT INTO TB_UNG VALUES(4,6,1,1,1); -- 유저6번 그룹1번 회원
+INSERT INTO TB_UNG VALUES(5,4,2,2,1); -- 유저4번 그룹2번 그룹장
+INSERT INTO TB_UNG VALUES(6,2,2,1,1); -- 유저2번 그룹2번 회원(유저2번은 그룹1번 그룹장)
+INSERT INTO TB_UNG VALUES(7,3,2,1,1); -- 유저3번 그룹2번 회원
+INSERT INTO TB_UNG VALUES(8,6,2,1,1); -- 유저6번 그룹2번 회원
 
 
 ---추가 
