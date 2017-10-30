@@ -27,39 +27,50 @@
 					<div class="form-group">
 						<label for="email" class="col-sm-4 col-xs-10 control-label">이메일</label>
 						<div class="col-sm-8 col-xs-10">
-							<label for="name" class="control-label"><%=user.getEmail() %></label>
+							<input type="text" readonly class="form-control" id="email" value="<%=user.getEmail() %>"></input>
 						</div>
 					</div>
 					<div class="form-group ">
 						<label for="name" class="col-sm-4 col-xs-10 control-label">이름</label>
 						<div class="col-sm-8 col-xs-10">
-							<label for="name" class="control-label"><%=user.getUserName() %></label>
+							<input type="text" readonly class="form-control" id="name" value="<%=user.getUserName() %>"></input>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="name" class="col-sm-4 col-xs-10 control-label">연락처</label>
-						<div class="col-sm-8 col-xs-10">
+						<div class="col-sm-6 col-xs-8">
 							<input type="tel" class="form-control" id="modifytel"
-								name="phone" placeholder="연락처 '-' 없이" value='<%=user.getPhone() %>'>
+								name="phone" placeholder="연락처 '-' 없이" value='<%=user.getPhone() %>'
+								oninput='myinfoCheckPhone()' onblur='myinfoCheckPhone()' onclick='myinfoCheckPhone()'>
+						</div>
+						<div class="col-sm-2 col-xs-2">
+						<p id='modifyteltxt'></p>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="name" class="col-sm-4 col-xs-10 control-label">비밀번호
 							변경</label>
-						<div class="col-sm-8 col-xs-10">
-							<input type="password" class="form-control" id="inputPassword"
-								name="modifypwd" placeholder="Modify Password">
+						<div class="col-sm-6 col-xs-8">
+							<input type="password" class="form-control" id="modifypwd"
+								name="modifypwd" placeholder="Modify Password" oninput='myinfoPwdInput()' onblur='myinfoPwdInput()' onclick='myinfoPwdInput()'>
+						</div>
+						<div class="col-sm-2 col-xs-2">
+						<p id='modifypwdtxt'></p>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="name" class="col-sm-4 col-xs-10 control-label">비밀번호
 							확인</label>
-						<div class="col-sm-8 col-xs-10">
-							<input type="password" class="form-control" id="inputPassword"
-								name="confirmpwd" placeholder="Confirm Password">
+						<div class="col-sm-6 col-xs-8">
+							<input type="password" class="form-control" id="confirmpwd"
+								name="confirmpwd" placeholder="Confirm Password" oninput='myinfoPwdConfirm()' onblur='myinfoPwdConfirm()' onclick='myinfoPwdConfirm()'>
+						</div>
+						<div class="col-sm-2 col-xs-2">
+						<p id='confirmpwdtxt'></p>
 						</div>
 					</div>
-					<button type="submit" class="btn btn-primary pull-right">정보
+					<hr>
+					<button type="submit" class="btn btn-primary pull-right" id="modifybtn" disabled="disabled">정보
 						수정</button>
 				</form>
 			</div>
@@ -86,5 +97,7 @@
 
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
+
+<script type="text/javascript" src="/studyhub/js/signup.js"></script>
 <!--페이지 끝-->
 <%@ include file="/views/include/common/headend.jsp"%>
