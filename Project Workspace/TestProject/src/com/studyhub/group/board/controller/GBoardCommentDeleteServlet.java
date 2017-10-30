@@ -7,19 +7,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.common.vo.GBoard;
 import com.studyhub.group.board.model.service.GBoardService;
 
 /**
  * Servlet implementation class GBoardCommentDelete
  */
 @WebServlet("/gbcommentdelete")
-public class GBoardCommentDelete extends HttpServlet {
+public class GBoardCommentDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private GBoard gboard;
+	private GBoardService gboardService;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GBoardCommentDelete() {
+    public GBoardCommentDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,6 +35,7 @@ public class GBoardCommentDelete extends HttpServlet {
 		if(new GBoardService().deleteComment(commentno)>0){
 			response.sendRedirect("/views/group/groupBoard/BoardList.jsp");
 		}
+		
 	}
 
 	/**

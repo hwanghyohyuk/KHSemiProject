@@ -21,68 +21,125 @@
 <%@ include file="/views/include/main/header.jsp"%>
 <%@ include file="/views/include/group/nav.jsp"%>
 
-<div class="row">
+<div class="container">
 	<div class="panel panel-info" style="width: 80vw; margin: 3vh 10vw">
-		<div class="panel-heading">
 			<form class="form-horizontal">
-				<div class="form-group">
-
-					<div class="col-sm-30">
-						<label for="inputEmail3" class="col-sm-1 control-label">제목</label>
-					</div>
-					<%-- 					<h1><%=gBoard.getTitle()%></h1> 
- --%>
-					<div class="col-sm-30">
-						<label for="inputPassword3" class="col-sm-1 control-label">내용</label>
-					</div>
-					<%-- 					<%=gBoard.getContent()%> 
- --%>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">제목</label>
+				<div class="col-sm-3">
+					<p class="pull-left control-label"><%=gBoard.getTitle()%></p>
 				</div>
-
-				<div class="form-group ">
-					<div class="col-sm-12">
-						<button class="btn btn-default btn-sm"
-							style="margin-top: 0.6vh; float: right">
-							<a href="#" data-method="post" data-confirm="삭제하시겠습니까?">삭제</a>
-						</button>
-						<button class="btn btn-default btn-sm"
-							style="margin-top: 0.6vh; float: right">
-							<a href="/studyhub/views/group/groupBoard/BoardUpdateForm.jsp">수정</a>
-						</button>
-						<button class="btn btn-default btn-sm"
-							style="margin-top: 0.6vh; float: right">
-							<a href="/studyhub/gboardpreview?groupno=<%=group.getGroupNo()%>"
-								data-method="post">목록</a>
-						</button>
-
-
-
-					</div>
+				<label class="col-sm-3 control-label">내용</label>
+				<div class="col-sm-9">
+					<%=(gBoard.getContent()).replaceAll("\n", "<br>")%>
 				</div>
-		</div>
+			</div>
 
-		<div class="panel-body">
-			<!-- 댓글입력 -->
-			<form action="#" method="post">
-				<input type="text" name="content" class="form-control"
-					id="exampleInputEmail1" style="width: 64vw" placeholder="댓글을 달아주세요">
-				<button class="btn btn-info btn-sm" type="submit"
-					style="margin-right: 1vw">댓글달기</button>
+			<div class="form-group ">
+				<div class="col-sm-12">
+					<button class="btn btn-default btn-sm"
+						style="margin-top: 0.6vh; float: right">
+						<a href="#" data-method="post" data-confirm="삭제하시겠습니까?">삭제</a>
+					</button>
+					<button class="btn btn-default btn-sm"
+						style="margin-top: 0.6vh; float: right">
+						<a href="/studyhub/views/group/groupBoard/BoardUpdateForm.jsp">수정</a>
+					</button>
+					<button class="btn btn-default btn-sm"
+						style="margin-top: 0.6vh; float: right">
+						<a href="/studyhub/gboardpreview?groupno=<%=group.getGroupNo()%>"
+							data-method="post">목록</a>
+					</button>
+				</div>
+			</div>
 			</form>
-
-			<!-- 댓글보여지는부분 -->
-			<button>
-				<a href="#" data-method="post">수정</a>
-			</button>
-			<button>
-				<a href="#" data-method="post" data-confirm="Are you sure">삭제</a>
-			</button>
-
-
-
 		</div>
 
-		<div class="blank" style="height: 3vh; display: block"></div>
+	<div class="comment-list">
+	Comment<br> <br>
+	<!---댓글입력-->
+		<input type="text" name="content" class="form-control" width = "80%"
+			id="comment-write" placeholder="댓글을 달아주세요">
+		<input type="hidden" name ="gboardno" id ="gboardno" value="<%=gBoard.getgBoardNo() %>">
+		<input type="hidden" name ="uploader" id ="uploader" value="<%=gBoard.getUploader() %>">
+		<button class="btn btn-info btn-sm" onclick = "insert();">댓글달기</button>
+		<script type="text/javascript">
+	
+		$(function(){
+			select();
+		});
+			function insert(){
+				console.log("is it working");
+				if($("#comment-write").val() ==""){
+					alert("댓글을 입력하세요");
+					focus("#comment-write");
+					return false;
+				}else{
+					var comment = $("#comment-write").val();
+					var uploader = $("#uploader").val();
+					var gnoticeno = $("#gboardno").val();
+					
+					var queryString = { "uploader": uploader, "gboardno": gboardno, "comment": comment};
+					
+					$.ajax({
+						url: "/studyhub/gbcommentinsert",
+						data: queryString,
+						type: "get",
+						dataType: "json"
+					});
+					$("#comment-write").val("");
+					select();
+					return true;
+				}
+			}	
+			
+			function select(){
+				var gboardno = "<%= gBoard.getgBoardNo() %>";
+				$.ajax({
+					url: "/studyhub/gbcommentselect",
+					data: { gboardno: gboardno },
+					type: "get",
+					datatype: "json",
+					success: function(data){
+						
+						var json = JSON.parse(JSON.stringify(data));
+						var values = "";
+						for(var i in json.list){
+							values +=
+								"<div class='panel-footer'>"+
+								decodeURIComponent(json.list[i].comment)+
+								"<span> | "+ decodeURIComponent(json.list[i].username)+ "</span>"+
+								"<span> | "+ decodeURIComponent(json.list[i].uploaddate)+ "</span>"+
+								"<input type='hidden' value='"+ json.list[i].commentno +"' id='commentno'>"+
+								"<input type='button' id='comment-del-btn' name='comment-del-btn' class='btn btn-info btn-sm' value='삭제' onclick='deleteC();'></div>"									;
+							
+						}
+						$("#comment-list").html(values);
+						
+						
+					},
+					error: function(xhr,status,error){
+						alert("error\nxhr: " + xhr + ", status: " + status+ ", error: " + error);
+					}
+				});
+			}	
+			
+			function deleteC(){
+				var commentno = $("#commentno").val();
+				$.ajax({
+					url: "/studyhub/gbcommentdelete",
+					data: { commentno: commentno },
+					type: "get",
+					dataType: "json",
+				});
+				alert("삭제되었습니다.");
+				select();	
+			} 
+		
+		
+		</script>
+
+</div>
 
 	</div>
 
