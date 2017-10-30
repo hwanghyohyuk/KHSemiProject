@@ -45,7 +45,7 @@ public class NoticeService {
 		return notice;
 	}
 
-	public int insertNotice(Notice notice) {
+	public int insertNotice(String notice) {
 		Connection con = getConnection();
 		int result = new NoticeDao().insertNotice(con, notice);
 		if(result > 0)

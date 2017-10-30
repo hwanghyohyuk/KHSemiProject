@@ -1,7 +1,10 @@
 package com.studyhub.admin.notice.model.dao;
 
+import static com.studyhub.common.JDBCTemplate.close;
+
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,9 +38,23 @@ public class NoticeDao {
 	}
 
 
-	public int insertNotice(Connection con, Notice notice) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertNotice(Connection con, String notice) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into tb_notice values ( ? )";
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, notice);
+			
+			result = pstmt.executeUpdate();			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	public int deleteNotice(Connection con, int no) {

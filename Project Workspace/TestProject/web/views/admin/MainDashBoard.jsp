@@ -22,9 +22,9 @@
 <div
 	class="col-lg-8 col-md-8 col-sm-10 col-xs-10 col-lg-offset-2 col-md-offset-2">
 	<h3 id="notice-label">공지사항/알림 띄우기</h3>
-	<form class="form-inline">
+	<form class="form-inline" action="/studyhub/noticeinsert" method="post">
 		<div class="form-group">
-			<textarea class="form-control" id="notice-input"
+			<textarea class="form-control" id="notice-input" name="notice"
 				placeholder="사용자들에게 보여줄 공지사항을 입력하세요" rows="6"></textarea>
 			<div class="submit-area">
 				<div class="checkbox">
