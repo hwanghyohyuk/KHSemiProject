@@ -21,8 +21,8 @@ import com.studyhub.group.sharefile.model.service.ShareFileService;
 public class GBoardViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private GBoard gNboard;
-	private GBoardService gNboardService;
+	private GBoard gBoard;
+	private GBoardService gBoardService;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,16 +37,15 @@ public class GBoardViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html; charset=utf-8");
+		
 		int no = Integer.parseInt(request.getParameter("no"));
 
-		GBoardService gbservice = new GBoardService();
-		GBoard gboard = gbservice.selectGBoard(no);
-		
+		gBoardService = new GBoardService();
+		gBoard = gBoardService.selectGBoard(no);
 		RequestDispatcher view = null;
-		
-		if(gboard != null){
+		if(gBoard != null){
 			view = request.getRequestDispatcher("views/group/groupBoard/BoardDetail.jsp");
-			request.setAttribute("gBoard", gboard);
+			request.setAttribute("gBoard", gBoard);
 			view.forward(request, response);
 		}else{
 			view = request.getRequestDispatcher("views/group/groupBoard/BoardError.jsp");
