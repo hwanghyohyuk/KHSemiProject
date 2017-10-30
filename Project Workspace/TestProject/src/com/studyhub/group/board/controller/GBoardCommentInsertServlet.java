@@ -7,20 +7,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.common.vo.GBoard;
 import com.studyhub.group.board.model.service.GBoardService;
+import com.studyhub.group.notice.model.service.GNoticeService;
 import com.studyhub.group.qna.model.service.GroupQnAService;
 
 /**
  * Servlet implementation class GBoardCommentInsert
  */
 @WebServlet("/gbcommentinsert")
-public class GBoardCommentInsert extends HttpServlet {
+public class GBoardCommentInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private GBoard gboard;
+	private GBoardService gboardService;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GBoardCommentInsert() {
+	public GBoardCommentInsertServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -33,13 +37,13 @@ public class GBoardCommentInsert extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 
-		int gboardno = Integer.parseInt(request.getParameter("gboardno"));
-		int userno = Integer.parseInt(request.getParameter("userno"));
-		String comment = request.getParameter("comment");
-		System.out.println(comment);
 
-		if (new GBoardService().insertComment(gboardno, userno, comment) > 0) {
-			response.sendRedirect("views/group/groupBoard/BoardList.jsp");
+		int gboardno = Integer.parseInt(request.getParameter("gboardno"));
+		String comment = request.getParameter("comment");
+		int uploader = Integer.parseInt(request.getParameter("uploader"));
+		System.out.println(comment);
+		if(new GNoticeService().insertComment(gboardno, uploader, comment)>0 ){
+			response.sendRedirect("views/group/groupBoard/BoardDetail.jsp");
 		}
 	}
 
