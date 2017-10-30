@@ -43,6 +43,7 @@ function sendMessage(senderNo,receiverNo,groupNo){
 	checkBtnState(sender,groupno);
 	state=0;
 	}
+	history.back();
 }
 
 function checkBtnState(senderNo,groupNo){
@@ -55,7 +56,6 @@ function checkBtnState(senderNo,groupNo){
 		url : "/studyhub/ungstate",
 		async : false,
 		success : function(data) {
-			alert(data);
 			if(data==0){
 				$("#joinbtn").prop("disabled", true);
 				$("#joinbtn").html("가입대기 중");

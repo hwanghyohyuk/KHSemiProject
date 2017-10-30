@@ -78,7 +78,7 @@ window.onload = function(){ checkBtnState(<%=senderNo%>,<%=groupNo%>); }
 			<label class="col-sm-1 control-label">가입 신청</label>
 			<div class="col-sm-3">
 				<%if(board.getStatus().equals("모집중")){ %>
-				<button id="joinbtn" class="btn btn-primary main-back pull-left"  onclick='javascript:sendMessage(<%=senderNo%>,<%=receiverNo%>,<%=groupNo%>);'>가입 신청</button>
+				<button id="joinbtn" class="btn btn-primary main-back pull-left" onclick='javascript:sendMessage(<%=senderNo%>,<%=receiverNo%>,<%=groupNo%>);'>가입 신청</button>
 				<%}else{ %>
 				<a class="btn btn-default pull-left" disabled href="#">모집 마감</a>
 				<%} %>
