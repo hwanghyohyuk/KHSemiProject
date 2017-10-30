@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+		String notice = (String)request.getAttribute("notice");
+	%>
 <!-- 
 작성자 : 구미향
 내용 : FAQ 메인 페이지(메인에서 도움말 클릭했을 때의 화면)
@@ -84,7 +87,7 @@
 
 <!-- 메인 컨텐츠 -->
 	<div class="notice">
-		<p id="notice">[공지] 공지사항은 여기에 ㅎㅎㅎㅎㅎㅎ</p>
+		<p id="notice-text">[공지] <%= notice %></p>
 	</div>
 	<div class="head-text">
 	<h1 id="head-text">무엇이 궁금하신가요?</h1>

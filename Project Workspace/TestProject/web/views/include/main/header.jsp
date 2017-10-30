@@ -40,7 +40,7 @@
 							<span class="glyphicon glyphicon-search main" aria-hidden="true"></span><span
 							class="black">스터디찾기</span>
 					</a></li>
-					<li><a href="/studyhub/views/main/FAQ/FAQmain.jsp">
+					<li><a href="/studyhub/noticeview">
 							<p class="black">도움말</p>
 					</a></li>
 

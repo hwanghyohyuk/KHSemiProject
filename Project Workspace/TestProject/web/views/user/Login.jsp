@@ -56,6 +56,7 @@
 function emptyCheck() {
 	var email = $("#email").val();
 	var pwd = $("#pwd").val();
+	//if((email=="" || pwd=="")||pwd.length<10){
 	if(email=="" || pwd==""){
 		$("#loginbtn").prop("disabled", true);
 	}else{

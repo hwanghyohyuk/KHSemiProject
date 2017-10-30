@@ -41,11 +41,10 @@ public class GNoticePreviewServlet extends HttpServlet {
 		
 		GNoticeService gnservice = new GNoticeService();
 		
-		int groupno = Integer.parseInt(request.getParameter("groupno"));		
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
 		
 		int currentPage = 1;
-		int limit = 10;
-			
+		int limit = 10;			
 		if(request.getParameter("page")!= null)
 		currentPage = Integer.parseInt(request.getParameter("page"));						
 		
@@ -53,7 +52,6 @@ public class GNoticePreviewServlet extends HttpServlet {
 					
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		int startPage = ((int)((double)currentPage / limit + 0.9) -1) *limit +1;
-		
 		int endPage = startPage + limit -1;
 		if(maxPage < endPage)
 			endPage = maxPage;

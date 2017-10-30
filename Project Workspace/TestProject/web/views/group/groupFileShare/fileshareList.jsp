@@ -38,7 +38,7 @@
 	<div class="container">
 		<!-- Tab -->
 		<div class="category-tab">
-			<ul class="nav nav-tabs">
+			<ul class="nav nav-tabs" id="nav-ul">
 				<%
 					for (ShareFile c : clist) {
 						if(c.getFileCategoryNo() ==1){
@@ -65,8 +65,7 @@
 				<!-- <li><a href="#add" aria-controls="add" role="tab"
 					data-toggle="tab"> <span class="glyphicon glyphicon-plus"
 						aria-hidden="true"></span></a></li> -->
-				<li><a href="#settings" aria-controls="settings" role="tab"
-					data-toggle="tab"> <span class="glyphicon glyphicon-cog"
+				<li><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-cog"
 						aria-hidden="true"></span></a></li>
 				<%
 					}
@@ -366,7 +365,7 @@
 								<%
 									for (ShareFile sf : clist) {
 								%>
-								<li><input type="text" class="edit-input"
+								<li><input type="text" class="edit-input" name="<%=sf.getFileCategoryName()%>"
 									id="check<%=sf.getFileCategoryNo()%>" value="<%=sf.getFileCategoryName()%>">
 									<button class="c-btn" onclick="editCategory(<%=sf.getFileCategoryNo()%>);" id="edit-btn"><span class="glyphicon glyphicon-pencil"></span></button>
 									<button class="c-btn" onclick="deleteCategory(<%=sf.getFileCategoryNo()%>);" id="delete-btn"><span class="glyphicon glyphicon-remove-sign"></span></button>
@@ -432,19 +431,24 @@
 										console.log("json:"+json);
 										var values = "";
 										for(var i in json.list){
-											values +="<li><input type='text' class='edit-input' id='check" + json.list[i].categoryno +"' value='"+ decodeURIComponent(json.list[i].cname) +"'>"+
-											"<button class='c-btn' onclick='editCategory(" + decodeURIComponent(json.list[i].cname) + "," +json.list[i].categoryno+ ");'"+
+											values +="<li><input type='text' class='edit-input' id='check" + json.list[i].categoryno +"' name='"+ decodeURIComponent(json.list[i].cname) +"' value='"+ decodeURIComponent(json.list[i].cname) +"'>"+
+											"<button class='c-btn' onclick='editCategory(" +json.list[i].categoryno+ ");'"+
 											"id='edit-btn'><span class='glyphicon glyphicon-pencil'></span></button>"+
 												"<button class='c-btn' onclick='deleteCategory(" + json.list[i].categoryno + ");'"+ 
 												"id='delete-btn'><span class='glyphicon glyphicon-remove-sign'></span></button></li>";
 											
 										}
 										$(".list").html(values);
+										
+										var value2 = "";
+				
 										for(var j in json.list){
-											values += "<li><a href='#category" + json.list[i].categoryno +"' aria-controls='category" +json.list[i].categoryno+ "' role='tab'"+
-													"data-toggle='tab'>"+ decodeURIComponent(json.list[i].cname) + "</a></li>";
+											value2 += "<li><a href='#category" + json.list[j].categoryno +"' aria-controls='category" +json.list[j].categoryno+ "' role='tab'"+
+													"data-toggle='tab'>"+ decodeURIComponent(json.list[j].cname) + "</a></li>";
 										}
-										$(".nav nav-tabs").html(values);
+										value2 += "<li><a href='#settings' aria-controls='settings' role='tab' data-toggle='tab'><span class='glyphicon glyphicon-cog'"+
+										"aria-hidden='true'></span></a></li>";
+										$("#nav-ul").html(value2);
 									},
 									error: function(xhr, status, error){
 										alert("error\nxhr: " + xhr + ", status: " + status +", error: " + error);
@@ -468,13 +472,14 @@
 							}
 							
 							function editCategory(no){
-								if($(".edit-input").val() ==""){
+								if($("#check"+no).val() ==""){
 									alert("카테고리 이름을 입력하세요");
 									focus(".edit-input");
 								}else{
-									var cname = $(".edit-input").val();
+									var cname = $("#check"+no).val();
 									var cno = no;
 									var groupno = <%=group.getGroupNo()%>;
+									console.log(cname+","+cno+","+groupno);
 									var queryString = { cname : cname, cno : cno, groupno: groupno };
 									
 									$.ajax({

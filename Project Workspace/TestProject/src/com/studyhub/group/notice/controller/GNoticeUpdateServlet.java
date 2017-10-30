@@ -37,15 +37,30 @@ public class GNoticeUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
+		int no = Integer.parseInt(request.getParameter("no"));
+		String title = request.getParameter("title");
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
+		String content = request.getParameter("content");
+		int accessNo = Integer.parseInt(request.getParameter("accessno"));
+		String uploader = request.getParameter("uploader");
+		
 		gNotice = new GNotice();
-		gNotice.setNoticeNo(Integer.parseInt(request.getParameter("no")));
-		gNotice.setTitle(request.getParameter("title"));
-		gNotice.setContent(request.getParameter("content"));
+		gNotice.setNoticeNo(no);
+		gNotice.setTitle(title);
+		gNotice.setContent(content);
+		gNotice.setGroupNo(groupno);
+		gNotice.setAccessNo(accessNo);
+		gNotice.setUploader_name(uploader);
+		
+		gNoticeService = new GNoticeService();
+		int result = gNoticeService.updateGNotice(gNotice);
+		
+		System.out.println(gNotice);
 		
 		RequestDispatcher view = null;
 		
-		if(new GNoticeService().updateGNotice(gNotice)>0){
-			response.sendRedirect("/studyhub/gnoticepreview");
+		if(result > 0){
+			response.sendRedirect("/studyhub/gnoticepreview?groupno="+groupno);
 		}else{
 			view = request.getRequestDispatcher("/views/group/groupNotice/NoticeError.jsp");
 			request.setAttribute("message", "수정실패");
