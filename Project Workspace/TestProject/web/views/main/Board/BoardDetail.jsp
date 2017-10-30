@@ -14,6 +14,7 @@
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
 <!--자바스크립트 및 CSS-->
+<script type="text/javascript" src='/studyhub/js/board.js' ></script>
 <style>
 #groupimg {
 	width: 140px;
@@ -24,6 +25,13 @@
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
+
+<!-- sendMessage -->
+<%
+	int sender = user.getUserNo();
+	int receiver = board.getUploader();
+	int groupno = board.getGroupNo();
+%>
 
 <!-- 메인 컨텐츠 -->
 <div class="container">
@@ -61,9 +69,18 @@
 		<hr>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">내용</label>
-			<div class="col-sm-9">
+			<div class="col-sm-5">
 				<%=(board.getContent()).replaceAll("\n", "<br>") %>
 			</div>
+			
+			<label class="col-sm-1 control-label">가입 신청</label>
+			<div class="col-sm-3">
+				<%if(board.getStatus().equals("모집중")){ %>
+				<a id="joinbtn" class="btn btn-primary main-back pull-left" href="#" onclick='javascript:sendMessage(<%=sender%>,<%=receiver%>,<%=groupno%>);'>가입 신청</a>
+				<%}else{ %>
+				<a class="btn btn-default pull-left" disabled href="#">모집 마감</a>
+				<%} %>
+			</div>		
 		</div>
 		<hr>
 		<div class="form-group">

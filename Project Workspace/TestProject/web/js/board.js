@@ -1,3 +1,5 @@
+var btn_state = 0;//모집게시판 가입신청 버튼 상태
+
 function boardInsert() {
 	var btitle = $('#btitle').val();
 	var bglist = $('#bglist').val();
@@ -15,4 +17,38 @@ function boardInsert() {
 	}else{
 		$('#boardinsert').submit();
 	}	
+}
+
+function sendMessage(sender,receiver,groupno){
+	alert('sender : '+sender+'\nreceiver : '+receiver+'\ngroupno : '+groupno);
+	$.ajax({
+		type : "post",
+		data : {
+			sender : sender,
+			receiver : receiver,
+			groupno : groupno
+		},
+		url : "/studyhub/joinmessage",
+		async : false,
+		success : function(data) {
+			if(data==1){
+				alert('가입이 신청되었습니다.');
+				btn_state=1;
+			}else{
+				alert('가입 신청 오류!');
+				btn_state=0;
+			}
+		}
+	});
+		
+}
+
+function toggleJoinBtn(){
+	if(btn_state==0){
+		btn_state=1;
+	}else if(btn_state==1){
+		btn_state=0;
+	}
+	$("#joinbtn").prop("disabled", false);
+	//수정 시작 부분
 }
