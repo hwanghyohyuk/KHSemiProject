@@ -1,6 +1,7 @@
 package com.studyhub.user.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,15 +41,39 @@ public class FindPwdProcessServlet extends HttpServlet implements CryptTemplate 
 		String userPwd = request.getParameter("pwd");
 		String newPwd = null;
 		
+		int result=0;
+		
+		String page = request.getParameter("page");
+		
 		AesUtil util = new AesUtil(KEY_SIZE, ITERATION_COUNT);
-		String decryptEmail = util.decrypt(SALT, IV, PASSPHRASE, userEmail);
-		String decryptName = util.decrypt(SALT, IV, PASSPHRASE, userName);
+		String decryptEmail = null;
+		String decryptName = null;
 		String encryptPwd = util.encrypt(SALT, IV, PASSPHRASE, userPwd);
 		
-		us = new UserService();
-		int result = us.checkPwd(decryptEmail,decryptName,encryptPwd);	
-		
 		RequestDispatcher view = null;
+		
+		if(page!=null){
+			if(page.equals("myinfo")){
+				us = new UserService();
+				result = us.checkPwd(userEmail,userName,encryptPwd);	
+				PrintWriter pw = response.getWriter();
+				if (result > 0) {
+					pw.println("1");//기존 비밀번호와같음
+					pw.flush();
+					pw.close();
+				} else {
+					pw.println("0");//기존 비밀번호와 다름
+					pw.flush();
+					pw.close();
+				}
+			}				
+		}else{			
+			decryptEmail = util.decrypt(SALT, IV, PASSPHRASE, userEmail);
+			decryptName = util.decrypt(SALT, IV, PASSPHRASE, userName);			
+			
+			us = new UserService();
+			result = us.checkPwd(decryptEmail,decryptName,encryptPwd);
+			
 			if (result > 0) {
 				view = request.getRequestDispatcher("/views/user/userSuccess.jsp");
 				request.setAttribute("messageheader", "기존 비밀번호 찾기 완료");
@@ -77,6 +102,11 @@ public class FindPwdProcessServlet extends HttpServlet implements CryptTemplate 
 				}
 				view.forward(request, response);
 			}
+		}
+			
+		
+		
+			
 	}
 
 	/**

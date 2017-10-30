@@ -6,7 +6,6 @@ import static com.studyhub.common.JDBCTemplate.*;
 import com.studyhub.common.CryptTemplate;
 import com.studyhub.common.vo.AesUtil;
 import com.studyhub.common.vo.User;
-import com.sun.org.apache.xml.internal.resolver.tools.ResolvingParser;
 
 public class UserDao implements CryptTemplate {
 
@@ -39,7 +38,7 @@ public class UserDao implements CryptTemplate {
 				user.setUserState(rset.getInt("user_state"));
 				user.setPwdState(rset.getInt("pwd_state"));
 				user.setDeleteDate(rset.getDate("delete_date"));
-				System.out.println(user);
+				System.out.println(user.getPwdState());
 			} else {
 
 			}
