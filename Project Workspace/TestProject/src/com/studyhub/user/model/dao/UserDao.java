@@ -39,6 +39,7 @@ public class UserDao implements CryptTemplate {
 				user.setUserState(rset.getInt("user_state"));
 				user.setPwdState(rset.getInt("pwd_state"));
 				user.setDeleteDate(rset.getDate("delete_date"));
+				System.out.println(user);
 			} else {
 
 			}
@@ -54,7 +55,7 @@ public class UserDao implements CryptTemplate {
 	}
 
 	public boolean createUser(Connection conn, User user) {
-		String query = "insert into tb_user values((select max(user_no)+1 from tb_user),?,?,?,?)";
+		String query = "insert into tb_user values((select max(user_no)+1 from tb_user),?,?,?,?,default,default,null)";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		boolean result = false;
