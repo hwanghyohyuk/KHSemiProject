@@ -130,4 +130,11 @@ public class MainService {
 		close(con);
 		return result;
 	}
+
+	public int ungState(int senderNo, int groupNo) {
+		Connection con = getConnection();
+		int result = new MainDao().ungState(con, senderNo, groupNo);
+		close(con);
+		return result;
+	}
 }
