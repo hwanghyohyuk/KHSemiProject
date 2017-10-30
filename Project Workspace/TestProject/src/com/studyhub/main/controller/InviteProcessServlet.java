@@ -30,13 +30,13 @@ public class InviteProcessServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		int messageno = Integer.parseInt(request.getParameter("message"));
+		int messageno = Integer.parseInt(request.getParameter("messageno"));
 		int receiver = Integer.parseInt(request.getParameter("receiver"));
 		int sender = Integer.parseInt(request.getParameter("sender"));
 		int groupno = Integer.parseInt(request.getParameter("groupno"));
 		int state = Integer.parseInt(request.getParameter("state"));
 		
-		if(state == 1) { // 초대수락(인서트, 메시지상태2, 메시지인서트)
+		if(state == 1) { // 초대수락(ung 인서트, 메시지상태2, 메시지인서트)
 			if(new MainService().InviteAgree(groupno, receiver) > 0) {
 				if(new MainService().changeMessage1(messageno) > 0) {
 					if(new MainService().InsertMessage(groupno, sender, receiver) > 0) {
@@ -44,8 +44,15 @@ public class InviteProcessServlet extends HttpServlet {
 					}
 				}
 			}
-		} else { // 초대거절 (메시지 인서트)
-			
+		} else if(state == 0) { // 초대거절 (메시지 상태2, 메시지 인서트)
+			if(new MainService().changeMessage1(messageno) > 0) {
+				if(new MainService().InsertMessage2(groupno, sender, receiver) > 0)
+					response.sendRedirect("views/include/main/header.jsp");
+			}
+		} else {
+			if(new MainService().changeMessage1(messageno) > 0) {
+				response.sendRedirect("views/include/main/header.jsp");
+			}
 		}
 	}
 

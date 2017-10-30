@@ -145,7 +145,7 @@ public class GCreateServlet extends HttpServlet {
 		// 처리결과에 따라 뷰 지정함
 		if (new MainService().insertGroup(g) > 0) {
 			Group groupno = new MainService().selectGroupNo(groupname);
-			if (new MainService().inserUnG(userno, groupno) > 0)
+			if (new MainService().inserUnG(userno, groupno, 2) > 0)
 				response.sendRedirect("/studyhub/main");
 		}
 	}

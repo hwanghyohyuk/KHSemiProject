@@ -10,6 +10,7 @@ public class Message implements java.io.Serializable {
 	private String groupName;
 	private String message;
 	private int messageState;
+	private String userName;
 	
 	public Message() {
 		super();
@@ -28,7 +29,7 @@ public class Message implements java.io.Serializable {
 	}
 
 	public Message(int messageNo, int senderNo, int receiverNo, int groupNo, String groupName, String message,
-			int messageState) {
+			int messageState, String userName) {
 		super();
 		this.messageNo = messageNo;
 		this.senderNo = senderNo;
@@ -37,9 +38,16 @@ public class Message implements java.io.Serializable {
 		this.groupName = groupName;
 		this.message = message;
 		this.messageState = messageState;
+		this.userName = userName;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
 
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public int getSenderNo() {
 		return senderNo;

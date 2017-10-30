@@ -37,9 +37,9 @@ public class MainService {
 		return result;
 	}
 
-	public int inserUnG(int userno, Group groupno) {
+	public int inserUnG(int userno, Group groupno, int i) {
 		Connection con = getConnection();
-		int result = new MainDao().InsertUnG(con, userno, groupno);
+		int result = new MainDao().InsertUnG(con, userno, groupno, i);
 		if (result > 0)
 			commit(con);
 		else
@@ -74,5 +74,49 @@ public class MainService {
 		ArrayList<Message> list = new MainDao().MessageSelect(con, userno);
 		close(con);
 		return list;
+	}
+
+	public int InviteAgree(int groupno, int receiver) {
+		Connection con = getConnection();
+		int result = new MainDao().InviteAgree(con, groupno, receiver);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+
+	public int changeMessage1(int messageno) {
+		Connection con = getConnection();
+		int result = new MainDao().changeMessage1(con, messageno);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+
+	public int InsertMessage(int groupno, int sender, int receiver) {
+		Connection con = getConnection();
+		int result = new MainDao().InsertMessage(con, groupno, sender, receiver);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+
+	public int InsertMessage2(int groupno, int sender, int receiver) {
+		Connection con = getConnection();
+		int result = new MainDao().InsertMessage2(con, groupno, sender, receiver);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
 	}
 }
