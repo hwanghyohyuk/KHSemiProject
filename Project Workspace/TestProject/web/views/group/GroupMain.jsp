@@ -735,7 +735,8 @@
 			async: false
 		});
 		alert("초대 메시지를 보냈습니다.");
-		inviteslect();
+		$("#serchid").val("");
+		inviteselect();
 	}
 	
 	
