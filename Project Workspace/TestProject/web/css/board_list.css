@@ -1,14 +1,13 @@
 @CHARSET "UTF-8";
 
-#list-layout{
+#list-layout {
 	margin-top: 6vh;
-	
 }
 
-#qnatitle{
+#qnatitle {
 	color: black;
-	
 }
+
 .search {
 	margin-left: 42vw;
 }
@@ -62,6 +61,7 @@ td {
 	outline: 0;
 }
 
+
 #search-btn {
 	background: #004157;
 	color: white;
@@ -77,45 +77,41 @@ td {
 	background: #0789a3;
 }
 
+
+
+<!--- mobile --->
 @media screen and (max-width: 768px) {
-	*{
+	* {
 		font-size: 1rem;
 	}
-	
 	#search-input {
 		width: 20vw;
 	}
-	
-	
-	
 	.search {
-	margin-left: 20vw;
-}
-
-select {
-	height: 3vh;
-}
-
-#btns {
-	float: right;
-	background: #004157;
-	color: white;
-	top: 0;
-	left: 0;
-	width: 10vw;
-	height: 5vh;
-	border: 0;
-	outline: 0;
-}
-
-#search-btn {
-	background: #004157;
-	color: white;
-	top: 0;
-	left: 0;
-	width: 8vw;
-	height: 4vh;
-	border: 0;
-	outline: 0;
-}
+		margin-left: 20vw;
+	}
+	select {
+		height: 3vh;
+	}
+	#btns {
+		float: right;
+		background: #004157;
+		color: white;
+		top: 0;
+		left: 0;
+		width: 10vw;
+		height: 5vh;
+		border: 0;
+		outline: 0;
+	}
+	#search-btn {
+		background: #004157;
+		color: white;
+		top: 0;
+		left: 0;
+		width: 8vw;
+		height: 4vh;
+		border: 0;
+		outline: 0;
+	}
 }
