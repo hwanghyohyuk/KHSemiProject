@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.main.model.service.MainService;
+
 /**
  * Servlet implementation class JoinMessageServlet
  */
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 public class JoinMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private MainService ms;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,9 +36,8 @@ public class JoinMessageServlet extends HttpServlet {
 		int groupNo = Integer.parseInt(request.getParameter("groupno"));
 		
 		System.out.println("sender : "+sender+"\nreceiver : "+receiver+"\ngroupNo : "+groupNo);
-		
-		
-	}
+		ms = new MainService();
+		int insertMessage = ms.insertMessage(sender,receiver,groupNo);
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -19,36 +19,41 @@ function boardInsert() {
 	}	
 }
 
-function sendMessage(sender,receiver,groupno){
-	alert('sender : '+sender+'\nreceiver : '+receiver+'\ngroupno : '+groupno);
+function sendMessage(senderNo,receiverNo,groupNo){
+	alert('senderNo : '+senderNo+'\nreceiverNo : '+receiverNo+'\ngroupNo : '+groupNo);
 	$.ajax({
 		type : "post",
 		data : {
-			sender : sender,
-			receiver : receiver,
-			groupno : groupno
+			senderNo : senderNo,
+			receiverNo : receiverNo,
+			groupNo : groupNo
 		},
 		url : "/studyhub/joinmessage",
 		async : false,
 		success : function(data) {
 			if(data==1){
 				alert('가입이 신청되었습니다.');
-				btn_state=1;
 			}else{
 				alert('가입 신청 오류!');
-				btn_state=0;
 			}
 		}
 	});
-		
+	checkBtnState(sender,groupno);
 }
 
-function toggleJoinBtn(){
-	if(btn_state==0){
-		btn_state=1;
-	}else if(btn_state==1){
-		btn_state=0;
-	}
-	$("#joinbtn").prop("disabled", false);
-	//수정 시작 부분
+function checkBtnState(sender,groupno){
+	$.ajax({
+		type : "post",
+		data : {
+			sender : sender,
+			groupno : groupno
+		},
+		url : "/studyhub/ungstate",
+		async : false,
+		success : function(data) {
+			if(data==1){
+			}else{
+			}
+		}
+	});
 }

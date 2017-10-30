@@ -28,9 +28,9 @@
 
 <!-- sendMessage -->
 <%
-	int sender = user.getUserNo();
-	int receiver = board.getUploader();
-	int groupno = board.getGroupNo();
+	int senderNo = user.getUserNo();
+	int receiverNo = board.getUploader();
+	int groupNo = board.getGroupNo();
 %>
 
 <!-- 메인 컨텐츠 -->
@@ -76,7 +76,7 @@
 			<label class="col-sm-1 control-label">가입 신청</label>
 			<div class="col-sm-3">
 				<%if(board.getStatus().equals("모집중")){ %>
-				<a id="joinbtn" class="btn btn-primary main-back pull-left" href="#" onclick='javascript:sendMessage(<%=sender%>,<%=receiver%>,<%=groupno%>);'>가입 신청</a>
+				<a id="joinbtn" class="btn btn-primary main-back pull-left" href="#" onclick='javascript:sendMessage(<%=senderNo%>,<%=receiverNo%>,<%=groupNo%>);'>가입 신청</a>
 				<%}else{ %>
 				<a class="btn btn-default pull-left" disabled href="#">모집 마감</a>
 				<%} %>
