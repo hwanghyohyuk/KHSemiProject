@@ -21,14 +21,14 @@ import com.studyhub.main.model.service.MainService;
 /**
  * Servlet implementation class MessageSelectServlet
  */
-@WebServlet("/messageselect")
-public class MessageSelectServlet extends HttpServlet {
+@WebServlet("/messagelist")
+public class MessageListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MessageSelectServlet() {
+    public MessageListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

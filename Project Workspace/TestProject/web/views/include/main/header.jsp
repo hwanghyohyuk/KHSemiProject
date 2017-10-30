@@ -131,7 +131,7 @@
 						function messageselect(){
 							var userno ="<%= user.getUserNo() %>";
 							$.ajax({
-								url: "/studyhub/messageselect",
+								url: "/studyhub/messagelist",
 								data: { userno: userno },
 								type: "get",
 								dataType: "json",
@@ -158,7 +158,7 @@
 													"</li>";
 										} else if (json.list[i].messagestate == 1) {
 											values += 	"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4' style='padding-left: 0px;'>" +
-															"<button type='button' class='btn btn-primary' onclick='confiem=(" + json.list[i].messageno + ")'>확인</button>" +
+															"<button type='button' class='btn btn-primary' onclick='confirm=(" + json.list[i].messageno + ")'>확인</button>" +
 															/* 확인누르면 메시지상태 2로 업뎃 */
 														"</div>" +
 													"</li>";
@@ -186,6 +186,17 @@
 									$("#mymessage").html(sub + values);
 								}
 							});
+						}
+						
+						// 초대 수락
+						function agree(messageno, receiver, sender, groupno){
+							$.ajax({
+								url: "/studyhub/inviteprocess",
+								data: { messageno: messageno, receiver: receiver, sender: sender, groupno: groupno, state: 1 },
+								type: "get",
+								async: false
+							});
+							messageselect();
 						}
 					</script>
 					
