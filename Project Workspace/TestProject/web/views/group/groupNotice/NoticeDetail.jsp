@@ -43,12 +43,25 @@
 		<hr>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<a href="/studyhub/gnoticedelete?no=<%=gNotice.getNoticeNo()%>"
-					class="btn btn-primary main-back pull-right">삭제</a> 
+				<%
+					if(user.getUserNo() == gNotice.getUploader()){
+				%>
+				<a class="btn btn-primary main-back pull-right"
+				href="javascript:checkDelete(<%=gNotice.getNoticeNo()%>)">삭제</a>
+				<script type="text/javascript">
+				function checkDelete(groupno){
+					if (confirm('해당 게시글을 삭제하시겠습니까?')) {
+					    location.href="/studyhub/gnoticedelete?groupno="+groupno;
+					} 
+				}
+				</script>
 				<a href="/studyhub/gnoticeupdateview?no=<%=gNotice.getNoticeNo() %>"
-					class="btn btn-primary main-back pull-right">수정</a>											 
+					class="btn btn-primary main-back pull-right">수정</a>	
+				<%
+					}
+				%>
 				<a	href="/studyhub/gnoticepreview?groupno=<%=group.getGroupNo()%>"
-					class="btn btn-primary main-back pull-right">목록</a>
+					class="btn btn-default pull-right">목록</a>
 			</div>
 		</div>
 	</form>

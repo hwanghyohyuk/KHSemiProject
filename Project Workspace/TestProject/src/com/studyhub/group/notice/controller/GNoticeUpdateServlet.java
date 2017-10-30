@@ -39,22 +39,28 @@ public class GNoticeUpdateServlet extends HttpServlet {
 		
 		int no = Integer.parseInt(request.getParameter("no"));
 		String title = request.getParameter("title");
-		//int groupno = Integer.parseInt(request.getParameter("nglist"));
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
 		String content = request.getParameter("content");
+		int accessNo = Integer.parseInt(request.getParameter("accessno"));
+		String uploader = request.getParameter("uploader");
 		
 		gNotice = new GNotice();
 		gNotice.setNoticeNo(no);
 		gNotice.setTitle(title);
 		gNotice.setContent(content);
-		//gNotice.setGroupNo(groupno);
+		gNotice.setGroupNo(groupno);
+		gNotice.setAccessNo(accessNo);
+		gNotice.setUploader_name(uploader);
 		
 		gNoticeService = new GNoticeService();
 		int result = gNoticeService.updateGNotice(gNotice);
 		
+		System.out.println(gNotice);
+		
 		RequestDispatcher view = null;
 		
 		if(result > 0){
-			response.sendRedirect("/studyhub/gnoticelist?page=1");
+			response.sendRedirect("/studyhub/gnoticepreview?groupno="+groupno);
 		}else{
 			view = request.getRequestDispatcher("/views/group/groupNotice/NoticeError.jsp");
 			request.setAttribute("message", "수정실패");

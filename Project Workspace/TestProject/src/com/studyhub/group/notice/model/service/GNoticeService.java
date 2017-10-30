@@ -95,9 +95,9 @@ public class GNoticeService {
 		
 	}
 
-	public int insertComment(int gnoticeno, String comment, int userno) {
+	public int insertComment(int gnoticeno, int uploader, String comment) {
 		Connection con = getConnection();
-		int result = new GNoticeDao().insertComment(con, gnoticeno, comment, userno);
+		int result = new GNoticeDao().insertComment(con, gnoticeno, uploader, comment);
 		if(result>0)
 			commit(con);
 		else

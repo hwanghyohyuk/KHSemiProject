@@ -7,7 +7,7 @@
 작성일자 17.10.19
  -->
 <!-- java 구문 -->
-<%@ page import="java.util.*, com.studyhub.common.vo.GNotice"%>
+<%@ page import="java.util.*, com.studyhub.common.vo.GNotice, com.studyhub.group.main.controller.GNoticePreviewServlet"%>
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 <%
 	ArrayList<GNotice> list = (ArrayList<GNotice>) request.getAttribute("list");
@@ -69,4 +69,6 @@
 
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>
+	<!--페이지 끝-->
+	<%@ include file="/views/include/common/tail.jsp"%>
 	
