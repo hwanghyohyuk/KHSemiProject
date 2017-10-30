@@ -38,7 +38,7 @@ public class FileCategorySelectServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int groupno = Integer.parseInt(request.getParameter("groupno"));
 		ArrayList<ShareFile> list = new ShareFileService().selectCategory(groupno);
-		System.out.println("list: "+ list + "groupno" + groupno);
+		
 		
 		JSONObject json = new JSONObject();
 		JSONArray jarr = new JSONArray();
@@ -47,7 +47,7 @@ public class FileCategorySelectServlet extends HttpServlet {
 			JSONObject job = new JSONObject();
 			job.put("categoryno", sf.getFileCategoryNo());
 			job.put("cname", URLEncoder.encode(sf.getFileCategoryName(), "UTF-8"));
-			System.out.println("for문 sf" + sf);
+			
 			jarr.add(job);
 		}
 		json.put("list", jarr);

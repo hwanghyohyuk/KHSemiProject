@@ -23,7 +23,6 @@
 		<div class="col-sm-3 col-xs-2"></div>
 		<div class="col-sm-6 col-xs-8">
 			<p>사용자 이름을 입력해주세요</p>
-			<p>현재 이메일 : <%=email%></p>
 			<form action="/studyhub/findnameprocess" method="post" name="findname">
 				<div class="form-group">
 					<input type="hidden" id="email" name="email" value="<%=email%>">
