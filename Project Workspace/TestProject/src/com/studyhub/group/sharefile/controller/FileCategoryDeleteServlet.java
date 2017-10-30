@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.group.qna.model.service.GroupQnAService;
+import com.studyhub.group.sharefile.model.service.ShareFileService;
+
 /**
  * Servlet implementation class FileCategoryDeleteServlet
  */
@@ -26,8 +29,12 @@ public class FileCategoryDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int cno = Integer.parseInt(request.getParameter("cno"));
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
+		
+		if(new ShareFileService().deleteCategory(cno) > 0){
+			response.sendRedirect("/studyhub/sharedfilepreview?groupno="+groupno);
+		}
 	}
 
 	/**

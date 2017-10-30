@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyhub.common.vo.ShareFile;
+import com.studyhub.group.qna.model.service.GroupQnAService;
+import com.studyhub.group.sharefile.model.service.ShareFileService;
+
 /**
  * Servlet implementation class FileCategoryEditServlet
  */
@@ -26,8 +30,17 @@ public class FileCategoryEditServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		
+		int cno = Integer.parseInt(request.getParameter("cno"));
+		String cname = request.getParameter("cname");
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
+		ShareFile sf = new ShareFile(cno, cname);
+		
+		if(new ShareFileService().editCategory(sf) > 0) {
+			response.sendRedirect("/studyhub/sharedfilepreview?groupno="+groupno);
+		}
+
 	}
 
 	/**

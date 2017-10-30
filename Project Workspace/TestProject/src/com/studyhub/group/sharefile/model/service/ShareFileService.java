@@ -108,9 +108,9 @@ public class ShareFileService {
 		return clist;
 	}
 
-	public int addCategory(String cname, int groupno) {
+	public int addCategory(int groupno, String cname) {
 		Connection con = getConnection();
-		int result = new ShareFileDao().addCategory(con, cname, groupno);
+		int result = new ShareFileDao().addCategory(con, groupno, cname);
 		if(result>0)
 			commit(con);
 		else
@@ -119,4 +119,25 @@ public class ShareFileService {
 		return result;
 	}
 	
+	public int deleteCategory(int cno){
+		Connection con = getConnection();
+		int result = new ShareFileDao().deleteCategory(con, cno);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+	
+	public int editCategory(ShareFile sf){
+		Connection con = getConnection();
+		int result = new ShareFileDao().editCategory(con, sf);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
 }
