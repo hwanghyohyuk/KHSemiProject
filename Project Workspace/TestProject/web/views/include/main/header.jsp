@@ -143,7 +143,7 @@
 														"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='height: 34px; padding-top: 7px;'>" +
 															decodeURIComponent(json.list[i].groupname).replace(/\+/gi, " ") +
 														"</div>" +
-														"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+														"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='height: 34px; padding-top: 7px;'>" +
 															decodeURIComponent(json.list[i].username).replace(/\+/gi, " ") +
 														"</div>" +
 														"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6' style='height: 34px; padding-top: 7px;'>" +

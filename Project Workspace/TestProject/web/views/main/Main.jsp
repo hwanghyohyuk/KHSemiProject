@@ -168,7 +168,7 @@ location.href="/studyhub/myinfo";
 				    		   					"<img id='groupimg' src='/studyhub/images/groupimg/" + decodeURIComponent(json.list[i].renameimg) +"'>" +
 					 						"</div>" + 
 							 		        "<div class='cover col-md-9'>" +
-					 							"<p id='groupname'>" + decodeURIComponent(json.list[i].group_name) + "</p>" +
+					 							"<p id='groupname'>" + decodeURIComponent(json.list[i].group_name).replace(/\+/gi, " ") + "</p>" +
 					 						"</div>" + 
 							 		        "<div class='col-md-3'>" +
 					 							"<span class='glyphicon glyphicon-user' aria-hidden='true'>&nbsp;</span>" + json.list[i].usercount + 

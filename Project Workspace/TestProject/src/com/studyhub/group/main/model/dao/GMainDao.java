@@ -1,7 +1,5 @@
 package com.studyhub.group.main.model.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.sql.*;
 
@@ -14,6 +12,7 @@ import com.studyhub.common.vo.Group;
 import com.studyhub.common.vo.Schedule;
 import com.studyhub.common.vo.ShareFile;
 import com.studyhub.common.vo.UNG;
+import com.studyhub.common.vo.User;
 
 public class GMainDao {
 
@@ -593,5 +592,104 @@ ArrayList<UNG> list = null;
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public ArrayList<Integer> SearchSelect(Connection con, String search, int groupno) {
+		ArrayList<Integer> usernolist = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		search = "%" + search + "%";
+		
+		String query = 	"select user_no, search " +
+						"from (select user_no, user_name || email as search " +
+						"from tb_user " +
+						"left outer join (select distinct(user_no) from tb_ung where group_no <> ?) using(user_no)) " + 
+						"where search like ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			pstmt.setString(2, search);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset != null){
+				usernolist = new ArrayList<Integer>();
+				while(rset.next()){
+					usernolist.add(rset.getInt("user_no"));
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return usernolist;
+	}
+
+	public ArrayList<User> userlist(Connection con, int userno, int groupno, ArrayList<Integer> searchlist) {
+		ArrayList<User> userlist = new ArrayList<User>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			for (int i = 0; i < searchlist.size(); i++) {
+				User u = null;
+
+				String query = "select user_no, user_name, email from tb_user where user_no = ?";
+
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, searchlist.get(i));
+
+				rset = pstmt.executeQuery();
+				
+				
+				if (rset.next()) {
+					u = new User();
+					u.setUserNo(rset.getInt("user_no"));
+					u.setUserName(rset.getString("user_name"));
+					u.setEmail(rset.getString("email"));
+					
+					userlist.add(u);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return userlist;
+	}
+
+	public int InviteMessage(Connection con, int groupno, int sender, int receiver) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into tb_message values ("
+				+ "(select max(message_no) + 1 from tb_message)"
+				+ ", ?, ?, ?, 0, '그룹으로 초대')";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupno);
+			pstmt.setInt(2, sender);
+			pstmt.setInt(3, receiver);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

@@ -98,7 +98,7 @@ public class MainService {
 		return result;
 	}
 
-	public int insertMessage(int groupno, int sender, int receiver) {
+	public int InsertMessage(int groupno, int sender, int receiver) {
 		Connection con = getConnection();
 		int result = new MainDao().InsertMessage(con, groupno, sender, receiver);
 		if(result > 0)
