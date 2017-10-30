@@ -34,7 +34,6 @@ public class UnGStateServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		int senderNo = Integer.parseInt(request.getParameter("senderNo"));
 		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
-
 		System.out.println("senderNo : " + senderNo + "\nsenderNo : " + senderNo + "\ngroupNo : " + groupNo);
 		ms = new MainService();
 		int ungState = ms.ungState(senderNo, groupNo);

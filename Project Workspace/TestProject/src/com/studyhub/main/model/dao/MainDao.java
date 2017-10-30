@@ -335,7 +335,7 @@ public class MainDao {
 	}
 
 	public int ungState(Connection con, int senderNo, int groupNo) {
-		int result = 0;
+		int result = -1;
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -351,6 +351,7 @@ public class MainDao {
 			if (rset != null) {
 				while (rset.next()) {
 					result = rset.getInt("ung_state");
+					System.out.println(result);
 				}
 			}
 		} catch (Exception e) {
