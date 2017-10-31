@@ -1,5 +1,6 @@
 var emailCheck = 0;
-var pwdCheck = 0;
+var pwdInputCheck = 0;
+var pwdConfirmCheck = 0;
 var nameCheck = 0;
 var phoneCheck = 0;
 var pagename = '';
@@ -21,12 +22,19 @@ function checkEmail(pagename) {
 				if (!signupemail.includes("@")) {
 					$("#signupemail").css("background-color", "#FFCECE");
 					emailCheck = 0;
-				} else if (data == 0) {
+					$("#signupemailtxt").html("@ 없음").css("color","red");
+				}else if(!signupemail.includes(".")){
+					$("#signupemail").css("background-color", "#FFCECE");
+					emailCheck = 0;
+					$("#signupemailtxt").html("이메일확인").css("color","red");
+				}else if (data == 0) {
 					$("#signupemail").css("background-color", "#B0F6AC");
 					emailCheck = 1;
+					$("#signupemailtxt").html("사용 가능").css("color","green");
 				} else if (data == 1) {
 					$("#signupemail").css("background-color", "#FFCECE");
 					emailCheck = 0;
+					$("#signupemailtxt").html("이메일 중복").css("color","red");
 				}
 			}
 		}
@@ -45,8 +53,10 @@ function checkPwd() {
 		$("#signuppwd").css("background-color", "white");
 	} else if(signuppwd.length < 10){
 		$("#signuppwd").css("background-color", "#FFCECE");
+		$("#signuppwdtxt").html("사용불가").css("color","red");
 	}else{
 		$("#signuppwd").css("background-color", "#B0F6AC");
+		$("#signuppwdtxt").html("사용가능").css("color","green");
 	}
 	if (confirmpwd == "") {
 		$("#confirmpwd").css("background-color", "white");
@@ -60,9 +70,11 @@ function checkPwd() {
 		if (signuppwd == confirmpwd) {
 			$("#confirmpwd").css("background-color", "#B0F6AC");
 			pwdCheck = 1;
+			$("#confirmpwdtxt").html("같음").css("color","green");
 		} else if (signuppwd != confirmpwd) {
 			$("#confirmpwd").css("background-color", "#FFCECE");
 			pwdCheck = 0;
+			$("#confirmpwdtxt").html("다름").css("color","red");
 		}
 	}
 
@@ -96,10 +108,12 @@ function checkPhone() {
 		if(pattern.test(phone)){
 			$("#phone").css("background-color", "#B0F6AC");
 			phoneCheck = 1;
+			$("#phonetxt").html("사용가능").css("color","green");
 		}else{
 			$("#phone").css("background-color", "#FFCECE");
-			phoneCheck = 0;
-		}	
+			phoneCheck = -1;
+			$("#phonetxt").html("사용불가").css("color","red");
+		}
 	}
 	toggleBtn();
 }
@@ -125,5 +139,86 @@ function startToggleBtn() {
 		$("#signupbtn").css("background-color", "#aaaaaa");
 	}
 }
+//myinfo
+function myinfoPwdInput() {
+	var email = $('email').val();
+	var name = $('name').val();
+	var modifypwd = $('#modifypwd').val();
+	if (modifypwd == "") {
+		$("#modifypwd").css("background-color", "white");
+		pwdInputCheck = 0;
+	} else if(modifypwd.length < 10){
+		$("#modifypwd").css("background-color", "#FFCECE");
+		pwdInputCheck = 0;
+		$("#modifypwdtxt").html("사용불가").css("color","red");
+	}else{
+		$.ajax({
+			type : "post",
+			data : {
+				email : email,
+				name : name,
+				pwd : modifypwd,
+				page : "myinfo"
+			},
+			url : "/studyhub/findpwdprocess",
+			success : function(data) {
+				if (data == 0) {
+					$("#modifypwd").css("background-color", "#B0F6AC");
+					pwdInputCheck = 1;
+					$("#modifypwdtxt").html("사용가능").css("color","green");
+				} else if (data == 1) {
+					$("#modifypwd").css("background-color", "#FFCECE");
+					pwdInputCheck = 0;
+					$("#modifypwdtxt").html("기존 비밀번호").css("color","red");
+				}
+			}
+		});
+	}
+	myinfoToggleBtn();
+}
 
+function myinfoPwdConfirm() {
+	var modifypwd = $('#modifypwd').val();
+	var confirmpwd = $('#confirmpwd').val();
+	if(modifypwd!=""&&confirmpwd!="")
+	if (modifypwd == confirmpwd) {
+		$("#confirmpwd").css("background-color", "#B0F6AC");
+		pwdConfirmCheck = 1;
+		$("#confirmpwdtxt").html("같음").css("color","green");
+	} else if (modifypwd != confirmpwd) {
+		$("#confirmpwd").css("background-color", "#FFCECE");
+		pwdConfirmCheck = 0;
+		$("#confirmpwdtxt").html("다름").css("color","red");
+	}
+	myinfoToggleBtn();
+}
+function myinfoCheckPhone() {
+	var modifytel = $("#modifytel").val();
+	if (modifytel == "") {
+		$("#modifytel").css("background-color", "white");
+		phoneCheck = -1;
+	} else {
+		var pattern = /^[0-9]{10,11}$/;
+		if(pattern.test(modifytel)){
+			$("#modifytel").css("background-color", "#B0F6AC");
+			phoneCheck = 1;
+			$("#modifyteltxt").html("사용가능").css("color","green");
+		}else{
+			$("#modifytel").css("background-color", "#FFCECE");
+			phoneCheck = -1;
+			$("#modifyteltxt").html("사용불가").css("color","red");
+		}	
+	}
+	myinfoToggleBtn();
+}
 
+function myinfoToggleBtn() {
+	var activeBtn = pwdInputCheck+ pwdConfirmCheck + phoneCheck;
+	if (activeBtn >= 2) {
+		$("#modifybtn").prop("disabled", false);
+		$("#modifybtn").css("background-color", "#004157");
+	} else {
+		$("#modifybtn").prop("disabled", true);
+		$("#modifybtn").css("background-color", "#aaaaaa");
+	}
+}

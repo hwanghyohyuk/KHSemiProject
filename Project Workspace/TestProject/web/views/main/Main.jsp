@@ -1,10 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
+
 <%@ include file="/views/include/common/head.jsp"%>
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
-
 <script type="text/javascript" src='/studyhub/js/main.js' ></script>
-
+<% 
+User changePwd = (User)session.getAttribute("user");
+if (changePwd.getPwdState() == 1) {
+%>
+<script type="text/javascript">
+alert('임시 비밀번호를 변경해주세요!');
+location.href="/studyhub/myinfo";
+</script>
+<%
+	}
+%>
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
@@ -12,7 +22,6 @@
 <div class="row" id="count">	
 		<!-- ajax로 틀 불러옴 -->
 </div> 
-   
    <!-- 모집게시판 부분 -->
 	<div class="row">
 		<div class="col-md-10 col-sm-5 col-md-offset-2">
