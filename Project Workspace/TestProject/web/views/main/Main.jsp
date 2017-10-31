@@ -29,7 +29,7 @@
 		<div class="head">
 			<span id="title" style="margin-left: 10%">나의 그룹</span>
 		</div>
-		<div class="slider">
+		<div class="sliderG">
 			<div class="div-btn">
 				<button class="btn-left" onClick="imgMove(0,'g');">
 					<img class="btn-left" src="/studyhub/images/slider.png">
@@ -47,13 +47,16 @@
 			</div>
 		</div>
 	</div>
+	<br>
+	<br>
+	<hr>
 	<!-- 모집게시판 부분 -->
 	<div class="row">
 		<div class="head">
 			<a href="/studyhub/boardlist" id="more">더보기</a><span id="title"
 				style="margin-left: 10%">모집게시판</span>
 		</div>
-		<div class="slider">
+		<div class="sliderB">
 			<div class="div-btn">
 				<button class="btn-left" onClick="imgMove(0,'b');">
 					<img class="btn-left" src="/studyhub/images/slider.png">
