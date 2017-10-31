@@ -73,5 +73,5 @@
 <!-- /메인 컨텐츠 -->
 
 <!--푸터 부분-->
-<%@ include file="/views/include/admin/footer.jsp"%>
+
 <%@ include file="/views/include/common/tail.jsp"%>

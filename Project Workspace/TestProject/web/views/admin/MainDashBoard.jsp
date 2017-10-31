@@ -32,7 +32,7 @@
 					</label>
 				</div>
 				<button type="submit" id="notice-btn">공지하기</button>
-				<a href="/studyhub/noticedelete"><button id="notice-btn">기존공지삭제</button></a>
+				<a href="/studyhub/noticedelete"><button id="notice-btn">공지삭제</button></a>
 			</div>
 		</div>
 	</form>
