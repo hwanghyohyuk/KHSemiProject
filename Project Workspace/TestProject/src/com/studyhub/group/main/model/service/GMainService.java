@@ -2,6 +2,7 @@ package com.studyhub.group.main.model.service;
 
 import com.studyhub.common.vo.*;
 import com.studyhub.group.main.model.dao.GMainDao;
+import com.studyhub.group.qna.model.dao.GroupQnADao;
 
 import static com.studyhub.common.JDBCTemplate.*;
 import java.sql.*;
@@ -150,5 +151,30 @@ public class GMainService {
 		ArrayList<UNG> list = new GMainDao().SelectUser2(con, groupno, userno);
 		close(con);
 		return list;
+	}
+
+	public ArrayList<Integer> SearchSelect(String search, int groupno) {
+		Connection con = getConnection();
+		ArrayList<Integer> usernolist = new GMainDao().SearchSelect(con, search, groupno);
+		close(con);
+		return usernolist;
+	}
+
+	public ArrayList<User> userlist(int userno, int groupno, ArrayList<Integer> searchlist) {
+		Connection con = getConnection();
+		ArrayList<User> userlist = new GMainDao().userlist(con,userno ,groupno, searchlist);
+		close(con);
+		return userlist;
+	}
+
+	public int InviteMessage(int groupno, int sender, int receiver) {
+		Connection con = getConnection();
+		int result = new GMainDao().InviteMessage(con, groupno, sender, receiver);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
 	}
 }

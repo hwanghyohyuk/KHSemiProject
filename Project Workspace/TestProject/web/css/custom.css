@@ -121,6 +121,14 @@ p:hover{
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+<!--header -->
+#inbox{
+	font-size: 2rem;
+}
+#admin-dmenu{
+	font-weight: bold;
+	color: black;
+}
 
 <!--modal -->
 

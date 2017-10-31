@@ -39,6 +39,7 @@ public class NoticeInsertServlet extends HttpServlet {
 		
 		RequestDispatcher view = null;
 		String notice = request.getParameter("notice");
+		String popup = request.getParameter("popup");
 		
 		if(new NoticeService().insertNotice(notice) > 0){
 			response.sendRedirect("/studyhub/noticeview");

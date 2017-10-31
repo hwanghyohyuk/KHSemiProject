@@ -46,7 +46,12 @@
 
 					<%
 						if (user != null) {
+							if(user.getUserNo()==1){ //관리자일 때 
 					%>
+					<li><a href="/studyhub/views/admin/MainDashBoard.jsp" id="admin-dmenu">관리자화면</a>
+					</li>
+					<% }else{ %>
+					
 					<li class="dropdown">
 						<a href="javascript/mygroupdropdown()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 							<p class="black">
@@ -57,7 +62,7 @@
 							<!-- ajax로 그룹리스트 불러옴 --> 
 						</ul>
 					</li>
-					
+					<% } %>
 					<script type="text/javascript">
 						$(function mygroupdropdown(){
 							var userno = "<%= user.getUserNo()%>";
@@ -143,7 +148,7 @@
 														"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='height: 34px; padding-top: 7px;'>" +
 															decodeURIComponent(json.list[i].groupname).replace(/\+/gi, " ") +
 														"</div>" +
-														"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+														"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='height: 34px; padding-top: 7px;'>" +
 															decodeURIComponent(json.list[i].username).replace(/\+/gi, " ") +
 														"</div>" +
 														"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6' style='height: 34px; padding-top: 7px;'>" +

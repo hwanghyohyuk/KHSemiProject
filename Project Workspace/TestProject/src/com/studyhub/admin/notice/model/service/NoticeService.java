@@ -42,9 +42,9 @@ public class NoticeService {
 		return result;
 	}
 
-	public int deleteNotice(int no) {
+	public int deleteNotice() {
 		Connection con = getConnection();
-		int result = new NoticeDao().deleteNotice(con, no);
+		int result = new NoticeDao().deleteNotice(con);
 		if(result > 0)
 			commit(con);
 		else
