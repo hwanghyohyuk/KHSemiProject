@@ -11,11 +11,6 @@
 
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 <style type="text/css">
-#imagePreview{
-	width:	600px;
-	height: 400px;
-}
-
 #image {
 	display: none;
 }
@@ -26,6 +21,17 @@
 
 h2 {
 	margin-left: 30px;
+	margin-bottom: 20px;
+}
+
+#btn {
+	width: 100%;
+	height: 400px;
+}
+
+#imagePreview{
+	width: 100%;
+	height: 350px;
 }
 </style>
 
