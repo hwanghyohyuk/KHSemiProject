@@ -60,7 +60,12 @@
 }
 
 /* 이미지 슬라이더 효혁*/
-.slider {
+.sliderB {
+	display: block;
+	width: 100%;
+	margin: 0 8% 5% 8%;
+}
+.sliderG {
 	display: block;
 	width: 100%;
 	margin: 0 8% 5% 8%;
@@ -91,14 +96,14 @@
 
 .RollDivG {
 	width: 64%;
-	height: 240px;
+	height: 260px;
 	overflow: hidden;
 	float: left;
 }
 
 .RollDivG>div {
 	overflow: hidden;
-	height: 240px;
+	height: 260px;
 	width: 150%;
 }
 
