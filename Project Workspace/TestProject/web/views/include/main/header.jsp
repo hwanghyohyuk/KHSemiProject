@@ -166,7 +166,7 @@
 													"</li>";
 										} else if (json.list[i].messagestate == 1) {
 											values += 	"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='padding-left: 0px;'>" +
-															"<button type='button' class='btn btn-primary' onclick='confirm(" + json.list[i].messageno + ")'>확인</button>" +
+															"<button type='button' class='btn btn-primary' onclick='confirmMessage(" + json.list[i].messageno + ")'>확인</button>" +
 															/* 확인누르면 메시지상태 2로 업뎃 */
 														"</div>" +
 													"</li>";
@@ -224,7 +224,7 @@
 							messageselect();
 						}
 						
-						function confirm(messageno){
+						function confirmMessage(messageno){
 							$.ajax({
 								data: { messageno: messageno, receiver: 1, sender: 1, groupno: 1, state: 2 },
 								url: "/studyhub/inviteprocess",
