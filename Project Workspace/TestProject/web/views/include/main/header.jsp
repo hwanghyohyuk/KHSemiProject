@@ -252,6 +252,8 @@
 	</div>
 </nav>
 
+<script type="text/javascript" src='/studyhub/js/studysearch.js'></script>
+
 <!-- Modal -->
 <div class="modal fade bs-example-modal-lg" id="seachfilter"
 	tabindex="-1" role="dialog" aria-labelledby="seachfilterLabel"
