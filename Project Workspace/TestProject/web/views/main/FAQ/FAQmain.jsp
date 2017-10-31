@@ -12,75 +12,8 @@
 <%@ include file="/views/include/common/head.jsp"%>
 
 <!--자바스크립트 및 CSS-->
-<style>
-/* layout */
-.head-text {
-	margin-top: 4vh;
-}
-.search{
-	height: 3vh;
-}
-.service{
-	display: block;
-	width: 80vw;
-	height: 60vh;
-	margin: 0 auto;
-	margin-top: 7vh;
-}
-
-.service li {
-	height: 40vh;
-}
-/* detail */
-#head-text {
-	text-align: center;
-}
-#service-text{
-	text-align: center;
-}
-.notice {
-	height: 5vh;
-	margin: 0 auto;
-	background-color: #f7f7f7;
-	text-align: center;
-	line-height: 6vh;
-	margin-bottom: 3vh;
-}
-
-.services{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-}
-
-#img {
-	width: 27vh;
-	margin: 1vh 1vh;
-	-webkit-transition: all 0.5s ease;
-     -moz-transition: all 0.5s ease;
-       -o-transition: all 0.5s ease;
-      -ms-transition: all 0.5s ease;
-          transition: all 0.5s ease;
-}
-#img:hover {
-	width: 27vh;
-	margin: 1vh 1vh;
-	border: 3px solid #4dbbbf;
-	border-radius: 10%;
-}
-#service{
-	text-align: center;
-	color: #001429;
-	font-weight: bold;
-}
-h2, h4{
-	text-align : center;
-}
-
-
-</style>
-
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
+<link rel="stylesheet" type="text/css" href="/studyhub/css/FAQ.css">
 
 <script type="text/javascript">
 	function insertFAQ(){
@@ -98,35 +31,46 @@ h2, h4{
 	<div class="notice">
 		<p id="notice-text">[공지] <%= notice %></p>
 	</div>
-	<div class="head-text">
-	<h1 id="head-text">무엇이 궁금하신가요?</h1>
-	</div>
 	
-	
-	<div class="service">
-	<div class="col-md-6 col-md-offset-3">
 	<% if(user!=null){
 		if(user.getUserNo()==1){	
 	%>
-	<h2><b>--관리자모드--</b></h2>
+	<div class="head-text">
+	<h1 id="head-text">[관리자모드]</h1>
+	</div>
+	
+	<div class="service">
+	<div class="col-md-6 col-md-offset-3">
 	<h4><button onclick="insertFAQ();" class="btn btn-info">FAQ추가하기</button></h4>
-	<%  }}else{ %>
-	<h2 id="service-text">필요하신 서비스를 선택해주세요.</h2>
+	<%  }else{ %>
+		<div class="head-text">
+		<h1 id="head-text">무엇이 궁금하신가요?</h1>
+		</div>
+		<div class="service">
+		<div class="col-md-6 col-md-offset-3">
+		<h2 id="service-text">필요하신 서비스를 선택해주세요.</h2>
+	<%   }}else{ %>
+		<div class="head-text">
+		<h1 id="head-text">무엇이 궁금하신가요?</h1>
+		</div>
+		<div class="service">
+		<div class="col-md-6 col-md-offset-3">
+		<h2 id="service-text">필요하신 서비스를 선택해주세요.</h2>
 	<% } %>
 	<div class="col-md-6 col-lg-6 col-md-offset-3">
 				<div id="services">
 					<ul class="services">
 						<li class="service"><a href="/studyhub/faqmanagementlist?categoryno=1"><img id="img"
-								src="/studyhub/images/example.jpg"></a>
+								src="/studyhub/images/member.png"></a>
 							<p id="service">회원가입</p></li>
 						<li class="service"><a href="/studyhub/faqmanagementlist?categoryno=2"><img id="img"
-								src="/studyhub/images/example.jpg"></a>
+								src="/studyhub/images/studysearch.png"></a>
 							<p id="service">스터디찾기</p></li>
 						<li class="service"><a href="/studyhub/faqmanagementlist?categoryno=3"><img id="img"
-								src="/studyhub/images/example.jpg"></a>
+								src="/studyhub/images/group.png"></a>
 							<p id="service">그룹페이지</p></li>
 						<li class="service"><a href="/studyhub/faqmanagementlist?categoryno=4"><img id="img"
-								src="/studyhub/images/example.jpg"></a>
+								src="/studyhub/images/fileshare.png"></a>
 							<p id="service">파일공유</p></li>
 					</ul>
 				</div>

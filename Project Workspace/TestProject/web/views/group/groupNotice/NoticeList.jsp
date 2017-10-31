@@ -21,11 +21,8 @@
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
 
-<!-- <style>
-#btns {
-	float: right;
-}
-</style> -->
+<link rel="stylesheet" type="text/css" href="/studyhub/css/board_list.css">
+
 
 <script type="text/javascript">
 	function insertPage() {
@@ -42,10 +39,10 @@
 
 <!-- 메인 컨텐츠 -->
 	<div class="row" id="list-layout">
-		<div class="col-md-8 col-md-offset-2 col-sm-10 col-xs-9 col-xs-offset-1">
+		<div class="col-md-8 col-md-offset-1 col-lg-8 col-lg-offset-1 col-sm-10 col-xs-9 col-xs-offset-1">
 			<h2>공지사항</h2>
 			<div class="table-area">
-				<table class="table talble-striped" align="center" width="600">
+				<table class="table table-striped" align="center" width="600">
 					<tr id="attr">
 						<td>번호</td>
 						<td>제목</td>
@@ -97,7 +94,7 @@
 				<% } %>
 				</div>
 				<!-- /메인 컨텐츠 -->
-				<button onclick="insertPage();" class="btn btn-info">글쓰기</button>
+				<button onclick="insertPage();" class="btn btn-info" id="btns">글쓰기</button>
 			</div>
 		</div>
 	</div>

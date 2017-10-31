@@ -16,8 +16,7 @@
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
-<link rel="stylesheet" type="text/css"
-	href="/studyhub/css/board_detail.css">
+<link rel="stylesheet" type="text/css" href="/studyhub/css/board_detail.css">
 <link rel="stylesheet" href="/studyhub/css/detail.css">
 
 <%@ include file="/views/include/common/headend.jsp"%>
@@ -28,27 +27,22 @@
 
 <!--- 글쓴거 보이는 화면  -->
 <div class="row">
-	<h2 id="heading">
-		　　
-	</h2>
+	<h2 id="heading">공지글보기</h2>
 	<div id="inner"
-		class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xm-8 col-xs-2">
+		class="col-lg-9 col-lg-offset-1 col-md-9 col-md-offset-1 col-sm-8 col-sm-offset-1 col-xs-10">
 
 		<hr id="first-line">
 		<div class="head-text">
-			<h3 id="title-text"><%=gNotice.getTitle()%></h3>
-			<div id="attr-text">
-				<span>작성날짜 <%=gNotice.getUploadDate()%> |
-				</span> <span>작성자 <%=gNotice.getUploader_name()%></span>
-			</div>
+			<h3 id="notice-title"><%=gNotice.getTitle()%></h3>
+			<label class="writer-label">작성자: <%=gNotice.getUploader_name()%> </label>
 		</div>
-		<hr id="second-line">
+			<hr id="second-line">
 
-		<div class="panel-body" id="content"><%=(gNotice.getContent()).replaceAll("\n", "<br>")%></div>
+			<div class="panel-body" id="content"><%=(gNotice.getContent()).replaceAll("\n", "<br>") %></div>
 
-	
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
+		
+		<hr>
+		<div class="col-sm-offset-2 col-sm-10">
 				<%
 					if (user.getUserNo() == gNotice.getUploader()) {
 				%>
@@ -61,25 +55,34 @@
 					} 
 				}
 				</script>
-				<a href="/studyhub/gnoticeupdateview?no=<%=gNotice.getNoticeNo()%>"
+				<a href="/studyhub/gnoticeupdateview?no=<%=gNotice.getNoticeNo() %>"
 					class="btn btn-primary main-back pull-right">수정</a>
 				<%
 					}
 				%>
 				<a href="/studyhub/gnoticepreview?groupno=<%=group.getGroupNo()%>"
 					class="btn btn-default pull-right">목록</a>
-			</div>
+				<hr>
+		</div>
+		<!-- javascript select() 를 보기  -->
+		<div class="form-group">
+			<input
+		type="hidden" name="gnoticeno" id="gnoticeno"
+		value="<%=gNotice.getNoticeNo() %>"> <input type="hidden"
+		name="uploader" id="uploader" value="<%=gNotice.getUploader() %>">
+		</div>
+		
+		<div class="comment-list">
+			<!---댓글입력-->
+			<input type="text" name="content" class="form-control comment-input"
+			id="comment-write" placeholder="댓글을 달아주세요"> 
+			<button class="btn btn-info btn-sm" onclick="insert();">댓글달기</button>
+		</div>
+	</div>
 
-			<div class="comment-list">
-				Comment<br> <br>
-				<!---댓글입력-->
-				<input type="text" name="content" class="form-control"
-					id="comment-write" placeholder="댓글을 달아주세요"> 
-					<input type="hidden" name="gnoticeno" id="gnoticeno" value="<%=gNotice.getNoticeNo()%>"> 
-					<input type="hidden" name="uploader" id="uploader" value="<%=user.getUserNo()%>">
-				<button class="btn btn-info btn-sm" onclick="insert();">댓글달기</button>
-				<script type="text/javascript">
+
 	
+	<script type="text/javascript">
 		$(function(){
 			select();
 		});
@@ -109,76 +112,54 @@
 			}	
 			
 			function select(){
-				var gnoticeno = "<%=gNotice.getNoticeNo()%>";
-						$.ajax({
-									url : "/studyhub/gnoticecommentselect",
-									data : {
-										gnoticeno : gnoticeno
-									},
-									type : "get",
-									datatype : "json",
-									success : function(data) {
+				var gnoticeno = "<%= gNotice.getNoticeNo() %>";
+				$.ajax({
+					url: "/studyhub/gnoticecommentselect",
+					data: { gnoticeno: gnoticeno },
+					type: "get",
+					datatype: "json",
+					success: function(data){
+						
+						var json = JSON.parse(JSON.stringify(data));
+						var values = "";
+						for(var i in json.list){
+							values +=
+								"<div id='comment-area'>"+
+								decodeURIComponent(json.list[i].comment)+
+								"<span> | "+ decodeURIComponent(json.list[i].username)+ "</span>"+
+								"<span> | "+ decodeURIComponent(json.list[i].uploaddate)+ "</span>"+
+								"<input type='hidden' value='"+ json.list[i].commentno +"' id='commentno'>"+
+								"<input type='button' id='comment-del-btn' name='comment-del-btn' class='btn btn-info btn-sm' value='삭제' onclick='deleteC();'></div>"									;
+							
+						}
+						values += "<input type='text' name='content' class='form-control' id='comment-write' placeholder='댓글을 달아주세요'>"+
+									 "<button class='btn btn-info btn-sm' onclick = 'insert();'>댓글달기</button>"
 
-										var json = JSON.parse(JSON
-												.stringify(data));
-										var values = "";
-										for ( var i in json.list) {
-											values += "<div class='panel-footer'>"
-													+ decodeURIComponent(json.list[i].comment)
-													+ "<span> | "
-													+ decodeURIComponent(json.list[i].username)
-													+ "</span>"
-													+ "<span> | "
-													+ decodeURIComponent(json.list[i].uploaddate)
-													+ "</span>"
-													+ "<input type='hidden' value='"+ json.list[i].commentno +"' id='commentno'>"
-													+ "<input type='button' id='comment-del-btn' name='comment-del-btn' class='btn btn-info btn-sm' value='삭제' onclick='deleteC();'></div>";
+							$(".comment-list").html(values);
 
-										}
-										$("#comment-list").html(values);
+						},
+						error : function(xhr, status, error) {
+							alert("error\nxhr: " + xhr + ", status: " + status
+									+ ", error: " + error);
+						}
+					});
+		}
 
-									},
-									error : function(xhr, status, error) {
-										alert("error\nxhr: " + xhr
-												+ ", status: " + status
-												+ ", error: " + error);
-									}
-								});
-					}
-
-					function deleteC() {
-						var commentno = $("#commentno").val();
-						$.ajax({
-							url : "/studyhub/gnoticecommentdelete",
-							data : {
-								commentno : commentno
-							},
-							type : "get",
-							dataType : "json",
-						});
-						alert("삭제되었습니다.");
-						select();
-					}
-				</script>
-
-
-			</div>
-		</div>
-	</div>
+		function deleteC() {
+			var commentno = $("#commentno").val();
+			$.ajax({
+				url : "/studyhub/gnoticecommentdelete",
+				data : {
+					commentno : commentno
+				},
+				type : "get",
+				dataType : "json",
+			});
+			alert("삭제되었습니다.");
+			select();
+		}
+	</script>
 </div>
-
-
-
-<!---댓글보여지는부분--->
-
-<!-- <div class="panel-footer">
-				Comments:
-				
-					<a href="#" data-method="post" data-confirm="댓글을 삭제하시겠습니까?"><button><span
-						class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a>
-				
-			</div> -->
-
 
 
 <!--푸터 부분-->
