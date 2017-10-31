@@ -136,6 +136,7 @@ p:hover{
 }
 #header-bar{
 	height: 7vh;
+	border-bottom: 1px solid lightgray;
 }
 
 <!--modal -->
