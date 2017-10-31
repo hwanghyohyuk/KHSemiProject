@@ -17,6 +17,19 @@ public class GNComment implements java.io.Serializable{
 		super();
 	}
 
+	
+	
+	public GNComment(int commentNo, int noticeNo, String content, String uploaderName, String strUploadDate) {
+		super();
+		this.commentNo = commentNo;
+		this.noticeNo = noticeNo;
+		this.content = content;
+		this.uploaderName = uploaderName;
+		this.strUploadDate = strUploadDate;
+	}
+
+
+
 	public GNComment(int commentNo, int noticeNo, String content, 
 					Date uploadDate, int uploader, int accessNo, String uploaderName, String strUploadDate) {
 		super();

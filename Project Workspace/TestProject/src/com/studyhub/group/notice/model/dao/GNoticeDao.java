@@ -226,7 +226,7 @@ public class GNoticeDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "insert into tb_g_notice comment values("+
+		String query = "insert into tb_gn_comment values("+
 						"(select max(comment_no)+1 from tb_gn_comment),"+
 						"?, ?, sysdate, ?, 1)";
 
@@ -268,8 +268,8 @@ public class GNoticeDao {
 					gnc.setCommentNo(rset.getInt("comment_no"));
 					gnc.setNoticeNo(rset.getInt("notice_no"));
 					gnc.setContent(rset.getString("content"));
-					gnc.setUploadDate(rset.getDate("uploade_date"));
-					gnc.setUploader(rset.getInt("uploader"));
+					gnc.setStrUploadDate(rset.getString("str_date"));
+					gnc.setUploaderName(rset.getString("user_name"));
 
 					list.add(gnc);
 				}

@@ -129,6 +129,9 @@ p:hover{
 	font-weight: bold;
 	color: black;
 }
+#header-bar{
+	height: 7vh;
+}
 
 <!--modal -->
 

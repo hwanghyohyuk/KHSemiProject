@@ -5,7 +5,7 @@
 	User user = (User)session.getAttribute("user");
 %>
 <!-- 헤더 영역 : 네비게이션 바 -->
-<nav id="navbar">
+<nav class="navbar" id="header-bar">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"

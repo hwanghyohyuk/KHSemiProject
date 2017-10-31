@@ -122,21 +122,9 @@
 	right: 26vw;
 }
 
-/*FAQ_detail*/
-#main-text {
-	color: #001429;
-	margin-top: 10vh;
-}
 
-#move {
-	text-align: center;
-}
 
-#btns {
-	float: right;
-}
-#btns:hover{
-	background-color: #001429;
-}
+
+
 	
 	

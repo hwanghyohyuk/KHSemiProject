@@ -21,6 +21,7 @@
 	float: right;
 }
 </style>
+<link rel="stylesheet" type="text/css" href="/studyhub/css/board_list.css">
 
 <script type="text/javascript">
 	function insertPage() {
@@ -35,12 +36,13 @@
 <%@ include file="/views/include/group/nav.jsp"%>
 
 <!-- 메인 컨텐츠 -->
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+	<div class="row" id="list-layout">
+		<div
+			class="col-md-8 col-md-offset-1 col-lg-8 col-lg-offset-1 col-sm-10 col-xs-9 col-xs-offset-1">
 			<h2>공지사항</h2>
 			<div class="table-area">
-				<table class="table table-bordered table-condensed table-responsive" align="center" width="600">
-					<tr align="center">
+				<table class="table table-striped" align="center" width="600">
+					<tr id="attr">
 						<td>번호</td>
 						<td>제목</td>
 						<td>작성자</td>
@@ -62,7 +64,7 @@
 					%>
 				</table>
 				<!-- /메인 컨텐츠 -->
-				<button onclick="insertPage();" class="btn btn-info">글쓰기</button>
+				<button onclick="insertPage();" class="btn btn-info" id="btns">글쓰기</button>
 			</div>
 		</div>
 	</div>
