@@ -15,10 +15,14 @@ function imgMove(move, part) {
 	if (movePart == 'g')
 		if (moveType == 0) {
 			var aWidth = $(".RollDivG > div > a:first").width();
-			$(
-					"<a href=\"" + $(".RollDivG > div > a:first").attr("href")
-							+ "\">" + $(".RollDivG > div > a:first").html()
-							+ "</a>").insertBefore(".RollDivG > div > a:last");
+			$(".RollDivG > div").append(
+					"<a id='toolG' href=\"" 
+							+ $(".RollDivG > div > a:first").attr("href")
+							+ "\" data-placement=\"bottom\" title=\""
+							+ $(".RollDivG > div > a:first").attr(
+									"data-original-title") + "\">" 
+							+ $(".RollDivG > div > a:first").html()+ "</a>");
+			$("#toolG").tooltip();
 			$(".RollDivG > div > a:first").animate({
 				marginLeft : -aWidth
 			}, {
@@ -30,16 +34,24 @@ function imgMove(move, part) {
 		} else {
 			var aWidth = $(".RollDivG > div > a:last").width();
 			$(
-					"<a href=\"" + $(".RollDivG > div > a:last").attr("href")
-							+ "\" style=\"margin-left:-" + aWidth + "px\">"
+					"<a id='toolG' href=\""
+							+ $(".RollDivG > div > a:last").attr("href")
+							+ "\" style=\"margin-left:-"
+							+ aWidth
+							+ "px\" "
+							+ " data-placement=\"bottom\" title=\""
+							+ $(".RollDivG > div > a:last").attr(
+									"data-original-title") + "\">"
 							+ $(".RollDivG > div > a:last").html() + "</a>")
 					.insertBefore(".RollDivG > div > a:first");
+			$("#toolG").tooltip();
 			$(".RollDivG > div > a:first").animate({
 				marginLeft : 0
 			}, {
 				duration : moveSpeed,
 				complete : function() {
 					$(".RollDivG > div > a:last").remove();
+
 				}
 			});
 		}
@@ -47,9 +59,14 @@ function imgMove(move, part) {
 		if (moveType == 0) {
 			var aWidth = $(".RollDivB > div > a:first").width();
 			$(
-					"<a href=\"" + $(".RollDivB > div > a:first").attr("href")
-							+ "\">" + $(".RollDivB > div > a:first").html()
-							+ "</a>").insertBefore(".RollDivB > div > a:last");
+					"<a id ='toolB' href=\""
+							+ $(".RollDivB > div > a:first").attr("href")
+							+ "\" data-placement=\"bottom\" title=\""
+							+ $(".RollDivB > div > a:first").attr(
+									"data-original-title") + "\">"
+							+ $(".RollDivB > div > a:first").html() + "</a>")
+					.insertBefore(".RollDivB > div > a:last");
+			$("#toolB").tooltip();
 			$(".RollDivB > div > a:first").animate({
 				marginLeft : -aWidth
 			}, {
@@ -61,10 +78,17 @@ function imgMove(move, part) {
 		} else {
 			var aWidth = $(".RollDivB > div > a:last").width();
 			$(
-					"<a href=\"" + $(".RollDivB > div > a:last").attr("href")
-							+ "\" style=\"margin-left:-" + aWidth + "px\">"
+					"<a id ='toolB' href=\""
+							+ $(".RollDivB > div > a:last").attr("href")
+							+ "\" style=\"margin-left:-"
+							+ aWidth
+							+ "px\""
+							+ " data-placement=\"bottom\" title=\""
+							+ $(".RollDivB > div > a:last").attr(
+									"data-original-title") + "\">"
 							+ $(".RollDivB > div > a:last").html() + "</a>")
 					.insertBefore(".RollDivB > div > a:first");
+			$("#toolB").tooltip();
 			$(".RollDivB > div > a:first").animate({
 				marginLeft : 0
 			}, {
@@ -77,23 +101,34 @@ function imgMove(move, part) {
 }
 
 function boardlist() {
-	$.ajax({
-		url : "/studyhub/boardpreview",
-		type : "get",
-		dataType : "json",
-		success : function(data) {
-			var json = JSON.parse(JSON.stringify(data));
-			var values = "";
-			for ( var i in json.list) {
-				values += "<a href='/studyhub/boardview?bno="
-						+ json.list[i].board_no + "'>"
-						+ "<img src='/studyhub/images/"
-						+ decodeURIComponent(json.list[i].renameimg)
-						+ "' /></a> ";
-			}
-			$("#board").html(values);
-		}
-	});
+	$
+			.ajax({
+				url : "/studyhub/boardpreview",
+				type : "get",
+				dataType : "json",
+				async: false,
+				success : function(data) {
+					var json = JSON.parse(JSON.stringify(data));
+					var values = "";
+					for ( var i in json.list) {
+						values += "<a id ='toolB' href=\"/studyhub/boardview?bno="
+								+ json.list[i].board_no
+								+ "\" data-toggle=\"tooltip\" data-placement=\"bottom\" data-original-title=\""
+								+ decodeURIComponent(json.list[i].category_name)
+								+ ", "
+								+ decodeURIComponent(json.list[i].title)
+								+ ", "
+								+ decodeURIComponent(json.list[i].location)
+								+ "\">"
+								+ "<img src=\"/studyhub/images/"
+								+ decodeURIComponent(json.list[i].renameimg)
+								+ "\" /></a> ";
+					}
+					$("#board").html(values);
+					
+				}
+			});
+			$("#toolB").tooltip();
 }
 
 function mygrouplist(userno) {
@@ -106,27 +141,27 @@ function mygrouplist(userno) {
 				},
 				type : "get",
 				dataType : "json",
+				async: false,
 				success : function(data) {
 					var json = JSON.parse(JSON.stringify(data));
 					var values = "";
 					for ( var i in json.list) {
-						values += "<a href='/studyhub/gmainpreview?group_no="
+						values += "<a id ='toolG' href=\"/studyhub/gmainpreview?group_no="
 								+ json.list[i].group_no
 								+ "&reset=0&user_no="
 								+ user_no
-								+ "' data-toggle='tooltip' data-placement='bottom' title='"+decodeURIComponent(json.list[i].group_name)+", "+json.list[i].usercount+"명'>"
-								+ "<img id='groupimg' src='/studyhub/images/groupimg/"
+								+ "\" data-toggle=\"tooltip\" data-placement=\"bottom\" data-original-title=\""
+								+ decodeURIComponent(json.list[i].group_name)
+								+ ", "
+								+ json.list[i].usercount
+								+ "명\">"
+								+ "<img id=\"groupimg\" src=\"/studyhub/images/groupimg/"
 								+ decodeURIComponent(json.list[i].renameimg)
-								+ "'>";
+								+ "\">";
 					}
 					$("#group").html(values);
+					
 				}
 			});
+			$("#toolG").tooltip();
 }
-
-///////////////////////////////////////////////////
-//툴팁 초기화
-
-$(function() {
-	$('[data-toggle="tooltip"]').tooltip()
-})

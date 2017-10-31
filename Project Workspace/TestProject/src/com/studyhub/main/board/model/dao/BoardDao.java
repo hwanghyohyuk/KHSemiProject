@@ -268,20 +268,18 @@ public class BoardDao {
 		ResultSet rset = null;
 
 		
-		String query = "select group_no, group_name "
-				+ "from tb_ung "
-				+ "join tb_group using(group_no) "
-				+ "where user_no = ? and "
-				+ "group_name not in (select group_name from boardlistview where status = '모집중')";
+		String query = "select group_no, group_name"
+				+ " from boardlistview"
+				+ " where user_name = (select user_name from tb_user where user_no = ?) and"
+				+ " group_name not in (select group_name from boardlistview where status = '모집중')";
 
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, userNo);
 
 			rset = pstmt.executeQuery();
-
+			list = new ArrayList<Group>();
 			if (rset != null) {
-				list = new ArrayList<Group>();
 
 				while (rset.next()) {
 					Group g = new Group();
@@ -290,6 +288,7 @@ public class BoardDao {
 
 					list.add(g);
 				}
+			}else{
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -332,8 +331,8 @@ public class BoardDao {
 		ResultSet rset = null;
 		
 		String query = "select * from boardlistview "
-				+ "where rnum<=(select max(rnum) from boardlistview) "
-				+ "and rnum>=(select max(rnum)-4 from boardlistview) ";
+				+ "where status = '모집중' and (rnum<=(select max(rnum) from boardlistview) "
+				+ "and rnum>=(select max(rnum)-4 from boardlistview)) ";
 	
 		try {
 			pstmt = con.prepareStatement(query);
