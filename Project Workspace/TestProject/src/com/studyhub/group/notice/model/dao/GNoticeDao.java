@@ -226,8 +226,9 @@ public class GNoticeDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "insert into tb_gn_comment values ( "+
-						"(select max(comment_no)+1 from tb_gn_comment), " +
+
+		String query = "insert into tb_gn_comment values("+
+						"(select max(comment_no)+1 from tb_gn_comment),"+
 						"?, ?, sysdate, ?, 1)";
 
 		try {

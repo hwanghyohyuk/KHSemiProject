@@ -5,6 +5,10 @@ body{
 
 #heading{
 	margin-top: 6vh;
+	margin-left: 20vw;
+}
+.writer-label{
+	margin-left: 60vw;
 }
 #inner{
 	background: white;
@@ -29,8 +33,19 @@ hr #first-line{
 	font-weight: bold;
 	width: 40vw;
 }
+#notice-title{
+	text-align: center;
+	color: #0789a3;
+	font-weight: bold;
+}
 
 #content{
 	margin-left: 2vw;
+}
+#comment-area{
+	margin-left: 3vw;
+}
+.comment-input{
+	margin-left: 3vw;
 }
 

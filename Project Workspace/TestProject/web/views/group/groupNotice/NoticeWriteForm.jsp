@@ -34,7 +34,7 @@
 <!-- 메인 컨텐츠 -->
 
 <div class="row" id="layout">
-	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
+	<div class="col-md-5 col-md-offset-2 col-lg-5 col-lg-offset-2 col-sm-6 col-xs-10">
 		<h2>그룹 공지 작성</h2>
 		<br>
 		<form action="/studyhub/gnoticecreate" method="post">
