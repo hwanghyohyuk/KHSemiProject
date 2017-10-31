@@ -1,5 +1,4 @@
 ﻿@CHARSET "UTF-8";
-
 * {
 	margin: 0px;
 	padding: 0px;
@@ -96,14 +95,14 @@
 
 .RollDivG {
 	width: 64%;
-	height: 260px;
+	height: 240px;
 	overflow: hidden;
 	float: left;
 }
 
 .RollDivG>div {
 	overflow: hidden;
-	height: 260px;
+	height: 240px;
 	width: 150%;
 }
 
