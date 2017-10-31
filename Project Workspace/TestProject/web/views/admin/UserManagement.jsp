@@ -31,8 +31,8 @@
 				<form action="/studyhub/qnasearch" method="post" class="admin-search">
 				<button onclick="deleteMember();" id="delete-btn">삭제</button>
 					<select id="search-by" name="search-by">
-						<option value="title">제목</option>
-						<option value="writer">작성자</option>
+						<option value="user_name">이름</option>
+						<option value="email">이메일</option>
 					</select> <input type="search" autocomplete name="keyword" length="50"
 						id="search-input"> &nbsp; <input type="submit" value="검색"
 						id="search-btn">
@@ -45,30 +45,24 @@
 					<tr id="attr">
 						<th>선택</th>
 						<th>회원번호</th>
-						<th>이메일</th>
 						<th>사용자이름</th>
+						<th>이메일</th>
 						<th>휴대전화</th>
-						<th>그룹번호</th>
-						<th>분류</th>
 					</tr>
 					<%
 						 for (User u : ulist) { 
 					%>
 					<tr>
 						<td><input type="checkbox" id="member-check"></td>
-						<td><%=user.getUserNo() %></td>
+						<td><%=u.getUserNo() %></td>
+						<td><%=u.getUserName() %></td>
 						<td id="title_text"><a
 							href="#"><%=u.getEmail() %></a></td>
-						<td><%=u.getUserName() %></td>
+						
 						<td><%=u.getPhone() %></td>
-						<td><%=u.getGroupno() %></td>
-						<% if(u.getAuthorityno()==2){ %>
-						<td>그룹장</td>
-						<% }else{ %>
-						<td>일반회원</td>
 					</tr>
 					<%
-						} } 
+						}
 					%>
 				</table>
 			</div>

@@ -8,8 +8,8 @@
 <ul class="nav nav-stacked" id="nav_ul">
 	<li id="nav_li"><a href="/studyhub/views/admin/MainDashBoard.jsp" id="nav_text">대시보드</a></li>
 	<li id="nav_li"><a href="/studyhub/usermanagementlist" id="nav_text">회원관리</a></li>
-	<li id="nav_li"><a href="/studyhub/views/admin/GroupManagement.jsp" id="nav_text">그룹관리</a></li>
-	<li id="nav_li"><a href="/studyhub/views/admin/FAQManagement.jsp" id="nav_text">FAQ관리</a></li>
+	<li id="nav_li"><a href="/studyhub/groupmanagementlist" id="nav_text">그룹관리</a></li>
+	<li id="nav_li"><a href="/studyhub/noticeview" id="nav_text">FAQ관리</a></li>
 	<li id="nav_li"><a href="/studyhub/views/admin/FAQManagement.jsp" id="nav_text">Q&A관리</a></li><!-- 수정필요 -->
 	<li id="nav_li"><a href="/studyhub/views/admin/MainBoardManagement.jsp" id="nav_text">모집게시판</a></li>
 </ul>

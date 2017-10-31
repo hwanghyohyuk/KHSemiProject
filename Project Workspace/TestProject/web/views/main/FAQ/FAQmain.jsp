@@ -73,11 +73,20 @@
 	color: #001429;
 	font-weight: bold;
 }
+h4{
+	text-align : center;
+}
 
 
 </style>
 
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
+
+<script type="text/javascript">
+	function insertFAQ(){
+		location.href="/studyhub/views/admin/FAQwriteForm.jsp";
+	}
+</script>
 
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
@@ -105,21 +114,27 @@
 	</div>
 	<div class="service">
 	<div class="col-md-6 col-md-offset-3">
+	<% if(user!=null){
+		if(user.getUserNo()==1){	
+	%>
+	<h4>--관리자모드--</h4>
+	<h4><button onclick="insertFAQ();" class="btn btn-info">FAQ추가하기</button></h4>
+	<%  }}else{ %>
 	<h2 id="service-text">필요하신 서비스를 선택해주세요.</h2>
-	
+	<% } %>
 	<div class="col-md-6 col-lg-6 col-md-offset-3">
 				<div id="services">
 					<ul class="services">
-						<li class="service"><a href="/studyhub/views/main/FAQ/FAQdetail.jsp"><img id="img"
+						<li class="service"><a href="/studyhub/faqmanagementlist?categoryno=1"><img id="img"
 								src="/studyhub/images/example.jpg"></a>
 							<p id="service">회원가입</p></li>
-						<li class="service"><a href="/studyhub/views/main/FAQ/FAQdetail.jsp"><img id="img"
+						<li class="service"><a href="/studyhub/faqmanagementlist?categoryno=2"><img id="img"
 								src="/studyhub/images/example.jpg"></a>
 							<p id="service">스터디찾기</p></li>
-						<li class="service"><a href="/studyhub/views/main/FAQ/FAQdetail.jsp"><img id="img"
+						<li class="service"><a href="/studyhub/faqmanagementlist?categoryno=3"><img id="img"
 								src="/studyhub/images/example.jpg"></a>
 							<p id="service">그룹페이지</p></li>
-						<li class="service"><a href="/studyhub/views/main/FAQ/FAQdetail.jsp"><img id="img"
+						<li class="service"><a href="/studyhub/faqmanagementlist?categoryno=4"><img id="img"
 								src="/studyhub/images/example.jpg"></a>
 							<p id="service">파일공유</p></li>
 					</ul>
