@@ -1,11 +1,15 @@
 package com.studyhub.main.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.studyhub.main.model.service.MainService;
 
 /**
  * Servlet implementation class JoinMessageServlet
@@ -13,33 +17,50 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/joinmessage")
 public class JoinMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public JoinMessageServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	private MainService ms;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int sender = Integer.parseInt(request.getParameter("sender"));
-		int receiver = Integer.parseInt(request.getParameter("receiver"));
-		int groupNo = Integer.parseInt(request.getParameter("groupno"));
-		
-		System.out.println("sender : "+sender+"\nreceiver : "+receiver+"\ngroupNo : "+groupNo);
-		
-		
+	public JoinMessageServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int senderNo = Integer.parseInt(request.getParameter("senderNo"));
+		int receiverNo = Integer.parseInt(request.getParameter("receiverNo"));
+		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
+
+		System.out.println("senderNo : " + senderNo + "\nsenderNo : " + senderNo + "\ngroupNo : " + groupNo);
+		ms = new MainService();
+		int insertUnG = ms.inserUnG(senderNo, groupNo, 1, 0);
+		int insertMessage = ms.InsertMessage3(groupNo, senderNo, receiverNo);
+		PrintWriter pw = response.getWriter();
+		if (insertMessage > 0 && insertUnG > 0) {
+			pw.println("1");
+			pw.flush();
+			pw.close();
+		} else {
+			pw.println("0");
+			pw.flush();
+			pw.close();
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

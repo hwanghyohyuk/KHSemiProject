@@ -28,11 +28,13 @@
 
 <!-- sendMessage -->
 <%
-	int sender = user.getUserNo();
-	int receiver = board.getUploader();
-	int groupno = board.getGroupNo();
+	int senderNo = user.getUserNo();
+	int receiverNo = board.getUploader();
+	int groupNo = board.getGroupNo();
 %>
-
+<script type="text/javascript" >
+window.onload = function(){ checkBtnState(<%=senderNo%>,<%=groupNo%>); }
+</script>
 <!-- 메인 컨텐츠 -->
 <div class="container">
 	<div class="page-header">
@@ -76,7 +78,7 @@
 			<label class="col-sm-1 control-label">가입 신청</label>
 			<div class="col-sm-3">
 				<%if(board.getStatus().equals("모집중")){ %>
-				<a id="joinbtn" class="btn btn-primary main-back pull-left" href="#" onclick='javascript:sendMessage(<%=sender%>,<%=receiver%>,<%=groupno%>);'>가입 신청</a>
+				<button id="joinbtn" class="btn btn-primary main-back pull-left" onclick='javascript:sendMessage(<%=senderNo%>,<%=receiverNo%>,<%=groupNo%>);'>가입 신청</button>
 				<%}else{ %>
 				<a class="btn btn-default pull-left" disabled href="#">모집 마감</a>
 				<%} %>
@@ -138,7 +140,6 @@
 	</div>
 </div>
 <!-- /메인 컨텐츠 -->
-
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
 <!--페이지 끝-->

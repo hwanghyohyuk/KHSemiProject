@@ -1,4 +1,4 @@
-var btn_state = 0;//모집게시판 가입신청 버튼 상태
+var state = 0;//성공실패여부
 
 function boardInsert() {
 	var btitle = $('#btitle').val();
@@ -19,36 +19,53 @@ function boardInsert() {
 	}	
 }
 
-function sendMessage(sender,receiver,groupno){
-	alert('sender : '+sender+'\nreceiver : '+receiver+'\ngroupno : '+groupno);
+function sendMessage(senderNo,receiverNo,groupNo){
 	$.ajax({
 		type : "post",
 		data : {
-			sender : sender,
-			receiver : receiver,
-			groupno : groupno
+			senderNo : senderNo,
+			receiverNo : receiverNo,
+			groupNo : groupNo
 		},
 		url : "/studyhub/joinmessage",
 		async : false,
 		success : function(data) {
 			if(data==1){
 				alert('가입이 신청되었습니다.');
-				btn_state=1;
+				state=1;
 			}else{
 				alert('가입 신청 오류!');
-				btn_state=0;
+				state=0;
 			}
 		}
 	});
-		
+	if(state==1){
+	checkBtnState(sender,groupno);
+	state=0;
+	}
+	history.back();
 }
 
-function toggleJoinBtn(){
-	if(btn_state==0){
-		btn_state=1;
-	}else if(btn_state==1){
-		btn_state=0;
-	}
-	$("#joinbtn").prop("disabled", false);
-	//수정 시작 부분
+function checkBtnState(senderNo,groupNo){
+	$.ajax({
+		type : "post",
+		data : {
+			senderNo : senderNo,
+			groupNo : groupNo
+		},
+		url : "/studyhub/ungstate",
+		async : false,
+		success : function(data) {
+			if(data==0){
+				$("#joinbtn").prop("disabled", true);
+				$("#joinbtn").html("가입대기 중");
+			}else if(data==1){
+				$("#joinbtn").prop("disabled", true);
+				$("#joinbtn").html("가입 됨");
+			}else if(data==2){
+				$("#joinbtn").prop("disabled", false);
+				$("#joinbtn").html("가입신청");
+			}
+		}
+	});
 }

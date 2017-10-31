@@ -55,6 +55,7 @@ public class MessageListServlet extends HttpServlet {
 			job.put("sender", m.getSenderNo());
 			job.put("receiver", m.getReceiverNo());
 			job.put("messagestate", m.getMessageState());
+			job.put("username", URLEncoder.encode(m.getUserName(), "UTF-8"));
 
 			jarr.add(job);
 		}
