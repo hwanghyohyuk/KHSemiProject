@@ -23,29 +23,15 @@ public class NoticeService {
 	private Board board;
 	
 	
-	public ArrayList<Notice> selectList(){
-		Connection con = getConnection();
-		ArrayList<Notice> list = new NoticeDao().selectList(con);
-		close(con);		
-		return list;
-		
-	}
-	
-	public HashMap<Integer, Notice> selectMap() {
-		Connection con = getConnection();
-		HashMap<Integer, Notice> map = new NoticeDao().selectMap(con);
-		close(con);
-		return map;
-	}
 
-	public Notice selectNotice(int no) {
+	public String selectNotice() {
 		Connection con = getConnection();
-		Notice notice = new NoticeDao().selectOne(con, no);
+		String notice = new NoticeDao().selectOne(con);
 		close(con);
 		return notice;
 	}
 
-	public int insertNotice(Notice notice) {
+	public int insertNotice(String notice) {
 		Connection con = getConnection();
 		int result = new NoticeDao().insertNotice(con, notice);
 		if(result > 0)
@@ -56,33 +42,15 @@ public class NoticeService {
 		return result;
 	}
 
-	public int deleteNotice(int no) {
+	public int deleteNotice() {
 		Connection con = getConnection();
-		int result = new NoticeDao().deleteNotice(con, no);
+		int result = new NoticeDao().deleteNotice(con);
 		if(result > 0)
 			commit(con);
 		else
 			rollback(con);
 		close(con);
 		return result;
-	}
-
-	public int updateNotice(Notice notice) {
-		Connection con = getConnection();
-		int result = new NoticeDao().updateNotice(con, notice);
-		if(result > 0)
-			commit(con);
-		else
-			rollback(con);
-		close(con);
-		return result;
-	}
-
-	public ArrayList<Notice> selectSearch(String keyword) {
-		Connection con = getConnection();
-		ArrayList<Notice> list = new NoticeDao().selectTitleSearch(con, keyword);
-		close(con);
-		return list;
 	}
 
 	

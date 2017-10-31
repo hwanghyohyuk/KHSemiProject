@@ -35,10 +35,11 @@ public class GNoticeCommentSelectServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int gnoticeno = Integer.parseInt(request.getParameter("no"));
+		int gnoticeno = Integer.parseInt(request.getParameter("gnoticeno"));
 		ArrayList<GNComment> list = new GNoticeService().selectcomment(gnoticeno);
-		System.out.println(gnoticeno);
+		
 		JSONObject json = new JSONObject();
 		JSONArray jarr = new JSONArray();
 		
@@ -53,6 +54,8 @@ public class GNoticeCommentSelectServlet extends HttpServlet {
 			jarr.add(job);
 						
 		}
+		//console 출력
+		System.out.println("\n코멘트 셀렉트 서블릿 : list : "+list +", gnoticeno : " + gnoticeno);
 		json.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();

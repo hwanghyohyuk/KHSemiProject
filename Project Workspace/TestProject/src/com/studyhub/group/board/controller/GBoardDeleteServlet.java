@@ -19,7 +19,7 @@ import com.studyhub.common.vo.*;
 public class GBoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private GBoardService gNboardService;
+	private GBoardService gboardService;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,12 +36,12 @@ public class GBoardDeleteServlet extends HttpServlet {
 			//게시글 삭제
 		response.setContentType("text/html; charset=utf-8");
 		
-		int no = Integer.parseInt(request.getParameter("no"));
+		int no = Integer.parseInt(request.getParameter("groupno"));
 		
 		if(new GBoardService().deleteGBoard(no) > 0){
-			response.sendRedirect("/studyhub/gboardlist");
+			response.sendRedirect("/studyhub/gboardpreview?groupno=1");
 		}else{
-			RequestDispatcher view = request.getRequestDispatcher("views/board/boardError.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/group/groupBoard/BoardError.jsp");
 			request.setAttribute("message", "게시글 삭제 처리 실패!");
 			view.forward(request, response);
 		}

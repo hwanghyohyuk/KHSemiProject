@@ -20,6 +20,7 @@ public class GNoticeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private GNoticeService gNoticeService;
+	private GNotice gNotice;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,10 +37,14 @@ public class GNoticeDeleteServlet extends HttpServlet {
 		// 공지 삭제
 		response.setContentType("text/html; charset=utf-8");
 		
-		int gno= Integer.parseInt(request.getParameter("no"));
+		int gno= Integer.parseInt(request.getParameter("groupno"));
+				
 		
+		//console 출력
+		System.out.println("\n 딜리트 서블릿 gno : "+ gno);
+			
 		if(new GNoticeService().deleteGNotice(gno) > 0){
-			response.sendRedirect("/studyhub/gnoticepreview");
+			response.sendRedirect("/studyhub/gnoticepreview?groupno=1");
 		}else{
 			RequestDispatcher view = request.getRequestDispatcher("/views/group/groupNotice/NoticeError.jsp");
 			request.setAttribute("message", "게시글 삭제 실패");

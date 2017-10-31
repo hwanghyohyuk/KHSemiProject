@@ -12,6 +12,8 @@ public class User implements java.io.Serializable {
 	private int userState;
 	private int pwdState;
 	private Date deleteDate;
+	private int groupno;
+	private int authorityno;
 
 	public User() {
 		super();
@@ -23,6 +25,18 @@ public class User implements java.io.Serializable {
 		this.userName = userName;
 		this.userPwd = userPwd;
 		this.phone = phone;
+	}
+	
+	
+
+	public User(int userNo, String email, String userName, String phone, int groupno, int authorityno) {
+		super();
+		this.userNo = userNo;
+		this.email = email;
+		this.userName = userName;
+		this.phone = phone;
+		this.groupno = groupno;
+		this.authorityno = authorityno;
 	}
 
 	public User(int userNo, String email, String userName, String userPwd, String phone) {
@@ -111,11 +125,31 @@ public class User implements java.io.Serializable {
 		this.deleteDate = deleteDate;
 	}
 
+	
+	
+	public int getGroupno() {
+		return groupno;
+	}
+
+	public void setGroupno(int groupno) {
+		this.groupno = groupno;
+	}
+
+	public int getAuthorityno() {
+		return authorityno;
+	}
+
+	public void setAuthorityno(int authorityno) {
+		this.authorityno = authorityno;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userNo=" + userNo + ", email=" + email + ", userName=" + userName + ", userPwd=" + userPwd
 				+ ", phone=" + phone + ", userState=" + userState + ", pwdState=" + pwdState + ", deleteDate="
-				+ deleteDate + "]";
+				+ deleteDate + ", groupno=" + groupno + ", authorityno=" + authorityno + "]";
 	}
+
+	
 
 }

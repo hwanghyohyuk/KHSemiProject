@@ -32,9 +32,10 @@ public class GNoticeCommentInsertServlet extends HttpServlet {
 		
 		int gnoticeno = Integer.parseInt(request.getParameter("gnoticeno"));
 		String comment = request.getParameter("comment");
-		int userno = Integer.parseInt(request.getParameter("userno"));
-		System.out.println(comment);
-		if(new GNoticeService().insertComment(gnoticeno, comment, userno)>0 ){
+		int uploader = Integer.parseInt(request.getParameter("uploader"));
+		//console 출력
+		System.out.println("\n코멘트 인서트 서블릿 : comment : " + comment + ", gnoticeno : "+ gnoticeno);
+		if(new GNoticeService().insertComment(gnoticeno, uploader, comment)>0 ){
 			response.sendRedirect("views/group/groupNotice/NoticeDetail.jsp");
 		}
 	}

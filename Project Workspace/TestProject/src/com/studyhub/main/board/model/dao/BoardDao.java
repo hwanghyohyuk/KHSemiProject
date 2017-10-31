@@ -268,20 +268,18 @@ public class BoardDao {
 		ResultSet rset = null;
 
 		
-		String query = "select group_no, group_name "
-				+ "from tb_ung "
-				+ "join tb_group using(group_no) "
-				+ "where user_no = ? and "
-				+ "group_name not in (select group_name from boardlistview where status = '모집중')";
+		String query = "select group_no, group_name"
+				+ " from boardlistview"
+				+ " where user_name = (select user_name from tb_user where user_no = ?) and"
+				+ " group_name not in (select group_name from boardlistview where status = '모집중')";
 
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, userNo);
 
 			rset = pstmt.executeQuery();
-
+			list = new ArrayList<Group>();
 			if (rset != null) {
-				list = new ArrayList<Group>();
 
 				while (rset.next()) {
 					Group g = new Group();
@@ -290,6 +288,7 @@ public class BoardDao {
 
 					list.add(g);
 				}
+			}else{
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -326,5 +325,51 @@ public class BoardDao {
 				return result;
 	}
 
+	public ArrayList<Board> top5board(Connection con) {
+		ArrayList<Board> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from boardlistview "
+				+ "where status = '모집중' and (rnum<=(select max(rnum) from boardlistview) "
+				+ "and rnum>=(select max(rnum)-4 from boardlistview)) ";
 	
+		try {
+			pstmt = con.prepareStatement(query);
+			rset = pstmt.executeQuery();
+
+			if (rset != null) {
+				list = new ArrayList<Board>();
+
+				while (rset.next()) {
+					Board b = new Board();
+
+					b.setBoardNo(rset.getInt("board_no"));
+					b.setTitle(rset.getString("title"));
+					b.setUploader(rset.getInt("user_no"));
+					b.setUploaderName(rset.getString("user_name"));
+					b.setContent(rset.getString("content"));
+					b.setUploadDate(rset.getDate("upload_date"));
+					b.setDeadlineDate(rset.getDate("deadline_date"));
+					b.setStatus(rset.getString("status"));
+					b.setGroupName(rset.getString("group_name"));
+					b.setLocation(rset.getString("location"));
+					b.setCategoryName(rset.getString("category_name"));
+					b.setAttributeName(rset.getString("attribute_name"));
+					b.setgImgRename(rset.getString("g_img_rename"));
+					b.setMemberCount(rset.getInt("memberCount"));
+
+					list.add(b);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}	
 }

@@ -69,6 +69,19 @@ public class Group {
 		this.userName = userName;
 		this.memberCount = memberCount;
 	}
+	
+	
+
+	public Group(int groupNo, String groupName, String attributeName, String location, String categoryName,
+			String userName) {
+		super();
+		this.groupNo = groupNo;
+		this.groupName = groupName;
+		this.attributeName = attributeName;
+		this.location = location;
+		this.categoryName = categoryName;
+		this.userName = userName;
+	}
 
 	public int getGroupState() {
 		return groupState;

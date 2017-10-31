@@ -1,4 +1,4 @@
-package com.studyhub.main.controller;
+package com.studyhub.group.main.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,21 +14,22 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.studyhub.common.vo.Message;
-import com.studyhub.common.vo.UNG;
-import com.studyhub.main.model.service.MainService;
+import com.studyhub.common.vo.GQNA;
+import com.studyhub.common.vo.User;
+import com.studyhub.group.main.model.service.GMainService;
+import com.studyhub.group.qna.model.service.GroupQnAService;
 
 /**
- * Servlet implementation class MessageSelectServlet
+ * Servlet implementation class SearchUserServlet
  */
-@WebServlet("/messageselect")
-public class MessageSelectServlet extends HttpServlet {
+@WebServlet("/searchuser")
+public class SearchUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MessageSelectServlet() {
+    public SearchUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,31 +41,35 @@ public class MessageSelectServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		int userno = Integer.parseInt(request.getParameter("userno"));
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
+		String search = request.getParameter("search");
 		
-		ArrayList<Message> list = new MainService().MessageSelect(userno);
+		ArrayList<Integer> searchlist = new GMainService().SearchSelect(search, groupno);
+		
+		ArrayList<User> userlist = new GMainService().userlist(userno, groupno, searchlist);
 		
 		JSONObject json = new JSONObject();
 		JSONArray jarr = new JSONArray();
 		
-		for(Message m : list){
-			JSONObject job = new JSONObject();
-			job.put("messageno", m.getMessageNo());
-			job.put("message", URLEncoder.encode(m.getMessage(),"UTF-8"));
-			job.put("groupno", m.getGroupNo());
-			job.put("groupname", URLEncoder.encode(m.getGroupName(), "UTF-8"));
-			job.put("sender", m.getSenderNo());
-			job.put("receiver", m.getReceiverNo());
-			job.put("messagestate", m.getMessageState());
-
-			jarr.add(job);
+		if(userlist != null) {
+			for(User u : userlist){
+				JSONObject job = new JSONObject();
+				job.put("userno", u.getUserNo());
+				job.put("email", URLEncoder.encode(u.getEmail(), "UTF-8"));
+				job.put("username", URLEncoder.encode(u.getUserName(), "UTF-8"));
+				
+				jarr.add(job);
+			}
+			json.put("list", jarr);
+			response.setContentType("application/json; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(json.toJSONString());
+			out.flush();
+			out.close();
+			}
+		else {
+			response.sendRedirect("views/group/GroupMain.jsp");
 		}
-		
-		json.put("list", jarr);
-		response.setContentType("application/json; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.print(json.toJSONString());
-		out.flush();
-		out.close();
 	}
 
 	/**

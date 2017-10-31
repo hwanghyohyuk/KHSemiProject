@@ -10,7 +10,7 @@
 
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 <% 
-	GNotice gnotice = (GNotice)request.getAttribute("gnotice"); 
+	GNotice gNotice = (GNotice)request.getAttribute("gNotice"); 
 %>
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
@@ -24,7 +24,7 @@
 	margin-top: 8vh;
 }
 </style>
-
+<link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
@@ -39,7 +39,7 @@
 		<div class="form-group">
 			<label for="title">제목</label> <input type="text"
 				class="form-control" id="post_title" name="title"
-				aria-describedby="emailHelp" value= <%=gnotice.getTitle() %>>
+				aria-describedby="emailHelp" value= <%=gNotice.getTitle() %>>
 		</div>
 		<div class="range">
 		<label for="Content">공개범위</label>
@@ -57,12 +57,14 @@
 		<div class="form-group">
 			<label for="Content">내용</label>
 			<textarea class="form-control" id="Textarea" rows="15" name="content"
-				><%=gnotice.getContent() %></textarea>
+				><%=gNotice.getContent() %></textarea>
 		</div>
 		
 		<input type="submit" value="수정하기" class="btn btn-default" id="btns">
-		<a href="/studyhub/gnoticepreview?groupno=<%=group.getGroupNo()%>">목록으로 이동</a>
-		<input type="hidden" name="no" value="<%=gnotice.getNoticeNo() %>">
+		<a href="/studyhub/gnoticepreview?groupno=<%=group.getGroupNo()%>">취소</a>
+		<input type="hidden" name="no" value="<%=gNotice.getNoticeNo() %>">
+		<input type="hidden" name="uploader" value ="<%=user.getUserName()%>">
+		<input type="hidden" name="groupno" value = "<%=group.getGroupNo()%>">
 		</form>
 	</div>
 </div>

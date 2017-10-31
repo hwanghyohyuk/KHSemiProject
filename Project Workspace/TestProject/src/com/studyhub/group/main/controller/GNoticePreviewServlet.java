@@ -21,7 +21,7 @@ import com.studyhub.group.notice.model.service.GNoticeService;
 public class GNoticePreviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private GNoticeService gms;
+	private GNoticeService gns;
 	private GNotice gNotice;
 	
     /**
@@ -38,27 +38,28 @@ public class GNoticePreviewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
+				
 		
-		GNoticeService gnservice = new GNoticeService();
-		
-		int groupno = Integer.parseInt(request.getParameter("groupno"));		
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
 		
 		int currentPage = 1;
-		int limit = 10;
-			
-		if(request.getParameter("page")!= null)
-		currentPage = Integer.parseInt(request.getParameter("page"));						
+		int limit = 10;			
+		if(request.getParameter("groupno")!= null)
+			currentPage = Integer.parseInt(request.getParameter("groupno"));						
 		
-		int listCount = gnservice.getListCount();
+		gns = new GNoticeService();
+		
+		int listCount = gns.getListCount();
+		
+		ArrayList<GNotice> list = gns.selectGroupNotice(groupno,currentPage,limit);
 					
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		int startPage = ((int)((double)currentPage / limit + 0.9) -1) *limit +1;
-		
 		int endPage = startPage + limit -1;
 		if(maxPage < endPage)
 			endPage = maxPage;
 		
-		ArrayList<GNotice> list = gnservice.selectGroupNotice(groupno,currentPage,limit);
+		
 				
 		RequestDispatcher view = null;
 		if(list != null){
@@ -66,11 +67,11 @@ public class GNoticePreviewServlet extends HttpServlet {
 			
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
-			request.setAttribute("maxpage", maxPage);
+			request.setAttribute("maxPage", maxPage);
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listCount", listCount);
-			//System.out.println(list + ", " + currentPage + ", " + maxPage + ", " + startPage + ", " + endPage + ", " + listCount);
+			System.out.println("\n 프리뷰서블릿 currentPage : " + currentPage + "maxPage : " + maxPage + "startPage : " + startPage + "endPage : " + endPage + "listCount : " + listCount);
 			view.forward(request, response);
 		}else{
 			view = request.getRequestDispatcher("views/group/groupNotice/NoticeError.jsp");

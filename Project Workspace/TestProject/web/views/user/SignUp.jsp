@@ -7,32 +7,32 @@
  -->
 <!-- java 구문 -->
 
-<!-- 초기화 블럭(변수선언 및 초기화) -->
 
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
+
+<!--자바스크립트 및 CSS-->
+<link rel="stylesheet" type="text/css" href="/studyhub/css/start.css">
+<script type="text/javascript" src="/studyhub/js/signup.js"></script>
+
+
+
+<%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 
 <!-- 메인 컨텐츠 -->
-<div class="container">
-	<!-- 이미지 영역 -->
-	<div class="col-md-0 hidden-xs" style="height: 60px"></div>
-	<div class="col-md-6 col-xs-12">
-		<img alt=""
-			src="https://dummyimage.com/540x540/3d6280/9da0cc.jpg&text=image+540x540"
-			style="width: 100%">
-	</div>
+<div class="container col-md-12 col-lg-12 col-sm-12 col-xs-12" id="main-area">
+	
 	<div class="col-md-6 col-xs-12">
 		<!-- 공백 영역 -->
-		<div class="col-md-0 col-xs-0" style="height: 100px"></div>
+		<div class="col-md-0 col-xs-0" style="height: 20px"></div>
 		<!-- 공백 영역 -->
-		<div class="col-md-1 col-xs-1" style="height: 40px"></div>
-		<div class="col-md-10 col-xs-10" style="display: table">
+		<div class="col-md-7 col-lg-7 col-sm-7 col-xs-7 col-md-offset-2 col-lg-offset-2" id="signup-area" style="display: table">
 			<div
 				style="display: table-cell; vertical-align: middle; height: 100%">
 				<div class="form-group">
-					<h3 class="text-center">회원가입</h3>
+					<h3 class="text-center" id="signup-text">회원가입</h3>
 				</div>
 				<form class="form-horizontal" action="/studyhub/signupprocess" method="post"
 					name="signupform">
@@ -96,6 +96,11 @@
 		</div>
 		<div class="col-md-1 col-xs-1" style="height: 40px"></div>
 	</div>
+	<!-- 이미지 영역 -->
+	<div class="col-md-0 hidden-xs" style="height: 60px"></div>
+	<div class="col-md-6 col-xs-12">
+		
+	</div>
 </div>
 
 <!-- /메인 컨텐츠 -->
@@ -103,5 +108,4 @@
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
 <!--페이지 끝-->
-<script type="text/javascript" src="/studyhub/js/signup.js"></script>
-<%@ include file="/views/include/common/headend.jsp"%>
+<%@ include file="/views/include/common/tail.jsp"%>

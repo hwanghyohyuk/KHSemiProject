@@ -4,6 +4,7 @@ import static com.studyhub.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.studyhub.common.vo.GBComment;
 import com.studyhub.common.vo.GBoard;
 import com.studyhub.group.board.model.dao.GBoardDao;
 
@@ -34,9 +35,9 @@ public class GBoardService {
 
 	}
 
-	public int deleteGBoard(int bnum) {
+	public int deleteGBoard(int bno) {
 		Connection conn = getConnection();
-		int result = new GBoardDao().deleteBoard(conn, bnum);
+		int result = new GBoardDao().deleteBoard(conn, bno);
 		if (result > 0)
 			commit(conn);
 		else
@@ -67,30 +68,43 @@ public class GBoardService {
 	public ArrayList<GBoard> selectList(int groupno, int currentPage, int limit) {
 		Connection con = getConnection();
 		gbDao = new GBoardDao();
-		ArrayList<GBoard> list = gbDao.selectList(con,groupno,currentPage, limit);
+		ArrayList<GBoard> list = gbDao.selectList(con, groupno, currentPage, limit);
 		close(con);
 		return list;
 	}
 
-	/*
-	 * // GNoticeComment
-	 * 
-	 * public int deleteComment(int cno) { Connection con = getConnection(); int
-	 * result = new GNoticeDao().deleteComment(con, cno); if(result >0)
-	 * commit(con); else rollback(con); close(con); return result;
-	 * 
-	 * }
-	 * 
-	 * public int insertComment(int gnoticeno, String comment, int userno) {
-	 * Connection con = getConnection(); int result = new
-	 * GNoticeDao().insertComment(con, gnoticeno, comment, userno); if(result>0)
-	 * commit(con); else rollback(con); close(con); return result; }
-	 * 
-	 * public ArrayList<GNComment> selectcomment(int gnoticeno) { Connection con
-	 * = getConnection(); ArrayList<GNComment> list = new
-	 * GNoticeDao().selectComment(con, gnoticeno); close(con);
-	 * 
-	 * return list; }
-	 */
+	
+	
+	
+	public int deleteComment(int cno) {
+		Connection con = getConnection();
+		int result = new GBoardDao().deleteComment(con, cno);
+		if (result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+
+	}
+
+	public int insertComment(int gboardno, int uploader, String comment) {
+		Connection con = getConnection();
+		int result = new GBoardDao().insertComment(con, gboardno,uploader, comment);
+		if (result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+
+	public ArrayList<GBComment> selectcomment(int gboardno) {
+		Connection con = getConnection();
+		ArrayList<GBComment> list = new GBoardDao().selectComment(con, gboardno);
+		close(con);
+
+		return list;
+	}
 
 }

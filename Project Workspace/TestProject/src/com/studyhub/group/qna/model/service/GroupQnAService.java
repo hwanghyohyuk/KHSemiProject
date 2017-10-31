@@ -22,9 +22,9 @@ public class GroupQnAService {
 		return result;
 	}
 	
-	public ArrayList<GQNA> selectGroupQnA(int groupno) {
+	public ArrayList<GQNA> selectGroupQnA(int groupno, int startpage, int endpage) {
 		Connection con = getConnection();
-		ArrayList<GQNA> list = new GroupQnADao().selectGroupQnA(con, groupno);
+		ArrayList<GQNA> list = new GroupQnADao().selectGroupQnA(con, groupno, startpage, endpage);
 		close(con);
 		return list;
 	}
