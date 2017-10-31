@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studyhub.common.vo.GBoard;
+import com.studyhub.common.vo.GNotice;
 import com.studyhub.group.board.model.service.GBoardService;
+import com.studyhub.group.notice.model.service.GNoticeService;
 
 
 /**
@@ -21,8 +23,8 @@ import com.studyhub.group.board.model.service.GBoardService;
 public class GBoardUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private GBoard gNboard;
-	private GBoardService gNboardService;
+	private GBoard gBoard;
+	private GBoardService gboardService;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,21 +40,32 @@ public class GBoardUpdateServlet extends HttpServlet {
 		// 게시글 수정페이지 출력 처리용 컨트롤러
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-		GBoard gboard = new GBoard();
-		gboard.setgBoardNo(Integer.parseInt(request.getParameter("no")));
-		gboard.setTitle(request.getParameter("title"));
-		gboard.setContent(request.getParameter("content"));
 		
+		int gBoardNo = Integer.parseInt(request.getParameter("gBoardNo"));
+		String title = request.getParameter("title");
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
+		String content = request.getParameter("content");
+		int accessNo = Integer.parseInt(request.getParameter("accessno"));
+		
+		
+		gBoard = new GBoard();
+		gBoard.setgBoardNo(gBoardNo);
+		gBoard.setTitle(title);
+		gBoard.setContent(content);
+		gBoard.setGroupNo(groupno);
+		gBoard.setAccessNo(accessNo);
+		gboardService = new GBoardService();
+		System.out.println(gBoard);
 		RequestDispatcher view = null;
 		
-		//수정 updateBoard(gNboard)
-		if(new GBoardService().updateGBoard(gboard)>0){
-			response.sendRedirect("/studyhub/gboardlist");
+		if(gboardService.updateGBoard(gBoard) >0){
+			response.sendRedirect("/studyhub/gboardpreview?groupno="+groupno);
 		}else{
 			view = request.getRequestDispatcher("/views/group/groupBoard/BoardError.jsp");
 			request.setAttribute("message", "수정실패");
 			view.forward(request, response);
 		}
+		
 	}
 
 	/**
