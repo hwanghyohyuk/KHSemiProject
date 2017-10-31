@@ -68,6 +68,26 @@ location.href="/studyhub/myinfo";
 		</div>
 	</div>
 	
+	<div class="nav">
+<button onClick="imgMove(0);">왼쪽으로</button>  
+<button onClick="imgMove(1);">오른쪽으로</button>  
+</div>
+<div class="slider">
+  <div class="div-left">
+  <button class="btn-left" onClick="imgMove(0);">왼쪽으로</button>  
+  </div>
+<div class="RollDiv">  
+  <div>  
+    <a href=""><img src="http://placehold.it/187x60" /></a>  
+    <a href=""><img src="http://placehold.it/187x60" /></a>  
+    <a href=""><img src="http://placehold.it/187x60" /></a>   
+  </div>  
+</div>   
+  <div class="div-right">
+  <button class="btn-left" onClick="imgMove(0);">오른쪽으로</button> 
+  </div>
+</div>	
+	
 <script type="text/javascript">
 	$(function(){
 		var user_email = "<%= user.getEmail() %>";

@@ -120,3 +120,20 @@
 	color: #0789a3;
 	position: absolute;
 	right: 26vw;
+}
+
+/* 이미지 슬라이더*/
+.nav{margin:10px;}
+.slider{float:left; display:block; width:1300px}
+.div-left{float:left;width:100px}
+.div-right{float:left;width:100px}
+.btn-left{
+  height:200px; width:100px
+}
+.btn-right{
+  height:200px;width:100px
+}
+.RollDiv{width:1000px; height:200px;overflow:hidden;float:left;}  
+.RollDiv > div{overflow:hidden;height:200px;width:1200px}
+.RollDiv > div > a{ float:left; display:block;}  
+.RollDiv > div > a > img{ width:180px; height:200px;margin-right:10px;}
