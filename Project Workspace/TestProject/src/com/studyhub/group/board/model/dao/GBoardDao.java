@@ -73,15 +73,15 @@ public class GBoardDao {
 		return result;
 	}
 
-	public int deleteBoard(Connection conn, int bnum) {
+	public int deleteBoard(Connection conn, int bno) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "delete from gboard where g_Board_no = ?";
+		String query = "delete from tb_g_board where g_board_no = ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, bnum);
+			pstmt.setInt(1, bno);
 
 			result = pstmt.executeUpdate();
 
@@ -217,17 +217,19 @@ public class GBoardDao {
 		return result;
 	}
 
-	public int insertComment(Connection con, int gboardno, String comment, int userno) {
+	public int insertComment(Connection con, int gboardno,  int uploader, String content) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "";
+		String query = "insert into tb_gb_comment values ( " +
+						"(select max(comment_no)+1 from tb_gb_comment), " +
+						"?, ?, sysdate, ?, 1)";
 
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, gboardno);
-			pstmt.setString(2, comment);
-			pstmt.setInt(3, userno);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, uploader);
 
 			result = pstmt.executeUpdate();
 

@@ -32,8 +32,7 @@
 			<div class="col-sm-3">
 				<p class="pull-left control-label"><%=gBoard.getTitle()%></p>
 			</div>
-			<br>
-			<br>
+			<br> <br>
 			<hr>
 			<label class="col-sm-3 control-label">내용</label>
 			<div class="col-sm-9">
@@ -45,7 +44,7 @@
 			<div class="col-sm-12">
 				<button class="btn btn-default btn-sm"
 					style="margin-top: 0.6vh; float: right">
-					<a href="#" data-method="post" data-confirm="삭제하시겠습니까?">삭제</a>
+					<a href="javascript:checkDelete(<%=gBoard.getgBoardNo()%>)">삭제</a>
 				</button>
 				<button class="btn btn-default btn-sm"
 					style="margin-top: 0.6vh; float: right">
@@ -60,22 +59,26 @@
 		</div>
 	</form>
 </div>
-
-<div class="comment-list">
-	Comment<br> <br>
-	<!---댓글입력-->
-	<input type="text" name="content" class="form-control" width="80%"
-		id="comment-write" placeholder="댓글을 달아주세요"> <input
-		type="hidden" name="gboardno" id="gboardno"
-		value="<%=gBoard.getgBoardNo()%>"> <input type="hidden"
-		name="uploader" id="uploader" value="<%=gBoard.getUploader()%>">
-	<button class="btn btn-info btn-sm" onclick="insert();">댓글달기</button>
-	<script type="text/javascript">
+<div class="container">
+	<div class="comment-list">
+		Comment<br> <br>
+		<!---댓글입력-->
+		<input type="text" name="content" class="form-control" width = "80%"
+			id="comment-write" placeholder="댓글을 달아주세요">
+		<input type="hidden" name ="gboardno" id ="gboardno" value="<%=gBoard.getgBoardNo() %>">
+		<input type="hidden" name ="uploader" id ="uploader" value="<%=gBoard.getUploader() %>">
+		<button class="btn btn-info btn-sm" onclick = "commentInsert()">댓글달기</button>
+		<script type="text/javascript">
+	function checkDelete(groupno){
+		if (confirm('해당 게시글을 삭제하시겠습니까?')) {
+		    location.href="/studyhub/gboarddelete?groupno="+groupno;
+		} 
+	}
 	
 		$(function(){
 			select();
 		});
-			function insert(){
+	<%-- 		function insert(){
 				console.log("is it working");
 				if($("#comment-write").val() ==""){
 					alert("댓글을 입력하세요");
@@ -102,58 +105,136 @@
 			
 			function select(){
 				var gboardno = "<%=gBoard.getgBoardNo()%>";
-		
-			$.ajax({
-						url : "/studyhub/gbcommentselect",
-						data : {
-							gboardno : gboardno
-						},
-						type : "get",
-						datatype : "json",
-						success : function(data) {
 
-							var json = JSON.parse(JSON.stringify(data));
-							var values = "";
-							for ( var i in json.list) {
-								values += "<div class='panel-footer'>"
-										+ decodeURIComponent(json.list[i].comment)
-										+ "<span> | "
-										+ decodeURIComponent(json.list[i].username)
-										+ "</span>"
-										+ "<span> | "
-										+ decodeURIComponent(json.list[i].uploaddate)
-										+ "</span>"
-										+ "<input type='hidden' value='"+ json.list[i].commentno +"' id='commentno'>"
-										+ "<input type='button' id='comment-del-btn' name='comment-del-btn' class='btn btn-info btn-sm' value='삭제' onclick='deleteC();'></div>";
+				$.ajax({
+							url : "/studyhub/gbcommentselect",
+							data : {
+								gboardno : gboardno
+							},
+							type : "get",
+							datatype : "json",
+							success : function(data) {
 
+								var json = JSON.parse(JSON.stringify(data));
+								var values = "";
+								for ( var i in json.list) {
+									values += "<div class='panel-footer'>"
+											+ decodeURIComponent(json.list[i].comment)
+											+ "<span> | "
+											+ decodeURIComponent(json.list[i].username)
+											+ "</span>"
+											+ "<span> | "
+											+ decodeURIComponent(json.list[i].uploaddate)
+											+ "</span>"
+											+ "<input type='hidden' value='"+ json.list[i].commentno +"' id='commentno'>"
+											+ "<input type='button' id='comment-del-btn' name='comment-del-btn' class='btn btn-info btn-sm' value='삭제' onclick='deleteC();'></div>";
+
+								}
+								$("#comment-list").html(values);
+
+							},
+							error : function(xhr, status, error) {
+								alert("error\nxhr: " + xhr + ", status: "
+										+ status + ", error: " + error);
 							}
-							$("#comment-list").html(values);
+						});
+			}
 
-						},
-						error : function(xhr, status, error) {
-							alert("error\nxhr: " + xhr + ", status: " + status
-									+ ", error: " + error);
+			function deleteC() {
+				var commentno = $("#commentno").val();
+				$.ajax({
+					url : "/studyhub/gbcommentdelete",
+					data : {
+						commentno : commentno
+					},
+					type : "get",
+					dataType : "json",
+				});
+				alert("삭제되었습니다.");
+				select();
+			} --%>
+			
+			function commentconfirm(param){// param 으로 gboardno가 넘어옴
+				var groupno = "<%= group.getGroupNo() %>";
+				var userno = "<%= user.getUserNo() %>";
+				$.ajax({
+					url: "/studyhub/gboardcommentselect",
+					data: { gboardno: param, groupno: groupno },
+					type: "get",
+					dataType: "json",
+					success: function(data){
+						var json = JSON.parse(JSON.stringify(data));
+						var values = "";
+						for(var i in json.list){
+							if(userno == json.list[i].uploader){
+								values += 
+									"<li>" +
+										"<div class='col-lg-1 col-md-1 col-sm-1' id='commentwriter'>" +
+											decodeURIComponent(json.list[i].user_name).replace(/\+/gi, " ") +
+										"</div>" +
+										"<div class='col-lg-9 col-md-9 col-sm-9'>" +
+											decodeURIComponent(json.list[i].content).replace(/\+/gi, " ") +
+										"</div>" +
+										"<div class='col-lg-2 col-md-2 col-sm-2'>" +
+											decodeURIComponent(json.list[i].strdate) + "&nbsp;&nbsp;" +
+											"<a onclick='commentDelete(" + json.list[i].comment_no + ", " + json.list[i].gboardno + ")'>" +
+												"<span class='glyphicon glyphicon-remove'></span>" +
+											"</a>" +
+										"</div>" +
+									"</li>";
+							} else {
+								values += 
+									"<li>" +
+										"<div class='col-lg-1 col-md-1 col-sm-1' id='commentwriter'>" +
+											decodeURIComponent(json.list[i].user_name).replace(/\+/gi, " ") +
+										"</div>" +
+										"<div class='col-lg-9 col-md-9 col-sm-9'>" +
+											decodeURIComponent(json.list[i].content).replace(/\+/gi, " ") +
+										"</div>" +
+										"<div class='col-lg-2 col-md-2 col-sm-2'>" +
+											decodeURIComponent(json.list[i].strdate) + "&nbsp;&nbsp;" +
+										"</div>" +
+									"</li>";
+							}
 						}
-					});
-		}
+						$("#commentbody"+param).html(values);
+					}
+				});
+			}
+			
+			function commentInsert(param){
+				var gboardno = param;
+				var content = $("#commenttitle"+param).val();
+				var uploader = "<%= gBoard.getUploader() %>";
+				$.ajax({
+					url: "/studyhub/gboardcommentinsert",
+					data: { gboardno: gboardno, uploader: uploader, content: content },
+					type: "get",
+					dataType: "json",
+					async: false
+				});
+				$("#commenttitle"+param).val("");
+				alert("등록되었습니다.");
+				commentconfirm(gboardno);
+			}
+			
+			function commentDelete(param, param2){
+				var commentno = param;
+				var gboardno = param2;
+				$.ajax({
+					url: "/studyhub/gboardcommentdelete",
+					data: { commentno: commentno },
+					type: "get",
+					dataType: "json",
+					async: false
+				})
+				alert("삭제되었습니다.");
+				commentconfirm(gboardno);
+			}
+		</script>
 
-		function deleteC() {
-			var commentno = $("#commentno").val();
-			$.ajax({
-				url : "/studyhub/gbcommentdelete",
-				data : {
-					commentno : commentno
-				},
-				type : "get",
-				dataType : "json",
-			});
-			alert("삭제되었습니다.");
-			select();
-		}
-	</script>
-
+	</div>
 </div>
-
 </div>
 
 

@@ -55,6 +55,7 @@ public class GBoardUpdateServlet extends HttpServlet {
 		gBoard.setGroupNo(groupno);
 		gBoard.setAccessNo(accessNo);
 		gboardService = new GBoardService();
+		
 		System.out.println(gBoard);
 		RequestDispatcher view = null;
 		
