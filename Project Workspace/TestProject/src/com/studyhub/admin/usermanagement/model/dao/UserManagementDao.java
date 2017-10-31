@@ -17,8 +17,7 @@ public class UserManagementDao {
 		ArrayList<User> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select tb_user.user_no, tb_user.email, tb_user.user_name, tb_user.phone, tb_ung.group_no, tb_ung.authority_no "
-				+ "from tb_user join tb_ung on (tb_user.user_no = tb_ung.user_no)";
+		String query = "select user_no, email, user_name, phone from tb_user";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -32,9 +31,7 @@ public class UserManagementDao {
 					user.setEmail(rset.getString("email"));
 					user.setUserName(rset.getString("user_name"));
 					user.setPhone(rset.getString("phone"));
-					user.setGroupno(rset.getInt("group_no"));
-					user.setAuthorityno(rset.getInt("authority_no"));
-			
+					
 					list.add(user);
 				}
 			}

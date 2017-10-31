@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*, com.studyhub.common.vo.FAQ" %>
 <!-- 
 작성자 : 구미향
 내용 : FAQ 메인 페이지(메인에서 도움말 클릭했을 때의 화면)
@@ -7,7 +7,7 @@
  -->
 
 <!-- java 구문 -->
-
+<% ArrayList<FAQ> flist = (ArrayList<FAQ>)request.getAttribute("list");%>
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 
 <!--페이지 시작-->
@@ -15,31 +15,22 @@
 
 <!--자바스크립트 및 CSS-->
 
-<style>
-
-/* layout */
-
-/*detail*/
-#main-text {
-	color: #001429;
-}
-
-#move {
-	text-align: center;
-}
-
-#btns {
-	float: right;
-}
-
-
-</style>
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
 
 <script type="text/javascript">
 	function toQnA(){
 		location.href="/studyhub/qnalist";
 	}
+	function editFAQ(faqno){
+		location.href="/studyhub/faqmanagementupdateview?no="+faqno;
+	}
+	function deleteFAQ(faqno, cno){
+		var r = confirm("정말 삭제하시겠습니까?");
+		if(r==true){
+			location.href="/studyhub/faqmanagementdelete?faqno="+faqno+"&cno="+cno;
+		}
+	}
+	
 </script>
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
@@ -47,26 +38,25 @@
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 <!-- 메인 컨텐츠 -->
-
+	
 	<div class="col-md-6 col-sm-6 col-sm-offset-3 col-md-offset-3">
-		<h2 id="main-text">회원가입/로그인</h2>
+		<h2 id="main-text"><%=flist.get(0).getFaqCategoryName() %></h2>
+		
+		<% for(FAQ f : flist){ %>
 		<hr>
-		<span>아이디가 기억나지 않아요</span> <a class="btn btn-default btn-sm" id="btns"
-			data-toggle="collapse" href="#collapse1" aria-expanded="false"
-			aria-controls="collapseExample"> <span
-			class="glyphicon glyphicon-chevron-down"></span></a>
-		<div class="collapse" id="collapse1">
-			<div class="well">아이디가 왜 기억이 안날까요?</div>
+		<span><%=f.getTitle() %></span> 
+		<a class="edit" onclick="editFAQ(<%= f.getFaqNo()%>);"><span class="glyphicon glyphicon-pencil"></span></a>
+		<a class="delete" onclick="deleteFAQ(<%= f.getFaqNo()%>, <%=f.getFaqCategoryNo()%>);"><span class="glyphicon glyphicon-remove"></span></a>
+		<a class="btn btn-default btn-sm" id="btns"
+			data-toggle="collapse" href="#collapse<%=f.getFaqNo() %>" aria-expanded="false"
+			aria-controls="collapseExample"> 
+			<span class="glyphicon glyphicon-chevron-down"></span></a>
+		<div class="collapse" id="collapse<%=f.getFaqNo() %>">
+			<div class="well"><%=f.getContent() %></div>
 		</div>
+		<% } %>
 		<hr>
-		<span>회원가입 할 때 페이지가 넘어가지 않아요</span> <a class="btn btn-default btn-sm" id="btns"
-			data-toggle="collapse" href="#collapse2" aria-expanded="false"
-			aria-controls="collapseExample"> <span
-			class="glyphicon glyphicon-chevron-down"></span></a>
-		<div class="collapse" id="collapse2">
-			<div class="well">답변을 채워야 합니다 :) </div>
-		</div>
-		<hr>
+		<!-- <hr>
 		<span>아이디를 해킹당한 것 같아요</span> <a class="btn btn-default btn-sm" id="btns"
 			data-toggle="collapse" href="#collapse3" aria-expanded="false"
 			aria-controls="collapseExample"> <span
@@ -82,11 +72,14 @@
 		<div class="collapse" id="collapse4">
 			<div class="well">답변을 채워야 합니다 :)</div>
 		</div>
-		<hr>
+		<hr> -->
 		
 
-		<span id="move">질문이 해결되지 않는다면? → </span>
+		<span id="move"><b>질문이 해결되지 않는다면? → </b></span>
 		<button onclick="toQnA();" class="btn btn-info" id="btns">질문게시판으로 이동</button>
+		<hr>
+		
+		<p><a href="/studyhub/noticeview">FAQ메인으로 가기</a></p>
 
 	</div>
 

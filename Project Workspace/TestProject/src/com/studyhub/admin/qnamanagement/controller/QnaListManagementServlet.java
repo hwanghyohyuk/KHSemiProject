@@ -1,6 +1,7 @@
-package com.studyhub.admin.faqmanagement.controller;
+package com.studyhub.admin.qnamanagement.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,25 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.admin.faqmanagement.model.service.FAQManagementService;
-import com.studyhub.common.vo.FAQ;
+import com.studyhub.admin.groupmanagement.model.service.GroupManagementService;
+import com.studyhub.common.vo.Group;
 import com.studyhub.common.vo.QnA;
 import com.studyhub.main.qna.model.service.QnAService;
 
 /**
- * Servlet implementation class FAQManagementUpdateServlet
+ * Servlet implementation class QnaListManagementServlet
  */
-@WebServlet("/faqmanagementupdate")
-public class FAQManagementUpdateServlet extends HttpServlet {
+@WebServlet("/qnalistmanagement")
+public class QnaListManagementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private FAQManagementService faqms;
-	private FAQ faq;
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FAQManagementUpdateServlet() {
+    public QnaListManagementServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,23 +34,18 @@ public class FAQManagementUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8");
-		
-		faq = new FAQ();
-		faq.setFaqNo(Integer.parseInt(request.getParameter("faqno")));
-		faq.setTitle(request.getParameter("title"));
-		faq.setContent(request.getParameter("content"));
-		int categoryno = Integer.parseInt(request.getParameter("categoryno"));
-		faq.setFaqCategoryNo(categoryno);
-		
+		response.setContentType("text/html; charset=utf-8"); 
 		RequestDispatcher view = null;
 		
-		if(new FAQManagementService().updateFAQ(faq) > 0){
-			response.sendRedirect("/studyhub/faqmanagementlist?categoryno="+categoryno);
+		ArrayList<QnA> list = new QnAService().selectList();
+		
+		if(list!=null){
+			view= request.getRequestDispatcher("/views/admin/QnAManagement.jsp");
+			request.setAttribute("qlist", list);
+			view.forward(request, response);
 		}else{
 			view = request.getRequestDispatcher("/views/main/QnA/QnAError.jsp");
-			request.setAttribute("message", "수정실패");
+			request.setAttribute("message", "view 출력 실패");
 			view.forward(request, response);
 		}
 	}
