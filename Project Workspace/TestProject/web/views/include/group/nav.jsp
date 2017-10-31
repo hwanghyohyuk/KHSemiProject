@@ -7,7 +7,7 @@
 
 <div id="nav_menu">
 <ul class="nav nav-stacked" id="nav_ul">
-	<li id="nav_li_top"><a href="/studyhub/gmainpreview?group_no=<%= group.getGroupNo() %>&reset=0&user_no=<%=navuser.getUserNo()%>" id="nav_text">[<%= group.getGroupName() %>]</a></li>
+	<li id="nav_li_top"><a href="/studyhub/gmainpreview?group_no=<%= group.getGroupNo() %>&reset=0&user_no=<%=navuser.getUserNo()%>" id="nav_text_group"><%= group.getGroupName() %></a></li>
 	<li id="nav_li"><a href="/studyhub/gnoticepreview?groupno=<%=group.getGroupNo() %>" id="nav_text"> ▷ 공지사항</a></li>
 	<li id="nav_li"><a href="/studyhub/schedulepreview?group_no=<%= group.getGroupNo() %>" id="nav_text"> ▷ 스터디일정</a></li>
 	<li id="nav_li"><a href="/studyhub/sharedfilepreview?groupno=<%= group.getGroupNo() %>" id="nav_text"> ▷ 파일공유</a></li>
