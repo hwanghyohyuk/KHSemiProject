@@ -21,66 +21,6 @@
 	margin-bottom: 2vh;
 }
 
-#slider {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	height: 36vh;
-	width: 52vw;
-	overflow: hidden;
-	background-color: lightgray;
-}
-
-#slider .group-slides {
-	display: block;
-	overflow: hidden;
-}
-
-#slider .slides {
-	display: block;
-	overflow: hidden;
-}
-
-#slider .slide {
-	float: left;
-	list-style-type: none;
-}
-
-/* 세부요소 */
-#slider-left {
-	height: 10vh;
-	margin-top: 27vh;
-	float: left;
-	cursor: pointer;
-}
-
-#group-slider-left {
-	height: 10vh;
-	margin-top: 27vh;
-	float: left;
-	cursor: pointer;
-}
-
-#slider-right {
-	height: 10vh;
-	margin-top: 10vh;
-	margin-left: 13vw;
-	-ms-transform: rotate(180deg); /* IE 9 */
-	-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-	transform: rotate(180deg);
-	cursor: pointer;
-}
-
-#group-slider-right {
-	height: 10vh;
-	margin-top: 10vh;
-	margin-left: 13vw;
-	-ms-transform: rotate(180deg); /* IE 9 */
-	-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-	transform: rotate(180deg);
-	cursor: pointer;
-}
-
 #groupimg {
 	float: left;
 	width: 16vw;
@@ -120,7 +60,7 @@
 }
 
 /* 이미지 슬라이더*/
-.boardslider {
+.slider {
 	display: block;
 	width: 100%;
 	margin: 0 8% 5% 8%;
@@ -135,36 +75,63 @@
 	height: 240px;
 	width: 100%;
 	cursor: pointer;
+	border-style:none;
+	background-color: #ffffff;
 }
 
 .btn-right {
 	height: 240px;
 	width: 100%;
+	background-color: #ffffff;
 	-ms-transform: rotate(180deg); /* IE 9 */
 	-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
 	transform: rotate(180deg);
 	cursor: pointer;
 }
 
-.RollDiv {
+.RollDivG {
 	width: 64%;
 	height: 240px;
 	overflow: hidden;
 	float: left;
 }
 
-.RollDiv>div {
+.RollDivG>div {
 	overflow: hidden;
 	height: 240px;
 	width: 150%;
 }
 
-.RollDiv>div>a {
+.RollDivG>div>a {
 	float: left;
 	display: block;
 }
 
-.RollDiv>div>a>img {
+.RollDivG>div>a>img {
+	width: 240px;
+	height: 240px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.RollDivB {
+	width: 64%;
+	height: 240px;
+	overflow: hidden;
+	float: left;
+}
+
+.RollDivB>div {
+	overflow: hidden;
+	height: 240px;
+	width: 150%;
+}
+
+.RollDivB>div>a {
+	float: left;
+	display: block;
+}
+
+.RollDivB>div>a>img {
 	width: 240px;
 	height: 240px;
 	margin-left: 5px;

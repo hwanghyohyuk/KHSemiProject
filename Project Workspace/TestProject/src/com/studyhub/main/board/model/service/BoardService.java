@@ -94,6 +94,13 @@ public class BoardService {
 		return groupCount;
 	}
 
+	public ArrayList<Board> top5board() {
+		Connection con = getConnection();
+		ArrayList<Board> list = new BoardDao().top5board(con);
+		close(con);
+		return list;
+	}
+
 	
 
 }

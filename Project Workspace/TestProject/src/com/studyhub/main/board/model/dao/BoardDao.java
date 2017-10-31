@@ -326,5 +326,51 @@ public class BoardDao {
 				return result;
 	}
 
+	public ArrayList<Board> top5board(Connection con) {
+		ArrayList<Board> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from boardlistview "
+				+ "where rnum<=(select max(rnum) from boardlistview) "
+				+ "and rnum>=(select max(rnum)-4 from boardlistview) ";
 	
+		try {
+			pstmt = con.prepareStatement(query);
+			rset = pstmt.executeQuery();
+
+			if (rset != null) {
+				list = new ArrayList<Board>();
+
+				while (rset.next()) {
+					Board b = new Board();
+
+					b.setBoardNo(rset.getInt("board_no"));
+					b.setTitle(rset.getString("title"));
+					b.setUploader(rset.getInt("user_no"));
+					b.setUploaderName(rset.getString("user_name"));
+					b.setContent(rset.getString("content"));
+					b.setUploadDate(rset.getDate("upload_date"));
+					b.setDeadlineDate(rset.getDate("deadline_date"));
+					b.setStatus(rset.getString("status"));
+					b.setGroupName(rset.getString("group_name"));
+					b.setLocation(rset.getString("location"));
+					b.setCategoryName(rset.getString("category_name"));
+					b.setAttributeName(rset.getString("attribute_name"));
+					b.setgImgRename(rset.getString("g_img_rename"));
+					b.setMemberCount(rset.getInt("memberCount"));
+
+					list.add(b);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}	
 }

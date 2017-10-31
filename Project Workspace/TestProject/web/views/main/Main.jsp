@@ -15,8 +15,8 @@
 	if (changePwd.getPwdState() == 1) {
 %>
 <script type="text/javascript">
-alert('임시 비밀번호를 변경해주세요!');
-location.href="/studyhub/myinfo";
+	alert('임시 비밀번호를 변경해주세요!');
+	location.href = "/studyhub/myinfo";
 </script>
 <%
 	}
@@ -25,159 +25,59 @@ location.href="/studyhub/myinfo";
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 <div class="container">
-	<div class="row" id="count">
-		<!-- ajax로 틀 불러옴 -->
+	<div class="row">
+		<div class="head">
+			<span id="title" style="margin-left: 10%">나의 그룹</span>
+		</div>
+		<div class="slider">
+			<div class="div-btn">
+				<button class="btn-left" onClick="imgMove(0,'g');">
+					<img class="btn-left" src="/studyhub/images/slider.png">
+				</button>
+			</div>
+			<div class="RollDivG">
+				<div id="group">
+					<!-- ajax -->
+				</div>
+			</div>
+			<div class="div-btn">
+				<button class="btn-left" onClick="imgMove(1,'g');">
+					<img class="btn-right" src="/studyhub/images/slider.png">
+				</button>
+			</div>
+		</div>
 	</div>
 	<!-- 모집게시판 부분 -->
-	<div class="row" id="board">
+	<div class="row">
 		<div class="head">
 			<a href="/studyhub/boardlist" id="more">더보기</a><span id="title"
 				style="margin-left: 10%">모집게시판</span>
 		</div>
-		<div class="boardslider">
+		<div class="slider">
 			<div class="div-btn">
-				<a class="btn-left" href="#" onClick="imgMove(0);"><img
-					class="btn-left" src="/studyhub/images/slider.png"></a>
+				<button class="btn-left" onClick="imgMove(0,'b');">
+					<img class="btn-left" src="/studyhub/images/slider.png">
+				</button>
 			</div>
-			<div class="RollDiv">
-				<div>
-					<a href=""><img src="/studyhub/images/recruit.jpg" /></a> <a
-						href=""><img src="/studyhub/images/recruit.jpg" /></a> <a href=""><img
-						src="/studyhub/images/recruit.jpg" /></a> <a href=""><img
-						src="/studyhub/images/recruit.jpg" /></a>
+			<div class="RollDivB">
+				<div id="board">
+					<!-- ajax -->
 				</div>
 			</div>
 			<div class="div-btn">
-				<a class="btn-left" href="#" onClick="imgMove(1);"><img
-					class="btn-right" src="/studyhub/images/slider.png"></a>
+				<button class="btn-left" onClick="imgMove(1,'b');">
+					<img class="btn-right" src="/studyhub/images/slider.png">
+				</button>
 			</div>
 		</div>
 	</div>
 </div>
-
 <script type="text/javascript">
-	$(function(){
-		var user_email = "<%=user.getEmail()%>";
-		$.ajax({
-					url : "/studyhub/mygroupcount",
-					data : {
-						email : user_email
-					},
-					type : "get",
-					dataType : "json",
-					success : function(data) {
-						var json = JSON.parse(JSON.stringify(data));
-						var values = "";
-						if (json.countgroup > 0) {
-							values += "<div class='col-md-10 col-sm-5 col-md-offset-2'>"
-									+ "<div class='slider-btn'>"
-									+ "<img id='group-slider-left' " +
-									"src='/studyhub/images/slider.png'>"
-									+ "</div>"
-									+ "<div class='head'>"
-									+ "<a href='#' id='more'>더보기</a><span id='title'>나의 그룹</span>"
-									+ "</div>"
-									+ "<div class='col-md-8 col-lg-6'>"
-									+ "<div id='slider'>"
-									+ "<ul class='group-slides'>"
-									+
-									// ajax 코드가 li 태그를 생성함
-									"</ul>"
-									+ "</div>"
-									+ "</div>"
-									+ "<div class='slider-btn'>"
-									+ "<img id='group-slider-right' " +
-									"src='/studyhub/images/slider.png'>"
-									+ "</div>" + "</div>";
-						}
-						$("#count").html(values);
-						var width = 400;
-						$(document).ready(function() {
-							$("#group-slider-left").click(function() {
-								$('.group-slides').animate({
-									'margin-left' : '+=' + width
-								}, 800);
-								console.log("working!1");
-							});
-
-						});
-
-						$(document).ready(function() {
-							$("#group-slider-right").click(function() {
-								$('.group-slides').animate({
-									'margin-left' : '-=' + width
-								}, 800);
-								console.log("working!2");
-							});
-
-						});
-
-						$(document).ready(function() {
-							$("#slider-right").click(function() {
-								$('.slides').animate({
-									'margin-left' : '-=' + width
-								}, 1000);
-								console.log("working!3");
-							});
-
-						});
-
-						$(document).ready(function() {
-							$("#slider-left").click(function() {
-								$('.slides').animate({
-									'margin-left' : '+=' + width
-								}, 1000);
-								console.log("working!4");
-							});
-
-						});
-						mygrouplist();
-					}
-				});
-	});
-
-	function mygrouplist() {
-		var user_no =<%=user.getUserNo()%>;
-		$.ajax({
-					url : "/studyhub/mygrouppreview",
-					data : {
-						userno : user_no
-					},
-					type : "get",
-					dataType : "json",
-					success : function(data) {
-						var json = JSON.parse(JSON.stringify(data));
-						var values = "";
-						for ( var i in json.list) {
-							values += "<li class='slide'>"
-									+ "<a href='/studyhub/gmainpreview?group_no="
-									+ json.list[i].group_no
-									+ "&reset=0&user_no="
-									+ user_no
-									+ "'>"
-									+ "<div>"
-									+ "<div>"
-									+ "<img id='groupimg' src='/studyhub/images/groupimg/"
-									+ decodeURIComponent(json.list[i].renameimg)
-									+ "'>"
-									+ "</div>"
-									+ "<div class='cover col-md-9'>"
-									+ "<p id='groupname'>"
-									+ decodeURIComponent(json.list[i].group_name)
-									+ "</p>"
-									+ "</div>"
-									+ "<div class='col-md-3'>"
-									+ "<span class='glyphicon glyphicon-user' aria-hidden='true'>&nbsp;</span>"
-									+ json.list[i].usercount
-									+ "</div>"
-									+ "</div>" + "</a>" + "</li>";
-						}
-						$(".group-slides").html(values);
-					}
-				});
-	}
+	$(boardlist());
+	$(mygrouplist(
+<%=user.getUserNo()%>
+	));
 </script>
-
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
 <%@ include file="/views/include/common/tail.jsp"%>
