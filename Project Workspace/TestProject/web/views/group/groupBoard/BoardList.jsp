@@ -39,84 +39,87 @@
 <%@ include file="/views/include/group/nav.jsp"%>
 <!-- 메인 컨텐츠 -->
 <body>
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<h2>자유게시판</h2>
-			<div class="table-area">
-				<table class="table table-striped" align="center" width="600">
-					<tr align="center">
-						<td>번호</td>
-						<td>제목</td>
-						<td>작성자</td>
-						<td>날짜</td>
-						<td>조회수</td>
-					</tr>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<h2>자유게시판</h2>
+				<div class="table-area">
+					<table class="table table-striped" align="center" width="600">
+						<tr align="center">
+							<td>번호</td>
+							<td>제목</td>
+							<td>작성자</td>
+							<td>날짜</td>
+							<td>조회수</td>
+						</tr>
 
-					<%
-						for (GBoard gboard : list) {
-					%>
-					<tr>
-						<td><%=gboard.getgBoardNo()%></td>
-						<td id="title_text"><a
-							href="/studyhub/gboardview?no=<%=gboard.getgBoardNo()%>"><%=gboard.getTitle()%></a></td>
-						<td><%=gboard.getUploaderName()%></td>
-						<td><%=gboard.getUploadDate()%></td>
-						<td><%=gboard.getReadCount()%></td>
-					</tr>
-					<%
-						}
-					%>
-				</table>
-				<div align="center">
-					<div class="btn-group" role="group" aria-label="paging">
-						<%-- 이전 페이지 있을 경우에 대한 처리 --%>
 						<%
-							if (currentPage <= 1) {
+							for (GBoard gboard : list) {
 						%>
-						<a class="btn btn-default" href="#" ><span
-							class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
-						<%
-							} else {
-						%>
-						<a class="btn btn-default"
-							href="/studyhub/gboardpreview?groupno=<%= currentPage -1 %>"><span
-							class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+						<tr>
+							<td><%=gboard.getgBoardNo()%></td>
+							<td id="title_text"><a
+								href="/studyhub/gboardview?no=<%=gboard.getgBoardNo()%>"><%=gboard.getTitle()%></a></td>
+							<td><%=gboard.getUploaderName()%></td>
+							<td><%=gboard.getUploadDate()%></td>
+							<td><%=gboard.getReadCount()%></td>
+						</tr>
 						<%
 							}
 						%>
-						<%-- 현재 페이지 숫자 보여주기 --%>
-						<%
-							for (int p = startPage; p <= endPage; p++) {
-								if (p == currentPage) {
-						%>
-						<a class="btn btn-default" href="#" ><%=p%></a>
-						<%
-							} else {
-						%>
-						<a class="btn btn-default" href="/studyhub/gboardpreview?groupno=<%=p%>"><%=p%></a>
-						<%
-							}
-							}
-						%>
-						<%-- 현재 페이지 다음 페이지에 대한 처리 --%>
-						<%
-							if (currentPage >= maxPage) {
-						%>
-						<a class="btn btn-default" href="#" ><span
-							class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
-						<%
-							} else {
-						%>
-						<a class="btn btn-default"
-							href="/studyhub/gboardpreview?groupno=<%= currentPage +1 %>"><span
-							class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
-						<%
-							}
-						%>
+					</table>
+					<div align="center">
+						<div class="btn-group" role="group" aria-label="paging">
+							<%-- 이전 페이지 있을 경우에 대한 처리 --%>
+							<%
+								if (currentPage <= 1) {
+							%>
+							<a class="btn btn-default" href="#"><span
+								class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+							<%
+								} else {
+							%>
+							<a class="btn btn-default"
+								href="/studyhub/gboardpreview?groupno=<%=currentPage - 1%>"><span
+								class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+							<%
+								}
+							%>
+							<%-- 현재 페이지 숫자 보여주기 --%>
+							<%
+								for (int p = startPage; p <= endPage; p++) {
+									if (p == currentPage) {
+							%>
+							<a class="btn btn-default" href="#"><%=p%></a>
+							<%
+								} else {
+							%>
+							<a class="btn btn-default"
+								href="/studyhub/gboardpreview?groupno=<%=p%>"><%=p%></a>
+							<%
+								}
+								}
+							%>
+							<%-- 현재 페이지 다음 페이지에 대한 처리 --%>
+							<%
+								if (currentPage >= maxPage) {
+							%>
+							<a class="btn btn-default" href="#"><span
+								class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+							<%
+								} else {
+							%>
+							<a class="btn btn-default"
+								href="/studyhub/gboardpreview?groupno=<%=currentPage + 1%>"><span
+								class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+							<%
+								}
+							%>
+						</div>
 					</div>
+					<!-- /메인 컨텐츠 -->
+					<button onclick="insertPage();" class="btn btn-info">글쓰기</button>
 				</div>
-				<!-- /메인 컨텐츠 -->
-				<button onclick="insertPage();" class="btn btn-info">글쓰기</button>
 			</div>
 		</div>
 	</div>

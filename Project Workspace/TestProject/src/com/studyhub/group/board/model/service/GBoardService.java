@@ -35,9 +35,9 @@ public class GBoardService {
 
 	}
 
-	public int deleteGBoard(int bnum) {
+	public int deleteGBoard(int bno) {
 		Connection conn = getConnection();
-		int result = new GBoardDao().deleteBoard(conn, bnum);
+		int result = new GBoardDao().deleteBoard(conn, bno);
 		if (result > 0)
 			commit(conn);
 		else
@@ -88,9 +88,9 @@ public class GBoardService {
 
 	}
 
-	public int insertComment(int gboardno, int userno, String comment) {
+	public int insertComment(int gboardno, int uploader, String comment) {
 		Connection con = getConnection();
-		int result = new GBoardDao().insertComment(con, gboardno, comment, userno);
+		int result = new GBoardDao().insertComment(con, gboardno,uploader, comment);
 		if (result > 0)
 			commit(con);
 		else

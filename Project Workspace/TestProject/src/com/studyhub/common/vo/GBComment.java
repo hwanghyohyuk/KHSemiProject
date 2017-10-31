@@ -9,12 +9,17 @@ public class GBComment implements java.io.Serializable{
 	private Date uploadDate;
 	private int uploader;
 	private int accessNo;
+	private String uploaderName;
+	private String strUploadDate;
 
 	public GBComment() {
 		super();
 	}
 
-	public GBComment(int commentNo, int gBoardNo, String content, Date uploadDate, int uploader, int accessNo) {
+	
+
+	public GBComment(int commentNo, int gBoardNo, String content, Date uploadDate, int uploader, int accessNo,
+			String uploaderName, String strUploadDate) {
 		super();
 		this.commentNo = commentNo;
 		this.gBoardNo = gBoardNo;
@@ -22,7 +27,11 @@ public class GBComment implements java.io.Serializable{
 		this.uploadDate = uploadDate;
 		this.uploader = uploader;
 		this.accessNo = accessNo;
+		this.uploaderName = uploaderName;
+		this.strUploadDate = strUploadDate;
 	}
+
+
 
 	public int getCommentNo() {
 		return commentNo;
@@ -72,10 +81,40 @@ public class GBComment implements java.io.Serializable{
 		this.accessNo = accessNo;
 	}
 
+	
+	public String getUploaderName() {
+		return uploaderName;
+	}
+
+
+
+	public void setUploaderName(String uploaderName) {
+		this.uploaderName = uploaderName;
+	}
+
+
+
+	public String getStrUploadDate() {
+		return strUploadDate;
+	}
+
+
+
+	public void setStrUploadDate(String strUploadDate) {
+		this.strUploadDate = strUploadDate;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "GBComment [commentNo=" + commentNo + ", gBoardNo=" + gBoardNo + ", content=" + content + ", uploader="
-				+ uploader + ", accessNo=" + accessNo + "]";
+		return "GBComment [commentNo=" + commentNo + ", gBoardNo=" + gBoardNo + ", content=" + content + ", uploadDate="
+				+ uploadDate + ", uploader=" + uploader + ", accessNo=" + accessNo + ", uploaderName=" + uploaderName
+				+ ", strUploadDate=" + strUploadDate + "]";
 	}
+
+
+
+	
 
 }

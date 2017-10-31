@@ -31,6 +31,7 @@
 <%@ include file="/views/include/main/header.jsp"%>
 <%@ include file="/views/include/group/nav.jsp"%>
 <!-- 메인 컨텐츠 -->
+<div class="container">
 <div class="row" id="layout">
 	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-1">
 		<h2>게시글 작성</h2>
@@ -65,8 +66,7 @@
 		</form>
 	</div>	
 </div>
-
-
+</div>
 
 <!-- /메인 컨텐츠 -->
 

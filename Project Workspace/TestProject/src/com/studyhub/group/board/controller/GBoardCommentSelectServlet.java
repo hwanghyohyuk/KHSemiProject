@@ -51,11 +51,12 @@ public class GBoardCommentSelectServlet extends HttpServlet {
 		
 		for(GBComment gbc : list){
 			JSONObject job = new JSONObject();
-			job.put("gnoticeno", gbc.getgBoardNo());
+			job.put("gboardno", gbc.getgBoardNo());
 			job.put("comment", URLEncoder.encode(gbc.getContent(), "UTF-8"));
 			job.put("commentno", gbc.getCommentNo());
 			job.put("uploaddate", URLEncoder.encode(gbc.getStrUploadDate(), "UTF-8"));
 			job.put("username", URLEncoder.encode(gbc.getUploaderName(), "UTF-8"));
+			
 			
 			jarr.add(job);
 						
