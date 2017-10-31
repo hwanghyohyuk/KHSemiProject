@@ -274,16 +274,15 @@
 							<div class="form-group">
 								<label for="rule" class="col-sm-3 control-label">스터디 방식</label>
 								<div class="col-sm-3">
-									<select class="form-control">
-										<option>온라인 스터디</option>
-										<option>오프라인 스터디</option>
+									<select class="form-control" id="attrlist" name="attrlist">
+										<option value="1">온라인 스터디</option>
+										<option value="2">오프라인 스터디</option>
 									</select>
 								</div>
 								<label for="rule" class="col-sm-3 control-label">스터디 분야</label>
 								<div class="col-sm-3">
-									<select class="form-control">
-										<option>1</option>
-										<option>2</option>
+									<select class="form-control" id="catelist" name="catelist">
+
 									</select>
 								</div>
 							</div>
