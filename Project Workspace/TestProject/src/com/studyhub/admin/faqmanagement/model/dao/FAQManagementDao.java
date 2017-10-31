@@ -41,7 +41,7 @@ public class FAQManagementDao {
 		ArrayList<FAQ> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select faq_no, title, content, faq_category_name from tb_faq join tb_faq_category using (faq_category_no) where faq_category_no = ?";
+		String query = "select faq_no, title, content, faq_category_no, faq_category_name from tb_faq join tb_faq_category using (faq_category_no) where faq_category_no = ?";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -55,6 +55,7 @@ public class FAQManagementDao {
 					faq.setFaqNo(rset.getInt("faq_no"));
 					faq.setTitle(rset.getString("title"));
 					faq.setContent(rset.getString("content"));
+					faq.setFaqCategoryNo(rset.getInt("faq_category_no"));
 					faq.setFaqCategoryName(rset.getString("faq_category_name"));
 					list.add(faq);
 				}
@@ -69,13 +70,75 @@ public class FAQManagementDao {
 	}
 
 	public int deleteFAQ(Connection con, int no) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from tb_faq where faq_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
-	public int updateFAQ(Connection con, FAQ faq2) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateFAQ(Connection con, FAQ faq) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_faq set title = ?, content = ?, faq_category_no = ? where faq_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, faq.getTitle());
+			pstmt.setString(2, faq.getContent());
+			pstmt.setInt(3, faq.getFaqCategoryNo());
+			pstmt.setInt(4, faq.getFaqNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public FAQ selectOneFAQ(Connection con, int no) {
+		FAQ faq = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select title, content, faq_no, faq_category_no from tb_faq where faq_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				faq = new FAQ();
+				faq.setTitle(rset.getString("title"));
+				faq.setContent(rset.getString("content"));
+				faq.setFaqNo(rset.getInt("faq_no"));
+				faq.setFaqCategoryNo(rset.getInt("faq_category_no"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return faq;
 	}
 	
 	

@@ -54,5 +54,12 @@ public class FAQManagementService {
 		
 		return result;
 	}
+
+	public FAQ selectOneFAQ(int no) {
+		Connection con = getConnection();
+		FAQ f = new FAQManagementDao().selectOneFAQ(con, no);
+		close(con);
+		return f;
+	}
 	
 }

@@ -73,7 +73,7 @@
 	color: #001429;
 	font-weight: bold;
 }
-h4{
+h2, h4{
 	text-align : center;
 }
 
@@ -117,7 +117,7 @@ h4{
 	<% if(user!=null){
 		if(user.getUserNo()==1){	
 	%>
-	<h4>--관리자모드--</h4>
+	<h2><b>--관리자모드--</b></h2>
 	<h4><button onclick="insertFAQ();" class="btn btn-info">FAQ추가하기</button></h4>
 	<%  }}else{ %>
 	<h2 id="service-text">필요하신 서비스를 선택해주세요.</h2>

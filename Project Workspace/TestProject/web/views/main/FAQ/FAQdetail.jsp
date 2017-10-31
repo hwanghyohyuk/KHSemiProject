@@ -21,13 +21,13 @@
 	function toQnA(){
 		location.href="/studyhub/qnalist";
 	}
-	function editFAQ(){
-		location.href="/studyhub/faqmanagementupdateview";
+	function editFAQ(faqno){
+		location.href="/studyhub/faqmanagementupdateview?no="+faqno;
 	}
-	function deleteFAQ(){
+	function deleteFAQ(faqno, cno){
 		var r = confirm("정말 삭제하시겠습니까?");
 		if(r==true){
-			location.href="/studyhub/faqmanagementdelete";
+			location.href="/studyhub/faqmanagementdelete?faqno="+faqno+"&cno="+cno;
 		}
 	}
 	
@@ -45,8 +45,8 @@
 		<% for(FAQ f : flist){ %>
 		<hr>
 		<span><%=f.getTitle() %></span> 
-		<a class="edit" onclick="editFAQ();"><span class="glyphicon glyphicon-pencil"></span></a>
-		<a class="delete" onclick="deleteFAQ();"><span class="glyphicon glyphicon-remove"></span></a>
+		<a class="edit" onclick="editFAQ(<%= f.getFaqNo()%>);"><span class="glyphicon glyphicon-pencil"></span></a>
+		<a class="delete" onclick="deleteFAQ(<%= f.getFaqNo()%>, <%=f.getFaqCategoryNo()%>);"><span class="glyphicon glyphicon-remove"></span></a>
 		<a class="btn btn-default btn-sm" id="btns"
 			data-toggle="collapse" href="#collapse<%=f.getFaqNo() %>" aria-expanded="false"
 			aria-controls="collapseExample"> 

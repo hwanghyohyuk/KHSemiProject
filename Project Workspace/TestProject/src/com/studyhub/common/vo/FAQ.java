@@ -14,6 +14,24 @@ public class FAQ implements java.io.Serializable {
 	
 	
 
+	public FAQ(int faqNo, String title, String content) {
+		super();
+		this.faqNo = faqNo;
+		this.title = title;
+		this.content = content;
+	}
+
+
+	public FAQ(int faqNo, String title, String content, int faqCategoryNo) {
+		super();
+		this.faqNo = faqNo;
+		this.title = title;
+		this.content = content;
+		this.faqCategoryNo = faqCategoryNo;
+	}
+
+
+
 	public String getFaqCategoryName() {
 		return faqCategoryName;
 	}
@@ -26,12 +44,13 @@ public class FAQ implements java.io.Serializable {
 
 
 
-	public FAQ(int faqNo, String title, String content, int faqCategoryNo) {
+	public FAQ(int faqNo, String title, String content, int faqCategoryNo, String faqCategoryName) {
 		super();
 		this.faqNo = faqNo;
 		this.title = title;
 		this.content = content;
 		this.faqCategoryNo = faqCategoryNo;
+		this.faqCategoryName = faqCategoryName;
 	}
 
 	public FAQ(int faqNo, String title, String content, String faqCategoryName) {
