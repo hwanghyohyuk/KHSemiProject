@@ -14,6 +14,11 @@
 %>
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
+<link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
+<link rel="stylesheet" type="text/css"
+	href="/studyhub/css/board_detail.css">
+<link rel="stylesheet" href="/studyhub/css/detail.css">
+
 <%@ include file="/views/include/common/headend.jsp"%>
 
 
@@ -21,6 +26,10 @@
 <%@ include file="/views/include/main/header.jsp"%>
 <%@ include file="/views/include/group/nav.jsp"%>
 
+<div class="row">
+	<h2 id="heading">
+		　　
+	</h2>
 
 <div id="inner"
 	class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xm-8 col-xs-2">
@@ -62,14 +71,12 @@
 	<div class="comment-list">
 		Comment<br> <br>
 		<!---댓글입력-->
-	 <input type="text" name="content" class="form-control" width="80%"
-			id="comment-write" placeholder="댓글을 달아주세요"> <input
-			type="hidden" name="gboardno" id="gboardno"
-			value="<%=gBoard.getgBoardNo()%>"> <input type="hidden"
-			name="uploader" id="uploader" value="<%=gBoard.getUploader()%>">
-		<button class="btn btn-info btn-sm" onclick="insert()">댓글달기</button>
-		
-		<script type="text/javascript">
+		<input type="text" name="content" class="form-control"
+					id="comment-write" placeholder="댓글을 달아주세요"> 
+					<input type="hidden" name="gboardno" id="gboardno" value="<%=gBoard.getgBoardNo()%>"> 
+					<input type="hidden" name="uploader" id="uploader" value="<%=user.getUserNo()%>">
+				<button class="btn btn-info btn-sm" onclick="insert();">댓글달기</button>
+				<script type="text/javascript">
 	function checkDelete(groupno){
 		if (confirm('해당 게시글을 삭제하시겠습니까?')) {
 		    location.href="/studyhub/gboarddelete?groupno="+groupno;
@@ -105,7 +112,7 @@
 		}	
 		
 		function select(){
-			var gnoticeno = "11";
+			var gnoticeno = "<%=gBoard.getgBoardNo()%>";
 					$.ajax({
 								url : "/studyhub/gboardcommentselect",
 								data : {
