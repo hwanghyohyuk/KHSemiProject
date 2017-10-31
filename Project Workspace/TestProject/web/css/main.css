@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+
 * {
 	margin: 0px;
 	padding: 0px;
@@ -30,7 +31,6 @@
 	background-color: lightgray;
 }
 
-
 #slider .group-slides {
 	display: block;
 	overflow: hidden;
@@ -47,8 +47,6 @@
 }
 
 /* 세부요소 */
-
-
 #slider-left {
 	height: 10vh;
 	margin-top: 27vh;
@@ -66,18 +64,17 @@
 #slider-right {
 	height: 10vh;
 	margin-top: 10vh;
-	margin-left: 13vw;	
+	margin-left: 13vw;
 	-ms-transform: rotate(180deg); /* IE 9 */
 	-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
 	transform: rotate(180deg);
 	cursor: pointer;
-	
 }
 
 #group-slider-right {
 	height: 10vh;
 	margin-top: 10vh;
-	margin-left: 13vw;	
+	margin-left: 13vw;
 	-ms-transform: rotate(180deg); /* IE 9 */
 	-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
 	transform: rotate(180deg);
@@ -123,17 +120,53 @@
 }
 
 /* 이미지 슬라이더*/
-.nav{margin:10px;}
-.slider{float:left; display:block; width:1300px}
-.div-left{float:left;width:100px}
-.div-right{float:left;width:100px}
-.btn-left{
-  height:200px; width:100px
+.boardslider {
+	display: block;
+	width: 100%;
+	margin: 0 8% 5% 8%;
 }
-.btn-right{
-  height:200px;width:100px
+
+.div-btn {
+	float: left;
+	width: 10%;
 }
-.RollDiv{width:1000px; height:200px;overflow:hidden;float:left;}  
-.RollDiv > div{overflow:hidden;height:200px;width:1200px}
-.RollDiv > div > a{ float:left; display:block;}  
-.RollDiv > div > a > img{ width:180px; height:200px;margin-right:10px;}
+
+.btn-left {
+	height: 240px;
+	width: 100%;
+	cursor: pointer;
+}
+
+.btn-right {
+	height: 240px;
+	width: 100%;
+	-ms-transform: rotate(180deg); /* IE 9 */
+	-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+	transform: rotate(180deg);
+	cursor: pointer;
+}
+
+.RollDiv {
+	width: 64%;
+	height: 240px;
+	overflow: hidden;
+	float: left;
+}
+
+.RollDiv>div {
+	overflow: hidden;
+	height: 240px;
+	width: 150%;
+}
+
+.RollDiv>div>a {
+	float: left;
+	display: block;
+}
+
+.RollDiv>div>a>img {
+	width: 240px;
+	height: 240px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
