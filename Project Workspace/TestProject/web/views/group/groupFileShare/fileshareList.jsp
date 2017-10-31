@@ -35,7 +35,6 @@
 
 
 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-	<div class="container">
 		<!-- Tab -->
 		<div class="category-tab">
 			<ul class="nav nav-tabs" id="nav-ul">
@@ -508,7 +507,6 @@
 		</div>
 		<!-- </div> -->
 
-	</div>
 </div>
 <!-- /메인 컨텐츠 -->
 

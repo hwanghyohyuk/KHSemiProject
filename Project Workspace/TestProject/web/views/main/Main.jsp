@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!-- 
-작성자 : 구미향
-내용 : 메인 페이지
-작성일자 17.10.16
- -->
-<!-- css, javascript, jQuery -->
 <%@ include file="/views/include/common/head.jsp"%>
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
 <script type="text/javascript" src='/studyhub/js/main.js'></script>

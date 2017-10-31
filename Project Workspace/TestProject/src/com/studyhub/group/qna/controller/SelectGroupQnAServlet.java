@@ -38,7 +38,9 @@ public class SelectGroupQnAServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int groupno = Integer.parseInt(request.getParameter("groupno"));
-		ArrayList<GQNA> list = new GroupQnAService().selectGroupQnA(groupno);
+		int startpage = Integer.parseInt(request.getParameter("startpage"));
+		int endpage = Integer.parseInt(request.getParameter("endpage"));
+		ArrayList<GQNA> list = new GroupQnAService().selectGroupQnA(groupno,startpage, endpage);
 		
 		JSONObject json = new JSONObject();
 		JSONArray jarr = new JSONArray();
