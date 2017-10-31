@@ -116,7 +116,26 @@ public class GBoardDao {
 		System.out.println(result);
 		return result;
 	}
-
+	public int updateReadCount(Connection con, int no){
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update tb_g_board set readcount = readcount+1 where g_board_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	public int getListCount(Connection con) {
 		// 총 게시글 갯수 조회용
 		int result = 0;
