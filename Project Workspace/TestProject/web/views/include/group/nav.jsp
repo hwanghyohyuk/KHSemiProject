@@ -4,7 +4,16 @@
 	Group group = (Group)session.getAttribute("group");
 	User navuser = (User)session.getAttribute("user");
 %>
-
+<%
+	if (navuser==null) {
+%>
+<script type="text/javascript">
+$(function pleaseLogin() {
+		alert("로그인이 필요합니다.");
+		location.href = "/studyhub/login";
+	});
+</script>
+<%}else{%>
 <div id="nav_menu">
 <ul class="nav nav-stacked" id="nav_ul">
 	<li id="nav_li"><a href="/studyhub/gmainpreview?group_no=<%= group.getGroupNo() %>&reset=0&user_no=<%=navuser.getUserNo()%>" id="nav_text">[<%= group.getGroupName() %>]</a></li>
@@ -15,6 +24,7 @@
 	<li id="nav_li"><a href="/studyhub/gqnapreview" id="nav_text">Q&A</a></li>
 </ul>
 </div>
+<%} %>
 
 <script type="text/javascript">
 	$(function(){

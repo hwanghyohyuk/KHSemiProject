@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.studyhub.common.vo.Board;
-
+import com.studyhub.common.vo.Category;
 import com.studyhub.common.vo.Group;
 import com.studyhub.common.vo.Message;
 import com.studyhub.common.vo.UNG;
@@ -137,4 +137,26 @@ public class MainService {
 		close(con);
 		return result;
 	}
+
+	public ArrayList<Category> selectCategoryList() {
+		Connection con = getConnection();
+		ArrayList<Category> list = new MainDao().selectCategoryList(con);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<Group> selectGroupList() {
+		Connection con = getConnection();
+		ArrayList<Group> list = new MainDao().selectGroupList(con);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<Group> searchGroupList(int attrNo, int cateNo, String location, String keyword) {
+		Connection con = getConnection();
+		ArrayList<Group> list = new MainDao().searchGroupList(con, attrNo, cateNo, location, keyword);
+		close(con);
+		return list;
+	}
+
 }
