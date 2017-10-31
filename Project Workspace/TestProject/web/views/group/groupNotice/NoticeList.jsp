@@ -21,8 +21,6 @@
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
 
-<link rel="stylesheet" type="text/css" href="/studyhub/css/board_list.css">
-
 
 <script type="text/javascript">
 	function insertPage() {
