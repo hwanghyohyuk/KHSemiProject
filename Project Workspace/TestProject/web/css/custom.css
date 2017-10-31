@@ -1,5 +1,10 @@
 @CHARSET "UTF-8";
 
+body{
+font-size:11pt;	
+font-weight:600;
+}
+
 #nav-bar {
 	height: 5vh;
 }

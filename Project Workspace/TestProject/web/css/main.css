@@ -1,5 +1,4 @@
 ﻿@CHARSET "UTF-8";
-
 * {
 	margin: 0px;
 	padding: 0px;
@@ -60,7 +59,12 @@
 }
 
 /* 이미지 슬라이더 효혁*/
-.slider {
+.sliderB {
+	display: block;
+	width: 100%;
+	margin: 0 8% 5% 8%;
+}
+.sliderG {
 	display: block;
 	width: 100%;
 	margin: 0 8% 5% 8%;

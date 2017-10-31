@@ -19,26 +19,21 @@
 <!-- 캘린더 js -->
 <script src="/studyhub/js/bootstrap.min.js"></script>
 <style type="text/css">
-#schedulelist {
-	margin-top: 20px;
-}
-
-.list-group-item {
+#schedulelist-item {
 	margin-top: 0px;
 	padding-left: 7px;
-	padding-right: 7px;/* 
-} */
-
-#list-group {
-	padding-top: 10px;
-	font-weight: bold;
-}
-
-#list-group-item {
+	padding-right: 7px;
 	margin-top: 10px;
 	height: 40px;
 	background-color: #004157;
 	color: white;
+}
+
+#schedulelist {
+	padding-top: 10px;
+	font-weight: bold;
+	margin-top: 20px;
+	list-style:none;
 }
 
 #day {
@@ -153,11 +148,12 @@
 
 <!-- 메인 컨텐츠 -->
 
+<div class='container'>
 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
 	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 		<div class="btn btn-default btn-sm col-lg-12 col-md-12"
 			id="schedulelist">
-			<ul class="list-group" id="list-group">
+			<ul class="list-group" id="schedulelist">
 				<!-- ajax로 일정목록을 불러옴 -->
 			</ul>
 		</div>
@@ -165,6 +161,7 @@
 	<div id="calendar" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 		<!-- 캘린더 ajax -->
 	</div>
+</div>
 </div>
 
 	<!-- 모달부분 -->
@@ -271,6 +268,7 @@
 
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
+
 
 <script type="text/javascript">
 	var authority = "<%= group.getAuthorityNo() %>";
@@ -496,7 +494,7 @@
 							var replace = decodeURIComponent(json.list[i].meeting_date).replace(/\+/gi, ' ');
 							values += 
 								"<div onclick='selectOne(" + json.list[i].schedule_no + ");'>" +
-									"<li class='list-group-item' id='list-group-item'>" +
+									"<li class='list-group-item' id='schedulelist-item'>" +
 										"<input type='hidden' value='" + json.list[i].schedule_no + "'>" +
 										"<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8' id='day'>" +
 											replace +
@@ -517,7 +515,7 @@
 									"</li>" +
 								"</div>"
 						}
-						$("#list-group").html(values);
+						$("#schedulelist").html(values);
 					}
 				});
 	}
