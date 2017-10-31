@@ -141,8 +141,8 @@ function startToggleBtn() {
 }
 //myinfo
 function myinfoPwdInput() {
-	var email = $('email').val();
-	var name = $('name').val();
+	var email = $('#email').val();
+	var name = $('#name').val();
 	var modifypwd = $('#modifypwd').val();
 	if (modifypwd == "") {
 		$("#modifypwd").css("background-color", "white");
@@ -222,3 +222,6 @@ function myinfoToggleBtn() {
 		$("#modifybtn").css("background-color", "#aaaaaa");
 	}
 }
+
+$("#modifybtn").prop("disabled", true);
+$("#modifybtn").css("background-color", "#aaaaaa");
