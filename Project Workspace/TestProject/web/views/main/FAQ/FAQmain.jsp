@@ -73,11 +73,20 @@
 	color: #001429;
 	font-weight: bold;
 }
+h2, h4{
+	text-align : center;
+}
 
 
 </style>
 
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
+
+<script type="text/javascript">
+	function insertFAQ(){
+		location.href="/studyhub/views/admin/FAQwriteForm.jsp";
+	}
+</script>
 
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
@@ -93,33 +102,30 @@
 	<h1 id="head-text">무엇이 궁금하신가요?</h1>
 	</div>
 	
-	<div class="search">
-		<div class="col-md-4 col-sm-4 col-sm-offset-4 col-md-offset-4">
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="키워드를 입력하세요...">
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">검색</button>
-				</span>
-			</div>
-		</div>
-	</div>
+	
 	<div class="service">
 	<div class="col-md-6 col-md-offset-3">
+	<% if(user!=null){
+		if(user.getUserNo()==1){	
+	%>
+	<h2><b>--관리자모드--</b></h2>
+	<h4><button onclick="insertFAQ();" class="btn btn-info">FAQ추가하기</button></h4>
+	<%  }}else{ %>
 	<h2 id="service-text">필요하신 서비스를 선택해주세요.</h2>
-	
+	<% } %>
 	<div class="col-md-6 col-lg-6 col-md-offset-3">
 				<div id="services">
 					<ul class="services">
-						<li class="service"><a href="/studyhub/views/main/FAQ/FAQdetail.jsp"><img id="img"
+						<li class="service"><a href="/studyhub/faqmanagementlist?categoryno=1"><img id="img"
 								src="/studyhub/images/example.jpg"></a>
 							<p id="service">회원가입</p></li>
-						<li class="service"><a href="/studyhub/views/main/FAQ/FAQdetail.jsp"><img id="img"
+						<li class="service"><a href="/studyhub/faqmanagementlist?categoryno=2"><img id="img"
 								src="/studyhub/images/example.jpg"></a>
 							<p id="service">스터디찾기</p></li>
-						<li class="service"><a href="/studyhub/views/main/FAQ/FAQdetail.jsp"><img id="img"
+						<li class="service"><a href="/studyhub/faqmanagementlist?categoryno=3"><img id="img"
 								src="/studyhub/images/example.jpg"></a>
 							<p id="service">그룹페이지</p></li>
-						<li class="service"><a href="/studyhub/views/main/FAQ/FAQdetail.jsp"><img id="img"
+						<li class="service"><a href="/studyhub/faqmanagementlist?categoryno=4"><img id="img"
 								src="/studyhub/images/example.jpg"></a>
 							<p id="service">파일공유</p></li>
 					</ul>
