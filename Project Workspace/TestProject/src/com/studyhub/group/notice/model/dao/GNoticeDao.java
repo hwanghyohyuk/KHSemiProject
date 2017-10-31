@@ -226,8 +226,8 @@ public class GNoticeDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "insert into tb_g_notice comment values("+
-						"(select max(comment_no)+1 from tb_gn_comment),"+
+		String query = "insert into tb_gn_comment values ( "+
+						"(select max(comment_no)+1 from tb_gn_comment), " +
 						"?, ?, sysdate, ?, 1)";
 
 		try {
@@ -237,7 +237,7 @@ public class GNoticeDao {
 			pstmt.setInt(3, uploader);
 
 			result = pstmt.executeUpdate();
-
+			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -251,7 +251,7 @@ public class GNoticeDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select comment_no, notice_no, content, to_char(upload_date, 'yyyyMMdd') as str_date, user_name " +
+		String query = "select comment_no, notice_no, content, to_char(upload_date, 'yyyy-MM-dd') as str_date, user_name, uploader " +
 						"from tb_gn_comment "
 						+"join tb_user on (tb_gn_comment.uploader = tb_user.user_no) "
 						+"where notice_no = ? order by comment_no desc";
@@ -268,8 +268,9 @@ public class GNoticeDao {
 					gnc.setCommentNo(rset.getInt("comment_no"));
 					gnc.setNoticeNo(rset.getInt("notice_no"));
 					gnc.setContent(rset.getString("content"));
-					gnc.setUploadDate(rset.getDate("uploade_date"));
+					gnc.setStrUploadDate(rset.getString("str_date"));
 					gnc.setUploader(rset.getInt("uploader"));
+					gnc.setUploaderName(rset.getString("user_name"));
 
 					list.add(gnc);
 				}
