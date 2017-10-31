@@ -14,11 +14,11 @@ public class GBoardDao {
 	}
 
 	public GBoard selectOne(Connection conn, int no) {
-		GBoard gBoard = null;
+		gBoard = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from tb_g_board where g_board_no = ?";
+		String query = "select * from tb_g_board join tb_user on(tb_g_board.uploader = tb_user.user_no) where g_board_no = ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -28,13 +28,15 @@ public class GBoardDao {
 
 			if (rset.next()) {
 				gBoard = new GBoard();
-				gBoard.setgBoardNo(rset.getInt("gboard_no"));
+				gBoard.setgBoardNo(rset.getInt("g_board_no"));
 				gBoard.setTitle(rset.getString("title"));
 				gBoard.setContent(rset.getString("content"));
 				gBoard.setUploadDate(rset.getDate("upload_date"));
+				gBoard.setUploaderName(rset.getString("user_name"));
 				gBoard.setUploader(rset.getInt("uploader"));
 				gBoard.setAccessNo(rset.getInt("access_no"));
 				gBoard.setGroupNo(rset.getInt("group_no"));
+				
 			}
 
 		} catch (Exception e) {
@@ -71,15 +73,15 @@ public class GBoardDao {
 		return result;
 	}
 
-	public int deleteBoard(Connection conn, int bnum) {
+	public int deleteBoard(Connection conn, int bno) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "delete from gboard where g_Board_no = ?";
+		String query = "delete from tb_g_board where g_board_no = ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, bnum);
+			pstmt.setInt(1, bno);
 
 			result = pstmt.executeUpdate();
 
@@ -96,13 +98,14 @@ public class GBoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "update tb_g_board set title = ?, content = ? " + "where g_board_no = ?";
+		String query = "update tb_g_board set title = ?, content = ?, access_no = ? " + "where g_board_no = ?";
 
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, gBoard.getTitle());
 			pstmt.setString(2, gBoard.getContent());
-			pstmt.setInt(3, gBoard.getgBoardNo());
+			pstmt.setInt(3, gBoard.getAccessNo());
+			pstmt.setInt(4, gBoard.getgBoardNo());
 
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -214,17 +217,19 @@ public class GBoardDao {
 		return result;
 	}
 
-	public int insertComment(Connection con, int gboardno, String comment, int userno) {
+	public int insertComment(Connection con, int gboardno,  int uploader, String content) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "";
+		String query = "insert into tb_gb_comment values ( " +
+						"(select max(comment_no)+1 from tb_gb_comment), " +
+						"?, ?, sysdate, ?, 1)";
 
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, gboardno);
-			pstmt.setString(2, comment);
-			pstmt.setInt(3, userno);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, uploader);
 
 			result = pstmt.executeUpdate();
 
@@ -241,7 +246,7 @@ public class GBoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "";
+		String query = "select * from tb_gb_comment where comment_no = ?";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -251,14 +256,14 @@ public class GBoardDao {
 			if (rset != null) {
 				list = new ArrayList<GBComment>();
 				while (rset.next()) {
-					GBComment gnc = new GBComment();
-					gnc.setCommentNo(rset.getInt("comment_no"));
-					gnc.setgBoardNo(rset.getInt("gboard_no"));
-					gnc.setContent(rset.getString("content"));
-					gnc.setUploadDate(rset.getDate("uploade_date"));
-					gnc.setUploader(rset.getInt("uploader"));
+					GBComment gbc = new GBComment();
+					gbc.setCommentNo(rset.getInt("comment_no"));
+					gbc.setgBoardNo(rset.getInt("g_board_no"));
+					gbc.setContent(rset.getString("content"));
+					gbc.setUploadDate(rset.getDate("uploade_date"));
+					gbc.setUploader(rset.getInt("uploader"));
 
-					list.add(gnc);
+					list.add(gbc);
 				}
 
 			}

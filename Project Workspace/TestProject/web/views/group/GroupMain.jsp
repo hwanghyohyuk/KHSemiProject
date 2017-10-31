@@ -80,10 +80,20 @@
 		text-align: center;
 	}
 	
-	#success, #outuser {
+	#success, #outuser, #removeuser {
 		height: 20px;
 		width: 100%;
 		padding-top: 0px;
+	}
+	
+	#inviteul {
+		margin-top: 15px;
+		text-align: center;
+	}
+	
+	#invitebtn {
+		height: 20px;
+		padding-top: 2px;
 	}
 </style>
 
@@ -107,9 +117,16 @@
 	
 	<% if(group.getAuthorityNo() == 2){ %>
 	<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3' id='usermanage'>
+		<div calss='col-lg-3 col-md-3 col-sm-3 col-xs-3'>
 		<a href="#" onclick='return usermanage()'>
 			<span class='glyphicon glyphicon-user'> 회원관리</span>
 		</a>
+		</div>
+		<div calss='col-lg-3 col-md-3 col-sm-3 col-xs-3'>
+		<a href="#" onclick='return invitemodal()'>
+			<span class='glyphicon glyphicon-user'> 회원초대</span>
+		</a>
+		</div>
 	</div>
 	<% } else { %>
 	<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3' id='userinfo'>
@@ -270,6 +287,7 @@
 					</button>
 					<% if( group.getAuthorityNo() == 2 ){ %>
 					<h4 class="modal-title" id="myModalLabel">회원 관리</h4>
+					
 					<% } else { %>
 					<h4 class="modal-title" id="myModalLabel">회원 정보</h4>
 					<% } %>
@@ -278,6 +296,50 @@
 					<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12' id='userlist'>
 					<ul class='list-group' id="userlistul">
 						
+					</ul>
+				</div>
+				</div>
+				<div class="modal-footer" id="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 회원초대 모달 -->
+	<div class="modal fade" id="inviteusermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">회원 초대</h4>
+				</div>
+				<div class="modal-body" id="modal-body">
+					<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12' id='userlist'>
+						<div class="input-group">
+					  		<span class="input-group-addon" id="sizing-addon2">
+					  			<span class='glyphicon glyphicon-search'></span>
+					  		</span>
+					  	<input type="text" class="form-control" placeholder="회원 이메일이나 이름을 검색해보세요!" aria-describedby="sizing-addon2" id="searchid">
+						</div>
+					<ul class='list-group' id="inviteul">
+						<li class='list-group-item' id='inviteli'>
+							<div class='col-lg-4 col-md-4 col-sm-4 col-xs-2'>
+								이메일
+							</div>
+							<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>
+								이름
+							</div>
+							<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>
+								상태
+							</div>
+							<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>
+								초대
+							</div>
+						</li>
 					</ul>
 				</div>
 				</div>
@@ -367,7 +429,7 @@
 				var listtitle = "";
 				for(var i in json.list){
 					values += "<li class='list-group-item' id='userlistli'>" +
-								"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-2'>" +
+								"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>" +
 									decodeURIComponent(json.list[i].email).replace(/\+/gi, " ") +
 								"</div>" +
 								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
@@ -396,7 +458,7 @@
 								}
 				}
 				listtitle += 	"<li class='list-group-item' id='userlistli'>" +
-									"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-2'>" +
+									"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>" +
 									"이메일" +
 								"</div>" +
 								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
@@ -479,47 +541,30 @@
 				var listtitle = "";
 				for(var i in json.list){
 					values += "<li class='list-group-item' id='userlistli'>" +
-									"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-2'>" +
+									"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>" +
 									decodeURIComponent(json.list[i].email).replace(/\+/gi, " ") +
 								"</div>" +
-								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+								"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>" +
 									decodeURIComponent(json.list[i].username).replace(/\+/gi, " ") +
 								"</div>" +
-								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>";
+								"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>";
 								if(json.list[i].authorityno == 2){
 									values += "그룹장" +
-												"</div>" +
-												"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
-												"</div>" +
-												"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
-												"</div>" +
 											"</li>";
 								} else {
 									values += "회원" +
-												"</div>" +
-												"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
-												"</div>" +
-												"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
-													"<button type='button' onclick='outuser(" + json.list[i].ungno + ")' class='btn btn-danger' id='outuser'>추방</button>" +
-												"</div>" +
 											"</li>";
 								}
 				}
 				listtitle += 	"<li class='list-group-item' id='userlistli'>" +
-									"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-2'>" +
+									"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>" +
 									"이메일" +
 								"</div>" +
-								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+								"<div class='col-lg-4 co4-md-4 col-sm-4 col-xs-4'>" +
 									"이름" +
 								"</div>" +
-								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
-									"상태" +
-								"</div>" +
-								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
-									"승인" +
-								"</div>" +
-								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
-									"거절" +
+								"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>" +
+									"권한" +
 								"</div>" +
 							"</li>";
 				$("#userlistul").html(listtitle + values);
@@ -615,6 +660,85 @@
 			return false;
 		}
 	}
+
+	// 회원 초대
+	function invitemodal(){
+		$("#inviteusermodal").modal();
+	}
+	
+	$("#searchid").keypress(function(e){
+		if(e.keyCode == 13){
+			inviteselect();
+		}
+	});
+	
+	function inviteselect(){
+		var search = $("#searchid").val();
+		var groupno = "<%= group.getGroupNo() %>";
+		var userno = "<%= user.getUserNo() %>";
+		$.ajax({
+			url: "/studyhub/searchuser",
+			data: { search: search, userno: userno, groupno: groupno },
+			type: "get",
+			dataType: "json",
+			async: false,
+			success: function(data){
+				var json = JSON.parse(JSON.stringify(data));
+				var values = "";
+				var listtitle = "";
+				for(var i in json.list){
+					values += 	"<li class='list-group-item' id='userlistli'>" +
+									"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>" +
+										decodeURIComponent(json.list[i].email).replace(/\+/gi, " ") +
+									"</div>" +
+									"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+										decodeURIComponent(json.list[i].username).replace(/\+/gi, " ") +
+									"</div>" +
+									"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+										"초대가능" +
+									"</div>" +
+									"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>" +
+										"<button type='button' class='btn btn-success' onclick='invitemessage(" + json.list[i].userno + ")' id='invitebtn'>" +
+											"<span class='glyphicon glyphicon-plus-sign'></span>초대" +
+										"</button>" +
+									"</div>" +
+								"</li>";
+				}
+				listtitle += 	"<li class='list-group-item' id='inviteli'>" +
+									"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>" +
+									"이메일" +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+									"이름" +
+								"</div>" +
+								"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+									"상태" +
+								"</div>" +
+								"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>" +
+									"초대" +
+								"</div>" +
+							"</li>";
+				$("#inviteul").html(listtitle + values);
+			}
+		});
+	}
+	
+	// 초대메시지 발송
+	function invitemessage(userno){
+		var groupno = "<%= group.getGroupNo() %>";
+		var sender = "<%= user.getUserNo() %>";
+		var receiver = userno;
+		$.ajax({
+			url: "/studyhub/invitemessage",
+			data: { groupno: groupno, sender: sender, receiver: receiver },
+			type: "get",
+			async: false
+		});
+		alert("초대 메시지를 보냈습니다.");
+		$("#serchid").val("");
+		inviteselect();
+	}
+	
 	
 	// 공지 리스트5개
 	function notice(){

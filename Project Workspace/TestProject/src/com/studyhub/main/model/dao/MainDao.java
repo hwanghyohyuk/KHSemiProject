@@ -229,7 +229,9 @@ public class MainDao {
 
 		PreparedStatement pstmt = null;
 
-		String query = "insert into tb_ung values (" + "(select max(ung_no) + 1 from tb_message) " + ", ?, ?, 1, 1)";
+		String query = "insert into tb_ung values (" + 
+						"(select max(ung_no) + 1 from tb_ung) " 
+						+ ", ?, ?, 1, 1)";
 
 		try {
 			pstmt = con.prepareStatement(query);

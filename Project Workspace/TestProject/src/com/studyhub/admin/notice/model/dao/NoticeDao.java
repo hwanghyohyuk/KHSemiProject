@@ -72,21 +72,21 @@ public class NoticeDao {
 		return result;
 	}
 
-	public int deleteNotice(Connection con, int no) {
+	public int deleteNotice(Connection con) {
 		int result = 0;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		String del = " ";
 		
-		String query = "update tb_notice set content = ' ' ";
-		
+		String query = "update tb_notice set content = ?";
 		try {
-			stmt = con.createStatement();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, del);
 			
-			result = stmt.executeUpdate(query);
-			
-		} catch(Exception e){
+			result = pstmt.executeUpdate();			
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
-			close(stmt);
+		} finally {
+			close(pstmt);
 		}
 		
 		return result;

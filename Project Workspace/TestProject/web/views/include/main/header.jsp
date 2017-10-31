@@ -5,7 +5,7 @@
 	User user = (User)session.getAttribute("user");
 %>
 <!-- 헤더 영역 : 네비게이션 바 -->
-<nav class="navbar navbar-default" id="navbar">
+<nav id="navbar">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -38,18 +38,23 @@
 				<ul class="nav navbar-nav navbar-left">
 					<li><a href="#" data-toggle="modal" data-target="#seachfilter">
 							<span class="glyphicon glyphicon-search main" aria-hidden="true"></span><span
-							class="black">스터디찾기</span>
+							class="black" id="color">스터디찾기</span>
 					</a></li>
 					<li><a href="/studyhub/noticeview">
-							<p class="black">도움말</p>
+							<p class="black" id="color">도움말</p>
 					</a></li>
 
 					<%
 						if (user != null) {
+							if(user.getUserNo()==1){ //관리자일 때 
 					%>
+					<li><a href="/studyhub/views/admin/MainDashBoard.jsp" id="admin-dmenu">관리자화면</a>
+					</li>
+					<% }else{ %>
+					
 					<li class="dropdown">
 						<a href="javascript/mygroupdropdown()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-							<p class="black">
+							<p class="black" id="color">
 								나의 그룹<span class="caret"></span>
 							</p> 
 						</a>
@@ -57,7 +62,7 @@
 							<!-- ajax로 그룹리스트 불러옴 --> 
 						</ul>
 					</li>
-					
+					<% } %>
 					<script type="text/javascript">
 						$(function mygroupdropdown(){
 							var userno = "<%= user.getUserNo()%>";
@@ -96,11 +101,11 @@
 					%>
 					<li class='drop-down' id='message'>
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-							<P class='black'>
+							<p class='black' id='color'>
 								<span class='badge' id="messagecount">
 								</span>
 								&nbsp;&nbsp;메시지함  <span class="caret"></span>
-							</P>
+							</p>
 						</a>
 						<ul class="dropdown-menu" role="menu" id="mymessage">
 							<!-- ajax로 그룹리스트 불러옴 -->
@@ -143,7 +148,7 @@
 														"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='height: 34px; padding-top: 7px;'>" +
 															decodeURIComponent(json.list[i].groupname).replace(/\+/gi, " ") +
 														"</div>" +
-														"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>" +
+														"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='height: 34px; padding-top: 7px;'>" +
 															decodeURIComponent(json.list[i].username).replace(/\+/gi, " ") +
 														"</div>" +
 														"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6' style='height: 34px; padding-top: 7px;'>" +
@@ -161,7 +166,7 @@
 													"</li>";
 										} else if (json.list[i].messagestate == 1) {
 											values += 	"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='padding-left: 0px;'>" +
-															"<button type='button' class='btn btn-primary' onclick='confirm(" + json.list[i].messageno + ")'>확인</button>" +
+															"<button type='button' class='btn btn-primary' onclick='confirmMessage(" + json.list[i].messageno + ")'>확인</button>" +
 															/* 확인누르면 메시지상태 2로 업뎃 */
 														"</div>" +
 													"</li>";
@@ -219,7 +224,7 @@
 							messageselect();
 						}
 						
-						function confirm(messageno){
+						function confirmMessage(messageno){
 							$.ajax({
 								data: { messageno: messageno, receiver: 1, sender: 1, groupno: 1, state: 2 },
 								url: "/studyhub/inviteprocess",
@@ -231,13 +236,13 @@
 						}
 					</script>
 					
-					<li><a href="/studyhub/myinfo"><p class="black"><%=user.getUserName()%></p></a></li>
-					<li><a href="/studyhub/logout"><p class="black">로그아웃</p></a></li>
+					<li><a href="/studyhub/myinfo"><p class="black" id="color"><%=user.getUserName()%></p></a></li>
+					<li><a href="/studyhub/logout"><p class="black" id="color">로그아웃</p></a></li>
 					<%
 						} else {
 					%>
-					<li><a href="/studyhub/signup"><p class="black">회원가입</p></a></li>
-					<li><a href="/studyhub/login"><p class="black">로그인</p></a></li>
+					<li><a href="/studyhub/signup"><p class="black" id="color">회원가입</p></a></li>
+					<li><a href="/studyhub/login"><p class="black" id="color">로그인</p></a></li>
 					<%
 						}
 					%>

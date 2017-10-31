@@ -28,10 +28,11 @@
 				placeholder="사용자들에게 보여줄 공지사항을 입력하세요" rows="6"></textarea>
 			<div class="submit-area">
 				<div class="checkbox">
-					<label> <input type="checkbox" id="popup"> 팝업띄우기
+					<label> <input type="checkbox" id="popup" name="popup"> 팝업띄우기
 					</label>
 				</div>
 				<button type="submit" id="notice-btn">공지하기</button>
+				<a href="/studyhub/noticedelete"><button id="notice-btn">공지삭제</button></a>
 			</div>
 		</div>
 	</form>
@@ -41,5 +42,4 @@
 <!-- /메인 컨텐츠 -->
 
 <!--푸터 부분-->
-<%@ include file="/views/include/admin/footer.jsp"%>
 <%@ include file="/views/include/common/tail.jsp"%>

@@ -1,4 +1,4 @@
-package com.studyhub.admin.notice.controller;
+package com.studyhub.group.main.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,23 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studyhub.admin.notice.model.service.NoticeService;
-import com.studyhub.common.vo.Notice;
+import com.studyhub.group.main.model.service.GMainService;
 
 /**
- * Servlet implementation class NoticeUpdateServlet
+ * Servlet implementation class InviteMessageServlet
  */
-@WebServlet("/noticeupdate")
-public class NoticeUpdateServlet extends HttpServlet {
+@WebServlet("/invitemessage")
+public class InviteMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	private Notice notice;
-	private NoticeService nService;
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeUpdateServlet() {
+    public InviteMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,8 +28,15 @@ public class NoticeUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		
+		int sender = Integer.parseInt(request.getParameter("sender"));
+		int receiver = Integer.parseInt(request.getParameter("receiver"));
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
+		
+		if(new GMainService().InviteMessage(groupno, sender, receiver) > 0 ) {
+			response.sendRedirect("views/group/GroupMain.jsp");
+		}
 	}
 
 	/**
