@@ -37,21 +37,34 @@ public class GroupQnADao {
 		return result;
 	}
 
-	public ArrayList<GQNA> selectGroupQnA(Connection con, int groupno) {
+	public ArrayList<GQNA> selectGroupQnA(Connection con, int groupno, int startpage, int endpage) {
 		ArrayList<GQNA> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = 	"select g_qna_no, title, content, to_char(upload_date, 'yyyyMMdd') as str_date, user_name, access_no, group_no, uploader, NVL(commentcount, 0) as commentcount " +
+		String query = 	"select g_qna_no, title, content, str_date, user_name, access_no, group_no, uploader, NVL(commentcount, 0) as commentcount  " +
+						"from (select rownum as rnum, g_qna_no, title, content, to_char(upload_date, 'yyyyMMdd') as str_date, user_name, access_no, group_no, uploader, NVL(commentcount, 0) as commentcount " +
 						"from tb_g_qna " +
 						"join tb_user on (tb_g_qna.uploader = tb_user.user_no) " +
 						"left outer join (select g_qna_no, count(*) as commentcount from tb_gq_comment group by g_qna_no) using (g_qna_no) " +
 						"where group_no = ? " + 
-						"order by (g_qna_no) desc";
+						"order by (g_qna_no) desc) " +
+						"where rnum between " + 
+						"(select max(rownum) " + 
+						"from tb_g_qna " + 
+						"where group_no = ?) - ?" + 
+						"and " + 
+						"(select max(rownum) " + 
+						"from tb_g_qna " + 
+						"where group_no = ?) - ?";
 			
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, groupno);
+			pstmt.setInt(2, groupno);
+			pstmt.setInt(3, startpage);
+			pstmt.setInt(4, groupno);
+			pstmt.setInt(5, endpage);
 			
 			rset = pstmt.executeQuery();
 			if(rset != null){
@@ -67,9 +80,8 @@ public class GroupQnADao {
 					gq.setGroupNo(rset.getInt("group_no"));
 					gq.setUploader(rset.getInt("uploader"));
 					gq.setCommentcount(rset.getInt("commentcount"));
-					
+					System.out.println(gq);
 					list.add(gq);
-					
 				}
 			}
 		} catch (Exception e) {
