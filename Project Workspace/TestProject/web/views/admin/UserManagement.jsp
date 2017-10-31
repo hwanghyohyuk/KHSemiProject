@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*, com.studyhub.common.vo.User" %>
 <!-- 
 작성자 : 구미향
 내용 : 관리자 회원관리페이지
 작성일자 17.10.30
  -->
 <!-- java 구문 -->
-
+<%
+	ArrayList<User> ulist = (ArrayList<User>) request.getAttribute("ulist");
+%>
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 <!-- css, javascript -->
 
@@ -46,22 +48,27 @@
 						<th>이메일</th>
 						<th>사용자이름</th>
 						<th>휴대전화</th>
-						<th>가입일</th>
+						<th>그룹번호</th>
+						<th>분류</th>
 					</tr>
 					<%
-						/* for (QnA qna : list) { */
+						 for (User u : ulist) { 
 					%>
 					<tr>
 						<td><input type="checkbox" id="member-check"></td>
-						<td>ㅇㅇ</td>
+						<td><%=user.getUserNo() %></td>
 						<td id="title_text"><a
-							href="#">ㅇ</a></td>
-						<td>ㅇ</td>
-						<td>ㅇ</td>
-						<td>ㅇ</td>
+							href="#"><%=u.getEmail() %></a></td>
+						<td><%=u.getUserName() %></td>
+						<td><%=u.getPhone() %></td>
+						<td><%=u.getGroupno() %></td>
+						<% if(u.getAuthorityno()==2){ %>
+						<td>그룹장</td>
+						<% }else{ %>
+						<td>일반회원</td>
 					</tr>
 					<%
-						/* } */
+						} } 
 					%>
 				</table>
 			</div>
@@ -73,5 +80,5 @@
 <!-- /메인 컨텐츠 -->
 
 <!--푸터 부분-->
-<%@ include file="/views/include/admin/footer.jsp"%>
+
 <%@ include file="/views/include/common/tail.jsp"%>

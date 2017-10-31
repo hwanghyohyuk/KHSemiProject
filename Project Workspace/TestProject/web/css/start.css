@@ -5,15 +5,25 @@
 	padding: 0 0;
 	
 }
+/* <!---검정 반투명 navbar -->
 #navbar{
-	background: transparent;
+	background: rgba(23, 23, 23, 0.6);
+	position: fixed;
+	z-index: 1111;
+	height: 8vh;
+	width: 100vw;
+	color: white;
+	
 }
+#color, #admin-dmenu{
+	color: white;
+} */
 .formgroup{
 	height: 40px;
 }
 #main-area{
 	background: url("../images/bg1.jpg") no-repeat;
-	height: 92vh;
+	height: 100vh;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -62,6 +72,7 @@
 }
 
 #promo-text {
+	margin-top: 5vh;
 	font-weight: bold;
 	color: white;
 	/*width: 8.25em;*/
