@@ -229,7 +229,9 @@ public class MainDao {
 
 		PreparedStatement pstmt = null;
 
-		String query = "insert into tb_ung values (" + "(select max(ung_no) + 1 from tb_message) " + ", ?, ?, 1, 1)";
+		String query = "insert into tb_ung values (" + 
+						"(select max(ung_no) + 1 from tb_ung) " 
+						+ ", ?, ?, 1, 1)";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -335,7 +337,7 @@ public class MainDao {
 	}
 
 	public int ungState(Connection con, int senderNo, int groupNo) {
-		int result = 0;
+		int result = -1;
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -351,6 +353,7 @@ public class MainDao {
 			if (rset != null) {
 				while (rset.next()) {
 					result = rset.getInt("ung_state");
+					System.out.println(result);
 				}
 			}
 		} catch (Exception e) {

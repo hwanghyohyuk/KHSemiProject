@@ -43,6 +43,7 @@ function sendMessage(senderNo,receiverNo,groupNo){
 	checkBtnState(sender,groupno);
 	state=0;
 	}
+	history.back();
 }
 
 function checkBtnState(senderNo,groupNo){
