@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*, com.studyhub.common.vo.QnA" %>
 <!-- 
 작성자 : 구미향
 내용 : 관리자 도움말 관리페이지
 작성일자 17.10.30
  -->
 <!-- java 구문 -->
-
+<% ArrayList<QnA> qlist = (ArrayList<QnA>)request.getAttribute("qlist"); %>
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 <!-- css, javascript -->
 
@@ -24,49 +24,44 @@
 <div class="row" id="list-layout">
 	<div
 		class="col-md-8 col-md-offset-1 col-lg-8 col-lg-offset-1 col-sm-10 col-xs-9 col-xs-offset-1">
-		<h2>FAQ관리</h2>
-
+		<h2>QnA게시판 관리</h2>
+		
 		<div class="top-area">
-			<form action="/studyhub/faqmanagementlist" method="post" class="admin-search">
-				<label class="radio-inline"> <input type="radio"
-					name="inlineRadioOptions" id="inlineRadio1" value="option1">
-					회원가입
-				</label> <label class="radio-inline"> <input type="radio"
-					name="inlineRadioOptions" id="inlineRadio2" value="option2">
-					스터디찾기
-				</label> <label class="radio-inline"> <input type="radio"
-					name="inlineRadioOptions" id="inlineRadio3" value="option3">
-					그룹페이지
-				</label> <label class="radio-inline"> <input type="radio"
-					name="inlineRadioOptions" id="inlineRadio4" value="option4">
-					파일공유 
-				</label> 
-			</form>
+				<form action="/studyhub/qnasearch" method="post" class="admin-search">
+				<button onclick="deleteMember();" id="delete-btn">삭제</button>
+					<select id="search-by" name="search-by">
+						<option value="user_name">제목</option>
+						<option value="email">작성자</option>
+					</select> <input type="search" autocomplete name="keyword" length="50"
+						id="search-input"> &nbsp; <input type="submit" value="검색"
+						id="search-btn">
+				</form>
 
-		</div>
+			</div>
 
 		<div class="table-area">
 			<table class="table table-striped" align="center" width="600">
 				<tr id="attr">
 					<th>선택</th>
-					<th>번호</th>
-					<th>질문</th>
-					<th>답변</th>
-					<th>질문카테고리</th>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성날짜</th>
+					<th>조회수</th>
 				</tr>
 				<%
-					/* for (QnA qna : list) { */
+					 for (QnA qna : qlist) { 
 				%>
 				<tr>
 					<td><input type="checkbox" id="member-check"></td>
-					<td>ㅇㅇ</td>
-					<td id="title_text"><a href="#">ㅇ</a></td>
-					<td>ㅇ</td>
-					<td>ㅇ</td>
-					<td>ㅇ</td>
+					<td><%=qna.getQnaNo() %></td>
+					<td id="title_text"><a href="#"><%=qna.getTitle() %></a></td>
+					<td><%=qna.getWriter() %></td>
+					<td><%=qna.getUploadDate() %></td>
+					<td><%=qna.getReadCount() %></td>
 				</tr>
 				<%
-					/* } */
+					 } 
 				%>
 			</table>
 		</div>

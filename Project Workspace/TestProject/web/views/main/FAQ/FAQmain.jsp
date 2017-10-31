@@ -102,16 +102,7 @@ h2, h4{
 	<h1 id="head-text">무엇이 궁금하신가요?</h1>
 	</div>
 	
-	<div class="search">
-		<div class="col-md-4 col-sm-4 col-sm-offset-4 col-md-offset-4">
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="키워드를 입력하세요...">
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">검색</button>
-				</span>
-			</div>
-		</div>
-	</div>
+	
 	<div class="service">
 	<div class="col-md-6 col-md-offset-3">
 	<% if(user!=null){
