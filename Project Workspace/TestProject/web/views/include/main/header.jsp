@@ -5,7 +5,7 @@
 	User user = (User)session.getAttribute("user");
 %>
 <!-- 헤더 영역 : 네비게이션 바 -->
-<nav class="navbar" id="header-bar">
+<nav id="navbar">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -282,7 +282,7 @@
 								<label for="rule" class="col-sm-3 control-label">스터디 분야</label>
 								<div class="col-sm-3">
 									<select class="form-control" id="catelist" name="catelist">
-
+										<!-- ajax -->
 									</select>
 								</div>
 							</div>
@@ -290,17 +290,30 @@
 							<div class="form-group">
 								<label for="rule" class="col-sm-3 control-label">스터디 지역</label>
 								<div class="col-sm-3">
-									<select class="form-control">
-										<option>1</option>
-										<option>2</option>
+									<select class="form-control" id="location" name="location">
+										<option>서울</option>
+										<option>경기</option>
+										<option>강원</option>
+										<option>충북</option>
+										<option>충남</option>
+										<option>전북</option>
+										<option>전남</option>
+										<option>경북</option>
+										<option>경남</option>
+										<option>제주</option>
 									</select>
 								</div>
-								<label for="rule" class="col-sm-3 control-label">상세 지역</label>
-								<div class="col-sm-3">
-									<select class="form-control">
-										<option>1</option>
-										<option>2</option>
-									</select>
+								<div class="col-sm-6">
+									<div id="imaginary_container">
+										<div class="input-group stylish-input-group">
+											<input type="text" class="form-control" placeholder="Search"
+												name='keyword'> <span class="input-group-addon">
+												<button>
+													<span class="glyphicon glyphicon-search"></span>
+												</button>
+											</span>
+										</div>
+									</div>
 								</div>
 							</div>
 						</form>

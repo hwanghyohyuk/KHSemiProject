@@ -1,10 +1,11 @@
 @CHARSET "UTF-8";
-
+/*모든 페이지 볼드 처리*/
+/*
 body{
 font-size:11pt;	
 font-weight:600;
 }
-
+*/
 #nav-bar {
 	height: 5vh;
 }
@@ -146,3 +147,18 @@ p:hover{
 	width: 24vw;
 }
 }
+
+#imaginary_container{
+}
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+    }

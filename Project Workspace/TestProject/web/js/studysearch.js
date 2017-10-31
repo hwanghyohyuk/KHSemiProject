@@ -1,7 +1,7 @@
 $(function() {
-	var userno = "<%= user.getUserNo()%>";
+	var userno;
 	$.ajax({
-		url : "/studyhub/bgrouplist",
+		url : "/studyhub/categorylist",
 		data : {
 			userno : userno
 		},

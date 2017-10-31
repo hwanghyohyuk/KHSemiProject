@@ -27,19 +27,7 @@
 	width: 140px;
 	height: 140px;
 }
-#imaginary_container{
-}
-.stylish-input-group .input-group-addon{
-    background: white !important; 
-}
-.stylish-input-group .form-control{
-	border-right:0; 
-	box-shadow:0 0 0; 
-	border-color:#ccc;
-}
-.stylish-input-group button{
-    border:0;
-    background:transparent;
+
 </style>
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
@@ -138,7 +126,7 @@
 			<a class="btn btn-default" href="javascript:grouplistcheck()">글쓰기</a>
 			<script type="text/javascript">
 		function grouplistcheck(){
-			var userno = "<%=user.getUserNo()%>";
+			var userno = <%=user.getUserNo()%>;
 				$.ajax({
 					url : "/studyhub/bgrouplist",
 					data : {	userno : userno	},
@@ -147,7 +135,7 @@
 					success : function(data) {
 						var json = JSON.parse(JSON.stringify(data));
 						var values = "";
-						if (json.list != '') {
+						if (json.list.length>0) {
 							location.href = '/studyhub/boardinsert.move';
 						} else {
 							alert("모집할 그룹이 없습니다.");
