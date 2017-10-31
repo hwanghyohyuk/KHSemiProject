@@ -26,11 +26,7 @@
 <%@ include file="/views/include/main/header.jsp"%>
 <%@ include file="/views/include/group/nav.jsp"%>
 
-<div class="row">
-	<h2 id="heading">
-		　　
-	</h2>
-
+<div class="container">	
 <div id="inner"
 	class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xm-8 col-xs-2">
 
@@ -38,45 +34,38 @@
 	<div class="head-text">
 		<h3 id="title-text"><%=gBoard.getTitle()%></h3>
 	</div>
-
-<br>
-<br>
+	
+			<hr id="second-line">
+	<div class="panel-body" id="content"> <%=(gBoard.getContent()).replaceAll("\n", "<br>")%></div>
 <hr>
-<label class="col-sm-3 control-label">내용</label>
-<div class="col-sm-9">
-	<%=(gBoard.getContent()).replaceAll("\n", "<br>")%>
-</div>
-</div>
-
-<div class="form-group ">
-	<div class="col-sm-12">
-		<button class="btn btn-primary main-back pull-right"
-			style="margin-top: 0.6vh; float: right">
-			<a href="javascript:checkDelete(<%=gBoard.getgBoardNo()%>)">삭제</a>
-		</button>
-		<button class="btn btn-default btn-sm"
-			style="margin-top: 0.6vh; float: right">
-			<a href="/studyhub/gboardupdateview?no=<%=gBoard.getgBoardNo()%>">수정</a>
-		</button>
-		<button class="btn btn-default btn-sm"
-			style="margin-top: 0.6vh; float: right">
+	<div class="col-sm-offset-2 col-sm-10">
+	<%
+					if (user.getUserNo() == gBoard.getUploader()) {
+				%>
+			<a class="btn btn-primary main-back pull-right" href="javascript:checkDelete(<%=gBoard.getgBoardNo()%>)">삭제</a>
+		
+			<a href="/studyhub/gboardupdateview?no=<%=gBoard.getgBoardNo()%>" class="btn btn-primary main-back pull-right">수정</a>
+		
+		<%
+					}
+				%>
 			<a href="/studyhub/gboardpreview?groupno=<%=group.getGroupNo()%>"
-				data-method="post">목록</a>
+				class="btn btn-default pull-right" data-method="post">목록</a>
 		</button>
-	</div>
+	<hr>
 </div>
-</form>
-</div>
-<div class="container">
-	<div class="comment-list">
-		Comment<br> <br>
-		<!---댓글입력-->
-		<input type="text" name="content" class="form-control"
-					id="comment-write" placeholder="댓글을 달아주세요"> 
+		<!---댓글입력-->					
+		<div class="form-group">
 					<input type="hidden" name="gboardno" id="gboardno" value="<%=gBoard.getgBoardNo()%>"> 
-					<input type="hidden" name="uploader" id="uploader" value="<%=user.getUserNo()%>">
-				<button class="btn btn-info btn-sm" onclick="insert();">댓글달기</button>
-				<script type="text/javascript">
+					<input type="hidden" name="uploader" id="uploader" value="<%=gBoard.getUploader()%>">
+				</div>
+				<div class="comment-list">
+			<!---댓글입력-->
+			<input type="text" name="content" class="form-control comment-input"
+			id="comment-write" placeholder="댓글을 달아주세요"> 
+			<button class="btn btn-info btn-sm" onclick="insert();">댓글달기</button>
+		</div>
+		<script type="text/javascript">
 	function checkDelete(groupno){
 		if (confirm('해당 게시글을 삭제하시겠습니까?')) {
 		    location.href="/studyhub/gboarddelete?groupno="+groupno;
@@ -126,21 +115,21 @@
 											.stringify(data));
 									var values = "";
 									for ( var i in json.list) {
-										values += "<div class='panel-footer'>"
-												+ decodeURIComponent(json.list[i].comment)
-												+ "<span> | "
-												+ decodeURIComponent(json.list[i].username)
-												+ "</span>"
-												+ "<span> | "
-												+ decodeURIComponent(json.list[i].uploaddate)
-												+ "</span>"
-												+ "<input type='hidden' value='"+ json.list[i].commentno +"' id='commentno'>"
-												+ "<input type='button' id='comment-del-btn' name='comment-del-btn' class='btn btn-info btn-sm' value='삭제' onclick='deleteC();'></div>";
-
+										values +=
+											"<div id='comment-area'>"+
+											decodeURIComponent(json.list[i].comment)+
+											"<span> | "+ decodeURIComponent(json.list[i].username)+ "</span>"+
+											"<span> | "+ decodeURIComponent(json.list[i].uploaddate)+ "</span>"+
+											"<input type='hidden' value='"+ json.list[i].commentno +"' id='commentno'>"+
+											"<input type='button' id='comment-del-btn' name='comment-del-btn' class='btn btn-info btn-sm' value='삭제' onclick='deleteC();'></div>"									;
+										
 									}
-									$("#comment-list").html(values);
+									values += "<input type='text' name='content' class='form-control' id='comment-write' placeholder='댓글을 달아주세요'>"+
+												 "<button class='btn btn-info btn-sm' onclick = 'insert();'>댓글달기</button>"
 
-								},
+										$(".comment-list").html(values);
+
+									},
 								error : function(xhr, status, error) {
 									alert("error\nxhr: " + xhr
 											+ ", status: " + status
@@ -163,11 +152,6 @@
 					select();
 				}
 			</script>
-
-
-
-	</div>
-</div>
 </div>
 
 

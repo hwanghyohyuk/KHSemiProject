@@ -25,8 +25,6 @@ import com.studyhub.group.board.model.service.GBoardService;
 public class GBoardCommentSelectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private GBoard gboard;
-	private GBoardService gboardService;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
