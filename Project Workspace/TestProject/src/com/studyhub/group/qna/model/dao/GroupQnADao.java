@@ -80,7 +80,7 @@ public class GroupQnADao {
 					gq.setGroupNo(rset.getInt("group_no"));
 					gq.setUploader(rset.getInt("uploader"));
 					gq.setCommentcount(rset.getInt("commentcount"));
-					System.out.println(gq);
+					
 					list.add(gq);
 				}
 			}

@@ -459,7 +459,6 @@
 					}
 				}
 				var tail = "<div class='col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='tail" + endpage + "'>"
-				console.log(endpage);
 				if(startpage == 10){
 					$("#qna_list").html(values + tail);
 				} else {
