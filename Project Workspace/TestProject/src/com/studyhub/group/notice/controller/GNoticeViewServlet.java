@@ -42,6 +42,8 @@ public class GNoticeViewServlet extends HttpServlet {
 		gNoticeService = new GNoticeService();
 		gNotice = gNoticeService.selectGNotice(gno);
 		
+		//console 출력
+		System.out.println("\n 뷰 서블릿 : gno : " +gno);
 				
 		RequestDispatcher view = null;
 	

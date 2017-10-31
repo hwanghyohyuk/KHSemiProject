@@ -641,6 +641,13 @@ INSERT INTO TB_MESSAGE VALUES(4,1,5,2,DEFAULT,'사진공유 부탁드려요');
 PROMPT INSERT DATA FAQ...
 INSERT INTO TB_FAQ VALUES(1,'아이디가 기억이 안나요','로그인화면 하단에 아이디찾기를 클릭하세요',1);
 INSERT INTO TB_FAQ VALUES(2,'글 공개범위는 어떻게바꾸나요?','글쓰기나 수정화면에서 전체공개 또는 그룹공개 가능합니다',3);
+INSERT INTO TB_FAQ VALUES(3,'그룹 탈퇴를 하면 내가 쓴 글은 어떻게 되나요?', '탈퇴를 하셔도 그대로 남아있습니다.',3);
+INSERT INTO TB_FAQ VALUES(4,'원하는 스터디가 없을 땐 어떻게 만들 수 있나요?', '스터디찾기 목록에서 추가하실수있습니다',2);
+INSERT INTO TB_FAQ VALUES(5,'파일공유게시판에 글이 안써져요', '파일이 10Mbyte를 초과하면 파일업로드가 되지 않습니다. 확인해주세요',4);
+INSERT INTO TB_FAQ VALUES(6,'파일 카테고리는 어떻게 만드나요?', '그룹장만 설정탭에 들어가서 만드실 수 있습니다.',4);
+INSERT INTO TB_FAQ VALUES(7,'비밀번호는 어떻게 찾을 수 있나요?', '비밀번호찾기를 누르시면 이메일로 임시비밀번호를 보내드립니다.',1);
+INSERT INTO TB_FAQ VALUES(8,'로그인하지 않고 스터디가입못하나요?','비회원은 참여 불가능합니다. 회원으로 가입해주세요!',1);
+INSERT INTO TB_FAQ VALUES(9,'스터디 찾기 어떤 검색기능이 있나요?', '지역별, 온/오프라인별 등 가능합니다', 2);
 
 --추가 II
 PROMPT INSERT DATA 전체공지...

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*, com.studyhub.common.vo.Group" %>
 <!-- 
 작성자 : 구미향
 내용 : 관리자 group관리페이지
 작성일자 17.10.30
  -->
 <!-- java 구문 -->
-
+<% ArrayList<Group> glist = (ArrayList<Group>)request.getAttribute("glist"); %>
 <!-- 초기화 블럭(변수선언 및 초기화) -->
 <!-- css, javascript -->
 
@@ -30,8 +30,8 @@
 				<button onclick="updateMember();" id="delete-btn">수정</button>
 				<button onclick="deleteMember();" id="delete-btn">삭제</button>
 					<select id="groupsearch-by" name="search-by">
-						<option value="title">제목</option>
-						<option value="writer">작성자</option>
+						<option value="group_name">그룹명</option>
+						<option value="g_category">카테고리</option>
 					</select> <input type="search" autocomplete name="keyword" length="50"
 						id="search-input"> &nbsp; <input type="submit" value="검색"
 						id="search-btn">
@@ -46,23 +46,24 @@
 						<th>번호</th>
 						<th>그룹명</th>
 						<th>카테고리</th>
+						<th>지역</th>
 						<th>on/offline</th>
 						<th>그룹장</th>
 					</tr>
 					<%
-						/* for (QnA qna : list) { */
+						for(Group g : glist){
 					%>
 					<tr>
 						<td><input type="checkbox" id="member-check"></td>
-						<td>ㅇㅇ</td>
-						<td id="title_text"><a
-							href="#">ㅇ</a></td>
-						<td>ㅇ</td>
-						<td>ㅇ</td>
-						<td>ㅇ</td>
+						<td><%=g.getGroupNo() %></td>
+						<td><%=g.getGroupName() %></td>
+						<td><%=g.getCategoryName() %></td>
+						<td><%=g.getLocation() %></td>
+						<td><%=g.getAttributeName() %></td>
+						<td><%=g.getUserName() %></td>
 					</tr>
 					<%
-						/* } */
+						 }
 					%>
 				</table>
 			</div>

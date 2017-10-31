@@ -52,6 +52,8 @@ public class GNoticeInsertServlet extends HttpServlet {
 		gNotice.setUploader(uploader);
 		gNotice.setAccessNo(accessNo);
 		gNotice.setGroupNo(groupNo);
+		
+		System.out.println("\n 인서트 서블릿 groupNo : "+ groupNo);
 				
 		if(new GNoticeService().insertGNotice(gNotice)>0){
 			response.sendRedirect("/studyhub/gnoticepreview?groupno="+groupNo);

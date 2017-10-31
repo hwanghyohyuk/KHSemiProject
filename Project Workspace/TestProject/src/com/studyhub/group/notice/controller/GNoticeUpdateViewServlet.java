@@ -39,6 +39,9 @@ public class GNoticeUpdateViewServlet extends HttpServlet {
 		GNotice gNotice = new GNoticeService().selectGNotice(Integer.parseInt(request.getParameter("no")));
 		
 		RequestDispatcher view = null;
+		
+		//console 출력
+		//System.out.println("\n 업데이트뷰 서블릿 gNotice : " + gNotice);
 				
 		if(gNotice != null){
 			view = request.getRequestDispatcher("/views/group/groupNotice/NoticeUpdateForm.jsp");

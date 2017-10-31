@@ -20,6 +20,7 @@ public class GNoticeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private GNoticeService gNoticeService;
+	private GNotice gNotice;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,8 +38,11 @@ public class GNoticeDeleteServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		int gno= Integer.parseInt(request.getParameter("groupno"));
+				
 		
-		
+		//console 출력
+		System.out.println("\n 딜리트 서블릿 gno : "+ gno);
+			
 		if(new GNoticeService().deleteGNotice(gno) > 0){
 			response.sendRedirect("/studyhub/gnoticepreview?groupno=1");
 		}else{

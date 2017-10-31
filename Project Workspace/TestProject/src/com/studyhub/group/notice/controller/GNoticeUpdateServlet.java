@@ -55,7 +55,8 @@ public class GNoticeUpdateServlet extends HttpServlet {
 		gNoticeService = new GNoticeService();
 		int result = gNoticeService.updateGNotice(gNotice);
 		
-		System.out.println(gNotice);
+		//console 출력
+		System.out.println("/n 업데이트 서블릿 groupno :" + groupno);
 		
 		RequestDispatcher view = null;
 		

@@ -24,7 +24,7 @@
 	margin-top: 8vh;
 }
 </style>
-
+<link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>

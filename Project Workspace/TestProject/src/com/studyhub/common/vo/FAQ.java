@@ -1,15 +1,26 @@
 package com.studyhub.common.vo;
 
-public class FAQ implements java.io.Serializable{
+public class FAQ implements java.io.Serializable {
 
 	private int faqNo;
 	private String title;
 	private String content;
 	private int faqCategoryNo;
+	private String faqCategoryName;
 
 	public FAQ() {
 		super();
 	}
+	
+	
+
+	public FAQ(int faqNo, String title, String content) {
+		super();
+		this.faqNo = faqNo;
+		this.title = title;
+		this.content = content;
+	}
+
 
 	public FAQ(int faqNo, String title, String content, int faqCategoryNo) {
 		super();
@@ -17,6 +28,37 @@ public class FAQ implements java.io.Serializable{
 		this.title = title;
 		this.content = content;
 		this.faqCategoryNo = faqCategoryNo;
+	}
+
+
+
+	public String getFaqCategoryName() {
+		return faqCategoryName;
+	}
+
+
+
+	public void setFaqCategoryName(String faqCategoryName) {
+		this.faqCategoryName = faqCategoryName;
+	}
+
+
+
+	public FAQ(int faqNo, String title, String content, int faqCategoryNo, String faqCategoryName) {
+		super();
+		this.faqNo = faqNo;
+		this.title = title;
+		this.content = content;
+		this.faqCategoryNo = faqCategoryNo;
+		this.faqCategoryName = faqCategoryName;
+	}
+
+	public FAQ(int faqNo, String title, String content, String faqCategoryName) {
+		super();
+		this.faqNo = faqNo;
+		this.title = title;
+		this.content = content;
+		this.faqCategoryName = faqCategoryName;
 	}
 
 	public int getFaqNo() {
@@ -50,6 +92,8 @@ public class FAQ implements java.io.Serializable{
 	public void setFaqCategoryNo(int faqCategoryNo) {
 		this.faqCategoryNo = faqCategoryNo;
 	}
+	
+	
 
 	@Override
 	public String toString() {
