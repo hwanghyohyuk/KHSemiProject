@@ -45,6 +45,14 @@ public class LoginProcessServlet extends HttpServlet {
       String userPwd = request.getParameter("pwd");
       uService = new UserService();
       user = uService.loginCheck(userEmail, userPwd);
+      if(user!=null && user.getUserState()==1){
+    	  int result = uService.changeUserState(userEmail, 0);
+    	  if(result>0){
+    		  System.out.println("사용자 상태가 성공적으로 바뀜");
+    	  }else{
+    		  System.out.println("사용자 상태가 바뀌지 않음");
+    	  }
+      }
       RequestDispatcher view = null;
       if (user != null) {
          HttpSession session = request.getSession();

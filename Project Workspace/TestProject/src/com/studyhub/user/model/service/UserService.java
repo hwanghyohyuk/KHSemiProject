@@ -139,4 +139,31 @@ public class UserService {
 		close(conn);
 		return result;
 	}
+
+
+	public int changeUserState(String email, int state) {
+		Connection conn = getConnection();
+		uDao = new UserDao();
+		int result = uDao.changeUserState(conn, email,state);
+		if (result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int updateUserInfo(String email, String pwd, String phone, int pwdState) {
+		Connection conn = getConnection();
+		uDao = new UserDao();
+		int result = uDao.updateUserInfo(conn, email, pwd, phone, pwdState);
+		if (result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }

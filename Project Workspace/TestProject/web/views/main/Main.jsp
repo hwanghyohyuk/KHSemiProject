@@ -6,7 +6,7 @@
 <script type="text/javascript" src='/studyhub/js/main.js'></script>
 <%
 	User changePwd = (User) session.getAttribute("user");
-	if (changePwd.getPwdState() == 1) {
+	if (changePwd!=null && changePwd.getPwdState() == 1) {
 %>
 <script type="text/javascript">
 	alert('임시 비밀번호를 변경해주세요!');
@@ -18,6 +18,16 @@
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
+<%
+	if (user==null) {
+%>
+<script type="text/javascript">
+$(function pleaseLogin() {
+		alert("로그인이 필요합니다.");
+		location.href = "/studyhub/login";
+	});
+</script>
+<%}%>
 <div class="container">
 	<div class="row">
 		<div class="head">
@@ -69,12 +79,14 @@
 		</div>
 	</div>
 </div>
+<%	if (user!=null) {%>
 <script type="text/javascript">
-	$(boardlist());
-	$(mygrouplist(
+$(boardlist());
+$(mygrouplist(
 <%=user.getUserNo()%>
-	));
+));
 </script>
+<%}%>
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
 <%@ include file="/views/include/common/tail.jsp"%>
