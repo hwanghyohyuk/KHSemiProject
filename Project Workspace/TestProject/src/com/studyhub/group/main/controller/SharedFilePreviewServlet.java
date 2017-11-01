@@ -45,6 +45,7 @@ public class SharedFilePreviewServlet extends HttpServlet {
 		
 		if(request.getParameter("page") != null)
 			currentPage = Integer.parseInt(request.getParameter("page"));
+	
 		
 		ShareFileService sfservice = new ShareFileService();
 		

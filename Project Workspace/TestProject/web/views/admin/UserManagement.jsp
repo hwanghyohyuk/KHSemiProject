@@ -36,7 +36,6 @@
 			
 			<div class="top-area">
 				<form action="/studyhub/qnasearch" method="post" class="admin-search">
-				<button onclick="deleteMember();" id="delete-btn">삭제</button>
 					<select id="user-search" name="search-by">
 						<option value="user_name">이름</option>
 						<option value="email">이메일</option>
@@ -63,12 +62,11 @@
 					<tr>
 						<td><%=u.getUserNo() %></td>
 						<td><%=u.getUserName() %></td>
-						<td id="title_text"><a
-							href="#"><%=u.getEmail() %></a></td>
+						<td id="title_text"><%=u.getEmail() %></td>
 						
 						<td><%=u.getPhone() %></td>
 						<td><%=u.getUserState() %></td>
-						<td><button onclick="deleteMember('<%=u.getEmail() %>');" id="user-delete"><span class="glyphicon glyphicon-remove"></span></button></td>
+						<td><a onclick="deleteMember('<%=u.getEmail() %>');" id="user-delete"><span class="glyphicon glyphicon-remove"></span></a></td>
 					</tr>
 					<%
 						}

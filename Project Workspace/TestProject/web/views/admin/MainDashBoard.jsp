@@ -27,10 +27,10 @@
 			<textarea class="form-control" id="notice-input" name="notice"
 				placeholder="사용자들에게 보여줄 공지사항을 입력하세요" rows="6"></textarea>
 			<div class="submit-area">
-				<div class="checkbox">
+				<!-- <div class="checkbox">
 					<label> <input type="checkbox" id="popup" name="popup"> 팝업띄우기
 					</label>
-				</div>
+				</div> -->
 				<button type="submit" id="notice-btn">공지하기</button>
 				<a href="/studyhub/noticedelete"><button id="notice-btn">공지삭제</button></a>
 			</div>
