@@ -78,7 +78,6 @@
 			id="comment-write" placeholder="댓글을 달아주세요"> 
 			<button class="btn btn-info btn-sm" onclick="insert();">댓글달기</button>
 		</div>
-	</div>
 
 
 	

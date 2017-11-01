@@ -19,8 +19,6 @@ import com.studyhub.group.qna.model.service.GroupQnAService;
 public class GBoardCommentInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private GBoard gboard;
-	private GBoardService gboardService;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -41,8 +39,7 @@ public class GBoardCommentInsertServlet extends HttpServlet {
 		int gboardno = Integer.parseInt(request.getParameter("gboardno"));
 		String comment = request.getParameter("comment");
 		int uploader = Integer.parseInt(request.getParameter("uploader"));
-		System.out.println(comment);
-		if(new GNoticeService().insertComment(gboardno, uploader, comment)>0 ){
+		if(new GBoardService().insertComment(gboardno, uploader, comment)>0 ){
 			response.sendRedirect("views/group/groupBoard/BoardDetail.jsp");
 		}
 	}

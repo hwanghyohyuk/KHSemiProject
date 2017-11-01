@@ -25,8 +25,6 @@ import com.studyhub.group.board.model.service.GBoardService;
 public class GBoardCommentSelectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private GBoard gboard;
-	private GBoardService gboardService;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -45,7 +43,6 @@ public class GBoardCommentSelectServlet extends HttpServlet {
 
 		int gboardno = Integer.parseInt(request.getParameter("gboardno"));
 		ArrayList<GBComment> list = new GBoardService().selectcomment(gboardno);
-		System.out.println(gboardno);
 		JSONObject json = new JSONObject();
 		JSONArray jarr = new JSONArray();
 		
@@ -60,7 +57,7 @@ public class GBoardCommentSelectServlet extends HttpServlet {
 			
 			jarr.add(job);
 						
-		}
+		}		
 		json.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
