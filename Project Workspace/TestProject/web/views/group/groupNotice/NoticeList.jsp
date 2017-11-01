@@ -36,6 +36,8 @@
 <%@ include file="/views/include/group/nav.jsp"%>
 
 <!-- 메인 컨텐츠 -->
+
+<div class="container">
 	<div class="row" id="list-layout">
 		<div class="col-md-8 col-md-offset-1 col-lg-8 col-lg-offset-1 col-sm-10 col-xs-9 col-xs-offset-1">
 			<h2>공지사항</h2>
@@ -95,6 +97,7 @@
 				<button onclick="insertPage();" class="btn btn-info" id="btns">글쓰기</button>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<!--푸터 부분-->

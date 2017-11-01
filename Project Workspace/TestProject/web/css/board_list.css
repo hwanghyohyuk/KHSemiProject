@@ -2,6 +2,7 @@
 
 #list-layout {
 	margin-top: 6vh;
+	margin-bottom: 30vh;
 }
 
 #qnatitle {
@@ -9,7 +10,7 @@
 }
 
 .search {
-	margin-left: 42vw;
+	margin-left: 38vw;
 }
 
 select {

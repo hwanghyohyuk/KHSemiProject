@@ -154,7 +154,12 @@
 
 #faqwrapper{
 	margin-top: 10vh;
-	margin-bottom: 40vh;
+	margin-bottom: 50vh;
+	
+}
+
+#qbtns{
+	float: right;
 	
 }
 
