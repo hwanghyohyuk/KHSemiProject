@@ -11,6 +11,7 @@ public class QnA implements java.io.Serializable {
 	private int accessNo;
 	private String writer;
 	private int readCount;
+	private String strDate;
 
 	public QnA() {
 		super();
@@ -52,6 +53,22 @@ public class QnA implements java.io.Serializable {
 		this.qnaNo = qnaNo;
 		this.title = title;
 		this.content = content;
+	}
+
+	public QnA(int qnaNo, String title, String writer, String strDate) {
+		super();
+		this.qnaNo = qnaNo;
+		this.title = title;
+		this.writer = writer;
+		this.strDate = strDate;
+	}
+
+	public String getStrDate() {
+		return strDate;
+	}
+
+	public void setStrDate(String strDate) {
+		this.strDate = strDate;
 	}
 
 	public String getWriter() {

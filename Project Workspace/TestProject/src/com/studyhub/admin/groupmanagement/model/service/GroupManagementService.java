@@ -28,12 +28,26 @@ public class GroupManagementService {
 		return list;		
 	}
 	
-	public boolean groupDelete(int groupno){
+	public int groupDelete(int groupno){
 		Connection con = getConnection();
-		gmd =  new GroupManagementDao();
-		boolean result = gmd.faqDelete(con, groupno);
+		int result = new GroupManagementDao().DeleteGroup(con, groupno);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
 		close(con);
 		return result;		
+	}
+
+	public int groupMessage(int groupno, int userno) {
+		Connection con = getConnection();
+		int result = new GroupManagementDao().groupMessage(con, groupno, userno);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
 	}
 	
 	

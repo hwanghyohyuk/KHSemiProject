@@ -14,6 +14,16 @@
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 
+<%
+	if (user==null) {
+%>
+<script type="text/javascript">
+$(function pleaseLogin() {
+		alert("로그인이 필요합니다.");
+		location.href = "/studyhub/login";
+	});
+</script>
+<%}%>
 <!-- 메인 컨텐츠 -->
 <div class="container">
 	<div class="row center-block">

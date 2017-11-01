@@ -100,7 +100,7 @@
 						if (user != null) {
 					%>
 					<li class='drop-down' id='message'>
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						<a href="javascript/messageselect();" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 							<p class='black' id='color'>
 								<span class='badge' id="messagecount">
 								</span>

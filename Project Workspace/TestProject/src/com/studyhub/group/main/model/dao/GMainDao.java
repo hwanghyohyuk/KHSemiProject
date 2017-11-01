@@ -189,7 +189,7 @@ public class GMainDao {
 		
 		PreparedStatement pstmt = null;
 		
-		String query = "update tb_ung set ung_state = 1 where user_no = ? and group_no = ?";
+		String query = "update tb_ung set ung_state = 2 where user_no = ? and group_no = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
