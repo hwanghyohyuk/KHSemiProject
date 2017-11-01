@@ -55,7 +55,7 @@
 						<th>이메일</th>
 						<th>휴대전화</th>
 						<th>상태</th>
-						<th>삭제</th>
+						<th>탈퇴</th>
 					</tr>
 					<%
 						 for (User u : ulist) { 

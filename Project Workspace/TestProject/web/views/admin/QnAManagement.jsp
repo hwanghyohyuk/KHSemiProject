@@ -28,12 +28,14 @@
 			<h2>QnA게시판 관리</h2>
 			
 			<div class="top-area">
+					
 					<form action="/studyhub/qnasearch" method="post" class="admin-search">
+						
 						<input type="text" autocomplete name="keyword" length="50"
-							id="search-input" oninput="search()"> &nbsp;
+							id="search-input" oninput="search()"> &nbsp;<span class="glyphicon glyphicon-search"></span>
 					</form>
 	
-				</div>
+			</div>
 	
 			<div class="table-area">
 				<table class="table table-striped" align="center" width="600" id="searchtable">
