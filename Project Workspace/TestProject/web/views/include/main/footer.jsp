@@ -8,13 +8,13 @@
 			<div class="row">
 				<div class="footer-col col-md-6">
 					<h3 style=" margin-bottom: 30px;">SiteMap</h3>
-					<p><a href="/views/main/Start.jsp" class="btn-social btn-outline">HOME</a></p>
 
-					<p><a href="/views/main/Board/BoardList.jsp"
+					<p><a href="/studyhub/main" class="btn-social btn-outline">HOME</a></p>
+					<p><a href="/studyhub/boardlist"
 							class="btn-social btn-outline">스터디찾기</a></p>
-					<p><a href="/views/main/Main.jsp" class="btn-social btn-outline">나의그룹</a></p>
-					<p><a href="#" class="btn-social btn-outline">계정설정</a></p>
-					<p><a href="/views/main/FAQmain.jsp" class="btn-social btn-outline">도움말</a></p>
+					<p><a href="/studyhub/main" class="btn-social btn-outline">나의그룹</a></p>
+					<p><a href="/studyhub/myinfo" class="btn-social btn-outline">계정설정</a></p>
+					<p><a href="/studyhub/noticeview" class="btn-social btn-outline">도움말</a></p>
 
 
 				</div>
