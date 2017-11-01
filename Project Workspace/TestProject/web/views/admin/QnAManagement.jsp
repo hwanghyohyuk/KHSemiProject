@@ -29,18 +29,16 @@
 			
 			<div class="top-area">
 					<form action="/studyhub/qnasearch" method="post" class="admin-search">
-						<select id="search-by" name="search-by">
-							<option value="user_name">제목</option>
-							<option value="email">작성자</option>
-						</select> <input type="search" autocomplete name="keyword" length="50"
-							id="search-input"> &nbsp; <input type="submit" value="검색"
-							id="search-btn">
+						<input type="text" autocomplete name="keyword" length="50"
+							id="search-input" oninput="search()"> &nbsp;
 					</form>
 	
 				</div>
 	
 			<div class="table-area">
-				<table class="table table-striped" align="center" width="600">
+				<table class="table table-striped" align="center" width="600" id="searchtable">
+				</table>
+				<table class="table table-striped" align="center" width="600" id="qnatable">
 					<tr id="attr">
 						<th>글번호</th>
 						<th>제목</th>
@@ -70,6 +68,11 @@
 </div>
 <!-- /메인 컨텐츠 -->
 <script type="text/javascript">
+	$(function (){
+		$("#searchtable").hide();
+		$("#qnatable").show();
+	});
+
 	function deleteQna(param, name){
 		var userno = "<%= user.getUserNo() %>";
 		$.ajax({
@@ -81,6 +84,48 @@
 		});
 		location.href = "/studyhub/qnalistmanagement";
 		alert(name + " 글이 삭제되었습니다..");
+	}
+	
+	function search(){
+		var search = $("#search-input").val();
+		if(search == ""){
+			$("#searchtable").hide();
+			$("#qnatable").show();
+		} else {
+			$("#searchtable").show();
+			$("#qnatable").hide();
+			console.log(search);
+			$.ajax({
+				url: "/studyhub/qnasearchmanagement",
+				data: { search: search },
+				type: "get",
+				dataType: "json",
+				success: function(data){
+					var json = JSON.parse(JSON.stringify(data));
+					var values = "";
+					for(var i in json.list){
+						values += 	"<tr>" +
+										"<td>" + json.list[i].qnano + "</td>" +
+										"<td id='title_text'><a href='#'>" + decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") + "</a></td>" +
+										"<td>" + decodeURIComponent(json.list[i].writer) + "</td>" +
+										"<td>" + decodeURIComponent(json.list[i].strdate) + "</td>" +
+										"<td>" + json.list[i].readcount +"</td>" +
+										"<td><button onclick='deleteQna(" + json.list[i].qnano + ", " + decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") + ");' id='delete-btn'>삭제</button></td>" +
+									"</tr>";
+					}
+					var tr = "<tr id='attr'>" +
+									"<th>글번호</th>" +
+									"<th>제목</th>" +
+									"<th>작성자</th>" +
+									"<th>작성날짜</th>" +
+									"<th>조회수</th>" +
+									"<th>삭제</th>" +
+								"</tr>";
+					$("#searchtable").html(tr + values);
+				}
+				
+			});
+		}
 	}
 	
 </script>

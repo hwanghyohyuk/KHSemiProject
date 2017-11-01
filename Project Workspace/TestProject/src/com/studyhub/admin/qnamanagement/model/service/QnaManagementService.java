@@ -2,8 +2,12 @@ package com.studyhub.admin.qnamanagement.model.service;
 
 import static com.studyhub.common.JDBCTemplate.*;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.studyhub.admin.qnamanagement.model.dao.QnaManagementDao;
+import com.studyhub.common.vo.GQNA;
+import com.studyhub.common.vo.QnA;
+import com.studyhub.group.qna.model.dao.GroupQnADao;
 
 public class QnaManagementService {
 
@@ -16,6 +20,20 @@ public class QnaManagementService {
 			rollback(con);
 		close(con);
 		return result;
+	}
+
+	public ArrayList<Integer> QnaNoList(String search) {
+		Connection con = getConnection();
+		ArrayList<Integer> qnanolist = new QnaManagementDao().QnaNoList(con, search);
+		close(con);
+		return qnanolist;
+	}
+
+	public ArrayList<QnA> QNAlist(ArrayList<Integer> qnanolist) {
+		Connection con = getConnection();
+		ArrayList<QnA> qnalist = new QnaManagementDao().QNAList(con, qnanolist);
+		close(con);
+		return qnalist;
 	}
 
 }
