@@ -142,6 +142,8 @@
 
 #edge {
 	margin-left: 150px;
+	margin-top: 8vh;
+	margin-bottom: 20vh;
 }
 </style>
 

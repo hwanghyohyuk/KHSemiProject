@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <!-- 푸터 영역 -->
 
-<div class="text-center col-lg-12 col-md-12 col-sm-12 col-xs-12" style=" color: white;  margin-top: 0vh; padding: 0px;">
-	<div class="footer-above" style=" padding-top: 25px; background-color: #2C3E50;">
+<div class="text-center col-lg-12 col-md-12 col-sm-12 col-xs-12" style=" color: white;  margin-top: 0vh; padding: 0px; width: 100%;  bottom: 0;">
+	<div class="footer-above" style=" padding-top: 25px; background-color: #2C3E50; margin-top: 10vh; padding: 0px; width: 100%;bottom: 0;">
 		<div class="container">
 			<div class="row">
 				<div class="footer-col col-md-6">
@@ -28,7 +28,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="footer-below" style="padding: 8px 0; background-color: #233140;">
+	<div class="footer-below" style="padding: 8px 0; background-color: #233140; width: 100%; margin-top: 0vh; padding: 0px; bottom: 0;">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
