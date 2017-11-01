@@ -33,7 +33,7 @@
 
 <!-- 메인 컨텐츠 -->
 
-
+<div class="container">
 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
 		<!-- Tab -->
 		<div class="category-tab">
@@ -507,6 +507,7 @@
 		</div>
 		<!-- </div> -->
 
+</div>
 </div>
 <!-- /메인 컨텐츠 -->
 

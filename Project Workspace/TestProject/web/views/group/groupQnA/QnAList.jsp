@@ -192,6 +192,10 @@
 	  position: relative;
 	}
 	
+	#qnawrapper{
+		margin-top: 8vh;
+		margin-bottom: 20vh;
+	}
 
 </style>
 <!--헤더 부분-->
@@ -201,7 +205,7 @@
 
 
 <!-- 메인 컨텐츠 -->
-<div class="container col-lg-offset-2 col-md-offset-2 col-sm-offset-2" data-spy="scroll">
+<div class="container col-lg-offset-2 col-md-offset-2 col-sm-offset-2" id="qnawrapper" data-spy="scroll">
 	<div class="col-md-6 col-sm-6 col-sm-offset-3 col-md-offset-3">
 		<div class="input-group" data-toggle="tooltip" data-placement="top" title="검색어 입력시 자동으로 데이터를 가져옵니다!">
 			<span class="input-group-addon" id="basic-addon1"> <span

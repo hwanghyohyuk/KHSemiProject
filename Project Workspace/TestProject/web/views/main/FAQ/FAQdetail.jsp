@@ -39,14 +39,20 @@
 <%@ include file="/views/include/main/header.jsp"%>
 <!-- 메인 컨텐츠 -->
 	
-	<div class="col-md-6 col-sm-6 col-sm-offset-3 col-md-offset-3">
+	<div class="col-md-6 col-sm-6 col-sm-offset-3 col-md-offset-3" id="faqwrapper">
 		<h2 id="main-text"><%=flist.get(0).getFaqCategoryName() %></h2>
 		
 		<% for(FAQ f : flist){ %>
 		<hr>
 		<span><%=f.getTitle() %></span> 
+		
+		<% if(user.getUserNo()==1){ %>
+		
 		<a class="edit" onclick="editFAQ(<%= f.getFaqNo()%>);"><span class="glyphicon glyphicon-pencil"></span></a>
 		<a class="delete" onclick="deleteFAQ(<%= f.getFaqNo()%>, <%=f.getFaqCategoryNo()%>);"><span class="glyphicon glyphicon-remove"></span></a>
+		
+		<% } %>
+		
 		<a class="btn btn-default btn-sm" id="btns"
 			data-toggle="collapse" href="#collapse<%=f.getFaqNo() %>" aria-expanded="false"
 			aria-controls="collapseExample"> 
@@ -87,6 +93,3 @@
 	<%@ include file="/views/include/main/footer.jsp"%>
 	<!--페이지 끝-->
 <%@ include file="/views/include/common/tail.jsp" %>
-
-</body>
-</html>
