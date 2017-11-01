@@ -292,7 +292,7 @@
 
 
 <script type="text/javascript">
-	var basic = 1;
+	var basic = 0;
 	var startpage = 9;
 	var endpage = 0;
 	
@@ -343,7 +343,9 @@
 			});
 			$("#title").val("");
 			$("#content").val("");
-			selectQnA(basic, endpage);
+			startpage = 9;
+			endpage = 0;
+			selectQnA(startpage, endpage);
 			return true
 		}
 	}
@@ -463,7 +465,7 @@
 					}
 				}
 				var tail = "<div class='col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='tail" + endpage + "'>"
-				if(startpage == 10){
+				if(endpage == 0){
 					$("#qna_list").html(values + tail);
 				} else {
 					$("#qna_list").append(values + tail);
@@ -485,7 +487,9 @@
 			async: false
 		});
 		alert("삭제되었습니다.");
-		selectQnA(basic, endpage);
+		startpage = 9;
+		endpage = 0;
+		selectQnA(startpage, endpage);
 	}
 	
 	function selectOne(param){
@@ -528,7 +532,9 @@
 		});
 		alert("수정되었습니다.");
 		$("#qnamodal").modal("hide");
-		selectQnA(basic, endpage);
+		startpage = 9;
+		endpage = 0;
+		selectQnA(startpage, endpage);
 	}
 	
 	function qnasearch(){
