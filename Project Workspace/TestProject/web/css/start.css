@@ -32,11 +32,11 @@
 #signup-area{
 	background-color: black;
 	width: 30vw;
-	height: 40vh;
+	height: 33vh;
 	padding: 1.5vh 2vw;
 	opacity: 0.9;
-	margin-top: 14vh;
-	margin-left: 12vw;
+	margin-top: 10vh;
+	margin-left: 9vw;
 	border: 2px white solid;
 }
 
@@ -49,6 +49,7 @@
 }
 #signup-text{
 	color: white;
+	text-align: center;
 } 
 #sep{
 	line-height: 40px; 
@@ -76,12 +77,40 @@
 	font-weight: bold;
 	color: white;
 	/*width: 8.25em;*/
-	width: 39vw;
+	width: 37vw;
+	white-space: nowrap;
+	overflow: hidden;
+	
+}
+#promo-text2 {
+	margin-top: 5vh;
+	font-weight: bold;
+	color: white;
+	/*width: 8.25em;*/
+	width: 8.5vw;
 	white-space: nowrap;
 	overflow: hidden;
 	border-right: .05em solid;
-	animation: typing 2s steps(24),
-	           caret 1s steps(1) infinite;
+	animation: typing 1s steps(9),
+	           caret 1s steps(9) infinite;
+}
+
+#signupbtn{
+	display: block;
+     background: #001429 ;
+     color: white;
+     top: 0;
+     left: 0;
+     width: 26vw;
+     height: 5vh;
+     border: 0;
+     outline: 0;
+}
+#signupbtn:hover{
+	background: #004157;
+}
+#signupemail{
+	width: 26vw;
 }
 #signup-text{
 	font-weight: bold;
@@ -179,4 +208,27 @@ header .container {
   section.first {
     padding-top: 75px;
   }
+}
+@media (max-width: 1067px) {
+  #promo-text {
+	margin-top: 5vh;
+	font-weight: bold;
+	color: white;
+	/*width: 8.25em;*/
+	width: 37vw;
+	white-space: nowrap;
+	overflow: hidden;
+	
+}
+#promo-text2 {
+	margin-top: 5vh;
+	font-weight: bold;
+	color: white;
+	/*width: 8.25em;*/
+	width: 8.5vw;
+	white-space: nowrap;
+	overflow: hidden;
+	border-right: .05em solid;
+}
+  
 }

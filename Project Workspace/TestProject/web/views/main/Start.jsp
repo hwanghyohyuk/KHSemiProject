@@ -25,7 +25,8 @@
 			<!-- 텍스트 영역 -->
 			<div
 				class="col-md-10 col-lg-10 col-xs-12 col-md-offset-1 col-lg-offset-1">
-				<h3 id="promo-text">함께 성장할 스터디를 찾고 소통하는 공간, 스터디허브</h3>
+				<h3 id="promo-text">함께 성장할 스터디를 찾고 소통하는 공간,</h3>
+				<h3 id="promo-text2">스터디허브</h3>
 			</div>
 
 			<!-- 로그인 & 회원가입 요약영역 -->
@@ -37,14 +38,14 @@
 				<!-- 페이스북 로그인 연동 -->
 				<div class="form-group">
 					<div class="form-group col-md-0 col-xs-0">
-						<button type="button" class="btn btn-default btn-block"
-							id="fb-btn">Facebook 으로 가입하기</button>
+						<!-- <button type="button" class="btn btn-default btn-block"
+							id="fb-btn">Facebook 으로 가입하기</button> -->
 
 					</div>
 					<div class="form-group col-md-4 col-xs-4">
-						<hr />
+						<!-- <hr /> -->
 					</div>
-					<div class="form-group col-md-4 col-xs-4" id="sep">또는</div>
+					<!-- <div class="form-group col-md-4 col-xs-4" id="sep">또는</div> -->
 					<div class="form-group col-md-4 col-xs-4">
 						<hr />
 					</div>
@@ -56,7 +57,7 @@
 							oninput='checkEmail("start")' onblur='checkEmail("start")'
 							onclick='checkEmail("start")'>
 					</div>
-					<button type="submit" class="btn btn-primary btn-block"
+					<button type="submit" 
 						id='signupbtn' disabled="disabled">가입하기</button>
 				</form>
 			</div>
