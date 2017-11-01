@@ -86,9 +86,9 @@ public class GBoardService {
 	
 	
 	
-	public int deleteComment(int cno) {
+	public int deleteComment(int bno) {
 		Connection con = getConnection();
-		int result = new GBoardDao().deleteComment(con, cno);
+		int result = new GBoardDao().deleteComment(con, bno);
 		if (result > 0)
 			commit(con);
 		else

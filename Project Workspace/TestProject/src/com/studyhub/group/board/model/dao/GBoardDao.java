@@ -216,15 +216,15 @@ public class GBoardDao {
 		return list;
 	}
 
-	public int deleteComment(Connection con, int cno) {
+	public int deleteComment(Connection con, int bno) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "delete from tb_gboard_comment where comment_no =? ";
+		String query = "delete from tb_gb_comment where comment_no =? ";
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, cno);
+			pstmt.setInt(1, bno);
 
 			result = pstmt.executeUpdate();
 
