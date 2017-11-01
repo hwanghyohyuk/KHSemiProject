@@ -95,7 +95,7 @@
 							class="glyphicon glyphicon-search">
 					</form>
 				</div>
-				<hr>
+				<hr id="fileboxline">
 				<!-- file boxes  -->
 				<div class="fileboxes">
 					<div class="filebox">
@@ -228,6 +228,7 @@
 							class="glyphicon glyphicon-search">
 					</form>
 				</div>
+				<hr id="fileboxline">
 				<!-- file boxes  -->
 				<div class="fileboxes">
 					<div class="filebox">

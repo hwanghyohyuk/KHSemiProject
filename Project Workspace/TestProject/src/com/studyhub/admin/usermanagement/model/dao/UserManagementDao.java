@@ -17,7 +17,7 @@ public class UserManagementDao {
 		ArrayList<User> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select user_no, email, user_name, phone from tb_user";
+		String query = "select user_no, email, user_name, phone, user_state from tb_user";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -31,6 +31,7 @@ public class UserManagementDao {
 					user.setEmail(rset.getString("email"));
 					user.setUserName(rset.getString("user_name"));
 					user.setPhone(rset.getString("phone"));
+					user.setUserState(rset.getInt("user_state"));
 					
 					list.add(user);
 				}
@@ -43,6 +44,7 @@ public class UserManagementDao {
 		}
 		return list;
 	}
+
 	
 	
 }
