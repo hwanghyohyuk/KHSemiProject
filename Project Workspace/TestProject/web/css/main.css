@@ -127,7 +127,7 @@
 .RollDivB>div {
 	overflow: hidden;
 	height: 240px;
-	width: 150%;
+	width: 200%;
 }
 
 .RollDivB>div>a {
@@ -151,7 +151,7 @@
 }
 #namewrap{
 	position: absolute;
-    z-index: 99999999999;
+    z-index: 1;
     background: rgba(8, 8, 8, 0.59);
     height: 80px;
     margin-top: 160px;

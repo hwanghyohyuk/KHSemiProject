@@ -93,8 +93,8 @@ function boardlist() {
 						$(".RollDivB").css("width","64%");
 						$(".sliderB").css("margin","0 8% 5% 8%");
 					}else if(json.list.length>1){
-						$(".RollDivB").css("width","40%");
-						$(".sliderB").css("margin","0 18% 5% 18%");
+						$(".RollDivB").css("width","46%");
+						$(".sliderB").css("margin","0 24% 5% 18%");
 					}else if(json.list.length>0){
 						$(".RollDivB").css("width","20%");
 						$(".sliderB").css("margin","0 28% 5% 28%");
@@ -105,12 +105,12 @@ function boardlist() {
 						$(".sliderB").css("margin","0 8% 5% 8%");
 					}
 					for ( var i in json.list) {
-						values += "<a href=\"/studyhub/boardview?bno="
+						values += "<a id='a-img' href=\"/studyhub/boardview?bno="
 								+ json.list[i].board_no
 								+ "\">"
-								+ "<img src=\"/studyhub/images/"
+								+ "<img id=\"groupimg\" src=\"/studyhub/images/groupimg/"
 								+ decodeURIComponent(json.list[i].renameimg)
-								+ "\" /></a> ";
+								+ "\" /><div id='namewrap'><p id='imgname'>"+decodeURIComponent(json.list[i].title)+"</p></div></a> ";
 					}
 					$("#board").html(values);
 				}
@@ -155,7 +155,7 @@ function mygrouplist(userno) {
 								+"\">"
 								+ "<img id=\"groupimg\" src=\"/studyhub/images/groupimg/"
 								+ decodeURIComponent(json.list[i].renameimg)
-								+ "\"><div id='namewrap'><p id='imgname'>"+ decodeURIComponent(json.list[i].groupname) +"</p>" +
+								+ "\"><div id='namewrap'><p id='imgname'>"+ decodeURIComponent(json.list[i].group_name) +"</p>" +
 										"<p><span class='glyphicon glyphicon-user'></span>"+ json.list[i].usercount +"</p></div></a>";
 					}
 					$("#group").html(values);
