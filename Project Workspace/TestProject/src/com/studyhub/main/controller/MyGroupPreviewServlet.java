@@ -51,7 +51,7 @@ public class MyGroupPreviewServlet extends HttpServlet {
 		for(UNG ung : list){
 			JSONObject job = new JSONObject();
 			job.put("group_no", ung.getGroupNo());
-			job.put("group_name", URLEncoder.encode(ung.getGroupName(),"UTF-8"));
+			job.put("group_name", ung.getGroupName());
 			job.put("usercount", ung.getCount());
 			if(ung.getRenameimg() == null){
 				job.put("renameimg", URLEncoder.encode("이미지가없습니다.JPG", "UTF-8"));
