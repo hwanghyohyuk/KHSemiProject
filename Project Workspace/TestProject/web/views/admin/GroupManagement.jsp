@@ -20,15 +20,14 @@
 <%@ include file="/views/admin/adminNav.jsp"%>
 
 <!-- 메인 컨텐츠 -->
+<div class="container">
 	<div class="row" id="list-layout">
 		<div
-			class="col-md-8 col-md-offset-1 col-lg-8 col-lg-offset-1 col-sm-10 col-xs-9 col-xs-offset-1">
+			class="col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-1 col-sm-10 col-xs-10 col-xs-offset-1">
 			<h2>그룹관리</h2>			
 			
 			<div class="top-area">
 				<form action="/studyhub/qnasearch" method="post" class="admin-search">
-				<button onclick="updateMember();" id="delete-btn">수정</button>
-				<button onclick="deleteMember();" id="delete-btn">삭제</button>
 					<select id="groupsearch-by" name="search-by">
 						<option value="group_name">그룹명</option>
 						<option value="g_category">카테고리</option>
@@ -42,25 +41,25 @@
 			<div class="table-area">
 				<table class="table table-striped" align="center" width="600">
 					<tr id="attr">
-						<th>선택</th>
 						<th>번호</th>
 						<th>그룹명</th>
 						<th>카테고리</th>
 						<th>지역</th>
 						<th>on/offline</th>
 						<th>그룹장</th>
+						<th>삭제</th>
 					</tr>
 					<%
 						for(Group g : glist){
 					%>
 					<tr>
-						<td><input type="checkbox" id="member-check"></td>
 						<td><%=g.getGroupNo() %></td>
 						<td><%=g.getGroupName() %></td>
 						<td><%=g.getCategoryName() %></td>
 						<td><%=g.getLocation() %></td>
 						<td><%=g.getAttributeName() %></td>
 						<td><%=g.getUserName() %></td>
+						<td><button onclick='deleteGroup(<%= g.getGroupNo() %>, "<%= g.getGroupName() %>");' id='delete-btn'>삭제</button></td>
 					</tr>
 					<%
 						 }
@@ -69,10 +68,26 @@
 			</div>
 		</div>
 	</div>
-
-
-
+</div>
 <!-- /메인 컨텐츠 -->
+<script type="text/javascript">
+	function deleteGroup(param, name){
+		var userno = "<%= user.getUserNo() %>";
+		var name = name;
+		$.ajax({
+			url: "/studyhub/groupmanagementdelete",
+			data: { groupno: param, userno: userno },
+			type: "get",
+			dataType: "json",
+			async: false
+		});
+		location.href = "/studyhub/groupmanagementlist";
+		alert(name + " 그룹이 삭제되었습니다.");
+	}
+	
+</script>
+
+
 
 <!--푸터 부분-->
 

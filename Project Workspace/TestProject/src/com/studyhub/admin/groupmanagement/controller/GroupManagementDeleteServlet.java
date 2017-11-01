@@ -1,6 +1,9 @@
 package com.studyhub.admin.groupmanagement.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studyhub.admin.groupmanagement.model.service.GroupManagementService;
+import com.studyhub.common.vo.Group;
 
 /**
  * Servlet implementation class GroupManagementDeleteServlet
@@ -29,8 +33,17 @@ public class GroupManagementDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8"); 
+		
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
+		int userno = Integer.parseInt(request.getParameter("userno"));
+		
+		if(new GroupManagementService().groupDelete(groupno) > 0 ){
+			if(new GroupManagementService().groupMessage(groupno, userno) > 0 ){
+				response.sendRedirect("/studyhub/groupmanagementlist");
+			}
+		}
 	}
 
 	/**
