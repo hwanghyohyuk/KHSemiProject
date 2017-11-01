@@ -35,53 +35,54 @@
 <!-- 메인 컨텐츠 -->
 
 <div class="container">
-<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12" id="fswrapper">
+	<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12" id="fswrapper">
+	<h3 id="head-text">파일공유하기</h3>
 		<!-- Tab -->
 		<div class="category-tab">
 			<ul class="nav nav-tabs" id="nav-ul">
 				<%
 					for (ShareFile c : clist) {
-						if(c.getFileCategoryNo() ==1){
+						if(c == clist.get(0)){ //게시판에 들어왔을 때 맨 첫번째탭 활성화 
 				%>
 				<li class="active">
 				<a
 					href="#category<%=c.getFileCategoryNo()%>"
-					aria-controls="category<%=c.getFileCategoryNo()%>" role="tab"
+					aria-controls="category<%=c.getFileCategoryNo()%>" role="tab" id="tab"
 					data-toggle="tab"> <%=c.getFileCategoryName()%></a>
 				</li>
 				<% }else{ %>
 				<li>
 				<a href="#category<%=c.getFileCategoryNo()%>"
-					aria-controls="category<%=c.getFileCategoryNo()%>" role="tab"
+					aria-controls="category<%=c.getFileCategoryNo()%>" role="tab" id="tab"
 					data-toggle="tab"> <%=c.getFileCategoryName()%></a>
 				</li>
 				
 				<% }} %>
 
-				<!-- 그룹장만 카테고리 추가, 삭제, 수정 가능  -->
+				<!-- 그룹장만 보이는 settings. 카테고리 추가, 삭제, 수정  -->
 				<%
 					if (group.getAuthorityNo() == 2) {
 				%>
-				<!-- <li><a href="#add" aria-controls="add" role="tab"
-					data-toggle="tab"> <span class="glyphicon glyphicon-plus"
-						aria-hidden="true"></span></a></li> -->
 				<li><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-cog"
 						aria-hidden="true"></span></a></li>
-				<%
-					}
-				%>
+				<% } %>
 
 			</ul>
-
+			<!-- 새 그룹에 카테고리가 없을 시  -->
+		<% if(clist.isEmpty()==true){ %>
+					<p>그룹장은 설정을 클릭하여 카테고리를 추가해주세요!</p>
+		<% } %>
 		</div>
+		
 
 		<!-- <div role="tabpanel"> -->
 		<!-- 카테고리(탭) 하나씩 -->
 
 		<div class="tab-content">
+		
 			<%
 				for (ShareFile c : clist) {
-					if(c.getFileCategoryNo()==1){  //기본카테고리(탭 active)
+					if(c == clist.get(0)){  //기본카테고리(탭 active)
 			%>
 			<div class="tab-pane fade in active"
 				id="category<%=c.getFileCategoryNo()%>">
@@ -91,9 +92,10 @@
 					<form action="/studyhub/sharefilesearch" method="post"
 						id="search-area">
 						<input type="search" autocomplete name="keyword" length="15"
-							placeholder="제목 또는 파일이름..." id="search-input"> <input
+							placeholder="제목 또는 파일이름..." id="search-input" oninput="filesearch();"> <input
 							type="submit" value="검색" id="search-btn"
 							class="glyphicon glyphicon-search">
+						<input type="hidden" name="groupno" value="<%=group.getGroupNo() %>">
 					</form>
 				</div>
 				<hr id="fileboxline">
@@ -446,9 +448,9 @@
 				
 										for(var j in json.list){
 											value2 += "<li><a href='#category" + json.list[j].categoryno +"' aria-controls='category" +json.list[j].categoryno+ "' role='tab'"+
-													"data-toggle='tab'>"+ decodeURIComponent(json.list[j].cname) + "</a></li>";
+													"data-toggle='tab' id='tab'>"+ decodeURIComponent(json.list[j].cname) + "</a></li>";
 										}
-										value2 += "<li><a href='#settings' aria-controls='settings' role='tab' data-toggle='tab'><span class='glyphicon glyphicon-cog'"+
+										value2 += "<li><a href='#settings' aria-controls='settings' role='tab' id='tab' data-toggle='tab'><span class='glyphicon glyphicon-cog'"+
 										"aria-hidden='true'></span></a></li>";
 										$("#nav-ul").html(value2);
 									},
@@ -495,6 +497,31 @@
 									select();
 									return true;
 								}
+							}
+							
+							function filesearch(){
+								var groupno = "<%= group.getGroupNo() %>";
+								var keyword = $('#search-input').val();
+								$.ajax({
+									url: "/studyhub/sharefilesearch",
+									data: { keyword: keyword, groupno: groupno },
+									type: "get",
+									dataType: "json",
+									success: function(data){
+										var json = JSON.parse(JSON.stringify(data));
+										var values = "";
+										for(var i in json.list){
+											values += "<div class='filebox'><span id='title'><a"+ 
+											"href='/studyhub/sharefiledetail?sfno="+json.list[i].fileNo+"'>"+
+											decodeURIComponent(json.list[i].title)+"</a></span><hr><h6>"+decodeURIComponent(json.list[i].userName)+"</h6>"+
+										"<h6>"+ json.list[i].uploadDate+"| 다운로드수:"+ json.list[i].downloadCount+"</h6><h6 id='filename'>"+
+										decodeURIComponent(json.list[i].fileName)+"</h6><h6><a "+
+											"href='/studyhub/sharefiledown?ofile="+decodeURIComponent(json.list[i].fileName)+"&rfile="+decodeURIComponent(json.list[i].renameFileName)+
+											"'><button id='download' onclick='download();'>download</button></a></h6></div>";
+										}
+										$(".fileboxes").html(values);
+									}
+								});
 							}
 							
 							
