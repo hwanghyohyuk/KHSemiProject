@@ -47,7 +47,7 @@
 		<hr>
 		<div class="col-sm-offset-2 col-sm-10">
 				<%
-					if (user.getUserNo() == gNotice.getUploader()) {
+					if (user.getUserNo() == gNotice.getUploader()||group.getAuthorityNo() == 2) {
 				%>
 				<a class="btn btn-primary main-back pull-right"
 					href="javascript:checkDelete(<%=gNotice.getNoticeNo()%>)">삭제</a>

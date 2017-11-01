@@ -94,7 +94,9 @@
 				<% } %>
 				</div>
 				<!-- /메인 컨텐츠 -->
+				<% if(group.getAuthorityNo() == 2){ %>
 				<button onclick="insertPage();" class="btn btn-info" id="btns">글쓰기</button>
+				<%} %>
 			</div>
 		</div>
 	</div>
