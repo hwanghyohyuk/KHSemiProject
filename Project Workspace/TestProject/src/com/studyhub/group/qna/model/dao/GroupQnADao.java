@@ -225,7 +225,7 @@ public class GroupQnADao {
 		ResultSet rset = null;
 
 		try {
-			for (int i = 0; i < groupnolist.size(); i++) {
+			for (int i = groupnolist.size() - 1; i >= 0; i--) {
 				GQNA gq = null;
 
 				String query = "select g_qna_no, title, content, to_char(upload_date, 'yyyyMMdd') as str_date, user_name, access_no, group_no, uploader "
