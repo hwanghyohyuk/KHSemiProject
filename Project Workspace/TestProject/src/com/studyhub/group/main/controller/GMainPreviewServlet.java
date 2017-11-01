@@ -42,13 +42,18 @@ public class GMainPreviewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
+		RequestDispatcher view = null;
 		
+		if(request.getParameter("user_no")==null){
+			view = request.getRequestDispatcher("/views/main/Main.jsp");
+			view.forward(request, response);
+		}
 		int group_no = Integer.parseInt(request.getParameter("group_no"));
 		int reset = Integer.parseInt(request.getParameter("reset"));
 		int user_no = Integer.parseInt(request.getParameter("user_no"));
 		
+		
 		Group group = null;
-		RequestDispatcher view = null;
 		if(reset == 1){
 			group = new GMainService().SelectGroupMain(group_no);
 			JSONObject json = new JSONObject();

@@ -40,7 +40,7 @@ public class FindPwdProcessServlet extends HttpServlet implements CryptTemplate 
 		String userName = request.getParameter("name");
 		String userPwd = request.getParameter("pwd");
 		String newPwd = null;
-		
+		System.out.println(userPwd);
 		int result=0;
 		
 		String page = request.getParameter("page");
@@ -57,6 +57,7 @@ public class FindPwdProcessServlet extends HttpServlet implements CryptTemplate 
 				us = new UserService();
 				result = us.checkPwd(userEmail,userName,encryptPwd);	
 				PrintWriter pw = response.getWriter();
+				System.out.println(result);
 				if (result > 0) {
 					pw.println("1");//기존 비밀번호와같음
 					pw.flush();
