@@ -93,8 +93,9 @@ public class GCreateServlet extends HttpServlet {
 				category_no = 8;
 		}
 
+		
 		int groupon = 2;
-		if (mrequest.getParameter("group_on") != null)
+		if (mrequest.getParameter("group_on") == "on")
 			groupon = 1;
 
 		String location = "";
