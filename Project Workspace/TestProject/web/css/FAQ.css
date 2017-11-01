@@ -25,13 +25,19 @@
 #service-text{
 	text-align: center;
 }
+#notice-text{
+	width: 100vw;
+	display: block;
+}
 .notice {
 	height: 5vh;
+	width: 100vw;
 	margin: 0 auto;
 	background-color: #f7f7f7;
 	text-align: center;
 	line-height: 6vh;
 	margin-bottom: 3vh;
+	margin-top: 2vh;
 }
 
 .services{
