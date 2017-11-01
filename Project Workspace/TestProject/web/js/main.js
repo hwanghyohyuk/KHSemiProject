@@ -135,8 +135,8 @@ function mygrouplist(userno) {
 						$(".RollDivG").css("width","64%");
 						$(".sliderG").css("margin","0 8% 5% 8%");
 					}else if(json.list.length>1){
-						$(".RollDivG").css("width","40%");
-						$(".sliderG").css("margin","0 18% 5% 18%");
+						$(".RollDivG").css("width","46%");
+						$(".sliderG").css("margin","0 24% 5% 18%");
 					}else if(json.list.length>0){
 						$(".RollDivG").css("width","20%");
 						$(".sliderG").css("margin","0 28% 5% 28%");
