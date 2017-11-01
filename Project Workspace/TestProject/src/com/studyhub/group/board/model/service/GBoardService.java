@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.studyhub.common.vo.GBComment;
 import com.studyhub.common.vo.GBoard;
 import com.studyhub.group.board.model.dao.GBoardDao;
+import com.studyhub.main.qna.model.dao.QnADao;
 
 public class GBoardService {
 
@@ -56,7 +57,16 @@ public class GBoardService {
 		close(con);
 		return result;
 	}
-
+	public void updateReadCount(int no){
+		Connection con = getConnection();
+		int result = new QnADao().updateReadCount(con, no);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		
+	}
 	public int getListCount() {
 		Connection con = getConnection();
 		gbDao = new GBoardDao();

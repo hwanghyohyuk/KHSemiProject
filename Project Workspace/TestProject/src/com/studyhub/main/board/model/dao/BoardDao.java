@@ -287,6 +287,7 @@ public class BoardDao {
 					g.setGroupName(rset.getString("group_name"));
 
 					list.add(g);
+					System.out.println("g : "+g);
 				}
 			}else{
 			}

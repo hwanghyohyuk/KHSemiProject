@@ -252,6 +252,8 @@
 	</div>
 </nav>
 
+<script type="text/javascript" src='/studyhub/js/studysearch.js'></script>
+
 <!-- Modal -->
 <div class="modal fade bs-example-modal-lg" id="seachfilter"
 	tabindex="-1" role="dialog" aria-labelledby="seachfilterLabel"
@@ -272,16 +274,15 @@
 							<div class="form-group">
 								<label for="rule" class="col-sm-3 control-label">스터디 방식</label>
 								<div class="col-sm-3">
-									<select class="form-control">
-										<option>온라인 스터디</option>
-										<option>오프라인 스터디</option>
+									<select class="form-control" id="attrlist" name="attrlist">
+										<option value="1">온라인 스터디</option>
+										<option value="2">오프라인 스터디</option>
 									</select>
 								</div>
 								<label for="rule" class="col-sm-3 control-label">스터디 분야</label>
 								<div class="col-sm-3">
-									<select class="form-control">
-										<option>1</option>
-										<option>2</option>
+									<select class="form-control" id="catelist" name="catelist">
+										<!-- ajax -->
 									</select>
 								</div>
 							</div>
@@ -289,17 +290,30 @@
 							<div class="form-group">
 								<label for="rule" class="col-sm-3 control-label">스터디 지역</label>
 								<div class="col-sm-3">
-									<select class="form-control">
-										<option>1</option>
-										<option>2</option>
+									<select class="form-control" id="location" name="location">
+										<option>서울</option>
+										<option>경기</option>
+										<option>강원</option>
+										<option>충북</option>
+										<option>충남</option>
+										<option>전북</option>
+										<option>전남</option>
+										<option>경북</option>
+										<option>경남</option>
+										<option>제주</option>
 									</select>
 								</div>
-								<label for="rule" class="col-sm-3 control-label">상세 지역</label>
-								<div class="col-sm-3">
-									<select class="form-control">
-										<option>1</option>
-										<option>2</option>
-									</select>
+								<div class="col-sm-6">
+									<div id="imaginary_container">
+										<div class="input-group stylish-input-group">
+											<input type="text" class="form-control" placeholder="Search"
+												name='keyword'> <span class="input-group-addon">
+												<button>
+													<span class="glyphicon glyphicon-search"></span>
+												</button>
+											</span>
+										</div>
+									</div>
 								</div>
 							</div>
 						</form>

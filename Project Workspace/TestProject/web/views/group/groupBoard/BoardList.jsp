@@ -20,16 +20,13 @@
 <%@ include file="/views/include/common/head.jsp"%>
 
 <!--자바스크립트 및 CSS-->
-<style>
-#btns {
-	float: right;
-}
-</style>
 <script type="text/javascript">
 	function insertPage() {
 		location.href = "/studyhub/views/group/groupBoard/BoardWriteForm.jsp"
 	}
 </script>
+<link rel="stylesheet" type="text/css" href="/studyhub/css/board_list.css">
+<link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
 
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
@@ -40,12 +37,12 @@
 <!-- 메인 컨텐츠 -->
 <body>
 	<div class="container">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
+		<div class="row" id="list-layout">
+			<div class="col-md-8 col-md-offset-2 col-sm-10 col-xs-9 col-xs-offset-1">
 				<h2>자유게시판</h2>
 				<div class="table-area">
 					<table class="table table-striped" align="center" width="600">
-						<tr align="center">
+						<tr id="attr">
 							<td>번호</td>
 							<td>제목</td>
 							<td>작성자</td>
@@ -118,7 +115,7 @@
 						</div>
 					</div>
 					<!-- /메인 컨텐츠 -->
-					<button onclick="insertPage();" class="btn btn-info">글쓰기</button>
+					<button onclick="insertPage();" class="btn btn-info" id="btns">글쓰기</button>
 				</div>
 			</div>
 		</div>

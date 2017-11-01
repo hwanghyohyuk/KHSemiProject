@@ -25,6 +25,8 @@ GBoard gBoard = (GBoard)request.getAttribute("gBoard");
 	margin-top: 8vh;
 }
 </style>
+
+<link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">s
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->

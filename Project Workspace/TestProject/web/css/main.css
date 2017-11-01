@@ -1,5 +1,4 @@
 ﻿@CHARSET "UTF-8";
-
 * {
 	margin: 0px;
 	padding: 0px;
@@ -96,14 +95,14 @@
 
 .RollDivG {
 	width: 64%;
-	height: 260px;
+	height: 240px;
 	overflow: hidden;
 	float: left;
 }
 
 .RollDivG>div {
 	overflow: hidden;
-	height: 260px;
+	height: 240px;
 	width: 150%;
 }
 
@@ -153,22 +152,10 @@
 	right: 26vw;
 }
 
-/*FAQ_detail*/
-#main-text {
-	color: #001429;
-	margin-top: 10vh;
-}
 
-#move {
-	text-align: center;
-}
 
-#btns {
-	float: right;
-}
-#btns:hover{
-	background-color: #001429;
-}
+
+
 	
 
 

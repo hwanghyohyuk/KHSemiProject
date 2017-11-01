@@ -104,6 +104,8 @@ function boardlist() {
 						$(".sliderB").css("margin","0 28% 5% 28%");
 					}else{
 						$(".RollDivB").html("모집중인 그룹이 없습니다.");
+						$(".RollDivB").css("text-align","center");
+						$(".RollDivB").css("line-height","240px");
 						$(".sliderB").css("margin","0 8% 5% 8%");
 					}
 					for ( var i in json.list) {
@@ -143,7 +145,10 @@ function mygrouplist(userno) {
 						$(".RollDivG").css("width","20%");
 						$(".sliderG").css("margin","0 28% 5% 28%");
 					}else{
-						$(".RollDivG").html("가입된 그룹이 없습니다.");
+						$(".RollDivG").html("가입된 그룹이 없습니다.<br><a href='#' data-toggle='modal' data-target='#seachfilter'>스터디 그룹 찾기</a>");
+						$(".RollDivG").css("text-align","center");
+						$(".RollDivG").css("line-height","50px");
+						$(".RollDivG").css("padding-top","80px");
 						$(".sliderG").css("margin","0 8% 5% 8%");
 					}
 					for ( var i in json.list) {
