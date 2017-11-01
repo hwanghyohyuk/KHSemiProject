@@ -42,6 +42,7 @@ public class GBoardViewServlet extends HttpServlet {
 
 		gBoardService = new GBoardService();
 		gBoard = gBoardService.selectGBoard(no);
+		gBoardService.updateReadCount(no);
 		RequestDispatcher view = null;
 		if(gBoard != null){
 			view = request.getRequestDispatcher("views/group/groupBoard/BoardDetail.jsp");

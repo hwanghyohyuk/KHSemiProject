@@ -121,7 +121,7 @@ public class GBoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "update tb_g_board set readcount = readcount+1 where g_board_no = ?";
+		String query = "update tb_g_board set readcount = readcount + 1 where g_board_no = ?";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -170,7 +170,7 @@ public class GBoardDao {
 		ResultSet rset = null;
 
 		// currentPage 에 해당되는 목록만 조회
-		String query = "select rownum, g_board_no, title, content, uploader, upload_date, user_name, access_no, access_right "
+		String query = "select rownum, g_board_no, title, content, uploader, upload_date, user_name, access_no, readcount "
 				+ "from(select * from tb_g_board " + "join tb_user on(tb_user.user_no=tb_g_board.uploader) "
 				+ "join tb_access using(access_no) where group_no = ? order by g_board_no asc) "
 				+ "where rownum >= ? and rownum<= ? order by rownum desc";
@@ -200,7 +200,7 @@ public class GBoardDao {
 					gb.setUploaderName(rset.getString("user_name"));
 					gb.setUploadDate(rset.getDate("upload_date"));
 					gb.setAccessNo(rset.getInt("access_no"));
-					gb.setAccessRight(rset.getString("access_right"));
+					gb.setReadCount(rset.getInt("readcount"));
 
 					list.add(gb);
 				}

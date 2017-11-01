@@ -59,7 +59,7 @@ public class GBoardService {
 	}
 	public void updateReadCount(int no){
 		Connection con = getConnection();
-		int result = new QnADao().updateReadCount(con, no);
+		int result = new GBoardDao().updateReadCount(con, no);
 		if(result>0)
 			commit(con);
 		else
