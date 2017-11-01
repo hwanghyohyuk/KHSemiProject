@@ -83,7 +83,8 @@
 					<th>마감일</th>					
 					<th>상태</th>
 					<th>지역</th>				
-					<th>스터디방식</th>					
+					<th>스터디방식</th>		
+					<th>회원수</th>					
 				</tr>
 			</thead>
 			<tbody>
@@ -91,7 +92,7 @@
 				for (Board b : list) {
 			%>			
 				<tr>
-					<td><img id="groupimg" src="/imamges/groupimg/<%=b.getgImgRename()%>" style></td>
+					<td><img id="groupimg" src="/studyhub/images/groupimg/<%=b.getgImgRename()%>"></td>
 					<td><%=b.getCategoryName() %></td>
 					<td><%=b.getGroupName() %></td>
 					<td>
@@ -108,6 +109,7 @@
 					<td><%=b.getStatus() %></td>
 					<td><%=b.getLocation() %></td>
 					<td><%=b.getAttributeName() %></td>
+					<td><%=b.getMemberCount() %></td>
 				</tr>			
 			<%}%>
 			</tbody>

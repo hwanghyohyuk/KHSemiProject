@@ -78,8 +78,10 @@ public class BoardDao {
 					b.setCategoryName(rset.getString("category_name"));
 					b.setAttributeName(rset.getString("attribute_name"));
 					b.setgImgRename(rset.getString("g_img_rename"));
-
+					b.setMemberCount(rset.getInt("memberCount"));
+					
 					list.add(b);
+					
 				}
 			}
 
