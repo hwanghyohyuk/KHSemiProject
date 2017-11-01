@@ -62,6 +62,16 @@ public class User implements java.io.Serializable {
 		this.deleteDate = deleteDate;
 	}
 
+
+
+	public User(String email, String userName, String userPwd, String phone) {
+		super();
+		this.email = email;
+		this.userName = userName;
+		this.userPwd = userPwd;
+		this.phone = phone;
+	}
+
 	public int getUserNo() {
 		return userNo;
 	}
