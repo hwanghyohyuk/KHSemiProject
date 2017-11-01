@@ -309,7 +309,7 @@
 	// 스크롤 페이징
 	$(window).scroll(function(){
 		if($(window).scrollTop() >= $(document).height() - $(window).height()){
-			location.href = "#tail"+endpage;
+			location.href = "#tail"+endpage; // 스크롤 스파이
 			selectQnA(startpage,endpage);
 			startpage += 10;
 			endpage += 10;
