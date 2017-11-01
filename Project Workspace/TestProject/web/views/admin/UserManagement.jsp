@@ -35,7 +35,7 @@
 			<h2>회원관리</h2>			
 			
 			<div class="top-area">
-				<form action="/studyhub/qnasearch" method="post" class="admin-search">
+				<form action="/studyhub/usermanagementsearch" method="post" class="admin-search">
 					<select id="user-search" name="search-by">
 						<option value="user_name">이름</option>
 						<option value="email">이메일</option>
