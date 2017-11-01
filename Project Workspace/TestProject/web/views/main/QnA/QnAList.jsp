@@ -35,10 +35,10 @@
 <!-- 메인 컨텐츠 -->
 
 
-
+<div class="container">
 	<div class="row" id="list-layout">
 		<div
-			class="col-md-8 col-md-offset-2 col-sm-10 col-xs-9 col-xs-offset-1">
+			class="col-md-10 col-lg-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-xs-9 col-xs-offset-1">
 			<h2><a href="/studyhub/qnalist" id="qnatitle">Q&A게시판</a></h2>
 
 			<div class="search">
@@ -82,7 +82,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>
 	<!--페이지 끝-->

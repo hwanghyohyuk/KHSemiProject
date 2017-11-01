@@ -6,6 +6,16 @@ font-size:11pt;
 font-weight:600;
 }
 */
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  flex: 1 0 auto;
+}
 #nav-bar {
 	height: 5vh;
 }

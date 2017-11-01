@@ -33,8 +33,8 @@
 
 <!-- 메인 컨텐츠 -->
 
-
-<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+<div class="container">
+<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12" id="fswrapper">
 		<!-- Tab -->
 		<div class="category-tab">
 			<ul class="nav nav-tabs" id="nav-ul">
@@ -95,6 +95,7 @@
 							class="glyphicon glyphicon-search">
 					</form>
 				</div>
+				<hr>
 				<!-- file boxes  -->
 				<div class="fileboxes">
 					<div class="filebox">
@@ -507,6 +508,7 @@
 		</div>
 		<!-- </div> -->
 
+</div>
 </div>
 <!-- /메인 컨텐츠 -->
 

@@ -138,14 +138,12 @@ public class UserDao implements CryptTemplate {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		AesUtil util = new AesUtil(KEY_SIZE, ITERATION_COUNT);
-		String encryptPwd = util.encrypt(SALT, IV, PASSPHRASE, userPwd);
 		System.out.println(userEmail+userName+userPwd);
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userEmail);
 			pstmt.setString(2, userName);
-			pstmt.setString(3, encryptPwd);
+			pstmt.setString(3, userPwd);
 			rset = pstmt.executeQuery();
 
 			if (rset.next())
