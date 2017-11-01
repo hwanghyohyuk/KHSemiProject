@@ -13,12 +13,28 @@
 <!--자바스크립트 및 CSS-->
 <link rel="stylesheet" type="text/css" href="/studyhub/css/start.css">
 <script type="text/javascript" src="/studyhub/js/signup.js"></script>
-
-
+<script type="text/javascript" src="/studyhub/js/fb/all.js"></script>
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
-
+<script type="text/javascript">
+window.fbAsyncInit = function() {   //페이지 로딩시 기본적으로 fb 세팅을 하는겁니다
+  FB.init({   //기본 init 
+   appId  : '/*사용하는 페북 앱의 id값 넣는곳... 이건 다른곳 찾아봐도 자세하게 나옵니다.*/', 
+   status : true, // check login status
+   cookie : true, // enable cookies to allow the server to access the session
+   xfbml  : true, // parse XFBML
+   oauth  : true // enable OAuth 2.0   기본세팅입니다. 그냥 따라 쓰면 됩니다. 
+  <!-- API가 번전업이 됬다는 소리입니다. 꼭 넣어 주세요 -->
+ });
+ };
+ (function(d){
+    var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    d.getElementsByTagName('head')[0].appendChild(js);
+  }(document));   //기본적으로 페이스북과 연동하는 세팅 입니다. 같이 써주면 됩니다.
+</script>
 <!-- 메인 컨텐츠 -->
 <section class="container1">
 	<div class="row">
