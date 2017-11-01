@@ -57,9 +57,7 @@ public class GBoardCommentSelectServlet extends HttpServlet {
 			
 			jarr.add(job);
 						
-		}
-		System.out.println("\n코멘트 셀렉트 서블릿 : list : "+list +", gboardno : " + gboardno);
-		
+		}		
 		json.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
