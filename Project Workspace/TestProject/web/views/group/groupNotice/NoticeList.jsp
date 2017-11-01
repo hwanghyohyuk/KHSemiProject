@@ -82,7 +82,7 @@
 					<a class="btn btn-default"><%=p %></a>
 				
 				<% }else{ %> 
-					<a class="btn btn-default" href="/studyhub/gnoticepreview?groupno=<%= p %>"><%=p %></a>
+					<a class="btn btn-default" href="/studyhub/gnoticepreview?groupno=<%=p %>"><%=p %></a>
 				<% }} %>
 				<%-- 현재 페이지 다음 페이지에 대한 처리 --%>
 				<% if(currentPage >= maxPage){ %>
