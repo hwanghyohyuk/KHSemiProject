@@ -36,6 +36,7 @@ public class GBoardDao {
 				gBoard.setUploader(rset.getInt("uploader"));
 				gBoard.setAccessNo(rset.getInt("access_no"));
 				gBoard.setGroupNo(rset.getInt("group_no"));
+				gBoard.setReadCount(rset.getInt("readcount"));
 
 			}
 

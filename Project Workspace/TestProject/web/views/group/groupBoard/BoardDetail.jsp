@@ -33,6 +33,11 @@
 	<hr id="first-line">
 	<div class="head-text">
 		<h3 id="title-text"><%=gBoard.getTitle()%></h3>
+		<div id="attr-text">
+				<span>조회수 <%=gBoard.getReadCount() %> |</span>
+				<span>작성날짜 <%=gBoard.getUploadDate() %> |</span>
+				<span>작성자 <%=gBoard.getUploaderName() %></span>
+				</div>
 	</div>
 	
 			<hr id="second-line">
