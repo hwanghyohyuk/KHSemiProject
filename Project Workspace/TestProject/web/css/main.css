@@ -94,7 +94,7 @@
 }
 
 .RollDivG {
-	width: 64%;
+	width: 84%;
 	height: 240px;
 	overflow: hidden;
 	float: left;
@@ -103,7 +103,7 @@
 .RollDivG>div {
 	overflow: hidden;
 	height: 240px;
-	width: 150%;
+	width: 200%;
 }
 
 .RollDivG>div>a {
