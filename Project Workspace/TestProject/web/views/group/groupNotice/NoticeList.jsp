@@ -82,7 +82,7 @@
 					<a class="btn btn-default"><%=p %></a>
 				
 				<% }else{ %> 
-					<a class="btn btn-default" href="/studyhub/gnoticepreview?groupno=<%= p %>"><%=p %></a>
+					<a class="btn btn-default" href="/studyhub/gnoticepreview?groupno=<%=p %>"><%=p %></a>
 				<% }} %>
 				<%-- 현재 페이지 다음 페이지에 대한 처리 --%>
 				<% if(currentPage >= maxPage){ %>
@@ -94,7 +94,9 @@
 				<% } %>
 				</div>
 				<!-- /메인 컨텐츠 -->
+				<% if(group.getAuthorityNo() == 2){ %>
 				<button onclick="insertPage();" class="btn btn-info" id="btns">글쓰기</button>
+				<%} %>
 			</div>
 		</div>
 	</div>
