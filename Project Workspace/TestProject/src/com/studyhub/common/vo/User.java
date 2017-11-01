@@ -19,12 +19,13 @@ public class User implements java.io.Serializable {
 		super();
 	}
 
-	public User(String email, String userName, String userPwd, String phone) {
+	public User(String email, String userName, String userPwd, String phone, int userState) {
 		super();
 		this.email = email;
 		this.userName = userName;
 		this.userPwd = userPwd;
 		this.phone = phone;
+		this.userState = userState;
 	}
 	
 	
@@ -59,6 +60,16 @@ public class User implements java.io.Serializable {
 		this.userState = userState;
 		this.pwdState = pwdState;
 		this.deleteDate = deleteDate;
+	}
+
+
+
+	public User(String email, String userName, String userPwd, String phone) {
+		super();
+		this.email = email;
+		this.userName = userName;
+		this.userPwd = userPwd;
+		this.phone = phone;
 	}
 
 	public int getUserNo() {
