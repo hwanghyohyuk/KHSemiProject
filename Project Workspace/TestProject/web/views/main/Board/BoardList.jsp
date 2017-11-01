@@ -43,13 +43,17 @@
 	color: white;
 	box-sizing: border-box;
 	margin-top: -70px;
-	height: 40px;
+	height: 75px;
 	width: 200px;
 }
 
-#g-text {
+#g-text,#g-title {
 	z-index: 100;
 	color: white;
+	text-align: center;
+}
+#g-text{
+	margin-top: 15px;
 }
 </style>
 
@@ -105,9 +109,8 @@
 				src="/studyhub/images/groupimg/<%=b.getgImgRename()%>"
 				class="img-rounded">
 				<div id="gname">
-					<p id="g-text"><%=b.getGroupName()%>
-						|
-						<%=b.getTitle()%></p>
+					<p id="g-text"><%=b.getGroupName()%></p>
+					<p id="g-title"><%=b.getTitle()%></p>
 				</div>
 			</a>
 		</div>
