@@ -84,12 +84,12 @@
 			}else{
 				var comment = $("#comment-write").val();
 				var uploader = $("#uploader").val();
-				var gnoticeno = $("#gboardno").val();
+				var gboardno = $("#gboardno").val();
 				
 				var queryString = { "uploader": uploader, "gboardno": gboardno, "comment": comment};
 				
 				$.ajax({
-					url: "/studyhub/gboardcommentinsert",
+					url: "/studyhub/gbcommentinsert",
 					data: queryString,
 					type: "get",
 					dataType: "json"
@@ -101,9 +101,9 @@
 		}	
 		
 		function select(){
-			var gnoticeno = "<%=gBoard.getgBoardNo()%>";
+			var gboardno = "<%=gBoard.getgBoardNo()%>";
 					$.ajax({
-								url : "/studyhub/gboardcommentselect",
+								url : "/studyhub/gbcommentselect",
 								data : {
 									gboardno : gboardno
 								},
@@ -141,7 +141,7 @@
 				function deleteC() {
 					var commentno = $("#commentno").val();
 					$.ajax({
-						url : "/studyhub/gboardcommentdelete",
+						url : "/studyhub/gbcommentdelete",
 						data : {
 							commentno : commentno
 						},

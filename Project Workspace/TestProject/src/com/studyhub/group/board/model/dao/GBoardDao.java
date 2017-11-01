@@ -36,7 +36,7 @@ public class GBoardDao {
 				gBoard.setUploader(rset.getInt("uploader"));
 				gBoard.setAccessNo(rset.getInt("access_no"));
 				gBoard.setGroupNo(rset.getInt("group_no"));
-				
+
 			}
 
 		} catch (Exception e) {
@@ -116,26 +116,28 @@ public class GBoardDao {
 		System.out.println(result);
 		return result;
 	}
-	public int updateReadCount(Connection con, int no){
+
+	public int updateReadCount(Connection con, int no) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		
+
 		String query = "update tb_g_board set readcount = readcount+1 where g_board_no = ?";
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, no);
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
+
 	public int getListCount(Connection con) {
 		// 총 게시글 갯수 조회용
 		int result = 0;
@@ -214,7 +216,6 @@ public class GBoardDao {
 		return list;
 	}
 
-	
 	public int deleteComment(Connection con, int cno) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -236,18 +237,17 @@ public class GBoardDao {
 		return result;
 	}
 
-	public int insertComment(Connection con, int gboardno,  int uploader, String content) {
+	public int insertComment(Connection con, int gboardno, int uploader, String comment) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "insert into tb_gb_comment values ( " +
-						"(select max(comment_no)+1 from tb_gb_comment), " +
-						"?, ?, sysdate, ?, 1)";
+		String query = "insert into tb_gb_comment values ( " + "(select max(comment_no)+1 from tb_gb_comment), "
+				+ "?, ?, sysdate, ?, 1)";
 
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, gboardno);
-			pstmt.setString(2, content);
+			pstmt.setString(2, comment);
 			pstmt.setInt(3, uploader);
 
 			result = pstmt.executeUpdate();
@@ -265,7 +265,9 @@ public class GBoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from tb_gb_comment where comment_no = ?";
+		String query = "select comment_no, g_board_no, content, to_char(upload_date, 'yyyy-MM-dd') as str_date,user_name, uploader"
+				+ " from tb_gb_comment " + "join tb_user on (tb_gb_comment.uploader = tb_user.user_no) "
+				+ "where g_board_no = ? order by comment_no desc";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -279,8 +281,9 @@ public class GBoardDao {
 					gbc.setCommentNo(rset.getInt("comment_no"));
 					gbc.setgBoardNo(rset.getInt("g_board_no"));
 					gbc.setContent(rset.getString("content"));
-					gbc.setUploadDate(rset.getDate("uploade_date"));
+					gbc.setStrUploadDate(rset.getString("str_date"));
 					gbc.setUploader(rset.getInt("uploader"));
+					gbc.setUploaderName(rset.getString("user_name"));
 
 					list.add(gbc);
 				}

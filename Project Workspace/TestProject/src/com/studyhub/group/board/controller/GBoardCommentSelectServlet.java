@@ -43,7 +43,6 @@ public class GBoardCommentSelectServlet extends HttpServlet {
 
 		int gboardno = Integer.parseInt(request.getParameter("gboardno"));
 		ArrayList<GBComment> list = new GBoardService().selectcomment(gboardno);
-		System.out.println(gboardno);
 		JSONObject json = new JSONObject();
 		JSONArray jarr = new JSONArray();
 		
@@ -59,6 +58,8 @@ public class GBoardCommentSelectServlet extends HttpServlet {
 			jarr.add(job);
 						
 		}
+		System.out.println("\n코멘트 셀렉트 서블릿 : list : "+list +", gboardno : " + gboardno);
+		
 		json.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();

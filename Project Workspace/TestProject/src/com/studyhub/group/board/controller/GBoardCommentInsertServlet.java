@@ -39,7 +39,7 @@ public class GBoardCommentInsertServlet extends HttpServlet {
 		int gboardno = Integer.parseInt(request.getParameter("gboardno"));
 		String comment = request.getParameter("comment");
 		int uploader = Integer.parseInt(request.getParameter("uploader"));
-		if(new GNoticeService().insertComment(gboardno, uploader, comment)>0 ){
+		if(new GBoardService().insertComment(gboardno, uploader, comment)>0 ){
 			response.sendRedirect("views/group/groupBoard/BoardDetail.jsp");
 		}
 	}
