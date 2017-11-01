@@ -4,15 +4,32 @@
 	list-style: none;
 	padding-left: 0;
 }
-
+#nav_text_group{
+	color: white;
+}
 #nav_text {
 	color: white;
-	font-weight: bold;
+	font-size: 1.5rem;
+	display: inline-block;
+    margin-left: 0.6vw;
+}
+
+.nav > li > a:hover{
+	background: #001429 !important;
 }
 
 #nav_li {
-	text-align: center;
+	margin-top: 17px;
+	height: 50px;
+}
+#nav_li:hover{
+	background: #001429;
+}
+
+#nav_li_top{
 	margin-top: 30px;
+	text-align: center;
+	margin-bottom: 20px;
 }
 
 #nav_menu {
@@ -21,10 +38,12 @@
 	font-size: 15pt;
 	float: left;
 	left: 0%;
-	top: 0px;;
-	text-align: center;
+	top: 0px;
 	height: 87vh;
 	padding-top: 0px;
+	position: fixed;
+    margin-top: 7vh;
+    width: 150px;
 }
 
 

@@ -1,11 +1,22 @@
 package com.studyhub.main.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.studyhub.common.vo.Category;
+import com.studyhub.main.model.service.MainService;
+
 
 /**
  * Servlet implementation class AttributeListServlet
@@ -27,7 +38,26 @@ public class CategoryListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ArrayList<Category> list = new MainService().selectCategoryList();
+
+		// 전송할 최종 json 객체
+		JSONObject json = new JSONObject();
+		JSONArray jarr = new JSONArray();
+
+		for (Category c : list) {
+			JSONObject job = new JSONObject();
+			job.put("category_no", c.getCategoryNo());
+			job.put("category_name", URLEncoder.encode(c.getCategoryName(), "UTF-8"));
+
+			jarr.add(job);
+		}
+
+		json.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(json.toJSONString());
+		out.flush();
+		out.close();
 	}
 
 	/**

@@ -195,6 +195,45 @@
 					}
 				%>
 			</div>
+			<!-- 썸네일 스타일 테스트중  -->
+			<style>
+			.thumbnail{
+				display: inline-block;
+			}
+			#grouppic{
+				width: 200px;
+				height: 200px;
+			}
+			#gname{
+				position: absolute;
+			    background: rgba(0,0,0,0.6);
+			    color: white;
+			    box-sizing: border-box;
+				margin-top: -70px;
+				height: 40px;
+				width: 200px;
+				
+			}
+			#g-text{
+				z-index: 100;
+				color: white;
+			}
+			
+			</style>
+			<div class="container thumbnails">
+			<%
+				if(list.size()>0){
+				for (Board b : list) {
+			%>
+				<div class="thumbnail">
+					<img id="grouppic" src="/imamges/groupimg/<%=b.getgImgRename()%>" class="img-rounded">
+					<div id="gname"><p id="g-text"><%=b.getGroupName()%> | <%=b.getCategoryName()%></p></div>
+						
+			<% }} %>
+			</div>
+			</div>
+			
+			
 		</div>
 
 	</div>

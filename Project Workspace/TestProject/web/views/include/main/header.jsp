@@ -253,7 +253,46 @@
 </nav>
 
 <script type="text/javascript" src='/studyhub/js/studysearch.js'></script>
-
+<script type="text/javascript">
+function studySearch() {
+	var userNo = <%=(user!=null)?user.getUserNo():"''"%>;
+	var attrNo = $("#attrlist").val();
+	var cateNo = $("#catelist").val();
+	var location = $("#location").val();
+	var keyword = $("#keyword").val();
+	$.ajax({
+		url : "/studyhub/grouplist",
+		data : {
+			attrNo : attrNo,
+			cateNo : cateNo,
+			location : location,
+			keyword : keyword,			
+		},
+		type : "post",
+		datatype : "json",
+		success : function(data) {
+			var json = JSON.parse(JSON.stringify(data));
+			var values = "";
+			if (json.list.length > 0) {
+				for ( var i in json.list) {
+					if(userNo!=''){
+						values+="<div class='col-md-6' style='margin-bottom:10px'><a href='/studyhub/gmainpreview?group_no="+json.list[i].group_no+"&reset=0&user_no="+userNo+"'>"
+								+"<img src='/imamges/groupimg/'"+decodeURIComponent(json.list[i].g_img_rename)+"' style='width:80px;height: 80px;' >"+decodeURIComponent(json.list[i].group_name)+"</a></div>"
+					}else{
+						values+="<div class='col-md-6' style='margin-bottom:10px'>"
+						+"<a href='/studyhub/main'>"
+						+"<img src='/imamges/groupimg/'"+decodeURIComponent(json.list[i].g_img_rename)+"' style='width:80px;height: 80px;' >"
+						+decodeURIComponent(json.list[i].group_name)+"</a></div>";
+						}
+					}
+				} else {
+					values += "그룹 없음";
+					}
+			$("#result").html(values);
+		}
+	});
+}
+</script>
 <!-- Modal -->
 <div class="modal fade bs-example-modal-lg" id="seachfilter"
 	tabindex="-1" role="dialog" aria-labelledby="seachfilterLabel"
@@ -268,29 +307,29 @@
 				<h4 class="modal-title" id="seachfilterLabel">스터디 찾기</h4>
 			</div>
 			<div class="modal-body">
-				<div style="display: table; width: 100%">
-					<div style="display: table-cell; vertical-align: middle">
+				<div class="container-fluid">
 						<form class="form-horizontal">
 							<div class="form-group">
 								<label for="rule" class="col-sm-3 control-label">스터디 방식</label>
 								<div class="col-sm-3">
-									<select class="form-control" id="attrlist" name="attrlist">
+									<select class="form-control" id="attrlist" name="attrlist" onchange='studySearch()'>
+										<option value ='0' selected>모든 방식</option>
 										<option value="1">온라인 스터디</option>
 										<option value="2">오프라인 스터디</option>
 									</select>
 								</div>
 								<label for="rule" class="col-sm-3 control-label">스터디 분야</label>
 								<div class="col-sm-3">
-									<select class="form-control" id="catelist" name="catelist">
-										<!-- ajax -->
+									<select class="form-control" id="catelist" name="catelist" onchange='studySearch()'>
+
 									</select>
 								</div>
 							</div>
-
 							<div class="form-group">
 								<label for="rule" class="col-sm-3 control-label">스터디 지역</label>
 								<div class="col-sm-3">
-									<select class="form-control" id="location" name="location">
+									<select class="form-control" id="location" name="location" onchange='studySearch()'>
+										<option value ='0' selected>모든 지역</option>
 										<option>서울</option>
 										<option>경기</option>
 										<option>강원</option>
@@ -307,10 +346,8 @@
 									<div id="imaginary_container">
 										<div class="input-group stylish-input-group">
 											<input type="text" class="form-control" placeholder="Search"
-												name='keyword'> <span class="input-group-addon">
-												<button>
-													<span class="glyphicon glyphicon-search"></span>
-												</button>
+												id='keyword' name='keyword' oninput="studySearch()"> <span class="input-group-addon">
+											<span class="glyphicon glyphicon-search"></span>
 											</span>
 										</div>
 									</div>
@@ -318,10 +355,41 @@
 							</div>
 						</form>
 						<hr>
-						<div>결과도출</div>
+						<div id='result'></div>
+						<script type="text/javascript">
+						$(function() { //모든그룹 불러오기
+							var userNo = <%=(user!=null)?user.getUserNo():"''"%>;
+							$.ajax({
+								url : "/studyhub/grouplist",
+								type : "get",
+								datatype : "json",
+								success : function(data) {
+									var json = JSON.parse(JSON.stringify(data));
+									var values = "";
+									if (json.list.length > 0) {
+										for ( var i in json.list) {
+											if(userNo!=''){
+												values+="<div class='col-md-6' style='margin-bottom:10px'><a href='/studyhub/gmainpreview?group_no="+json.list[i].group_no+"&reset=0&user_no="+userNo+"'>"
+														+"<img src='/imamges/groupimg/'"+decodeURIComponent(json.list[i].g_img_rename)+"' style='width:80px;height: 80px;' >"+decodeURIComponent(json.list[i].group_name)+"</a></div>"
+											}else{
+												values+="<div class='col-md-6' style='margin-bottom:10px'>"
+												+"<a href='/studyhub/main'>"
+												+"<img src='/imamges/groupimg/'"+decodeURIComponent(json.list[i].g_img_rename)+"' style='width:80px;height: 80px;' >"
+												+decodeURIComponent(json.list[i].group_name)+"</a></div>";
+												}
+											}
+										} else {
+											values += "그룹 없음";
+											}
+									$("#result").html(values);
+									}
+							});
+							});
+						
+						
+						</script>
 					</div>
 				</div>
-			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				<!-- <button type="button" class="btn btn-primary">Save changes</button> -->

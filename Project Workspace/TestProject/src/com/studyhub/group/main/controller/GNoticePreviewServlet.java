@@ -63,7 +63,6 @@ public class GNoticePreviewServlet extends HttpServlet {
 				
 		RequestDispatcher view = null;
 		if(list != null){
-			view = request.getRequestDispatcher("views/group/groupNotice/NoticeList.jsp");
 			
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
@@ -71,6 +70,10 @@ public class GNoticePreviewServlet extends HttpServlet {
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listCount", listCount);
+			
+			view = request.getRequestDispatcher("views/group/groupNotice/NoticeList.jsp");
+			
+			
 			System.out.println("\n 프리뷰서블릿 currentPage : " + currentPage + "maxPage : " + maxPage + "startPage : " + startPage + "endPage : " + endPage + "listCount : " + listCount);
 			view.forward(request, response);
 		}else{
