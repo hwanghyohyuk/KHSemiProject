@@ -88,7 +88,7 @@ window.onload = function(){ checkBtnState(<%=senderNo%>,<%=groupNo%>); }
 		<div class="form-group">
 			<label class="col-sm-3 control-label">그룹정보</label>
 			<div class="col-sm-2">
-				<img id="groupimg" src="/imamges/groupimg/<%=board.getgImgRename()%>" class="img-rounded">
+				<img id="groupimg" src="/studyhub/images/groupimg/<%=board.getgImgRename()%>" class="img-rounded">
 			</div>
 			<label class="col-sm-2 control-label">그룹명</label>
 			<div class="col-sm-5">

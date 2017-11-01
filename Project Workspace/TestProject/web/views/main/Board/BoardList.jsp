@@ -92,7 +92,7 @@
 					%>
 					<tr>
 						<td><img id="groupimg"
-							src="/imamges/groupimg/<%=b.getgImgRename()%>"
+							src="/studyhub/images/groupimg/<%=b.getgImgRename()%>"
 							class="img-rounded"></td>
 						<td><%=b.getCategoryName()%></td>
 						<td><%=b.getGroupName()%></td>
@@ -226,7 +226,7 @@
 				for (Board b : list) {
 			%>
 				<div class="thumbnail">
-					<img id="grouppic" src="/imamges/groupimg/<%=b.getgImgRename()%>" class="img-rounded">
+					<img id="grouppic" src="/studyhub/images/groupimg/<%=b.getgImgRename()%>" class="img-rounded">
 					<div id="gname"><p id="g-text"><%=b.getGroupName()%> | <%=b.getCategoryName()%></p></div>
 						
 			<% }} %>
