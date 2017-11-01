@@ -17,7 +17,6 @@
 <script src='/studyhub/js/calendar/moment.min.js'></script>
 <script src='/studyhub/js/calendar/fullcalendar.js'></script>
 <!-- 캘린더 js -->
-<script src="/studyhub/js/bootstrap.min.js"></script>
 <style type="text/css">
 #schedulelist-item {
 	margin-top: 0px;

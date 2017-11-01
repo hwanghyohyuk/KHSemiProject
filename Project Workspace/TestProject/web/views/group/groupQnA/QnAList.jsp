@@ -210,7 +210,7 @@
 		<div class="input-group" data-toggle="tooltip" data-placement="top" title="검색어 입력시 자동으로 데이터를 가져옵니다!">
 			<span class="input-group-addon" id="basic-addon1"> <span
 				class="glyphicon glyphicon-search"></span>
-			</span> <input type="text" class="form-control"	placeholder="<%=user.getUserName()%> 님 검색어를 입력하세요!" id="qnasearch" aria-describedby="basic-addon1" oninput="qnasearch()" onblur="qnashow()">
+			</span> <input type="text" class="form-control"	placeholder="<%=user.getUserName()%> 님 검색어를 입력하세요!" id="qnasearch" aria-describedby="basic-addon1" oninput="qnasearch()">
 		</div>
 	</div>
 
