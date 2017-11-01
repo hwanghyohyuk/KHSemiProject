@@ -38,16 +38,22 @@
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
 <!-- 메인 컨텐츠 -->
-	
-	<div class="col-md-6 col-sm-6 col-sm-offset-3 col-md-offset-3">
+<div class="container">
+	<div class="col-lg-8 col-lg-offset-2 col-md-8 col-sm-10 col-sm-offset-1 col-md-offset-2" id="faqwrapper">
 		<h2 id="main-text"><%=flist.get(0).getFaqCategoryName() %></h2>
 		
 		<% for(FAQ f : flist){ %>
 		<hr>
 		<span><%=f.getTitle() %></span> 
+		
+		<% if(user.getUserNo()==1){ %>
+		
 		<a class="edit" onclick="editFAQ(<%= f.getFaqNo()%>);"><span class="glyphicon glyphicon-pencil"></span></a>
 		<a class="delete" onclick="deleteFAQ(<%= f.getFaqNo()%>, <%=f.getFaqCategoryNo()%>);"><span class="glyphicon glyphicon-remove"></span></a>
-		<a class="btn btn-default btn-sm" id="btns"
+		
+		<% } %>
+		
+		<a class="btn btn-default btn-sm" id="qbtns"
 			data-toggle="collapse" href="#collapse<%=f.getFaqNo() %>" aria-expanded="false"
 			aria-controls="collapseExample"> 
 			<span class="glyphicon glyphicon-chevron-down"></span></a>
@@ -76,17 +82,14 @@
 		
 
 		<span id="move"><b>질문이 해결되지 않는다면? → </b></span>
-		<button onclick="toQnA();" class="btn btn-info" id="btns">질문게시판으로 이동</button>
+		<button onclick="toQnA();" class="btn btn-info" id="qbtns">질문게시판으로 이동</button>
 		<hr>
 		
 		<p><a href="/studyhub/noticeview">FAQ메인으로 가기</a></p>
 
 	</div>
-
+</div>
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>
 	<!--페이지 끝-->
 <%@ include file="/views/include/common/tail.jsp" %>
-
-</body>
-</html>

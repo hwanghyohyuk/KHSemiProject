@@ -16,21 +16,28 @@
 <link rel="stylesheet" href="/studyhub/css/bootstrap.min.css">
 <link rel="stylesheet" href="/studyhub/css/admin.css">
 <link rel="stylesheet" type="text/css" href="/studyhub/css/board_list.css">
+<script type="text/javascript">
+	function deleteMember(useremail){
+		location.href="/studyhub/usermanagementdelete?ue="+useremail;
+	}
+
+</script>
 
 <%@ include file="/views/include/common/headend.jsp"%>
 <%@ include file="/views/include/main/header.jsp"%>
 <%@ include file="/views/admin/adminNav.jsp"%>
 
 <!-- 메인 컨텐츠 -->
+<div class="container">
 	<div class="row" id="list-layout">
 		<div
-			class="col-md-8 col-md-offset-1 col-lg-8 col-lg-offset-1 col-sm-10 col-xs-9 col-xs-offset-1">
+			class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-sm-10 col-xs-9 col-xs-offset-1">
 			<h2>회원관리</h2>			
 			
 			<div class="top-area">
 				<form action="/studyhub/qnasearch" method="post" class="admin-search">
 				<button onclick="deleteMember();" id="delete-btn">삭제</button>
-					<select id="search-by" name="search-by">
+					<select id="user-search" name="search-by">
 						<option value="user_name">이름</option>
 						<option value="email">이메일</option>
 					</select> <input type="search" autocomplete name="keyword" length="50"
@@ -43,23 +50,25 @@
 			<div class="table-area">
 				<table class="table table-striped" align="center" width="600">
 					<tr id="attr">
-						<th>선택</th>
 						<th>회원번호</th>
 						<th>사용자이름</th>
 						<th>이메일</th>
 						<th>휴대전화</th>
+						<th>상태</th>
+						<th>삭제</th>
 					</tr>
 					<%
 						 for (User u : ulist) { 
 					%>
 					<tr>
-						<td><input type="checkbox" id="member-check"></td>
 						<td><%=u.getUserNo() %></td>
 						<td><%=u.getUserName() %></td>
 						<td id="title_text"><a
 							href="#"><%=u.getEmail() %></a></td>
 						
 						<td><%=u.getPhone() %></td>
+						<td><%=u.getUserState() %></td>
+						<td><button onclick="deleteMember('<%=u.getEmail() %>');" id="user-delete"><span class="glyphicon glyphicon-remove"></span></button></td>
 					</tr>
 					<%
 						}
@@ -68,7 +77,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 
 
 <!-- /메인 컨텐츠 -->

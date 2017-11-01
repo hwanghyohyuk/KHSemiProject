@@ -139,6 +139,12 @@
     border-radius: 3px;
     border: 1px solid #2c7598;
 }
+
+#edge {
+	margin-left: 150px;
+	margin-top: 8vh;
+	margin-bottom: 20vh;
+}
 </style>
 
 <%@ include file="/views/include/common/headend.jsp"%>
@@ -148,8 +154,8 @@
 
 <!-- 메인 컨텐츠 -->
 
-<div class='container'>
-<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+<div class='container' id="edge">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 		<div class="btn btn-default btn-sm col-lg-12 col-md-12"
 			id="schedulelist">

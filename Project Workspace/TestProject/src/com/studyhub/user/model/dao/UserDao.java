@@ -38,7 +38,8 @@ public class UserDao implements CryptTemplate {
 				user.setUserState(rset.getInt("user_state"));
 				user.setPwdState(rset.getInt("pwd_state"));
 				user.setDeleteDate(rset.getDate("delete_date"));
-				System.out.println(user.getPwdState());
+				System.out.println("pwdState:"+user.getPwdState());
+				System.out.println("userState:"+user.getUserState());
 			} else {
 
 			}
@@ -136,7 +137,8 @@ public class UserDao implements CryptTemplate {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-
+		
+		System.out.println(userEmail+userName+userPwd);
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userEmail);
@@ -189,6 +191,53 @@ public class UserDao implements CryptTemplate {
 			pstmt.setInt(1, pwdState);
 			pstmt.setString(2, decryptEmail);
 
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int changeUserState(Connection conn, String email, int state) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "update tb_user set user_state=? where email=?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, state);
+			pstmt.setString(2, email);
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateUserInfo(Connection conn, String email, String userpwd, String phone, int pwdState) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "update tb_user set user_pwd=?, phone=?, pwd_state=? where email=?";
+
+		AesUtil util = new AesUtil(KEY_SIZE, ITERATION_COUNT);
+		String encryptPwd = util.encrypt(SALT, IV, PASSPHRASE, userpwd);
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, encryptPwd);
+			pstmt.setString(2, phone);
+			pstmt.setInt(3, pwdState);
+			pstmt.setString(4, email);
+			
 			result = pstmt.executeUpdate();
 
 		} catch (Exception e) {

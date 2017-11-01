@@ -19,12 +19,13 @@ public class User implements java.io.Serializable {
 		super();
 	}
 
-	public User(String email, String userName, String userPwd, String phone) {
+	public User(String email, String userName, String userPwd, String phone, int userState) {
 		super();
 		this.email = email;
 		this.userName = userName;
 		this.userPwd = userPwd;
 		this.phone = phone;
+		this.userState = userState;
 	}
 	
 	

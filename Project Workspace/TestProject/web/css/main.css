@@ -94,7 +94,7 @@
 }
 
 .RollDivG {
-	width: 64%;
+	width: 84%;
 	height: 240px;
 	overflow: hidden;
 	float: left;
@@ -103,7 +103,7 @@
 .RollDivG>div {
 	overflow: hidden;
 	height: 240px;
-	width: 150%;
+	width: 200%;
 }
 
 .RollDivG>div>a {
@@ -142,7 +142,24 @@
 	margin-right: 5px;
 }
 
-///////////////////////////////////////////////////////////
+#a-img{
+	text-decoration: none;
+	color: white;
+}
+#imgname{
+	    margin-top: 1.5vh;
+}
+#namewrap{
+	position: absolute;
+    z-index: 99999999999;
+    background: rgba(8, 8, 8, 0.59);
+    height: 80px;
+    margin-top: 160px;
+    width: 16vw;
+    text-align: center;
+}
+
+
 /*미향*/
 
 #more {
@@ -152,6 +169,16 @@
 	right: 26vw;
 }
 
+#faqwrapper{
+	margin-top: 10vh;
+	margin-bottom: 50vh;
+	
+}
+
+#qbtns{
+	float: right;
+	
+}
 
 
 

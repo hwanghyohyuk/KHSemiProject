@@ -187,6 +187,15 @@
 	#qnaupdatebtn{
 		margin-bottom: 10px;
 	}
+	
+	body {
+	  position: relative;
+	}
+	
+	#qnawrapper{
+		margin-top: 8vh;
+		margin-bottom: 20vh;
+	}
 
 </style>
 <!--헤더 부분-->
@@ -196,7 +205,7 @@
 
 
 <!-- 메인 컨텐츠 -->
-<div class="container col-lg-offset-2 col-md-offset-2 col-sm-offset-2">
+<div class="container col-lg-offset-2 col-md-offset-2 col-sm-offset-2" id="qnawrapper" data-spy="scroll">
 	<div class="col-md-6 col-sm-6 col-sm-offset-3 col-md-offset-3">
 		<div class="input-group" data-toggle="tooltip" data-placement="top" title="검색어 입력시 자동으로 데이터를 가져옵니다!">
 			<span class="input-group-addon" id="basic-addon1"> <span
@@ -283,12 +292,29 @@
 
 
 <script type="text/javascript">
+	var basic = 1;
+	var startpage = 9;
+	var endpage = 0;
+	
 	$(function(){
-		selectQnA();
+		selectQnA(startpage, endpage);
 		$('[data-toggle="tooltip"]').tooltip();
 		$("#qna_list").show();
 		$("#search_list").hide();
+		startpage += 10;
+		endpage += 10;
 	});
+	
+	
+	// 스크롤 페이징
+	$(window).scroll(function(){
+		if($(window).scrollTop() >= $(document).height() - $(window).height()){
+			location.href = "#tail"+endpage;
+			selectQnA(startpage,endpage);
+			startpage += 10;
+			endpage += 10;
+		}
+	})
 
 	function insertqna(){
 		if($("#title").val() == ""){
@@ -317,17 +343,17 @@
 			});
 			$("#title").val("");
 			$("#content").val("");
-			selectQnA();
+			selectQnA(basic, endpage);
 			return true
 		}
 	}
 	
-	function selectQnA(){
+	function selectQnA(startpage, endpage){
 		var group_no = "<%= group.getGroupNo() %>";
 		var user_no = "<%= user.getUserNo() %>";
 		$.ajax({
 			url: "/studyhub/selectgroupqna",
-			data: { groupno: group_no },
+			data: { groupno: group_no, startpage: startpage, endpage: endpage },
 			type: "get",
 			datatype: "json",
 			success: function(data){
@@ -436,7 +462,12 @@
 							"</div>";
 					}
 				}
-				$("#qna_list").html(values);
+				var tail = "<div class='col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='tail" + endpage + "'>"
+				if(startpage == 10){
+					$("#qna_list").html(values + tail);
+				} else {
+					$("#qna_list").append(values + tail);
+				}
 			},
 			error: function(xhr,status,error){
 				alert("error\nxhr : " + xhr + ", status : " + status + ", error : " + error);
@@ -454,7 +485,7 @@
 			async: false
 		});
 		alert("삭제되었습니다.");
-		selectQnA();
+		selectQnA(basic, endpage);
 	}
 	
 	function selectOne(param){
@@ -497,7 +528,7 @@
 		});
 		alert("수정되었습니다.");
 		$("#qnamodal").modal("hide");
-		selectQnA();
+		selectQnA(basic, endpage);
 	}
 	
 	function qnasearch(){

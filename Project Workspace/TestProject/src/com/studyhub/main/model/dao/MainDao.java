@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.studyhub.common.vo.Board;
+import com.studyhub.common.vo.Category;
 import com.studyhub.common.vo.Group;
 import com.studyhub.common.vo.Message;
 import com.studyhub.common.vo.UNG;
@@ -229,9 +230,7 @@ public class MainDao {
 
 		PreparedStatement pstmt = null;
 
-		String query = "insert into tb_ung values (" + 
-						"(select max(ung_no) + 1 from tb_ung) " 
-						+ ", ?, ?, 1, 1)";
+		String query = "insert into tb_ung values (" + "(select max(ung_no) + 1 from tb_ung) " + ", ?, ?, 1, 1)";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -364,4 +363,193 @@ public class MainDao {
 		}
 		return result;
 	}
+
+	public ArrayList<Category> selectCategoryList(Connection con) {
+		ArrayList<Category> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select category_no, category_name" + " from tb_category";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Category>();
+			if (rset != null) {
+
+				while (rset.next()) {
+					Category c = new Category();
+					c.setCategoryNo(rset.getInt("category_no"));
+					c.setCategoryName(rset.getString("category_name"));
+
+					list.add(c);
+				}
+			} else {
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
+	public ArrayList<Group> selectGroupList(Connection con) {
+		ArrayList<Group> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from tb_group where group_state=0";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Group>();
+			if (rset != null) {
+
+				while (rset.next()) {
+					Group g = new Group();
+					
+					g.setGroupNo(rset.getInt("group_no"));
+					g.setGroupName(rset.getString("group_name"));
+					g.setAttributeNo(rset.getInt("attribute_no"));
+					g.setLocation(rset.getString("location"));
+					g.setCategoryNo(rset.getInt("category_no"));
+					g.setG_img_rename(rset.getString("g_img_rename"));
+					
+					list.add(g);
+				}
+			}else{
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Group> searchGroupList(Connection con, int attrNo, int cateNo, String location, String keyword) {
+		ArrayList<Group> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		int attr=0;
+		int cate=0;
+		int loca=0;
+		int keyw=0;		
+		
+		
+		String query = "select * from tb_group where group_state=0 ";
+		
+		if(attrNo!=0){query += "and attribute_no = ? ";attr=1;}
+		if(cateNo!=0){query += "and category_no = ? ";cate=10;}
+		if(!location.equals("0")){query += "and location = ? ";loca=100;}
+		if(!keyword.equals("")){query += "and LOWER(group_name) like LOWER(?) ";keyw=1000;}
+
+		System.out.println("attrNo:"+attrNo+", cateNo:"+cateNo+", location:"+location+", keyword:"+keyword);
+		int sum = attr+cate+loca+keyw;
+		System.out.println("sum:"+sum);
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			switch (sum) {
+			case 0:
+				break;
+			case 1:
+				pstmt.setInt(1, attrNo);
+				break;
+			case 10:
+				pstmt.setInt(1, cateNo);
+				break;
+			case 11:
+				pstmt.setInt(1, attrNo);
+				pstmt.setInt(2, cateNo);
+				break;
+			case 100:
+				pstmt.setString(1, location);
+				break;
+			case 101:
+				pstmt.setInt(1, attrNo);
+				pstmt.setString(2, location);
+				break;
+			case 110:
+				pstmt.setInt(1, cateNo);
+				pstmt.setString(2, location);
+				break;
+			case 111:
+				pstmt.setInt(1, attrNo);
+				pstmt.setInt(2, cateNo);
+				pstmt.setString(3, location);
+				break;
+			case 1000:
+				pstmt.setString(1, "%"+keyword+"%");
+				break;
+			case 1001:
+				pstmt.setInt(1, attrNo);
+				pstmt.setString(2, "%"+keyword+"%");
+				break;
+			case 1010:
+				pstmt.setInt(1, cateNo);
+				pstmt.setString(2, "%"+keyword+"%");
+				break;
+			case 1011:
+				pstmt.setInt(1, attrNo);
+				pstmt.setInt(2, cateNo);
+				pstmt.setString(3, "%"+keyword+"%");
+				break;
+			case 1100:
+				pstmt.setString(1, location);
+				pstmt.setString(2, "%"+keyword+"%");
+				break;
+			case 1101:
+				pstmt.setInt(1, attrNo);
+				pstmt.setString(2, location);
+				pstmt.setString(3, "%"+keyword+"%");
+				break;
+			case 1110:
+				pstmt.setInt(1, cateNo);
+				pstmt.setString(2, location);
+				pstmt.setString(3, "%"+keyword+"%");
+				break;
+			case 1111:
+				pstmt.setInt(1, attrNo);
+				pstmt.setInt(2, cateNo);
+				pstmt.setString(3, location);
+				pstmt.setString(4, "%"+keyword+"%");
+				break;
+			}
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Group>();
+			
+			if (rset != null) {
+
+				while (rset.next()) {
+					Group g = new Group();
+					
+					g.setGroupNo(rset.getInt("group_no"));
+					g.setGroupName(rset.getString("group_name"));
+					g.setAttributeNo(rset.getInt("attribute_no"));
+					g.setLocation(rset.getString("location"));
+					g.setCategoryNo(rset.getInt("category_no"));
+					g.setG_img_rename(rset.getString("g_img_rename"));
+					
+					list.add(g);
+				}
+			}else{
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;	
+	}
+
 }

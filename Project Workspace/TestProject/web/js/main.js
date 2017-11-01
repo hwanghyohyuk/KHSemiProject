@@ -1,7 +1,3 @@
-function pleaseLogin() {
-	alert("로그인이 필요합니다.");
-	location.href = "/studyhub/login";
-}
 
 // ///////////////////////////////////////////////////////////////////////////
 // /// 이미지 슬라이더 /////
@@ -16,7 +12,7 @@ function imgMove(move, part) {
 		if (moveType == 0) {
 			var aWidth = $(".RollDivG > div > a:first").width();
 			$(".RollDivG > div").append(
-					"<a href=\"" 
+					"<a id='a-img' href=\"" 
 							+ $(".RollDivG > div > a:first").attr("href")
 							+ "\">" 
 							+ $(".RollDivG > div > a:first").html()+ "</a>");
@@ -31,7 +27,7 @@ function imgMove(move, part) {
 		} else {
 			var aWidth = $(".RollDivG > div > a:last").width();
 			$(
-					"<a href=\""
+					"<a id='a-img' href=\""
 							+ $(".RollDivG > div > a:last").attr("href")
 							+ "\" style=\"margin-left:-"
 							+ aWidth
@@ -51,7 +47,7 @@ function imgMove(move, part) {
 		if (moveType == 0) {
 			var aWidth = $(".RollDivB > div > a:first").width();
 			$(".RollDivB > div").append(
-					"<a href=\"" 
+					"<a id='a-img' href=\"" 
 							+ $(".RollDivB > div > a:first").attr("href")
 							+ "\">" 
 							+ $(".RollDivB > div > a:first").html()+ "</a>");
@@ -66,7 +62,7 @@ function imgMove(move, part) {
 		} else {
 			var aWidth = $(".RollDivB > div > a:last").width();
 			$(
-					"<a href=\""
+					"<a id='a-img' href=\""
 							+ $(".RollDivB > div > a:last").attr("href")
 							+ "\" style=\"margin-left:-"
 							+ aWidth
@@ -139,8 +135,8 @@ function mygrouplist(userno) {
 						$(".RollDivG").css("width","64%");
 						$(".sliderG").css("margin","0 8% 5% 8%");
 					}else if(json.list.length>1){
-						$(".RollDivG").css("width","40%");
-						$(".sliderG").css("margin","0 18% 5% 18%");
+						$(".RollDivG").css("width","46%");
+						$(".sliderG").css("margin","0 24% 5% 18%");
 					}else if(json.list.length>0){
 						$(".RollDivG").css("width","20%");
 						$(".sliderG").css("margin","0 28% 5% 28%");
@@ -152,14 +148,15 @@ function mygrouplist(userno) {
 						$(".sliderG").css("margin","0 8% 5% 8%");
 					}
 					for ( var i in json.list) {
-						values += "<a href=\"/studyhub/gmainpreview?group_no="
+						values += "<a id='a-img' href=\"/studyhub/gmainpreview?group_no="
 								+ json.list[i].group_no
 								+ "&reset=0&user_no="
 								+ user_no
 								+"\">"
 								+ "<img id=\"groupimg\" src=\"/studyhub/images/groupimg/"
 								+ decodeURIComponent(json.list[i].renameimg)
-								+ "\">";
+								+ "\"><div id='namewrap'><p id='imgname'>"+ decodeURIComponent(json.list[i].groupname) +"</p>" +
+										"<p><span class='glyphicon glyphicon-user'></span>"+ json.list[i].usercount +"</p></div></a>";
 					}
 					$("#group").html(values);
 				}

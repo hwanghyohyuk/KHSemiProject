@@ -16,7 +16,7 @@
 <div class="container text-center">
 	<a href="/studyhub/"> <img class="img-responsive center-block"
 		alt=""
-		src="https://dummyimage.com/600x400/ffffff/004157&text=Logo+600*400"></a>
+		src="/studyhub/images/logo.png" style="width:600px"></a>
 	<hr />
 	<div class="row" style="height: 40px"></div>
 	<div class="row">

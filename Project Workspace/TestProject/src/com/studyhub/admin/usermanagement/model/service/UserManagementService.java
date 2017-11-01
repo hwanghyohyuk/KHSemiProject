@@ -18,5 +18,6 @@ public class UserManagementService {
 		close(con);
 		return list;
 	}
+
 	
 }
