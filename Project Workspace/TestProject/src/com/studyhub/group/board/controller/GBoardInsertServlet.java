@@ -24,8 +24,8 @@ import com.studyhub.group.board.model.service.GBoardService;
 public class GBoardInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private GBoard gNboard;
-	private GBoardService gNboardService;
+	private GBoard gboard;
+	private GBoardService gboardService;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,7 +43,7 @@ public class GBoardInsertServlet extends HttpServlet {
 				response.setContentType("text/html; charset=utf-8");
 				
 				RequestDispatcher view = null;
-				gNboard = new GBoard();
+				gboard = new GBoard();
 			
 
 				String title = request.getParameter("title");
@@ -52,19 +52,19 @@ public class GBoardInsertServlet extends HttpServlet {
 				int accessNo = Integer.parseInt(request.getParameter("accessno"));
 				int groupNo = Integer.parseInt(request.getParameter("groupno"));
 				
-				gNboard.setTitle(title);
-				gNboard.setContent(content);
-				gNboard.setUploader(uploader);
-				gNboard.setAccessNo(accessNo);
-				gNboard.setGroupNo(groupNo);								
+				gboard.setTitle(title);
+				gboard.setContent(content);
+				gboard.setUploader(uploader);
+				gboard.setAccessNo(accessNo);
+				gboard.setGroupNo(groupNo);								
 				
 				
-				if(new GBoardService().insertGBoard(gNboard)>0){
+				if(new GBoardService().insertGBoard(gboard)>0){
 					response.sendRedirect("/studyhub/gboardpreview?groupno="+groupNo);
 				}else{
 					
 					RequestDispatcher errorPage = request.getRequestDispatcher("/views/group/groupBoard/BoardError.jsp");
-					request.setAttribute("message", "질문 등록 실패");
+					request.setAttribute("message", "게시글 등록 실패");
 					errorPage.forward(request, response);
 				}
 				
