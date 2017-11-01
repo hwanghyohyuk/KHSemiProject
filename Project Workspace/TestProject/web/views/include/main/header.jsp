@@ -276,7 +276,7 @@ function studySearch() {
 			if (json.list.length > 0) {
 				for ( var i in json.list) {
 					if(userNo!=''){
-						values+="<div class='col-md-6' style='margin-bottom:10px'><a href='/studyhub/gmainpreview?group_no="+json.list[i].group_no+"&reset=0&user_no="+userNo+"'>"
+						values+="<div class='col-md-6' style='margin-bottom:10px'><a href='/studyhub/boardlist'>"
 								+"<img src='/studyhub/images/groupimg/"+decodeURIComponent(json.list[i].g_img_rename)+"' style='width:80px;height: 80px;' >"+decodeURIComponent(json.list[i].group_name)+"</a></div>"
 					}else{
 						values+="<div class='col-md-6' style='margin-bottom:10px'>"
@@ -369,7 +369,7 @@ function studySearch() {
 									if (json.list.length > 0) {
 										for ( var i in json.list) {
 											if(userNo!=''){
-												values+="<div class='col-md-6' style='margin-bottom:10px'><a href='/studyhub/gmainpreview?group_no="+json.list[i].group_no+"&reset=0&user_no="+userNo+"'>"
+												values+="<div class='col-md-6' style='margin-bottom:10px'><a href='/studyhub/boardlist'>"
 														+"<img src='/studyhub/images/groupimg/"+decodeURIComponent(json.list[i].g_img_rename)+"' style='width:80px;height: 80px;' >"+decodeURIComponent(json.list[i].group_name)+"</a></div>"
 											}else{
 												values+="<div class='col-md-6' style='margin-bottom:10px'>"
