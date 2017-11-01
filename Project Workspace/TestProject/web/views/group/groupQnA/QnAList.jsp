@@ -537,7 +537,6 @@
 		var groupno = "<%= group.getGroupNo() %>";
 		var user_no = "<%= user.getUserNo() %>";
 		var searchdata = $("#qnasearch").val();
-		console.log(searchdata);
 		$.ajax({
 			url: "/studyhub/searchgroupqna",
 			data: { searchdata: searchdata, groupno: groupno },

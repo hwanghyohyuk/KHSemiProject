@@ -13,12 +13,10 @@
 <!--자바스크립트 및 CSS-->
 <link rel="stylesheet" type="text/css" href="/studyhub/css/start.css">
 <script type="text/javascript" src="/studyhub/js/signup.js"></script>
-
-
+<script type="text/javascript" src="/studyhub/js/fb/all.js"></script>
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
 <%@ include file="/views/include/main/header.jsp"%>
-
 <!-- 메인 컨텐츠 -->
 <section class="container1">
 	<div class="row">
