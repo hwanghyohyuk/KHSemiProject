@@ -14,7 +14,7 @@ $(function pleaseLogin() {
 	});
 </script>
 <%}else{%>
-<div id="nav_menu">
+<div id="nav_menu" style="display: fixed;">
 <ul class="nav nav-stacked" id="nav_ul">
 	<li id="nav_li_top"><a href="/studyhub/gmainpreview?group_no=<%= group.getGroupNo() %>&reset=0&user_no=<%=navuser.getUserNo()%>" id="nav_text_group"><%= group.getGroupName() %></a></li>
 	<li id="nav_li"><a href="/studyhub/gnoticepreview?groupno=<%=group.getGroupNo() %>" id="nav_text"> ▷ 공지사항</a></li>
@@ -27,11 +27,11 @@ $(function pleaseLogin() {
 <%} %>
 
 <script type="text/javascript">
-	$(function(){
+/* 	$(function(){
 		var currentPosition = parseInt($("#nav_menu").css("top"));
 			$(window).scroll(function(){
 				var position = $(window).scrollTop();
 				$("#nav_menu").stop().animate({"top": position + currentPosition + "px"}, 300);
 			});
-	});
+	}); */
 </script>
