@@ -44,8 +44,8 @@ public class GNoticePreviewServlet extends HttpServlet {
 		
 		int currentPage = 1;
 		int limit = 10;			
-		if(request.getParameter("groupno")!= null)
-			currentPage = Integer.parseInt(request.getParameter("groupno"));						
+		if(request.getParameter("page")!= null)
+			currentPage = Integer.parseInt(request.getParameter("page"));						
 		
 		gns = new GNoticeService();
 		

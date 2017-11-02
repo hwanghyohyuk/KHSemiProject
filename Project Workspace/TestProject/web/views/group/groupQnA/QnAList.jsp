@@ -292,9 +292,9 @@
 
 
 <script type="text/javascript">
-	var basic = 1;
 	var startpage = 9;
 	var endpage = 0;
+	var zero = 0;
 	
 	$(function(){
 		selectQnA(startpage, endpage);
@@ -309,7 +309,7 @@
 	// 스크롤 페이징
 	$(window).scroll(function(){
 		if($(window).scrollTop() >= $(document).height() - $(window).height()){
-			location.href = "#tail"+endpage;
+			location.href = "#tail"+endpage; // 스크롤 스파이
 			selectQnA(startpage,endpage);
 			startpage += 10;
 			endpage += 10;
@@ -343,7 +343,7 @@
 			});
 			$("#title").val("");
 			$("#content").val("");
-			selectQnA(basic, endpage);
+			selectQnA(startpage, zero);
 			return true
 		}
 	}
@@ -363,11 +363,11 @@
 					if(user_no == json.list[i].user_no){
 					values += 
 						"<div class='panel panel-default col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='widthsize'>" +
-							"<div class='panel-heading' role='tab' id='heading" + i + "'>" +
+							"<div class='panel-heading' role='tab' id='heading" + (i+endpage) + "'>" +
 								"<h4 class='panel-title'>" +
 									"<div class='btn btn-default btn-sm' id='read'>" +
 										"<div class='col-xs-10 col-sm-10 col-md-11'>" +
-											"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + i + "' aria-expanded='false' aria-controls='collapse" + i + "'>" +
+											"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + (i+endpage) + "' aria-expanded='false' aria-controls='collapse" + (i+endpage) + "'>" +
 												"<div class='panel panel-primary'>" +
 													"<div class='panel-heading' id='title_size'>" +
 														"<div class='col-xs-9 col-sm-9 col-md-10'>" +
@@ -397,7 +397,7 @@
 									"</div>" +
 								"</h4>" +
 							"</div>" +
-								"<div id='collapse"+ i +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ i +"'>" +
+								"<div id='collapse"+ (i+endpage) +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ (i+endpage) +"'>" +
 									"<div class='list-group'>" +
 										"<ul id='commentbody" + json.list[i].g_qna_no + "'>" +
 										"</ul>" +
@@ -416,11 +416,11 @@
 					else {
 						values += 
 							"<div class='panel panel-default col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='widthsize'>" +
-							"<div class='panel-heading' role='tab' id='heading" + i + "'>" +
+							"<div class='panel-heading' role='tab' id='heading" + (i+endpage) + "'>" +
 								"<h4 class='panel-title'>" +
 									"<div class='btn btn-default btn-sm' id='read'>" +
 										"<div class='col-xs-10 col-sm-10 col-md-11'>" +
-											"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + i + "' aria-expanded='false' aria-controls='collapse" + i + "'>" +
+											"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + (i+endpage) + "' aria-expanded='false' aria-controls='collapse" + (i+endpage) + "'>" +
 												"<div class='panel panel-primary'>" +
 													"<div class='panel-heading' id='title_size'>" +
 														"<div class='col-xs-9 col-sm-9 col-md-10'>" +
@@ -445,7 +445,7 @@
 									"</div>" +
 								"</h4>" +
 							"</div>" +
-								"<div id='collapse"+ i +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ i +"'>" +
+								"<div id='collapse"+ (i+endpage) +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ (i+endpage) +"'>" +
 									"<div class='list-group'>" +
 										"<ul id='commentbody" + json.list[i].g_qna_no + "'>" +
 										"</ul>" +
@@ -463,7 +463,7 @@
 					}
 				}
 				var tail = "<div class='col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='tail" + endpage + "'>"
-				if(startpage == 10){
+				if(endpage == 0){
 					$("#qna_list").html(values + tail);
 				} else {
 					$("#qna_list").append(values + tail);
@@ -485,7 +485,7 @@
 			async: false
 		});
 		alert("삭제되었습니다.");
-		selectQnA(basic, endpage);
+		selectQnA(startpage, zero);
 	}
 	
 	function selectOne(param){
@@ -528,7 +528,7 @@
 		});
 		alert("수정되었습니다.");
 		$("#qnamodal").modal("hide");
-		selectQnA(basic, endpage);
+		selectQnA(startpage, zero);
 	}
 	
 	function qnasearch(){
@@ -537,6 +537,7 @@
 		var groupno = "<%= group.getGroupNo() %>";
 		var user_no = "<%= user.getUserNo() %>";
 		var searchdata = $("#qnasearch").val();
+		console.log(searchdata);
 		$.ajax({
 			url: "/studyhub/searchgroupqna",
 			data: { searchdata: searchdata, groupno: groupno },
@@ -549,11 +550,11 @@
 					if(user_no == json.list[i].user_no){
 						values += 
 							"<div class='panel panel-default col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='widthsize'>" +
-							"<div class='panel-heading' role='tab' id='heading" + i + "'>" +
+							"<div class='panel-heading' role='tab' id='heading" + (i+endpage) + "'>" +
 								"<h4 class='panel-title'>" +
 									"<div class='btn btn-default btn-sm' id='read'>" +
 										"<div class='col-xs-10 col-sm-10 col-md-11'>" +
-											"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + i + "' aria-expanded='false' aria-controls='collapse" + i + "'>" +
+											"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + (i+endpage) + "' aria-expanded='false' aria-controls='collapse" + (i+endpage) + "'>" +
 												"<div class='panel panel-primary'>" +
 													"<div class='panel-heading' id='title_size'>" +
 														"<div class='col-xs-9 col-sm-9 col-md-10'>" +
@@ -580,7 +581,7 @@
 									"</div>" +
 								"</h4>" +
 							"</div>" +
-								"<div id='collapse"+ i +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ i +"'>" +
+								"<div id='collapse"+ (i+endpage) +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ (i+endpage) +"'>" +
 									"<div class='list-group'>" +
 										"<ul id='commentbody" + json.list[i].g_qna_no + "'>" +
 										"</ul>" +
@@ -599,11 +600,11 @@
 						else {
 							values += 
 								"<div class='panel panel-default col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='widthsize'>" +
-								"<div class='panel-heading' role='tab' id='heading" + i + "'>" +
+								"<div class='panel-heading' role='tab' id='heading" + (i+endpage) + "'>" +
 									"<h4 class='panel-title'>" +
 										"<div class='btn btn-default btn-sm' id='read'>" +
 											"<div class='col-xs-10 col-sm-10 col-md-11'>" +
-												"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + i + "' aria-expanded='false' aria-controls='collapse" + i + "'>" +
+												"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + (i+endpage) + "' aria-expanded='false' aria-controls='collapse" + (i+endpage) + "'>" +
 													"<div class='panel panel-primary'>" +
 														"<div class='panel-heading' id='title_size'>" +
 															"<div class='col-xs-9 col-sm-9 col-md-10'>" +
@@ -628,7 +629,7 @@
 										"</div>" +
 									"</h4>" +
 								"</div>" +
-									"<div id='collapse"+ i +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ i +"'>" +
+									"<div id='collapse"+ (i+endpage) +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ (i+endpage) +"'>" +
 										"<div class='list-group'>" +
 											"<ul id='commentbody" + json.list[i].g_qna_no + "'>" +
 											"</ul>" +

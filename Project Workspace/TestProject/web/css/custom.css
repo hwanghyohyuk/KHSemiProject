@@ -6,6 +6,11 @@ font-size:11pt;
 font-weight:600;
 }
 */
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);   
+* { font-family: 'Nanum Gothic', sans-serif; }
+
+
 html, body {
   height: 100%;
 }
@@ -17,11 +22,11 @@ body {
   flex: 1 0 auto;
 }
 #nav-bar {
-	height: 5vh;
+	height: 7vh;
 }
 
 #logo {
-	width: 8vw;
+	width: 7vw;
 	margin-top: -2vh;
 }
 
@@ -152,13 +157,6 @@ p:hover{
 
 <!--modal -->
 
-
-@media screen and (max-width: 768px) {   
-#logo{
-	width: 24vw;
-}
-}
-
 #imaginary_container{
 }
 .stylish-input-group .input-group-addon{
@@ -173,3 +171,10 @@ p:hover{
     border:0;
     background:transparent;
     }
+
+@media screen and (max-width: 768px) {   
+#logo{
+	width: 24vw;
+}
+}
+    

@@ -29,6 +29,7 @@
 }
 
 </style>
+
 <!-- /head , body -->
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->
@@ -54,88 +55,88 @@
 		</div>
 		<div class="col-xs-4"></div>
 		<div class="col-xs-4">
-		<form action='/studyhub/boardlist' method='get'>
-            <div id="imaginary_container"> 
-                <div class="input-group stylish-input-group">
-                    <input type="text" class="form-control"  placeholder="Search" name='keyword'>
-                    <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>  
-                    </span>
-                </div>
-            </div>
-        </form>
-        </div>
+			<form action='/studyhub/boardlist' method='post'>
+				<div id="imaginary_container">
+					<div class="input-group stylish-input-group">
+						<input type="text" class="form-control" placeholder="Search"
+							name='keyword'> <span class="input-group-addon">
+							<button type="submit">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</div>
+				</div>
+			</form>
 		</div>
-		<div>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>그룹이미지</th>
-						<th>분류</th>
-						<th>그룹명</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>마감일</th>
-						<th>상태</th>
-						<th>지역</th>
-						<th>스터디방식</th>
-						<th>그룹원 수</th>
-					</tr>
-				</thead>
-				<tbody>
-					<%
-						if(list.size()>0){
-						for (Board b : list) {
-					%>
-					<tr>
-						<td><img id="groupimg"
-							src="/studyhub/images/groupimg/<%=b.getgImgRename()%>"
-							class="img-rounded"></td>
-						<td><%=b.getCategoryName()%></td>
-						<td><%=b.getGroupName()%></td>
-						<td>
-							<%
-								if (user != null) {
-							%> <a
-							href="/studyhub/boardview?bno=<%=b.getBoardNo()%>&page=<%=currentPage%>">
-								<%=b.getTitle()%>
-						</a> <%} else {%> <%=b.getTitle()%> <%} %>
-						</td>
-						<td><%=b.getUploaderName()%></td>
-						<td><%=b.getUploadDate()%></td>
-						<td><%=b.getDeadlineDate()%></td>
-						<td><%=b.getStatus()%></td>
-						<td><%=b.getLocation()%></td>
-						<td><%=b.getAttributeName()%></td>
-						<td><%=b.getMemberCount()%></td>
-					</tr>
-					<%}}else{%>
-					<td colspan='11' class="text-center"><a href="/studyhub/boardlist">검색 조건에 맞는 결과가 없습니다.</a></td>
-					<%} %>
-				</tbody>
-			</table>
-		</div>
-		<hr>
-		<div align="right">
+	</div>
+	<hr>
+	<div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>그룹이미지</th>
+					<th>분류</th>
+					<th>그룹명</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>마감일</th>					
+					<th>상태</th>
+					<th>지역</th>				
+					<th>스터디방식</th>		
+					<th>회원수</th>					
+				</tr>
+			</thead>
+			<tbody>
 			<%
-				if (user != null) {
-			%>
-			<a class="btn btn-default" href="javascript:grouplistcheck()">글쓰기</a>
-			<script type="text/javascript">
-		function grouplistcheck(){
-			var userno = <%=user.getUserNo()%>;
+				for (Board b : list) {
+			%>			
+				<tr>
+					<td><img id="groupimg" src="/studyhub/images/groupimg/<%=b.getgImgRename()%>"></td>
+					<td><%=b.getCategoryName() %></td>
+					<td><%=b.getGroupName() %></td>
+					<td>
+						<%
+							if (user != null) {
+						%> <a
+						href="/studyhub/boardview?bno=<%=b.getBoardNo()%>&page=<%=currentPage%>">
+							<%=b.getTitle()%>
+					</a> <%} else {%> <%=b.getTitle()%> <%	} %>
+					</td>
+					<td><%=b.getUploaderName()%></td>
+					<td><%=b.getUploadDate()%></td>
+					<td><%=b.getDeadlineDate() %></td>
+					<td><%=b.getStatus() %></td>
+					<td><%=b.getLocation() %></td>
+					<td><%=b.getAttributeName() %></td>
+					<td><%=b.getMemberCount() %></td>
+				</tr>			
+			<%}%>
+			</tbody>
+		</table>
+	</div>
+	<hr>
+	<div align="right">
+		<%
+			if (user != null) {
+		%>
+		<a class="btn btn-default" href="javascript:grouplistcheck()">글쓰기</a>
+		<script type="text/javascript">
+			function grouplistcheck() {
+				var userno =
+		<%=user.getUserNo()%>
+			;
 				$.ajax({
 					url : "/studyhub/bgrouplist",
-					data : {	userno : userno	},
+					data : {
+						userno : userno
+					},
 					type : "get",
 					datatype : "json",
 					success : function(data) {
 						var json = JSON.parse(JSON.stringify(data));
 						var values = "";
-						if (json.list.length>0) {
+						if (json.list.length > 0) {
 							location.href = '/studyhub/boardinsert.move';
 						} else {
 							alert("모집할 그룹이 없습니다.");
@@ -144,103 +145,67 @@
 				});
 			}
 		</script>
-			<%} else {	%>
-			<a class="btn btn-default" disabled>글쓰기</a>
-			<%}%>
-		</div>
-		<div align="center">
-			<div class="btn-group" role="group" aria-label="paging">
-				<%-- 이전 페이지 있을 경우에 대한 처리 --%>
-				<%
-					if (currentPage <= 1) {
-				%>
-				<a class="btn btn-default" href="#" disabled><span
-					class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
-				<%
-					} else {
-				%>
-				<a class="btn btn-default"
-					href="/first/blist?page=<%=currentPage - 1%>"><span
-					class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
-				<%
-					}
-				%>
-				<%-- 현재 페이지 숫자 보여주기 --%>
-				<%
-					for (int p = startPage; p <= endPage; p++) {
-						if (p == currentPage) {
-				%>
-				<a class="btn btn-default" href="#" disabled><%=p%></a>
-				<%
-					} else {
-				%>
-				<a class="btn btn-default" href="/studyhub/boardlist?page=<%=p%>"><%=p%></a>
-				<%
-					}
-					}
-				%>
-				<%-- 현재 페이지 다음 페이지에 대한 처리 --%>
-				<%
-					if (currentPage >= maxPage) {
-				%>
-				<a class="btn btn-default" href="#" disabled><span
-					class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
-				<%
-					} else {
-				%>
-				<a class="btn btn-default"
-					href="/studyhub/boardlist?page=<%=currentPage + 1%>"><span
-					class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
-				<%
-					}
-				%>
-			</div>
-			<!-- 썸네일 스타일 테스트중  -->
-			<style>
-			.thumbnail{
-				display: inline-block;
+		<%
+			} else {
+		%>
+		<a class="btn btn-default" disabled>글쓰기</a>
+		<%
 			}
-			#grouppic{
-				width: 200px;
-				height: 200px;
-			}
-			#gname{
-				position: absolute;
-			    background: rgba(0,0,0,0.6);
-			    color: white;
-			    box-sizing: border-box;
-				margin-top: -70px;
-				height: 40px;
-				width: 200px;
-				
-			}
-			#g-text{
-				z-index: 100;
-				color: white;
-			}
-			
-			</style>
-			<div class="container thumbnails">
-			<%
-				if(list.size()>0){
-				for (Board b : list) {
-			%>
-				<div class="thumbnail">
-					<img id="grouppic" src="/studyhub/images/groupimg/<%=b.getgImgRename()%>" class="img-rounded">
-					<div id="gname"><p id="g-text"><%=b.getGroupName()%> | <%=b.getCategoryName()%></p></div>
-						
-			<% }} %>
-			</div>
-			</div>
-			
-			
-		</div>
-
+		%>
 	</div>
-	<!-- /메인 컨텐츠 -->
+	<div align="center">
+		<div class="btn-group" role="group" aria-label="paging">
+			<%-- 이전 페이지 있을 경우에 대한 처리 --%>
+			<%
+				if (currentPage <= 1) {
+			%>
+			<a class="btn btn-default" href="#" disabled><span
+				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+			<%
+				} else {
+			%>
+			<a class="btn btn-default"
+				href="/first/blist?page=<%=currentPage - 1%>"><span
+				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+			<%
+				}
+			%>
+			<%-- 현재 페이지 숫자 보여주기 --%>
+			<%
+				for (int p = startPage; p <= endPage; p++) {
+					if (p == currentPage) {
+			%>
+			<a class="btn btn-default" href="#" disabled><%=p%></a>
+			<%
+				} else {
+			%>
+			<a class="btn btn-default" href="/studyhub/boardlist?page=<%=p%>"><%=p%></a>
+			<%
+				}
+				}
+			%>
+			<%-- 현재 페이지 다음 페이지에 대한 처리 --%>
+			<%
+				if (currentPage >= maxPage) {
+			%>
+			<a class="btn btn-default" href="#" disabled><span
+				class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+			<%
+				} else {
+			%>
+			<a class="btn btn-default"
+				href="/studyhub/boardlist?page=<%=currentPage + 1%>"><span
+				class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+			<%
+				}
+			%>
+		</div>
+	</div>
+</div>
+<!-- /메인 컨텐츠 -->
 
-	<!--푸터 부분-->
-	<%@ include file="/views/include/main/footer.jsp"%>
+<!--푸터 부분-->
+<%@ include file="/views/include/main/footer.jsp"%>
 
-	<!--페이지 끝-->
-	<%@ include file="/views/include/common/tail.jsp"%>
+<!--페이지 끝-->
+<%@ include file="/views/include/common/tail.jsp"%>

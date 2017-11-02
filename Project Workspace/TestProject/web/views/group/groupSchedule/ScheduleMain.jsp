@@ -13,10 +13,12 @@
 <link rel="stylesheet" href="/studyhub/css/fullcalendar.css">
 <link rel="stylesheet" href="/studyhub/css/bootstrap.min.css">
 
+
 <script src='/studyhub/js/calendar/jquery.min.js'></script>
 <script src='/studyhub/js/calendar/moment.min.js'></script>
 <script src='/studyhub/js/calendar/fullcalendar.js'></script>
 <!-- 캘린더 js -->
+<script src='/studyhub/js/bootstrap.min.js'></script>
 <style type="text/css">
 #schedulelist-item {
 	margin-top: 0px;
@@ -379,12 +381,12 @@
 				var meetingName = "";
 				var scno = "";
 				for ( var i in json.list) {
-					meetingDate += decodeURIComponent(json.list[i].meeting_date);
+					meetingDate += decodeURIComponent(json.list[i].meeting_date).replace(/\+/gi, " ");
 					ampm += decodeURIComponent(json.list[i].ampm);
 					hour += decodeURIComponent(json.list[i].hour);
 					minute += decodeURIComponent(json.list[i].minute);
 					onoff += decodeURIComponent(json.list[i].onoff);
-					meetingName += decodeURIComponent(json.list[i].meeting_name);
+					meetingName += decodeURIComponent(json.list[i].meeting_name).replace(/\+/gi, " ");
 					scno += json.list[i].schedule_no;
 				}
 				

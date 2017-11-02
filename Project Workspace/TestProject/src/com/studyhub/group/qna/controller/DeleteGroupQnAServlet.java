@@ -30,7 +30,7 @@ public class DeleteGroupQnAServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int gqnano = Integer.parseInt(request.getParameter("gqnano"));
 		if(new GroupQnAService().deleteGroupQnA(gqnano) > 0){
-			response.sendRedirect("views/main/QnA/QnADetail.jsp");
+			response.sendRedirect("/studyhub/gqnapreview");
 		}
 	}
 
@@ -43,3 +43,4 @@ public class DeleteGroupQnAServlet extends HttpServlet {
 	}
 
 }
+

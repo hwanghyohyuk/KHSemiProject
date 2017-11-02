@@ -45,10 +45,10 @@ public class QnACommentSelectServlet extends HttpServlet {
 		for(QComment qc : list){
 			JSONObject job = new JSONObject();
 			job.put("qnano", qc.getQnaNo());
-			job.put("comment", URLEncoder.encode(qc.getContent(), "UTF-8"));
+			job.put("comment", qc.getContent());
 			job.put("commentno", qc.getCommentNo());
 			job.put("uploaddate", URLEncoder.encode(qc.getStrUploadDate(), "UTF-8"));
-			job.put("username", URLEncoder.encode(qc.getCommentWriter(), "UTF-8"));
+			job.put("username", qc.getCommentWriter());
 			
 			jarr.add(job);
 		}

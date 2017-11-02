@@ -33,7 +33,6 @@ String deadlineDate = sdf.format(cal.getTime());
 			모집게시판 <small>글쓰기</small>
 		</h1>
 	</div>
-
 	<form class="form-horizontal" action="/studyhub/boardinsert"
 		method="post" id='boardinsert' name='boardinsert'>
 		<div class="form-group">
@@ -90,19 +89,23 @@ String deadlineDate = sdf.format(cal.getTime());
 		<div class="form-group">
 			<label for="bwriter" class="col-sm-2 control-label">작성자</label>
 			<div class="col-sm-10">
-				<input type="hidden" class="form-control" name="bwriterno"
-					id="bwriterno" value="<%=user.getUserNo()%>"> <input
-					type="text" readonly class="form-control" name="bwriter"
-					id="bwriter" value="<%=user.getUserName()%>">
+				<input type="hidden" class="form-control" name="bwriterno" id="bwriterno" value="<%= user.getUserNo() %>">
+				<input type="text" readonly class="form-control" name="bwriter" id="bwriter" value="<%= user.getUserName() %>">
 			</div>
 		</div>
 		<hr>
 		<div class="form-group">
 			<label for="bcontent" class="col-sm-2 control-label">내용</label>
 			<div class="col-sm-10">
-				<textarea class="form-control" rows="10" name="bcontent"
-					id="bcontent" placeholder="내용"></textarea>
+				<textarea class="form-control" rows="10" name="bcontent" id="bcontent"
+					placeholder="내용"></textarea>
 			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="fileupload" class="col-sm-2 control-label">파일
+				업로드</label> <input type="file" id="fileupload">
+			<p class="help-block"></p>
 		</div>
 		<hr>
 		<div class="form-group">

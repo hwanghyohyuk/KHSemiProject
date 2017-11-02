@@ -29,12 +29,15 @@
 <div class="row">
 	<h2 id="heading">공지글보기</h2>
 	<div id="inner"
-		class="col-lg-9 col-lg-offset-1 col-md-9 col-md-offset-1 col-sm-8 col-sm-offset-1 col-xs-10">
+		class="col-lg-8 col-lg-offset-2 col-md-9 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xm-8 col-xs-2">
 
 		<hr id="first-line">
 		<div class="head-text">
 			<h3 id="notice-title"><%=gNotice.getTitle()%></h3>
-			<label class="writer-label">작성자: <%=gNotice.getUploader_name()%> </label>
+			<br>
+			<label class="writer-labe">작성자:<%=gNotice.getUploader_name()%> </label>
+			<br>
+			<label class="writer-labe">작성날짜:<%=gNotice.getUploadDate() %></label>
 		</div>
 			<hr id="second-line">
 
@@ -44,7 +47,7 @@
 		<hr>
 		<div class="col-sm-offset-2 col-sm-10">
 				<%
-					if (user.getUserNo() == gNotice.getUploader()) {
+					if (user.getUserNo() == gNotice.getUploader()||group.getAuthorityNo() == 2) {
 				%>
 				<a class="btn btn-primary main-back pull-right"
 					href="javascript:checkDelete(<%=gNotice.getNoticeNo()%>)">삭제</a>
@@ -78,7 +81,6 @@
 			id="comment-write" placeholder="댓글을 달아주세요"> 
 			<button class="btn btn-info btn-sm" onclick="insert();">댓글달기</button>
 		</div>
-	</div>
 
 
 	

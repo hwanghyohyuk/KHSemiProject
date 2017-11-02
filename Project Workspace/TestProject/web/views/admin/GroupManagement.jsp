@@ -27,7 +27,7 @@
 			<h2>그룹관리</h2>			
 			
 			<div class="top-area">
-				<form action="/studyhub/qnasearch" method="post" class="admin-search">
+				<form action="/studyhub/groupmanagementsearch" method="post" class="admin-search">
 					<select id="groupsearch-by" name="search-by">
 						<option value="group_name">그룹명</option>
 						<option value="g_category">카테고리</option>

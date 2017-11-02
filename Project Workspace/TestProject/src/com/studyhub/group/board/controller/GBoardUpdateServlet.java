@@ -56,7 +56,6 @@ public class GBoardUpdateServlet extends HttpServlet {
 		gBoard.setAccessNo(accessNo);
 		gboardService = new GBoardService();
 		
-		System.out.println(gBoard);
 		RequestDispatcher view = null;
 		
 		if(gboardService.updateGBoard(gBoard) >0){
