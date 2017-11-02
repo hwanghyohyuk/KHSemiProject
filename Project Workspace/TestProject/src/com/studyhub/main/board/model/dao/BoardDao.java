@@ -270,10 +270,10 @@ public class BoardDao {
 		ResultSet rset = null;
 
 		
-		String query = "select group_no, group_name"
-				+ " from boardlistview"
-				+ " where user_name = (select user_name from tb_user where user_no = ?) and"
-				+ " group_name not in (select group_name from boardlistview where status = '모집중')";
+		String query = "select group_no, group_name "
+				+ "from tb_group join tb_ung using(group_no) join tb_user using(user_no)"
+				+ "where user_name = (select user_name from tb_user where user_no = ?) and authority_no=2 and "
+				+ "group_name not in (select group_name from boardlistview where status = '모집중')";
 
 		try {
 			pstmt = con.prepareStatement(query);

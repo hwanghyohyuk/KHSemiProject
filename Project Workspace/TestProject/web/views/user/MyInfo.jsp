@@ -98,13 +98,13 @@ $(function pleaseLogin() {
 								async : false,
 								success : function(data) {
 								if(data==1){
-									alert('성공적으로 수정되었습니다.');
+									alert('성공적으로 수정되었습니다. 다시 한번 로그인 해주세요.');
 								}else if(data==0){
 									alert('수정 오류 발생');
 								}
 								}
 							});
-							location.href="/studyhub/main";
+							location.href="/studyhub/logout";
 						}
 					}
 					</script>
@@ -145,9 +145,6 @@ $(function pleaseLogin() {
 					<div
 						style="display: table-cell; vertical-align: middle; width: 100%"
 						align="center">
-						<p>나의 그룹</p>
-						<br>
-						<p>리스트</p>
 					</div>
 				</div>
 			</div>
