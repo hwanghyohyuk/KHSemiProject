@@ -29,10 +29,11 @@ $(function pleaseLogin() {
 </script>
 <%}%>
 <div class="container">
-	<div class="row">
+	<div class="row" id="wrapper">
 		<div class="head">
 			<span id="title" style="margin-left: 10%">나의 그룹</span>
 		</div>
+		<div id="cover-left"></div>
 		<div class="sliderG">
 			<div class="div-btn">
 				<button class="btn-left" onClick="imgMove(0,'g');">
@@ -49,6 +50,7 @@ $(function pleaseLogin() {
 					<img class="btn-right" src="/studyhub/images/slider.png">
 				</button>
 			</div>
+			<div id="cover-right"></div>
 		</div>
 	</div>
 	<br>
