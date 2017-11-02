@@ -33,7 +33,7 @@ public class GQNACommentDeleteServlet extends HttpServlet {
 		int commentno = Integer.parseInt(request.getParameter("commentno"));
 		
 		if(new GroupQnAService().DeleteComment(commentno) > 0) {
-			response.sendRedirect("/studyhub/gqnapreview");
+			response.sendRedirect("views/group/groupQnA/QnAList.jsp");
 		}
 	}
 

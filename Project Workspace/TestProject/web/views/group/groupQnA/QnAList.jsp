@@ -292,9 +292,9 @@
 
 
 <script type="text/javascript">
+	var basic = 0;
 	var startpage = 9;
 	var endpage = 0;
-	var zero = 0;
 	
 	$(function(){
 		selectQnA(startpage, endpage);
@@ -343,7 +343,9 @@
 			});
 			$("#title").val("");
 			$("#content").val("");
-			selectQnA(startpage, zero);
+			startpage = 9;
+			endpage = 0;
+			selectQnA(startpage, endpage);
 			return true
 		}
 	}
@@ -363,11 +365,11 @@
 					if(user_no == json.list[i].user_no){
 					values += 
 						"<div class='panel panel-default col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='widthsize'>" +
-							"<div class='panel-heading' role='tab' id='heading" + (i+endpage) + "'>" +
+							"<div class='panel-heading' role='tab' id='heading" + i + "'>" +
 								"<h4 class='panel-title'>" +
 									"<div class='btn btn-default btn-sm' id='read'>" +
 										"<div class='col-xs-10 col-sm-10 col-md-11'>" +
-											"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + (i+endpage) + "' aria-expanded='false' aria-controls='collapse" + (i+endpage) + "'>" +
+											"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + i + "' aria-expanded='false' aria-controls='collapse" + i + "'>" +
 												"<div class='panel panel-primary'>" +
 													"<div class='panel-heading' id='title_size'>" +
 														"<div class='col-xs-9 col-sm-9 col-md-10'>" +
@@ -397,7 +399,7 @@
 									"</div>" +
 								"</h4>" +
 							"</div>" +
-								"<div id='collapse"+ (i+endpage) +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ (i+endpage) +"'>" +
+								"<div id='collapse"+ i +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ i +"'>" +
 									"<div class='list-group'>" +
 										"<ul id='commentbody" + json.list[i].g_qna_no + "'>" +
 										"</ul>" +
@@ -416,11 +418,11 @@
 					else {
 						values += 
 							"<div class='panel panel-default col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='widthsize'>" +
-							"<div class='panel-heading' role='tab' id='heading" + (i+endpage) + "'>" +
+							"<div class='panel-heading' role='tab' id='heading" + i + "'>" +
 								"<h4 class='panel-title'>" +
 									"<div class='btn btn-default btn-sm' id='read'>" +
 										"<div class='col-xs-10 col-sm-10 col-md-11'>" +
-											"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + (i+endpage) + "' aria-expanded='false' aria-controls='collapse" + (i+endpage) + "'>" +
+											"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + i + "' aria-expanded='false' aria-controls='collapse" + i + "'>" +
 												"<div class='panel panel-primary'>" +
 													"<div class='panel-heading' id='title_size'>" +
 														"<div class='col-xs-9 col-sm-9 col-md-10'>" +
@@ -445,7 +447,7 @@
 									"</div>" +
 								"</h4>" +
 							"</div>" +
-								"<div id='collapse"+ (i+endpage) +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ (i+endpage) +"'>" +
+								"<div id='collapse"+ i +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ i +"'>" +
 									"<div class='list-group'>" +
 										"<ul id='commentbody" + json.list[i].g_qna_no + "'>" +
 										"</ul>" +
@@ -485,7 +487,9 @@
 			async: false
 		});
 		alert("삭제되었습니다.");
-		selectQnA(startpage, zero);
+		startpage = 9;
+		endpage = 0;
+		selectQnA(startpage, endpage);
 	}
 	
 	function selectOne(param){
@@ -528,7 +532,9 @@
 		});
 		alert("수정되었습니다.");
 		$("#qnamodal").modal("hide");
-		selectQnA(startpage, zero);
+		startpage = 9;
+		endpage = 0;
+		selectQnA(startpage, endpage);
 	}
 	
 	function qnasearch(){
@@ -537,7 +543,6 @@
 		var groupno = "<%= group.getGroupNo() %>";
 		var user_no = "<%= user.getUserNo() %>";
 		var searchdata = $("#qnasearch").val();
-		console.log(searchdata);
 		$.ajax({
 			url: "/studyhub/searchgroupqna",
 			data: { searchdata: searchdata, groupno: groupno },
@@ -550,11 +555,11 @@
 					if(user_no == json.list[i].user_no){
 						values += 
 							"<div class='panel panel-default col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='widthsize'>" +
-							"<div class='panel-heading' role='tab' id='heading" + (i+endpage) + "'>" +
+							"<div class='panel-heading' role='tab' id='heading" + i + "'>" +
 								"<h4 class='panel-title'>" +
 									"<div class='btn btn-default btn-sm' id='read'>" +
 										"<div class='col-xs-10 col-sm-10 col-md-11'>" +
-											"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + (i+endpage) + "' aria-expanded='false' aria-controls='collapse" + (i+endpage) + "'>" +
+											"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + i + "' aria-expanded='false' aria-controls='collapse" + i + "'>" +
 												"<div class='panel panel-primary'>" +
 													"<div class='panel-heading' id='title_size'>" +
 														"<div class='col-xs-9 col-sm-9 col-md-10'>" +
@@ -581,7 +586,7 @@
 									"</div>" +
 								"</h4>" +
 							"</div>" +
-								"<div id='collapse"+ (i+endpage) +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ (i+endpage) +"'>" +
+								"<div id='collapse"+ i +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ i +"'>" +
 									"<div class='list-group'>" +
 										"<ul id='commentbody" + json.list[i].g_qna_no + "'>" +
 										"</ul>" +
@@ -600,11 +605,11 @@
 						else {
 							values += 
 								"<div class='panel panel-default col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1' id='widthsize'>" +
-								"<div class='panel-heading' role='tab' id='heading" + (i+endpage) + "'>" +
+								"<div class='panel-heading' role='tab' id='heading" + i + "'>" +
 									"<h4 class='panel-title'>" +
 										"<div class='btn btn-default btn-sm' id='read'>" +
 											"<div class='col-xs-10 col-sm-10 col-md-11'>" +
-												"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + (i+endpage) + "' aria-expanded='false' aria-controls='collapse" + (i+endpage) + "'>" +
+												"<a data-toggle='collapse' data-parent='#accordion' onclick='commentconfirm(" + json.list[i].g_qna_no + ")' href='#collapse" + i + "' aria-expanded='false' aria-controls='collapse" + i + "'>" +
 													"<div class='panel panel-primary'>" +
 														"<div class='panel-heading' id='title_size'>" +
 															"<div class='col-xs-9 col-sm-9 col-md-10'>" +
@@ -629,7 +634,7 @@
 										"</div>" +
 									"</h4>" +
 								"</div>" +
-									"<div id='collapse"+ (i+endpage) +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ (i+endpage) +"'>" +
+									"<div id='collapse"+ i +"' class=' panel-collapse collapse'	role='tabpanel' aria-labelledby='heading"+ i +"'>" +
 										"<div class='list-group'>" +
 											"<ul id='commentbody" + json.list[i].g_qna_no + "'>" +
 											"</ul>" +
