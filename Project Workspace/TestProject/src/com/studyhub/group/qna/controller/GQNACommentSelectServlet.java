@@ -66,7 +66,7 @@ public class GQNACommentSelectServlet extends HttpServlet {
 			out.close();
 			
 		} else {
-			response.sendRedirect("views/group/groupQnA/QnAList.jsp");
+			response.sendRedirect("/studyhub/gqnapreview");
 		}
 	}
 
