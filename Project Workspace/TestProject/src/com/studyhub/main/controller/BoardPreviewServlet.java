@@ -50,7 +50,7 @@ public class BoardPreviewServlet extends HttpServlet {
 			JSONObject job = new JSONObject();
 
 			job.put("board_no", b.getBoardNo());
-			job.put("title", URLEncoder.encode(b.getTitle(), "UTF-8"));
+			job.put("title", b.getTitle());
 			job.put("location", URLEncoder.encode(b.getLocation(), "UTF-8"));
 			job.put("category_name", URLEncoder.encode(b.getCategoryName(), "UTF-8"));
 			if(b.getgImgRename() == null){
