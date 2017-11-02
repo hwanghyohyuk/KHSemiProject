@@ -36,7 +36,7 @@ public class InsertGroupQnAServlet extends HttpServlet {
 		String content = request.getParameter("content");
 
 		if(new GroupQnAService().InsertQnA(userno, groupno, title, content) > 0) {
-				response.sendRedirect("/studyhub/gqnapreview");
+				response.sendRedirect("views/group/groupQnA/QnAList.jsp");
 		}
 	}
 

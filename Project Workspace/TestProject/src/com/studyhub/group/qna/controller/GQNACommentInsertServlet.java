@@ -36,7 +36,7 @@ public class GQNACommentInsertServlet extends HttpServlet {
 		System.out.println(content);
 		
 		if(new GroupQnAService().InsertComment(gqnano, userno, content) > 0 ) {
-			response.sendRedirect("/studyhub/gqnapreview");
+			response.sendRedirect("views/group/groupQnA/QnAList.jsp");
 		}
 	}
 
