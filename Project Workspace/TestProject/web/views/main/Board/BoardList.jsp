@@ -27,34 +27,7 @@
 	width: 140px;
 	height: 140px;
 }
-/* 썸네일 스타일 테스트중  */
-.thumbnail {
-	display: inline-block;
-}
 
-#grouppic {
-	width: 200px;
-	height: 200px;
-}
-
-#gname {
-	position: absolute;
-	background: rgba(0, 0, 0, 0.6);
-	color: white;
-	box-sizing: border-box;
-	margin-top: -70px;
-	height: 75px;
-	width: 200px;
-}
-
-#g-text,#g-title {
-	z-index: 100;
-	color: white;
-	text-align: center;
-}
-#g-text{
-	margin-top: 15px;
-}
 </style>
 
 <!-- /head , body -->
@@ -97,32 +70,50 @@
 		</div>
 	</div>
 	<hr>
-	<div class="container thumbnails">
-		<%
-			if (list.size() > 0) {
+	<div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>그룹이미지</th>
+					<th>분류</th>
+					<th>그룹명</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>마감일</th>					
+					<th>상태</th>
+					<th>지역</th>				
+					<th>스터디방식</th>		
+					<th>회원수</th>					
+				</tr>
+			</thead>
+			<tbody>
+			<%
 				for (Board b : list) {
-		%>
-		<div class="thumbnail">
-			<a
-				href="/studyhub/boardview?bno=<%=b.getBoardNo()%>&page=<%=currentPage%>">
-				<img id="grouppic"
-				src="/studyhub/images/groupimg/<%=b.getgImgRename()%>"
-				class="img-rounded">
-				<div id="gname">
-					<p id="g-text"><%=b.getGroupName()%></p>
-					<p id="g-title"><%=b.getTitle()%></p>
-				</div>
-			</a>
-		</div>
-
-		<%
-			}
-			} else {
-		%>
-		<a href="/studyhub/boardlist">검색 조건에 맞는 결과가 없습니다.</a>
-		<%
-			}
-		%>
+			%>			
+				<tr>
+					<td><img id="groupimg" src="/studyhub/images/groupimg/<%=b.getgImgRename()%>"></td>
+					<td><%=b.getCategoryName() %></td>
+					<td><%=b.getGroupName() %></td>
+					<td>
+						<%
+							if (user != null) {
+						%> <a
+						href="/studyhub/boardview?bno=<%=b.getBoardNo()%>&page=<%=currentPage%>">
+							<%=b.getTitle()%>
+					</a> <%} else {%> <%=b.getTitle()%> <%	} %>
+					</td>
+					<td><%=b.getUploaderName()%></td>
+					<td><%=b.getUploadDate()%></td>
+					<td><%=b.getDeadlineDate() %></td>
+					<td><%=b.getStatus() %></td>
+					<td><%=b.getLocation() %></td>
+					<td><%=b.getAttributeName() %></td>
+					<td><%=b.getMemberCount() %></td>
+				</tr>			
+			<%}%>
+			</tbody>
+		</table>
 	</div>
 	<hr>
 	<div align="right">

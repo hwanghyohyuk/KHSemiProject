@@ -31,8 +31,9 @@
 <%@ include file="/views/include/group/nav.jsp"%>
 
 <!-- 메인 컨텐츠 -->
-<div class="row" >
-	<div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-8 col-sm-offset-1 col-xm-8 col-xs-1">
+<div class="container" style="height: 90vh;">
+
+	<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-1 col-xm-8 col-xs-1" id="fswrapper">
 	<h2 id="heading">Shared Files</h2>
 	</div>
 	<div id="inner"
@@ -78,7 +79,6 @@
 		</div>
 	</div>
 </div>
-
 <!--푸터 부분-->
 <%@ include file="/views/include/main/footer.jsp"%>
 <!--페이지 끝-->

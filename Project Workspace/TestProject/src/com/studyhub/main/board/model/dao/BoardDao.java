@@ -45,6 +45,7 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
+
 		String query = "select * from boardlistview "
 				+ "where rnum >= ? and rnum <= ?";
 
@@ -70,7 +71,7 @@ public class BoardDao {
 					b.setUploaderName(rset.getString("user_name"));
 					b.setContent(rset.getString("content"));
 					b.setUploadDate(rset.getDate("upload_date"));
-					b.setDeadlineDate(rset.getDate("deadline_date"));
+					b.setDeadlineDate(rset.getDate("upload_date"));
 					b.setStatus(rset.getString("status"));
 					b.setGroupName(rset.getString("group_name"));
 					b.setLocation(rset.getString("location"));
@@ -78,8 +79,9 @@ public class BoardDao {
 					b.setAttributeName(rset.getString("attribute_name"));
 					b.setgImgRename(rset.getString("g_img_rename"));
 					b.setMemberCount(rset.getInt("memberCount"));
-
+					
 					list.add(b);
+					
 				}
 			}
 

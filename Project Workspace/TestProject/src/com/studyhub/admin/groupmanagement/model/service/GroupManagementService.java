@@ -20,10 +20,10 @@ public class GroupManagementService {
 		return list;
 	}
 	
-	public ArrayList<Group> groupSearch(String keyword){
+	public ArrayList<Group> groupNameSearch(String keyword){
 		Connection con = getConnection();
 		gmd =  new GroupManagementDao();
-		ArrayList<Group> list = gmd.groupSearch(con, keyword);
+		ArrayList<Group> list = gmd.groupNameSearch(con, keyword);
 		close(con);
 		return list;		
 	}
@@ -48,6 +48,14 @@ public class GroupManagementService {
 			rollback(con);
 		close(con);
 		return result;
+	}
+
+	public ArrayList<Group> CategorySearch(String keyword) {
+		Connection con = getConnection();
+		gmd =  new GroupManagementDao();
+		ArrayList<Group> list = gmd.CategorySearch(con, keyword);
+		close(con);
+		return list;
 	}
 	
 	

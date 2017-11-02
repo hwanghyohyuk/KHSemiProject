@@ -4,8 +4,13 @@ body{
 	background: #f4f4f4;
 }
 #fswrapper{
-	height: 90vh;
+	height: 110vh;
 	
+}
+#head-text{
+	margin-left: 2vw;
+	display: block;
+	margin-bottom: 2vh;
 }
 
 #title{
@@ -14,13 +19,11 @@ body{
 	font-size: 2rem;
 }
 .category-tab{
-	margin: 3vw;
+	margin: 2vh 1vw;
 	
 }
 .fileboxes {
 	width: 80vw;
-	text-align: center;
-	margin: 3vw;
 }
 
 .filebox {
@@ -32,7 +35,6 @@ body{
 	position: relative;
 	text-align: center;
 	background: aliceblue;
-	float: left;
 	margin: 3vh 3vh;
 	border-radius: 10px 0 0 0;
 	padding: 1vh 1vh;
@@ -83,10 +85,12 @@ body{
 }
 
 #search-area{
-	margin-left: 40vw;
+	margin-left: 45vw;
 }
 #search-input{
 	height: 4vh;
+	width: 13vw;
+	padding: 5px 5px;
     border: 1px solid silver;
 }
 #search-btn{

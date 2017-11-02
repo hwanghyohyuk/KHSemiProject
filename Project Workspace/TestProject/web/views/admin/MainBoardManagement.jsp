@@ -41,7 +41,7 @@
 <div class="container">
 	<div class="page-header">
 		<h1>
-			모집게시판 <small>원하는 그룹을 찾자.</small>
+			모집게시판 <small>관리</small>
 		</h1>
 		<br>
 	</div>
