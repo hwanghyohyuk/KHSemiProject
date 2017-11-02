@@ -569,11 +569,11 @@ INSERT INTO TB_USER VALUES(11,	'jnh@a.a',	'조남훈',	'hXOJpFbLxrkN37kwqnGAHg==
 PROMPT INSERT DATA 그룹생성..
 INSERT INTO TB_GROUP VALUES(1, 'TOEIC', 1, '서울', 1, '토익온오프라인모임', null, 'sample.JPG' ,DEFAULT,null);
 INSERT INTO TB_GROUP VALUES(2, '영어회화방',  2, '경기도', 2, '만나서회화까지', null, 'sample.JPG',DEFAULT,null);
-INSERT INTO TB_GROUP VALUES(3, '정보처리기사' ,1, '서울', 2, '자격증취득을위해', NULL, 'sample.JPG', DEFAULT, NULL);
+INSERT INTO TB_GROUP VALUES(3, '정보처리기사' ,5, '서울', 2, '자격증취득을위해', NULL, 'sample.JPG', DEFAULT, NULL);
 INSERT INTO TB_GROUP VALUES(4,	'토익700반'	,2,	'서울',	 1,	'토익700반입니다.',	'700.JPG',	'20171102091405.JPG'	,0,	'2017-11-02');
 INSERT INTO TB_GROUP VALUES(5,	'토익800반'	,2,	'서울',	1,	'토익800반입니다.	', '800.JPG',	'20171102091424.JPG',	0,	'2017-11-02');
 INSERT INTO TB_GROUP VALUES(6,	'토익900반',	2,	'서울',	1,	'토익900반입니다.',	'900.jpg',	'20171102091517.jpg',	0,	'2017-11-02');
-INSERT INTO TB_GROUP VALUES(7, 'JS정보공유',	2, '서울',	1	,'정보공유그룹입니다.','javascript.jpg',	'20171102091654.jpg',	0	,'2017-11-02');
+INSERT INTO TB_GROUP VALUES(7, 'JS정보공유',	5, '서울',	1	,'정보공유그룹입니다.','javascript.jpg',	'20171102091654.jpg',	0	,'2017-11-02');
 INSERT INTO TB_GROUP VALUES(8,	'토익',	2,	'서울',	1,	'토익',	'toeic.jpg',	'20171102091805.jpg',	0,	'2017-11-02');
 INSERT INTO TB_GROUP VALUES(9,	'중국어기초부터'	2,	'경기'	,3,	'중국어기초반입니다.'	,'중국어.JPG',	'20171102092636.JPG',	0,	'2017-11-02');
 INSERT INTO TB_GROUP VALUES(10,	'커피에대해',	2,	'서울',	8,	'커피에 대한 자료공유'	,'커피.jpg',	'20171102092837.jpg'	,0,	'2017-11-02');
