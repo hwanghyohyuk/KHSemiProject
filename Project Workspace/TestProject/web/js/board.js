@@ -43,7 +43,7 @@ function sendMessage(senderNo,receiverNo,groupNo){
 	checkBtnState(sender,groupno);
 	state=0;
 	}
-	history.back();
+	location.href='/studyhub/boardlist';
 }
 
 function checkBtnState(senderNo,groupNo){
@@ -57,13 +57,13 @@ function checkBtnState(senderNo,groupNo){
 		async : false,
 		success : function(data) {
 			if(data==0){
-				$("#joinbtn").prop("disabled", true);
+				$("#joinbtn").unbind('click', false);
 				$("#joinbtn").html("가입대기 중");
 			}else if(data==1){
-				$("#joinbtn").prop("disabled", true);
+				$("#joinbtn").unbind('click', false);
 				$("#joinbtn").html("가입 됨");
 			}else if(data==2){
-				$("#joinbtn").prop("disabled", false);
+				$("#joinbtn").bind('click', false);
 				$("#joinbtn").html("가입신청");
 			}
 		}
