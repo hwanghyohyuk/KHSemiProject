@@ -253,13 +253,13 @@ public class GMainDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 			
-		String query = "select g_qna_no, title, user_name, strdate from ("
-					+ "select rownum as rnum, g_qna_no, title, user_name, to_char(upload_date, 'yyyy-MM-dd') as strdate "
-					+ "from tb_g_qna "
-					+ "join tb_user on (uploader=user_no) "
-					+ "where group_no = ? "
-					+ "order by g_qna_no desc) "
-					+ "where rnum < 4";
+		String query = "select g_qna_no, title, user_name, to_char(upload_date, 'yyyy-MM-dd') as strdate " + 
+						"from tb_g_qna " + 
+						"join tb_user on (uploader=user_no) " + 
+						"where group_no = ? " + 
+						"and g_qna_no between (select max(g_qna_no) from tb_g_qna) - 2 " +
+						"and (select max(g_qna_no) from tb_g_qna) " + 
+						"order by g_qna_no desc";
 		
 		try {
 			pstmt = con.prepareStatement(query);

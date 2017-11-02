@@ -381,12 +381,12 @@
 				var meetingName = "";
 				var scno = "";
 				for ( var i in json.list) {
-					meetingDate += decodeURIComponent(json.list[i].meeting_date);
+					meetingDate += decodeURIComponent(json.list[i].meeting_date).replace(/\+/gi, " ");
 					ampm += decodeURIComponent(json.list[i].ampm);
 					hour += decodeURIComponent(json.list[i].hour);
 					minute += decodeURIComponent(json.list[i].minute);
 					onoff += decodeURIComponent(json.list[i].onoff);
-					meetingName += decodeURIComponent(json.list[i].meeting_name);
+					meetingName += decodeURIComponent(json.list[i].meeting_name).replace(/\+/gi, " ");
 					scno += json.list[i].schedule_no;
 				}
 				
