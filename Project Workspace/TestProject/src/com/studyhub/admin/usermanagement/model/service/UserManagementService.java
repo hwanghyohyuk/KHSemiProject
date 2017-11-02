@@ -19,5 +19,19 @@ public class UserManagementService {
 		return list;
 	}
 
+	public ArrayList<User> userNameSearch(String keyword) {
+		Connection con = getConnection();
+		ArrayList<User> list = new UserManagementDao().userNameSearch(con, keyword);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<User> emailSearch(String keyword) {
+		Connection con = getConnection();
+		ArrayList<User> list = new UserManagementDao().emailSearch(con, keyword);
+		close(con);
+		return list;
+	}
+
 	
 }
