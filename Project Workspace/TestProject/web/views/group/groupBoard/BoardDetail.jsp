@@ -45,7 +45,7 @@
 <hr>
 	<div class="col-sm-offset-2 col-sm-10">
 	<%
-					if (user.getUserNo() == gBoard.getUploader()) {
+					if (user.getUserNo() == gBoard.getUploader()||group.getAuthorityNo()==2) {
 				%>
 			<a class="btn btn-primary main-back pull-right" href="javascript:checkDelete(<%=gBoard.getgBoardNo()%>)">삭제</a>
 		
