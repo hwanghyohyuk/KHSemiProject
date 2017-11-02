@@ -299,7 +299,7 @@ public class GMainDao {
 					+ "from tb_g_notice "
 					+ "join tb_user on (uploader=user_no) "
 					+ "where group_no = ? "
-					+ "order by notice_no desc) "
+					+ "order by upload_date desc) "
 					+ "where rnum < 6";
 		
 		try {
