@@ -15,7 +15,7 @@
 <%@ include file="/views/include/main/header.jsp"%>
 
 <%
-	if (user==null) {
+	if (user == null) {
 %>
 <script type="text/javascript">
 $(function pleaseLogin() {
@@ -23,7 +23,9 @@ $(function pleaseLogin() {
 		location.href = "/studyhub/login";
 	});
 </script>
-<%}%>
+<%
+	}
+%>
 <!-- 메인 컨텐츠 -->
 <div class="container">
 	<div class="row center-block">
@@ -36,24 +38,27 @@ $(function pleaseLogin() {
 					<div class="form-group">
 						<label for="email" class="col-sm-4 col-xs-10 control-label">이메일</label>
 						<div class="col-sm-8 col-xs-10">
-							<input type="text" readonly class="form-control" id="email" name="email" value="<%=user.getEmail() %>"></input>
+							<input type="text" readonly class="form-control" id="email"
+								name="email" value="<%=user.getEmail()%>"></input>
 						</div>
 					</div>
 					<div class="form-group ">
 						<label for="name" class="col-sm-4 col-xs-10 control-label">이름</label>
 						<div class="col-sm-8 col-xs-10">
-							<input type="text" readonly class="form-control" id="name" name="name" value="<%=user.getUserName() %>"></input>
+							<input type="text" readonly class="form-control" id="name"
+								name="name" value="<%=user.getUserName()%>"></input>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="name" class="col-sm-4 col-xs-10 control-label">연락처</label>
 						<div class="col-sm-6 col-xs-8">
 							<input type="tel" class="form-control" id="modifytel"
-								name="phone" placeholder="연락처 '-' 없이" value='<%=user.getPhone() %>'
-								oninput='myinfoCheckPhone()' onblur='myinfoCheckPhone()' onclick='myinfoCheckPhone()'>
+								name="phone" placeholder="연락처 '-' 없이"
+								value='<%=user.getPhone()%>' oninput='myinfoCheckPhone()'
+								onblur='myinfoCheckPhone()' onclick='myinfoCheckPhone()'>
 						</div>
 						<div class="col-sm-2 col-xs-2">
-						<p id='modifyteltxt'></p>
+							<p id='modifyteltxt'></p>
 						</div>
 					</div>
 					<div class="form-group">
@@ -61,10 +66,12 @@ $(function pleaseLogin() {
 							변경</label>
 						<div class="col-sm-6 col-xs-8">
 							<input type="password" class="form-control" id="modifypwd"
-								name="modifypwd" placeholder="Modify Password" oninput='myinfoPwdInput()' onblur='myinfoPwdInput()' onclick='myinfoPwdInput()'>
+								name="modifypwd" placeholder="Modify Password"
+								oninput='myinfoPwdInput()' onblur='myinfoPwdInput()'
+								onclick='myinfoPwdInput()'>
 						</div>
 						<div class="col-sm-2 col-xs-2">
-						<p id='modifypwdtxt'></p>
+							<p id='modifypwdtxt'></p>
 						</div>
 					</div>
 					<div class="form-group">
@@ -72,66 +79,72 @@ $(function pleaseLogin() {
 							확인</label>
 						<div class="col-sm-6 col-xs-8">
 							<input type="password" class="form-control" id="confirmpwd"
-								name="confirmpwd" placeholder="Confirm Password" oninput='myinfoPwdConfirm()' onblur='myinfoPwdConfirm()' onclick='myinfoPwdConfirm()'>
+								name="confirmpwd" placeholder="Confirm Password"
+								oninput='myinfoPwdConfirm()' onblur='myinfoPwdConfirm()'
+								onclick='myinfoPwdConfirm()'>
 						</div>
 						<div class="col-sm-2 col-xs-2">
-						<p id='confirmpwdtxt'></p>
+							<p id='confirmpwdtxt'></p>
 						</div>
 					</div>
 					<hr>
-					<a class="btn btn-primary pull-right" id="modifybtn" onclick="updateInfo()">정보
-						수정</a>
+					<a class="btn btn-primary pull-right" id="modifybtn"
+						onclick="updateInfo()">정보 수정</a>
 					<script type="text/javascript">
 					function updateInfo(){
-						var email = "<%=user.getEmail()%>";
-						var phone = $("#modifytel").val();
-						var modifypwd = $("#modifypwd").val();
-						if(confirm("입력하신 정보를 수정하시겠습니까?")){
-							$.ajax({
-								url : "/studyhub/myinfoupdate",
-								type : "post",
-								data : {
-									email:email,
-									pwd:modifypwd,
-									phone:phone
-								},
-								async : false,
-								success : function(data) {
-								if(data==1){
-									alert('성공적으로 수정되었습니다. 다시 한번 로그인 해주세요.');
-								}else if(data==0){
-									alert('수정 오류 발생');
-								}
-								}
-							});
-							location.href="/studyhub/logout";
+						var email = "<%=user.getEmail()%>
+						";
+							var phone = $("#modifytel").val();
+							var modifypwd = $("#modifypwd").val();
+							if (confirm("입력하신 정보를 수정하시겠습니까?")) {
+								$
+										.ajax({
+											url : "/studyhub/myinfoupdate",
+											type : "post",
+											data : {
+												email : email,
+												pwd : modifypwd,
+												phone : phone
+											},
+											async : false,
+											success : function(data) {
+												if (data == 1) {
+													alert('성공적으로 수정되었습니다. 다시 한번 로그인 해주세요.');
+												} else if (data == 0) {
+													alert('수정 오류 발생');
+												}
+											}
+										});
+								location.href = "/studyhub/logout";
+							}
 						}
-					}
 					</script>
-					<a onclick="deleteUser()" class="btn btn-primary pull-left" id="dropbtn">회원탈퇴</a>
+					<a onclick="deleteUser()" class="btn btn-primary pull-left"
+						id="dropbtn">회원탈퇴</a>
 					<script type="text/javascript">
-					function deleteUser(){
+						function deleteUser() {
 							var email = $("#email").val();
-							if(confirm("정말로 탈퇴하시겠습니까?")){
-								$.ajax({
-									url : "/studyhub/dropuser",
-									type : "post",
-									data : {
-										email:email
-									},
-									async : false,
-									success : function(data) {
-									if(data==1){
-										alert('성공적으로 탈퇴되어 계정이 휴면상태가 되었습니다. \n휴면상태는 1개월간 유지됩니다.\n다시 로그인하신다면 휴면상태가 해제됩니다.');
-										
-									}else if(data==0){
-										alert('탈퇴 오류 발생');
-									}
-									}
-								});
-								location.href="/studyhub/logout";
+							if (confirm("정말로 탈퇴하시겠습니까?")) {
+								$
+										.ajax({
+											url : "/studyhub/dropuser",
+											type : "post",
+											data : {
+												email : email
+											},
+											async : false,
+											success : function(data) {
+												if (data == 1) {
+													alert('성공적으로 탈퇴되어 계정이 휴면상태가 되었습니다. \n휴면상태는 1개월간 유지됩니다.\n다시 로그인하신다면 휴면상태가 해제됩니다.');
+
+												} else if (data == 0) {
+													alert('탈퇴 오류 발생');
+												}
+											}
+										});
+								location.href = "/studyhub/logout";
+							}
 						}
-					}
 					</script>
 				</form>
 			</div>
@@ -145,6 +158,8 @@ $(function pleaseLogin() {
 					<div
 						style="display: table-cell; vertical-align: middle; width: 100%"
 						align="center">
+						<img class="img-responsive center-block" alt=""
+							src="/studyhub/images/group2.jpg" style="margin-top: 10vh">
 					</div>
 				</div>
 			</div>
