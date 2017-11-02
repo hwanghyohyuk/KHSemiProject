@@ -39,7 +39,7 @@ public class GBoardDeleteServlet extends HttpServlet {
 		int no = Integer.parseInt(request.getParameter("groupno"));
 		
 		if(new GBoardService().deleteGBoard(no) > 0){
-			response.sendRedirect("/studyhub/gboardpreview?groupno=1");
+			response.sendRedirect("/studyhub/gboardpreview?groupno="+no);
 		}else{
 			RequestDispatcher view = request.getRequestDispatcher("views/group/groupBoard/BoardError.jsp");
 			request.setAttribute("message", "게시글 삭제 처리 실패!");

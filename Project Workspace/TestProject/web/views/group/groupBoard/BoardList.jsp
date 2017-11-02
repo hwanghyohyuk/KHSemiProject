@@ -54,7 +54,7 @@
 							for (GBoard gboard : list) {
 						%>
 						<tr>
-							<td><%=gboard.getgBoardNo()%></td>
+							<td><%=gboard.getRownum()%></td>
 							<td id="title_text"><a
 								href="/studyhub/gboardview?no=<%=gboard.getgBoardNo()%>"><%=gboard.getTitle()%></a></td>
 							<td><%=gboard.getUploaderName()%></td>
