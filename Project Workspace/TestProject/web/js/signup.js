@@ -214,7 +214,7 @@ function myinfoCheckPhone() {
 
 function myinfoToggleBtn() {
 	var activeBtn = pwdInputCheck+ pwdConfirmCheck + phoneCheck;
-	if (activeBtn >= 2) {
+	if (activeBtn >= 2 && pwdConfirmCheck == 1) {
 		$("#modifybtn").prop("disabled", false);
 		$("#modifybtn").css("background-color", "#004157");
 	} else {

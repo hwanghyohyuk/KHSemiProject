@@ -103,12 +103,6 @@ String deadlineDate = sdf.format(cal.getTime());
 		</div>
 		<hr>
 		<div class="form-group">
-			<label for="fileupload" class="col-sm-2 control-label">파일
-				업로드</label> <input type="file" id="fileupload">
-			<p class="help-block"></p>
-		</div>
-		<hr>
-		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<a class="btn btn-primary main-back pull-right" href="#" onclick="boardInsert()">등록</a>
 				<a class="btn btn-default pull-right" href="/studyhub/boardlist">취소</a>

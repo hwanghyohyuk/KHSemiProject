@@ -111,7 +111,7 @@ function boardlist() {
 								+ "\">"
 								+ "<img id=\"groupimg\" src=\"/studyhub/images/groupimg/"
 								+ decodeURIComponent(json.list[i].renameimg)
-								+ "\" /><div id='namewrap'><p id='imgname'>"+decodeURIComponent(json.list[i].title)+"</p></div></a> ";
+								+ "\" /><div id='namewrap'><p id='imgname'>"+json.list[i].title+"</p></div></a> ";
 					}
 					$("#board").html(values);
 				}
