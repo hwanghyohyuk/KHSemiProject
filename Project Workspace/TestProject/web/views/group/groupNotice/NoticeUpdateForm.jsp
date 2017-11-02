@@ -14,8 +14,8 @@
 %>
 <!--페이지 시작-->
 <%@ include file="/views/include/common/head.jsp"%>
-
-<style>
+<link rel="stylesheet" type="text/css" href="/studyhub/css/write_form.css">
+<!-- <style>
 #btns {
 	float: right;
 }
@@ -23,7 +23,7 @@
 #layout {
 	margin-top: 8vh;
 }
-</style>
+</style> -->
 <link rel="stylesheet" type="text/css" href="/studyhub/css/main.css">
 <%@ include file="/views/include/common/headend.jsp"%>
 <!--헤더 부분-->

@@ -155,7 +155,7 @@ function mygrouplist(userno) {
 								+"\">"
 								+ "<img id=\"groupimg\" src=\"/studyhub/images/groupimg/"
 								+ decodeURIComponent(json.list[i].renameimg)
-								+ "\"><div id='namewrap'><p id='imgname'>"+ decodeURIComponent(json.list[i].group_name) +"</p>" +
+								+ "\"><div id='namewrap'><p id='imgname'>"+ json.list[i].group_name +"</p>" +
 										"<p><span class='glyphicon glyphicon-user'></span>"+ json.list[i].usercount +"</p></div></a>";
 					}
 					$("#group").html(values);
