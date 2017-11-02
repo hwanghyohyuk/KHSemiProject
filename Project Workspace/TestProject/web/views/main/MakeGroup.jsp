@@ -168,6 +168,7 @@ var InputImage =
 	    	var ImagePre; 
 	        var ImgReader = new window.FileReader();
 	        var fileType = /^(?:image\/bmp|image\/gif|image\/jpeg|image\/png|image\/x\-xwindowdump|image\/x\-portable\-bitmap)$/i; 
+	 
 	        ImgReader.onload = function (Event) {
 	            if (!ImagePre) {
 	                var newPreview = document.getElementById("imagePreview");
@@ -177,20 +178,26 @@ var InputImage =
 	                newPreview.appendChild(ImagePre);
 	            }
 	            ImagePre.src = Event.target.result;
+	            
 	        };
 	 
 	        return function () {
+	         
 	            var img = document.getElementById("image").files;
 	           
 	            if (!fileType.test(img[0].type)) { 
 	             alert("이미지 파일을 업로드 하세요"); 
 	             return; 
 	            }
+	            
 	            ImgReader.readAsDataURL(img[0]);
 	        }
+	 
 	    }
-	    document.getElementById("imagePreview").src = document.getElementById("image").value;
-
+	   
+	            document.getElementById("imagePreview").src = document.getElementById("image").value;
+	 
+	      
 	})();
 </script>
 
