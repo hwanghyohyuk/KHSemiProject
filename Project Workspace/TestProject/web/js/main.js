@@ -90,7 +90,7 @@ function boardlist() {
 					var json = JSON.parse(JSON.stringify(data));
 					var values = "";
 					if(json.list.length >2){
-						$(".RollDivB").css("width","64%");
+						$(".RollDivB").css("width","67%");
 						$(".sliderB").css("margin","0 8% 5% 8%");
 					}else if(json.list.length>1){
 						$(".RollDivB").css("width","46%");
@@ -103,6 +103,7 @@ function boardlist() {
 						$(".RollDivB").css("text-align","center");
 						$(".RollDivB").css("line-height","240px");
 						$(".sliderB").css("margin","0 8% 5% 8%");
+						$(".RollDivB").css("width","50vw");
 					}
 					for ( var i in json.list) {
 						values += "<a id='a-img' href=\"/studyhub/boardview?bno="
@@ -132,7 +133,7 @@ function mygrouplist(userno) {
 					var json = JSON.parse(JSON.stringify(data));
 					var values = "";
 					if(json.list.length >2){
-						$(".RollDivG").css("width","64%");
+						$(".RollDivG").css("width","67%");
 						$(".sliderG").css("margin","0 8% 5% 8%");
 					}else if(json.list.length>1){
 						$(".RollDivG").css("width","46%");
@@ -146,6 +147,7 @@ function mygrouplist(userno) {
 						$(".RollDivG").css("line-height","50px");
 						$(".RollDivG").css("padding-top","80px");
 						$(".sliderG").css("margin","0 8% 5% 8%");
+						$(".RollDivB").css("width","50vw");
 					}
 					for ( var i in json.list) {
 						values += "<a id='a-img' href=\"/studyhub/gmainpreview?group_no="
