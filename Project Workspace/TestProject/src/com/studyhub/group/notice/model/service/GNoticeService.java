@@ -7,6 +7,7 @@ import java.util.HashMap;
 import com.studyhub.common.vo.GNComment;
 import com.studyhub.common.vo.GNotice;
 import com.studyhub.common.vo.Notice;
+import com.studyhub.common.vo.RSA;
 import com.studyhub.group.notice.model.dao.GNoticeDao;
 
 
@@ -111,6 +112,24 @@ public class GNoticeService {
 		ArrayList<GNComment> list = new GNoticeDao().selectComment(con, gnoticeno);
 		close(con);
 		
+		return list;
+	}
+
+	public int InsertRSA(String id, String pwd) {
+		Connection con = getConnection();
+		int result = new GNoticeDao().InserRSA(con,id,pwd);
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+
+	public ArrayList<RSA> SelectRSA() {
+		Connection con = getConnection();
+		ArrayList<RSA> list = new GNoticeDao().SelectRSA(con);
+		close(con);
 		return list;
 	}
 

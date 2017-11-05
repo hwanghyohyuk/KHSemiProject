@@ -1,11 +1,20 @@
 package com.studyhub.group.notice.model.dao;
 
+import java.security.Key;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.spec.RSAPrivateKeySpec;
+import java.security.spec.RSAPublicKeySpec;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.crypto.Cipher;
+
 import com.studyhub.common.vo.GNComment;
 import com.studyhub.common.vo.GNotice;
+import com.studyhub.common.vo.RSA;
 import com.studyhub.group.notice.model.service.GNoticeService;
 import static com.studyhub.common.JDBCTemplate.*;
 
@@ -21,7 +30,7 @@ public class GNoticeDao {
 		ResultSet rset = null;
 
 		String query = "select * from tb_g_notice join tb_user on(tb_g_notice.uploader = tb_user.user_no) where notice_no = ?";
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, gno);
@@ -58,13 +67,13 @@ public class GNoticeDao {
 				+ " ?, ?, sysdate, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(query);
-			
+
 			pstmt.setString(1, gNotice.getTitle());
 			pstmt.setString(2, gNotice.getContent());
 			pstmt.setInt(3, gNotice.getUploader());
 			pstmt.setInt(4, gNotice.getAccessNo());
 			pstmt.setInt(5, gNotice.getGroupNo());
-			
+
 			result = pstmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -95,46 +104,48 @@ public class GNoticeDao {
 
 		return result;
 	}
-	
+
 	public ArrayList<GNotice> selectGroupNotice(Connection con, int groupno, int currentPage, int limit) {
-		//공지 목록 조회
-		
+		// 공지 목록 조회
+
 		ArrayList<GNotice> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		//String query = "select notice_no, title, content, uploader, upload_date, access_no" + " from tb_g_notice"
-		//		+ " join tb_user on (tb_g_notice.uploader=tb_user.user_no)" + " where group_no = ?";
+		// String query = "select notice_no, title, content, uploader, upload_date,
+		// access_no" + " from tb_g_notice"
+		// + " join tb_user on (tb_g_notice.uploader=tb_user.user_no)" + " where
+		// group_no = ?";
 
-		String query="select rownum, notice_no, title, content, uploader, upload_date, user_name, access_no, access_right "
+		String query = "select rownum, notice_no, title, content, uploader, upload_date, user_name, access_no, access_right "
 				+ "from(select * from tb_g_notice join tb_user on(tb_user.user_no=tb_g_notice.uploader) join tb_access using(access_no) "
 				+ "where group_no=? order by notice_no asc) where rownum >=? and rownum<=? order by rownum desc";
-				
-		int startRow = (currentPage -1) * limit + 1;
+
+		int startRow = (currentPage - 1) * limit + 1;
 		int endRow = startRow + limit - 1;
-		        
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, groupno);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
-			
+
 			rset = pstmt.executeQuery();
 			if (rset != null) {
 				list = new ArrayList<GNotice>();
-				while (rset.next()){
-				GNotice gn = new GNotice();
-				gn.setRownum(rset.getInt("rownum"));
-				gn.setNoticeNo(rset.getInt("notice_no"));
-				gn.setTitle(rset.getString("title"));
-				gn.setContent(rset.getString("content"));
-				gn.setUploader(rset.getInt("uploader"));
-				gn.setUploader_name(rset.getString("user_name"));
-				gn.setUploadDate(rset.getDate("upload_date"));
-				gn.setAccessNo(rset.getInt("access_no"));
-				gn.setAccessName(rset.getString("access_right"));
-				//System.out.println(gn);
-				list.add(gn);
+				while (rset.next()) {
+					GNotice gn = new GNotice();
+					gn.setRownum(rset.getInt("rownum"));
+					gn.setNoticeNo(rset.getInt("notice_no"));
+					gn.setTitle(rset.getString("title"));
+					gn.setContent(rset.getString("content"));
+					gn.setUploader(rset.getInt("uploader"));
+					gn.setUploader_name(rset.getString("user_name"));
+					gn.setUploadDate(rset.getDate("upload_date"));
+					gn.setAccessNo(rset.getInt("access_no"));
+					gn.setAccessName(rset.getString("access_right"));
+					// System.out.println(gn);
+					list.add(gn);
 				}
 			}
 		} catch (Exception e) {
@@ -145,40 +156,38 @@ public class GNoticeDao {
 		}
 		return list;
 	}
-	
 
 	public int getListCount(Connection con) {
-		//공지 총 갯수 조회
+		// 공지 총 갯수 조회
 		int result = 0;
 		Statement stmt = null;
 		ResultSet rset = null;
-		
+
 		String query = "select count(*) from tb_g_notice";
-		
+
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);
-			
-			if(rset.next())
+
+			if (rset.next())
 				result = rset.getInt(1);
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally{
+		} finally {
 			close(rset);
 			close(stmt);
 		}
 		return result;
 	}
-	
 
 	public int updateGNotice(Connection con, GNotice gNotice) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		
-		String query = "update tb_g_notice set title = ?, content = ?, access_no = ?, group_no = ?" + "where notice_no = ?";
-		
+
+		String query = "update tb_g_notice set title = ?, content = ?, access_no = ?, group_no = ?"
+				+ "where notice_no = ?";
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, gNotice.getTitle());
@@ -186,7 +195,7 @@ public class GNoticeDao {
 			pstmt.setInt(3, gNotice.getAccessNo());
 			pstmt.setInt(4, gNotice.getGroupNo());
 			pstmt.setInt(5, gNotice.getNoticeNo());
-			
+
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -196,9 +205,6 @@ public class GNoticeDao {
 		System.out.println(result);
 		return result;
 	}
-
-	
-	
 
 	// GNotice Comment
 	public int deleteComment(Connection con, int cno) {
@@ -226,10 +232,8 @@ public class GNoticeDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-
-		String query = "insert into tb_gn_comment values("+
-						"(select max(comment_no)+1 from tb_gn_comment),"+
-						"?, ?, sysdate, ?, 1)";
+		String query = "insert into tb_gn_comment values(" + "(select max(comment_no)+1 from tb_gn_comment),"
+				+ "?, ?, sysdate, ?, 1)";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -252,10 +256,9 @@ public class GNoticeDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select comment_no, notice_no, content, to_char(upload_date, 'yyyy-MM-dd') as str_date, user_name, uploader " +
-						"from tb_gn_comment "
-						+"join tb_user on (tb_gn_comment.uploader = tb_user.user_no) "
-						+"where notice_no = ? order by comment_no desc";
+		String query = "select comment_no, notice_no, content, to_char(upload_date, 'yyyy-MM-dd') as str_date, user_name, uploader "
+				+ "from tb_gn_comment " + "join tb_user on (tb_gn_comment.uploader = tb_user.user_no) "
+				+ "where notice_no = ? order by comment_no desc";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -283,11 +286,93 @@ public class GNoticeDao {
 			close(rset);
 			close(pstmt);
 		}
-		//System.out.println(list);
+		// System.out.println(list);
 		return list;
 	}
 
+	public int InserRSA(Connection con, String id, String pwd) {
+		int result = 0;
 
-	
+		PreparedStatement pstmt = null;
+		try {
+			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+			keyPairGenerator.initialize(1024);
+
+			KeyPair keyPair = keyPairGenerator.genKeyPair();
+			Key publicKey = keyPair.getPublic(); // 공개키
+
+			KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+			RSAPublicKeySpec publicKeySpec = keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
+
+			Cipher cipher = Cipher.getInstance("RSA");
+			cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+			byte[] arrCipherData = cipher.doFinal(pwd.getBytes()); // 암호화된 데이터(byte 배열)
+			String strCipher = new String(arrCipherData);
+
+			String query = "insert into tb_rsa values(?,?)";
+
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, id);
+				pstmt.setString(2, strCipher);
+
+				result = pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<RSA> SelectRSA(Connection con) {
+		ArrayList<RSA> list = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select id, pwd from tb_rsa";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			if(rset != null) {
+				list = new ArrayList<RSA>();
+				while(rset.next()) {
+					RSA r = new RSA();
+					r.setId(rset.getString("id"));
+					
+					String rsapwd = rset.getString("pwd");
+					byte[] outdata = rsapwd.getBytes();
+					
+					KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+			        keyPairGenerator.initialize(2048);
+			        
+			        KeyPair keyPair = keyPairGenerator.genKeyPair();
+			        Key privateKey = keyPair.getPrivate(); // 개인키
+			        
+			        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+			        RSAPrivateKeySpec privateKeySpec = keyFactory.getKeySpec(privateKey, RSAPrivateKeySpec.class);
+			        
+			        Cipher cipher = Cipher.getInstance("RSA");
+					
+					cipher.init(Cipher.DECRYPT_MODE, privateKey);
+		            byte[] arrData = cipher.doFinal(outdata);
+		            String strResult = new String(arrData);
+		            r.setPwd(strResult);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 
 }

@@ -100,7 +100,44 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class='col-lg-12 col-md-12 col-sm-12'>
+		<input type='text' id='testid' placeholder="아이디">
+		<input type='text' id='testpwd' placeholder="패스워드">
+		<input type="button" onclick="insertRSA();">
+		<input type="button" onclick="selectRSA();">
 	</div>
+	</div>
+	
+<script type="text/javascript">
+	function insertRSA(){
+		var id = $("#testid").val();
+		var pwd = $("#testpwd").val();
+		$.ajax({
+			url: "/studyhub/rsatest",
+			data: {id: id, pwd: pwd},
+			type: "get",
+			dataType: "json"
+		});
+	}	
+	
+	function selectRSA(){
+		var id = "";
+		var pwd = "";
+		$.ajax({
+			url: "/studyhub/rsaselect",
+			dataType: "json",
+			success: function(data){
+				var json = JSON.parse(JSON.stringify(data));
+				for(var i in json.list){
+					id = decodeURIComponent(json.list[i].id).replace(/\+/gi, " ");
+					pwd = decodeURIComponent(json.list[i].pwd).replace(/\+/gi, " ");
+				}
+			}
+		});
+		alert("id : " + id + "\npwd : " + pwd)
+	}
+</script>
 
 	<!--푸터 부분-->
 	<%@ include file="/views/include/main/footer.jsp"%>
